@@ -1,0 +1,439 @@
+{
+  "header_detail": {
+    "uni_name": "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
+    "uni_address": "เลขที่1ซอยฉลองกรุง1เขตลาดกระบังกรุงเทพฯ10520",
+    "student_id": "71010013",
+    "faculty_name": "คณะวิศวกรรมศาสตร์",
+    "prename": "นาย",
+    "name": "วศ13วิศวกรรมศาสตร์13",
+    "date_of_birth": "2000-01-26",
+    "admis_date": "2018-08-06",
+    "grad_date": "2023-01-06",
+    "grad_reason": null,
+    "degree": "วิทยาศาสตรบัณฑิต",
+    "major": null,
+    "program": "การจัดการวิศวกรรมและเทคโนโลยี(หลักสูตรนานาชาติ)",
+    "honor": 0
+  },
+  "transcript_detail": {
+    "semesters": [
+      {
+        "year": 2561,
+        "sem_num": 1,
+        "GPA": "2.00",
+        "GPS": "2.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13006006",
+            "subject_name": "พีชคณิตเชิงเส้น",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c+"
+          },
+          {
+            "subject_id": "13006007",
+            "subject_name": "แคลคูลัส1",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "d"
+          },
+          {
+            "subject_id": "13006109",
+            "subject_name": "programmingformanagement",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "d"
+          },
+          {
+            "subject_id": "13006204",
+            "subject_name": "ภาษาอังกฤษพื้นฐาน1",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b"
+          },
+          {
+            "subject_id": "13006301",
+            "subject_name": "ตรรกศาสตร์เบื้องต้น",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b"
+          },
+          {
+            "subject_id": "13006402",
+            "subject_name": "เศรษฐศาสตร์เบื้องต้น",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "d+"
+          }
+        ]
+      },
+      {
+        "year": 2561,
+        "sem_num": 2,
+        "GPA": "2.17",
+        "GPS": "2.33",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13006008",
+            "subject_name": "แคลคูลัส2",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "f"
+          },
+          {
+            "subject_id": "13006104",
+            "subject_name": "เทคโนโลยีอินเทอร์เน็ตเบื้องต้น",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c+"
+          },
+          {
+            "subject_id": "13006205",
+            "subject_name": "ภาษาอังกฤษพื้นฐาน2",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "a"
+          },
+          {
+            "subject_id": "13026001",
+            "subject_name": "วิศวกรรมสมัยใหม่เบื้องต้น",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c+"
+          },
+          {
+            "subject_id": "13026003",
+            "subject_name": "หลักธุรกิจ",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c"
+          },
+          {
+            "subject_id": "13026004",
+            "subject_name": "หลักการจัดการ",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b"
+          }
+        ]
+      },
+      {
+        "year": 2562,
+        "sem_num": 1,
+        "GPA": "2.25",
+        "GPS": "2.42",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "01006512",
+            "subject_name": "เอเชียศึกษา",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "d+"
+          },
+          {
+            "subject_id": "13006009",
+            "subject_name": "หลักความน่าจะเป็นและสถิติ",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c"
+          },
+          {
+            "subject_id": "13006206",
+            "subject_name": "การเขียนภาษาทางเทคนิค",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c"
+          },
+          {
+            "subject_id": "13026002",
+            "subject_name": "เศรษฐศาสตร์สำหรับธุรกิจและการจัดการ",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "a"
+          },
+          {
+            "subject_id": "13026005",
+            "subject_name": "หลักการบัญชีการเงิน",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c"
+          },
+          {
+            "subject_id": "13026011",
+            "subject_name": "ระบบสารสนเทศธุรกิจ",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b"
+          }
+        ]
+      },
+      {
+        "year": 2562,
+        "sem_num": 2,
+        "GPA": "2.26",
+        "GPS": "2.29",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13006008",
+            "subject_name": "แคลคูลัส2",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "d"
+          },
+          {
+            "subject_id": "13006207",
+            "subject_name": "การสื่อสารและการนำเสนอภาษาทางเทคนิค",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c"
+          },
+          {
+            "subject_id": "13026010",
+            "subject_name": "วิทยาศาสตร์การจัดการเบื้องต้น",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c"
+          },
+          {
+            "subject_id": "13026012",
+            "subject_name": "ระบบฐานข้อมูลและการประยุกต์",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c+"
+          },
+          {
+            "subject_id": "13026014",
+            "subject_name": "การจัดการวิศวกรรมและเทคโนโลยีเบื้องต้น",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "a"
+          },
+          {
+            "subject_id": "14036102",
+            "subject_name": "managerialaccounting",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c"
+          },
+          {
+            "subject_id": "14036107",
+            "subject_name": "internationalhumancapitalmanagement",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c+"
+          }
+        ]
+      },
+      {
+        "year": 2563,
+        "sem_num": 1,
+        "GPA": "2.42",
+        "GPS": "3.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13006407",
+            "subject_name": "introductiontopsychology",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c"
+          },
+          {
+            "subject_id": "13026006",
+            "subject_name": "หลักการตลาด",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "a"
+          },
+          {
+            "subject_id": "13026013",
+            "subject_name": "ระบบสนับสนุนการตัดสินใจเบื้องต้น",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b"
+          },
+          {
+            "subject_id": "13026016",
+            "subject_name": "การจัดการการผลิตและการดำเนินงาน",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b+"
+          },
+          {
+            "subject_id": "13026021",
+            "subject_name": "การวิเคราะห์เชิงสถิติ",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c+"
+          },
+          {
+            "subject_id": "13026025",
+            "subject_name": "การจัดการกระบวนการธุรกิจ",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b+"
+          },
+          {
+            "subject_id": "14036103",
+            "subject_name": "businessfinance",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c+"
+          }
+        ]
+      },
+      {
+        "year": 2563,
+        "sem_num": 2,
+        "GPA": "2.53",
+        "GPS": "3.08",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13026015",
+            "subject_name": "การจัดการโครงการ",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "a"
+          },
+          {
+            "subject_id": "13026017",
+            "subject_name": "การจัดการซัพพลายเชนเบื้องต้น",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "a"
+          },
+          {
+            "subject_id": "13026018",
+            "subject_name": "การวิเคราะห์การตัดสินใจเชิงเศรษฐศาสตร์",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c+"
+          },
+          {
+            "subject_id": "13026022",
+            "subject_name": "การจัดการระบบงานให้ได้ผลดีที่สุด",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "d"
+          },
+          {
+            "subject_id": "13026024",
+            "subject_name": "การจำลองกระบวนการธุรกิจ",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b+"
+          },
+          {
+            "subject_id": "13026037",
+            "subject_name": "วิธีวิจัยเบื้องต้น",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b+"
+          }
+        ]
+      },
+      {
+        "year": 2563,
+        "sem_num": 3,
+        "GPA": "2.53",
+        "GPS": "0.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13026040",
+            "subject_name": "การฝึกงานอุตสาหกรรม",
+            "type": null,
+            "credit": 0,
+            "grade_earn": "s"
+          }
+        ]
+      },
+      {
+        "year": 2564,
+        "sem_num": 1,
+        "GPA": "2.62",
+        "GPS": "3.42",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "01356333",
+            "subject_name": "qualityengineering",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c"
+          },
+          {
+            "subject_id": "13026020",
+            "subject_name": "การจัดการการผลิตและสินค้าคงคลัง",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "a"
+          },
+          {
+            "subject_id": "13026023",
+            "subject_name": "การวางแผนเลือกที่ตั้งโรงงานและจัดแผนผัง",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "a"
+          },
+          {
+            "subject_id": "13026031",
+            "subject_name": "การสื่อสารข้อมูลธุรกิจและการเครือข่าย",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b+"
+          },
+          {
+            "subject_id": "13026038",
+            "subject_name": "สัมมนา",
+            "type": null,
+            "credit": 1,
+            "grade_earn": "a"
+          }
+        ]
+      },
+      {
+        "year": 2564,
+        "sem_num": 2,
+        "GPA": "2.68",
+        "GPS": "4.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13026041",
+            "subject_name": "สหกิจศึกษา",
+            "type": null,
+            "credit": 6,
+            "grade_earn": "a"
+          }
+        ]
+      },
+      {
+        "year": 2565,
+        "sem_num": 1,
+        "GPA": null,
+        "GPS": null,
+        "pass_reason": "maintain",
+        "subject": []
+      }
+    ],
+    "master_comprehensive": null,
+    "master_thesis": null,
+    "master_qualify": null,
+    "total_credits_earned": 133,
+    "cumulative_gpa": "2.68"
+  },
+  "footer_detail": {
+    "updated_at": "2025-01-15",
+    "by": {
+      "by_signature": "ผู้ช่วยศาสตราจารย์ดร.ทดสอบนามสกุล",
+      "by_position": "ผู้อำนวยการ",
+      "by_reg": "สำนักทะเบียนและบริการการศึกษา"
+    }
+  }
+}

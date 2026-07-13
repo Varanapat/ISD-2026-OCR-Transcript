@@ -1,0 +1,72 @@
+{
+  "header_detail": {
+    "uni_name": "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
+    "uni_address": "เลขที่1ซอยฉลองกรุง1เขตลาดกระบังกรุงเทพฯ10520",
+    "student_id": "73066003",
+    "faculty_name": "คณะอุตสาหกรรมอาหาร",
+    "prename": "นาย",
+    "name": "บัณฑิตออ3อุตสาหกรรมอาหาร3",
+    "date_of_birth": "1994-03-04",
+    "admis_date": "2021-01-11",
+    "grad_date": "0000-00-00",
+    "grad_reason": null,
+    "degree": "ปรัชญาดุษฎีบัณฑิต",
+    "major": null,
+    "program": "วิทยาศาสตร์การอาหาร(หลักสูตรนานาชาติ)",
+    "honor": 0
+  },
+  "transcript_detail": {
+    "semesters": [
+      {
+        "year": 2563,
+        "sem_num": 2,
+        "GPA": "3.50",
+        "GPS": "3.50",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "08117111",
+            "subject_name": "กระบวนการแปรรูปอาหารอย่างยั่งยืน",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "b+"
+          },
+          {
+            "subject_id": "08218122",
+            "subject_name": "เทคโนโลยีการบรรจุอาหารขั้นสูง",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "b+"
+          },
+          {
+            "subject_id": "08218126",
+            "subject_name": "อาหารเชิงสุขภาพและอาหารทางการแพทย์",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "b+"
+          },
+          {
+            "subject_id": "08218414",
+            "subject_name": "วิทยานิพนธ์",
+            "type": "cr",
+            "credit": 6,
+            "grade_earn": "s"
+          }
+        ]
+      }
+    ],
+    "master_comprehensive": null,
+    "master_thesis": null,
+    "master_qualify": null,
+    "total_credits_earned": 15,
+    "cumulative_gpa": "3.50"
+  },
+  "footer_detail": {
+    "updated_at": "2025-01-15",
+    "by": {
+      "by_signature": "ผู้ช่วยศาสตราจารย์ดร.ทดสอบนามสกุล",
+      "by_position": "ผู้อำนวยการ",
+      "by_reg": "สำนักทะเบียนและบริการการศึกษา"
+    }
+  }
+}

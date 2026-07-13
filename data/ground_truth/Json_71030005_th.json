@@ -1,0 +1,93 @@
+{
+  "header_detail": {
+    "uni_name": "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
+    "uni_address": "เลขที่1ซอยฉลองกรุง1เขตลาดกระบังกรุงเทพฯ10520",
+    "student_id": "71030005",
+    "faculty_name": "คณะครุศาสตร์อุตสาหกรรมและเทคโนโลยี",
+    "prename": "นาย",
+    "name": "คอ5ครุศาสตร์อุตสาหกรรมและเทคโนโลยี5",
+    "date_of_birth": "1996-09-04",
+    "admis_date": "2018-08-06",
+    "grad_date": "0000-00-00",
+    "grad_reason": "n/a(ลาออก1/2561)",
+    "degree": "เทคโนโลยีบัณฑิต",
+    "major": null,
+    "program": "เทคโนโลยีชีวภาพทางการเกษตร",
+    "honor": 0
+  },
+  "transcript_detail": {
+    "semesters": [
+      {
+        "year": 2561,
+        "sem_num": 1,
+        "GPA": "0.00",
+        "GPS": "0.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "03606221",
+            "subject_name": "เคมีทางการเกษตร",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "-"
+          },
+          {
+            "subject_id": "03606222",
+            "subject_name": "ชีววิทยาทางการเกษตร",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "-"
+          },
+          {
+            "subject_id": "03606223",
+            "subject_name": "จุลชีววิทยาทางการเกษตร",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "-"
+          },
+          {
+            "subject_id": "03606701",
+            "subject_name": "เทคโนโลยีชีวภาพทางการเกษตร1",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "-"
+          },
+          {
+            "subject_id": "03606709",
+            "subject_name": "การวิเคราะห์คุณภาพผลิตผลทางการเกษตร1",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "-"
+          },
+          {
+            "subject_id": "90101002",
+            "subject_name": "คณิตศาสตร์ในชีวิตประจำวัน",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "-"
+          },
+          {
+            "subject_id": "90201024",
+            "subject_name": "ภาษาอังกฤษเพื่อการประกอบอาชีพ",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "-"
+          }
+        ]
+      }
+    ],
+    "master_comprehensive": null,
+    "master_thesis": null,
+    "master_qualify": null,
+    "total_credits_earned": 0,
+    "cumulative_gpa": "0.00"
+  },
+  "footer_detail": {
+    "updated_at": "2025-01-15",
+    "by": {
+      "by_signature": "ผู้ช่วยศาสตราจารย์ดร.ทดสอบนามสกุล",
+      "by_position": "ผู้อำนวยการ",
+      "by_reg": "สำนักทะเบียนและบริการการศึกษา"
+    }
+  }
+}

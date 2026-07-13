@@ -1,0 +1,574 @@
+{
+  "header_detail": {
+    "uni_name": "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
+    "uni_address": "เลขที่1ซอยฉลองกรุง1เขตลาดกระบังกรุงเทพฯ10520",
+    "student_id": "71020009",
+    "faculty_name": "คณะสถาปัตยกรรมศิลปะและการออกแบบ",
+    "prename": "นาย",
+    "name": "สถ9สถาปัตยกรรมศิลปะและการออกแบบ9",
+    "date_of_birth": "2000-12-18",
+    "admis_date": "2018-08-06",
+    "grad_date": "0000-00-00",
+    "grad_reason": null,
+    "degree": "สถาปัตยกรรมศาสตรบัณฑิต",
+    "major": null,
+    "program": "ศิลปอุตสาหกรรม",
+    "honor": 0
+  },
+  "transcript_detail": {
+    "semesters": [
+      {
+        "year": 2561,
+        "sem_num": 1,
+        "GPA": "1.21",
+        "GPS": "1.21",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "02246110",
+            "subject_name": "วาดเส้น",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "f"
+          },
+          {
+            "subject_id": "02246111",
+            "subject_name": "การออกแบบมูลฐาน1",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "f"
+          },
+          {
+            "subject_id": "02246113",
+            "subject_name": "ประวัติศาสตร์ศิลป์และการออกแบบอุตสาหกรรม",
+            "type": null,
+            "credit": 2,
+            "grade_earn": "f"
+          },
+          {
+            "subject_id": "02246114",
+            "subject_name": "การเขียนแบบอุตสาหกรรม",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "d"
+          },
+          {
+            "subject_id": "02246115",
+            "subject_name": "นวัตกรรมวัสดุและกรรมวิธีการผลิต",
+            "type": null,
+            "credit": 2,
+            "grade_earn": "c+"
+          },
+          {
+            "subject_id": "90591001",
+            "subject_name": "เรารักสจล.",
+            "type": null,
+            "credit": 2,
+            "grade_earn": "b"
+          },
+          {
+            "subject_id": "90591002",
+            "subject_name": "กีฬาและนันทนาการ",
+            "type": null,
+            "credit": 1,
+            "grade_earn": "b"
+          },
+          {
+            "subject_id": "90595001",
+            "subject_name": "ภาษาอังกฤษพื้นฐาน",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c"
+          }
+        ]
+      },
+      {
+        "year": 2561,
+        "sem_num": 2,
+        "GPA": "2.15",
+        "GPS": "3.21",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "02246116",
+            "subject_name": "การทำหุ่นจำลอง",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b"
+          },
+          {
+            "subject_id": "02246117",
+            "subject_name": "เทคโนโลยีทางวิศวกรรม",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c+"
+          },
+          {
+            "subject_id": "02246119",
+            "subject_name": "การสร้างความคิดเชิงสร้างสรรค์",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "a"
+          },
+          {
+            "subject_id": "02246120",
+            "subject_name": "การออกแบบที่ยั่งยืน",
+            "type": null,
+            "credit": 2,
+            "grade_earn": "a"
+          },
+          {
+            "subject_id": "90591004",
+            "subject_name": "ศิลปะการพัฒนาอารมณ์",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b+"
+          },
+          {
+            "subject_id": "90595002",
+            "subject_name": "ภาษาอังกฤษเพื่อการสื่อสาร",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c+"
+          }
+        ]
+      },
+      {
+        "year": 2562,
+        "sem_num": 1,
+        "GPA": "2.31",
+        "GPS": "2.57",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "02246118",
+            "subject_name": "ปัจจัยมนุษย์",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c+"
+          },
+          {
+            "subject_id": "02246210",
+            "subject_name": "การออกแบบผลิตภัณฑ์อุตสาหกรรม1",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c+"
+          },
+          {
+            "subject_id": "02246224",
+            "subject_name": "พื้นฐานการออกแบบเครื่องเคลือบดินเผา",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b"
+          },
+          {
+            "subject_id": "02246236",
+            "subject_name": "พื้นฐานการออกแบบบรรจุภัณฑ์",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b"
+          },
+          {
+            "subject_id": "02246240",
+            "subject_name": "พื้นฐานการออกแบบเครื่องประดับ",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b"
+          },
+          {
+            "subject_id": "90592004",
+            "subject_name": "วัฒนธรรมร่วมสมัย",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c"
+          },
+          {
+            "subject_id": "90595003",
+            "subject_name": "ภาษาอังกฤษเชิงวิชาการ",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c"
+          }
+        ]
+      },
+      {
+        "year": 2562,
+        "sem_num": 2,
+        "GPA": "2.43",
+        "GPS": "2.78",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "02246121",
+            "subject_name": "การออกแบบกราฟิก",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b"
+          },
+          {
+            "subject_id": "02246122",
+            "subject_name": "ศิลปะนิยม",
+            "type": null,
+            "credit": 2,
+            "grade_earn": "b"
+          },
+          {
+            "subject_id": "02246211",
+            "subject_name": "การออกแบบผลิตภัณฑ์อุตสาหกรรม2",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b"
+          },
+          {
+            "subject_id": "02246220",
+            "subject_name": "พื้นฐานการออกแบบเฟอร์นิเจอร์",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b"
+          },
+          {
+            "subject_id": "02246228",
+            "subject_name": "พื้นฐานการออกแบบสิ่งทอ",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c"
+          },
+          {
+            "subject_id": "02246232",
+            "subject_name": "พื้นฐานการออกแบบโลหะ",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c+"
+          },
+          {
+            "subject_id": "90595021",
+            "subject_name": "ภาษาไทยเพื่อการสร้างสรรค์",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b"
+          }
+        ]
+      },
+      {
+        "year": 2563,
+        "sem_num": 1,
+        "GPA": "2.35",
+        "GPS": "2.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "02246113",
+            "subject_name": "ประวัติศาสตร์ศิลป์และการออกแบบอุตสาหกรรม",
+            "type": null,
+            "credit": 2,
+            "grade_earn": "c"
+          },
+          {
+            "subject_id": "02246123",
+            "subject_name": "การออกแบบผลิตภัณฑ์ไทย",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b+"
+          },
+          {
+            "subject_id": "02246212",
+            "subject_name": "การออกแบบผลิตภัณฑ์อุตสาหกรรม3",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c+"
+          },
+          {
+            "subject_id": "02246221",
+            "subject_name": "การออกแบบเฟอร์นิเจอร์1",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "f"
+          },
+          {
+            "subject_id": "02246225",
+            "subject_name": "การออกแบบเครื่องเคลือบดินเผา1",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c"
+          },
+          {
+            "subject_id": "90594015",
+            "subject_name": "การตลาดร่วมสมัย",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c"
+          }
+        ]
+      },
+      {
+        "year": 2563,
+        "sem_num": 2,
+        "GPA": "2.30",
+        "GPS": "2.03",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "02246124",
+            "subject_name": "เศรษฐศาสตร์เพื่อการออกแบบ",
+            "type": null,
+            "credit": 2,
+            "grade_earn": "d+"
+          },
+          {
+            "subject_id": "02246213",
+            "subject_name": "การออกแบบผลิตภัณฑ์อุตสาหกรรม4",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c+"
+          },
+          {
+            "subject_id": "02246226",
+            "subject_name": "การออกแบบเครื่องเคลือบดินเผา2",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "f"
+          },
+          {
+            "subject_id": "02246312",
+            "subject_name": "การออกแบบเพื่อมวลชน",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b"
+          },
+          {
+            "subject_id": "90104003",
+            "subject_name": "สุขภาพและโภชนาการ",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c"
+          },
+          {
+            "subject_id": "90594001",
+            "subject_name": "ผู้ประกอบการสมัยใหม่",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b"
+          }
+        ]
+      },
+      {
+        "year": 2563,
+        "sem_num": 3,
+        "GPA": "2.30",
+        "GPS": "0.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "02246217",
+            "subject_name": "การฝึกปฏิบัติวิชาชีพออกแบบผลิตภัณฑ์อุตสาหกรรม",
+            "type": null,
+            "credit": 0,
+            "grade_earn": "s"
+          }
+        ]
+      },
+      {
+        "year": 2564,
+        "sem_num": 1,
+        "GPA": "2.33",
+        "GPS": "2.50",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "02246111",
+            "subject_name": "การออกแบบมูลฐาน1",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c+"
+          },
+          {
+            "subject_id": "02246214",
+            "subject_name": "การออกแบบผลิตภัณฑ์อุตสาหกรรม5",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "d+"
+          },
+          {
+            "subject_id": "02246215",
+            "subject_name": "การเตรียมวิทยานิพนธ์",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c"
+          },
+          {
+            "subject_id": "02246310",
+            "subject_name": "โครงงานออกแบบอิสระ",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b+"
+          },
+          {
+            "subject_id": "90302010",
+            "subject_name": "จิตวิทยาเพื่อการพัฒนาตน",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b"
+          }
+        ]
+      },
+      {
+        "year": 2564,
+        "sem_num": 2,
+        "GPA": "2.19",
+        "GPS": "0.64",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "02246112",
+            "subject_name": "การออกแบบมูลฐาน2",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "d"
+          },
+          {
+            "subject_id": "02246125",
+            "subject_name": "การประกอบวิชาชีพทางการออกแบบอุตสาหกรรม",
+            "type": null,
+            "credit": 2,
+            "grade_earn": "c"
+          },
+          {
+            "subject_id": "02246216",
+            "subject_name": "วิทยานิพนธ์",
+            "type": null,
+            "credit": 6,
+            "grade_earn": "f"
+          }
+        ]
+      },
+      {
+        "year": 2565,
+        "sem_num": 1,
+        "GPA": "2.11",
+        "GPS": "0.83",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "02246131",
+            "subject_name": "วาดเส้นเพื่อการออกแบบ",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "d"
+          },
+          {
+            "subject_id": "02246221",
+            "subject_name": "การออกแบบเฟอร์นิเจอร์1",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "f"
+          },
+          {
+            "subject_id": "16166206",
+            "subject_name": "ภาษาจีนเบื้องต้น1",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "d+"
+          }
+        ]
+      },
+      {
+        "year": 2565,
+        "sem_num": 2,
+        "GPA": null,
+        "GPS": null,
+        "pass_reason": "leaveofabsence",
+        "subject": []
+      },
+      {
+        "year": 2566,
+        "sem_num": 1,
+        "GPA": null,
+        "GPS": null,
+        "pass_reason": "leaveofabsence",
+        "subject": []
+      },
+      {
+        "year": 2566,
+        "sem_num": 2,
+        "GPA": "2.12",
+        "GPS": "2.50",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "02246216",
+            "subject_name": "วิทยานิพนธ์",
+            "type": null,
+            "credit": 6,
+            "grade_earn": "c+"
+          }
+        ]
+      },
+      {
+        "year": 2567,
+        "sem_num": 1,
+        "GPA": "2.07",
+        "GPS": "1.17",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "02246221",
+            "subject_name": "การออกแบบเฟอร์นิเจอร์1",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "f"
+          },
+          {
+            "subject_id": "02246226",
+            "subject_name": "การออกแบบเครื่องเคลือบดินเผา2",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "d"
+          },
+          {
+            "subject_id": "90643027",
+            "subject_name": "มนุษย์เงินและคณิตศาสตร์",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c+"
+          }
+        ]
+      },
+      {
+        "year": 2567,
+        "sem_num": 2,
+        "GPA": "2.07",
+        "GPS": "0.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "02246221",
+            "subject_name": "การออกแบบเฟอร์นิเจอร์1",
+            "type": null,
+            "credit": 3,
+            "grade_earn": null
+          },
+          {
+            "subject_id": "02246227",
+            "subject_name": "การออกแบบเครื่องเคลือบดินเผา3",
+            "type": null,
+            "credit": 3,
+            "grade_earn": null
+          }
+        ]
+      }
+    ],
+    "master_comprehensive": null,
+    "master_thesis": null,
+    "master_qualify": null,
+    "total_credits_earned": 161,
+    "cumulative_gpa": "2.07"
+  },
+  "footer_detail": {
+    "updated_at": "2025-01-15",
+    "by": {
+      "by_signature": "ผู้ช่วยศาสตราจารย์ดร.ทดสอบนามสกุล",
+      "by_position": "ผู้อำนวยการ",
+      "by_reg": "สำนักทะเบียนและบริการการศึกษา"
+    }
+  }
+}

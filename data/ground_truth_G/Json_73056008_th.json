@@ -1,0 +1,155 @@
+{
+  "header_detail": {
+    "uni_name": "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
+    "uni_address": "เลขที่1ซอยฉลองกรุง1เขตลาดกระบังกรุงเทพฯ10520",
+    "student_id": "73056008",
+    "faculty_name": "คณะวิทยาศาสตร์",
+    "prename": "นางสาว",
+    "name": "บัณฑิตวท8วิทยาศาสตร์8",
+    "date_of_birth": "1993-03-30",
+    "admis_date": "2021-01-11",
+    "grad_date": "0000-00-00",
+    "grad_reason": null,
+    "degree": "ปรัชญาดุษฎีบัณฑิต",
+    "major": null,
+    "program": "สาขาวิชาเทคโนโลยีชีวภาพ",
+    "honor": 0
+  },
+  "transcript_detail": {
+    "semesters": [
+      {
+        "year": 2563,
+        "sem_num": 2,
+        "GPA": "0.00",
+        "GPS": "0.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "05208101",
+            "subject_name": "สัมมนาปริญญาเอก1",
+            "type": "cr",
+            "credit": 1,
+            "grade_earn": "s"
+          }
+        ]
+      },
+      {
+        "year": 2564,
+        "sem_num": 1,
+        "GPA": "0.00",
+        "GPS": "0.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "05208102",
+            "subject_name": "สัมมนาปริญญาเอก2",
+            "type": "cr",
+            "credit": 1,
+            "grade_earn": "s"
+          }
+        ]
+      },
+      {
+        "year": 2564,
+        "sem_num": 2,
+        "GPA": "0.00",
+        "GPS": "0.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "05208011",
+            "subject_name": "วิทยานิพนธ์",
+            "type": "cr",
+            "credit": 12,
+            "grade_earn": "s"
+          }
+        ]
+      },
+      {
+        "year": 2565,
+        "sem_num": 1,
+        "GPA": "0.00",
+        "GPS": "0.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "05208011",
+            "subject_name": "วิทยานิพนธ์",
+            "type": "cr",
+            "credit": 12,
+            "grade_earn": "s"
+          }
+        ]
+      },
+      {
+        "year": 2565,
+        "sem_num": 2,
+        "GPA": "0.00",
+        "GPS": "0.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "05208011",
+            "subject_name": "วิทยานิพนธ์",
+            "type": "cr",
+            "credit": 12,
+            "grade_earn": "s"
+          }
+        ]
+      },
+      {
+        "year": 2566,
+        "sem_num": 1,
+        "GPA": "0.00",
+        "GPS": "0.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "05208011",
+            "subject_name": "วิทยานิพนธ์",
+            "type": "cr",
+            "credit": 12,
+            "grade_earn": "s"
+          }
+        ]
+      },
+      {
+        "year": 2566,
+        "sem_num": 2,
+        "GPA": null,
+        "GPS": null,
+        "pass_reason": "maintain",
+        "subject": []
+      },
+      {
+        "year": 2567,
+        "sem_num": 1,
+        "GPA": null,
+        "GPS": null,
+        "pass_reason": "maintain",
+        "subject": []
+      },
+      {
+        "year": 2567,
+        "sem_num": 2,
+        "GPA": null,
+        "GPS": null,
+        "pass_reason": "maintain",
+        "subject": []
+      }
+    ],
+    "master_comprehensive": null,
+    "master_thesis": null,
+    "master_qualify": null,
+    "total_credits_earned": 50,
+    "cumulative_gpa": null
+  },
+  "footer_detail": {
+    "updated_at": "2025-01-15",
+    "by": {
+      "by_signature": "ผู้ช่วยศาสตราจารย์ดร.ทดสอบนามสกุล",
+      "by_position": "ผู้อำนวยการ",
+      "by_reg": "สำนักทะเบียนและบริการการศึกษา"
+    }
+  }
+}

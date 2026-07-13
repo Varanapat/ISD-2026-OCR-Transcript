@@ -1,0 +1,201 @@
+{
+  "header_detail": {
+    "uni_name": "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
+    "uni_address": "เลขที่1ซอยฉลองกรุง1เขตลาดกระบังกรุงเทพฯ10520",
+    "student_id": "73066006",
+    "faculty_name": "คณะอุตสาหกรรมอาหาร",
+    "prename": "นาย",
+    "name": "บัณฑิตออ6อุตสาหกรรมอาหาร6",
+    "date_of_birth": "1986-09-01",
+    "admis_date": "2021-01-11",
+    "grad_date": "0000-00-00",
+    "grad_reason": null,
+    "degree": "วิทยาศาสตรมหาบัณฑิต",
+    "major": null,
+    "program": "การจัดการความปลอดภัยอาหาร",
+    "honor": 0
+  },
+  "transcript_detail": {
+    "semesters": [
+      {
+        "year": 2563,
+        "sem_num": 2,
+        "GPA": "3.50",
+        "GPS": "3.50",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "08127121",
+            "subject_name": "การควบคุมการผลิตและแบบจำลองประสิทธิภาพทางอาหาร",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "b"
+          },
+          {
+            "subject_id": "08127122",
+            "subject_name": "กฎหมายและระบบการรับรองด้านอาหารสำหรับการจัดการความปลอดภัยอาหาร",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "b+"
+          },
+          {
+            "subject_id": "08127126",
+            "subject_name": "สถิติและความน่าจะเป็นในการจัดการความปลอดภัยอาหาร",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "b+"
+          },
+          {
+            "subject_id": "08127224",
+            "subject_name": "การจัดการสิ่งแวดล้อมในอุตสาหกรรมอาหาร",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "a"
+          }
+        ]
+      },
+      {
+        "year": 2564,
+        "sem_num": 1,
+        "GPA": "3.57",
+        "GPS": "3.67",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "08127100",
+            "subject_name": "สุขาภิบาลอาหารและการประกันคุณภาพอาหาร",
+            "type": "nc",
+            "credit": 3,
+            "grade_earn": "s"
+          },
+          {
+            "subject_id": "08127120",
+            "subject_name": "หลักการวิเคราะห์ความเสี่ยงในอาหาร",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "b"
+          },
+          {
+            "subject_id": "08127124",
+            "subject_name": "กลยุทธ์การสื่อสารด้านความปลอดภัยอาหาร",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "a"
+          },
+          {
+            "subject_id": "08127221",
+            "subject_name": "การออกแบบเชิงสุขลักษณะในโรงงานอาหาร",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "a"
+          }
+        ]
+      },
+      {
+        "year": 2564,
+        "sem_num": 2,
+        "GPA": "3.55",
+        "GPS": "3.50",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "08127123",
+            "subject_name": "การจัดการความปลอดภัยอาหาร",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "b+"
+          },
+          {
+            "subject_id": "08127220",
+            "subject_name": "จุลินทรีย์ในกระบวนการแปรรูปอาหาร",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "b+"
+          },
+          {
+            "subject_id": "08127225",
+            "subject_name": "การควบคุมการใช้สารเคมีในอุตสาหกรรมอาหาร",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "b+"
+          },
+          {
+            "subject_id": "08127310",
+            "subject_name": "สัมมนา",
+            "type": "cr",
+            "credit": 1,
+            "grade_earn": "s"
+          }
+        ]
+      },
+      {
+        "year": 2565,
+        "sem_num": 1,
+        "GPA": "3.55",
+        "GPS": "3.50",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "08127125",
+            "subject_name": "เรียนรู้จากผู้เชี่ยวชาญ",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "b+"
+          },
+          {
+            "subject_id": "08127410",
+            "subject_name": "การศึกษาค้นคว้าอิสระ",
+            "type": "cr",
+            "credit": 6,
+            "grade_earn": "s"
+          }
+        ]
+      },
+      {
+        "year": 2565,
+        "sem_num": 2,
+        "GPA": null,
+        "GPS": null,
+        "pass_reason": "maintain",
+        "subject": []
+      },
+      {
+        "year": 2566,
+        "sem_num": 1,
+        "GPA": null,
+        "GPS": null,
+        "pass_reason": "maintain",
+        "subject": []
+      },
+      {
+        "year": 2566,
+        "sem_num": 2,
+        "GPA": null,
+        "GPS": null,
+        "pass_reason": "maintain",
+        "subject": []
+      },
+      {
+        "year": 2567,
+        "sem_num": 1,
+        "GPA": null,
+        "GPS": null,
+        "pass_reason": "maintain",
+        "subject": []
+      }
+    ],
+    "master_comprehensive": "ผ่าน",
+    "master_thesis": null,
+    "master_qualify": null,
+    "total_credits_earned": 40,
+    "cumulative_gpa": "3.55"
+  },
+  "footer_detail": {
+    "updated_at": "2025-01-15",
+    "by": {
+      "by_signature": "ผู้ช่วยศาสตราจารย์ดร.ทดสอบนามสกุล",
+      "by_position": "ผู้อำนวยการ",
+      "by_reg": "สำนักทะเบียนและบริการการศึกษา"
+    }
+  }
+}

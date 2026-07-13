@@ -1,0 +1,155 @@
+{
+  "header_detail": {
+    "uni_name": "kingmongkut'sinstituteoftechnologyladkrabang",
+    "uni_address": "chalongkrungroad,ladkrabang,bangkok10520,thailand",
+    "student_id": "74106009",
+    "faculty_name": "collegeofmaterialsinnovationandtechnology",
+    "prename": "miss",
+    "name": "graduatemit9materialsinnovationandtechnology9",
+    "date_of_birth": "1998-05-27",
+    "admis_date": "2021-08-02",
+    "grad_date": "2023-06-09",
+    "grad_reason": null,
+    "degree": "masterofscience",
+    "major": null,
+    "program": "nanoscienceandnanotechnology",
+    "honor": 0
+  },
+  "transcript_detail": {
+    "semesters": [
+      {
+        "year": 2564,
+        "sem_num": 1,
+        "GPA": "0.00",
+        "GPS": "0.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "10017001",
+            "subject_name": "thesis",
+            "type": "cr",
+            "credit": 9,
+            "grade_earn": "s"
+          },
+          {
+            "subject_id": "10017100",
+            "subject_name": "researchmethodologyandethicsinnanotechnology",
+            "type": "nc",
+            "credit": 3,
+            "grade_earn": "s"
+          },
+          {
+            "subject_id": "10017101",
+            "subject_name": "quantumtheoryfornanoscience",
+            "type": "nc",
+            "credit": 3,
+            "grade_earn": "s"
+          },
+          {
+            "subject_id": "10017410",
+            "subject_name": "materialscharacterizationandtesting",
+            "type": "nc",
+            "credit": 3,
+            "grade_earn": "s"
+          }
+        ]
+      },
+      {
+        "year": 2564,
+        "sem_num": 2,
+        "GPA": "0.00",
+        "GPS": "0.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "10017001",
+            "subject_name": "thesis",
+            "type": "cr",
+            "credit": 9,
+            "grade_earn": "s"
+          },
+          {
+            "subject_id": "10017081",
+            "subject_name": "seminar1",
+            "type": "nc",
+            "credit": 1,
+            "grade_earn": "s"
+          },
+          {
+            "subject_id": "10017102",
+            "subject_name": "materialsscienceandnanomaterials",
+            "type": "nc",
+            "credit": 3,
+            "grade_earn": "s"
+          },
+          {
+            "subject_id": "10017103",
+            "subject_name": "fundamentalthermodynamicsfornanoscience",
+            "type": "nc",
+            "credit": 3,
+            "grade_earn": "s"
+          },
+          {
+            "subject_id": "10017400",
+            "subject_name": "nanophotonics",
+            "type": "nc",
+            "credit": 3,
+            "grade_earn": "s"
+          }
+        ]
+      },
+      {
+        "year": 2565,
+        "sem_num": 1,
+        "GPA": "0.00",
+        "GPS": "0.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "10017001",
+            "subject_name": "thesis",
+            "type": "cr",
+            "credit": 9,
+            "grade_earn": "s"
+          },
+          {
+            "subject_id": "10017082",
+            "subject_name": "seminar2",
+            "type": "nc",
+            "credit": 1,
+            "grade_earn": "s"
+          }
+        ]
+      },
+      {
+        "year": 2565,
+        "sem_num": 2,
+        "GPA": "0.00",
+        "GPS": "0.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "10017001",
+            "subject_name": "thesis",
+            "type": "cr",
+            "credit": 9,
+            "grade_earn": "s"
+          }
+        ]
+      }
+    ],
+    "master_comprehensive": null,
+    "master_thesis": null,
+    "master_qualify": null,
+    "total_credits_earned": 36,
+    "cumulative_gpa": null
+  },
+  "footer_detail": {
+    "updated_at": "2025-01-15",
+    "by": {
+      "by_signature": "asst.prof.dr.testsurname",
+      "by_position": "director",
+      "by_reg": "kmitlregistrationandeducationserviceoffice"
+    }
+  }
+}

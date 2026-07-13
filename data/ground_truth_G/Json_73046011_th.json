@@ -1,0 +1,163 @@
+{
+  "header_detail": {
+    "uni_name": "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
+    "uni_address": "เลขที่1ซอยฉลองกรุง1เขตลาดกระบังกรุงเทพฯ10520",
+    "student_id": "73046011",
+    "faculty_name": "คณะเทคโนโลยีการเกษตร",
+    "prename": "นางสาว",
+    "name": "บัณฑิตกษ11เทคโนโลยีการเกษตร11",
+    "date_of_birth": "1996-07-24",
+    "admis_date": "2021-01-11",
+    "grad_date": "2023-07-27",
+    "grad_reason": null,
+    "degree": "วิทยาศาสตรมหาบัณฑิต",
+    "major": null,
+    "program": "การสื่อสารและวิทยาการสารสนเทศทางการเกษตร",
+    "honor": 0
+  },
+  "transcript_detail": {
+    "semesters": [
+      {
+        "year": 2563,
+        "sem_num": 2,
+        "GPA": "3.88",
+        "GPS": "3.88",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "04117301",
+            "subject_name": "สัมมนา1",
+            "type": "nc",
+            "credit": 1,
+            "grade_earn": "s"
+          },
+          {
+            "subject_id": "04117401",
+            "subject_name": "ระเบียบวิธีวิจัยทางการสื่อสารและวิทยาการสารสนเทศทางการเกษตร",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "a"
+          },
+          {
+            "subject_id": "04117403",
+            "subject_name": "วิทยาการสารสนเทศและการจัดการความรู้เพื่อการเกษตรยุคใหม่",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "a"
+          },
+          {
+            "subject_id": "04117405",
+            "subject_name": "การคิดเชิงวิทยาศาสตร์เพื่อการสื่อสารและวิทยาการสารสนเทศทางการเกษตร",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "b+"
+          },
+          {
+            "subject_id": "04117406",
+            "subject_name": "วิทยาการสารสนเทศเพื่อการเกษตรอัจฉริยะ",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "a"
+          }
+        ]
+      },
+      {
+        "year": 2564,
+        "sem_num": 1,
+        "GPA": "3.81",
+        "GPS": "3.75",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "04117302",
+            "subject_name": "สัมมนา2",
+            "type": "nc",
+            "credit": 1,
+            "grade_earn": "s"
+          },
+          {
+            "subject_id": "04117402",
+            "subject_name": "ทฤษฎีและการประยุกต์ใช้การสื่อสารเพื่อการเกษตร",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "a"
+          },
+          {
+            "subject_id": "04117404",
+            "subject_name": "ทัศนมิติทางพัฒนาการเกษตร",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "b"
+          },
+          {
+            "subject_id": "04117514",
+            "subject_name": "การสื่อสารการตลาดและการสร้างแบรนด์",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "a"
+          },
+          {
+            "subject_id": "04117515",
+            "subject_name": "ระบบสารสนเทศเพื่อการตัดสินใจสำหรับผู้ประกอบการพาณิชย์อิเล็กทรอนิกส์",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "a"
+          }
+        ]
+      },
+      {
+        "year": 2564,
+        "sem_num": 2,
+        "GPA": "3.81",
+        "GPS": "0.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "04117102",
+            "subject_name": "วิทยานิพนธ์(ก2)",
+            "type": "cr",
+            "credit": 6,
+            "grade_earn": "s"
+          }
+        ]
+      },
+      {
+        "year": 2565,
+        "sem_num": 1,
+        "GPA": "3.81",
+        "GPS": "0.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "04117102",
+            "subject_name": "วิทยานิพนธ์(ก2)",
+            "type": "cr",
+            "credit": 6,
+            "grade_earn": "s"
+          }
+        ]
+      },
+      {
+        "year": 2565,
+        "sem_num": 2,
+        "GPA": null,
+        "GPS": null,
+        "pass_reason": "maintain",
+        "subject": []
+      }
+    ],
+    "master_comprehensive": null,
+    "master_thesis": null,
+    "master_qualify": null,
+    "total_credits_earned": 36,
+    "cumulative_gpa": "3.81"
+  },
+  "footer_detail": {
+    "updated_at": "2025-01-15",
+    "by": {
+      "by_signature": "ผู้ช่วยศาสตราจารย์ดร.ทดสอบนามสกุล",
+      "by_position": "ผู้อำนวยการ",
+      "by_reg": "สำนักทะเบียนและบริการการศึกษา"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "file": "72100009.pdf",
+  "cer": 0.8913417052214144,
+  "wer": 1.0,
+  "exact_match": false,
+  "reference_chars": 8280,
+  "prediction_chars": 3432
+}

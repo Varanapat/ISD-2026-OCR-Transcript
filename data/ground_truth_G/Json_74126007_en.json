@@ -1,0 +1,203 @@
+{
+  "header_detail": {
+    "uni_name": "kingmongkut'sinstituteoftechnologyladkrabang",
+    "uni_address": "chalongkrungroad,ladkrabang,bangkok10520,thailand",
+    "student_id": "74126007",
+    "faculty_name": "kmitlbusinessschool",
+    "prename": "mr.",
+    "name": "graduatekbs7kmitlbusinessschool7",
+    "date_of_birth": "1995-10-29",
+    "admis_date": "2022-01-10",
+    "grad_date": "0000-00-00",
+    "grad_reason": null,
+    "degree": "doctorofphilosophy",
+    "major": null,
+    "program": "industrialbusinessadministration(internationalprogram)",
+    "honor": 0
+  },
+  "transcript_detail": {
+    "semesters": [
+      {
+        "year": 2564,
+        "sem_num": 2,
+        "GPA": "3.50",
+        "GPS": "3.50",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "14138102",
+            "subject_name": "advancedquantitativeresearchmethods",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "a"
+          },
+          {
+            "subject_id": "14138214",
+            "subject_name": "newproductandservicesdevelopment",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "b"
+          },
+          {
+            "subject_id": "14138301",
+            "subject_name": "doctoralseminar1",
+            "type": "nc",
+            "credit": 1,
+            "grade_earn": "s"
+          }
+        ]
+      },
+      {
+        "year": 2565,
+        "sem_num": 1,
+        "GPA": "3.50",
+        "GPS": "3.50",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "14138001",
+            "subject_name": "advancedintegratedbusinessmanagement",
+            "type": "nc",
+            "credit": 3,
+            "grade_earn": "s"
+          },
+          {
+            "subject_id": "14138101",
+            "subject_name": "philosophyofadvancedresearchmethodology",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "b+"
+          },
+          {
+            "subject_id": "14138103",
+            "subject_name": "advancedindustrialbusinessadministration",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "b+"
+          },
+          {
+            "subject_id": "14138302",
+            "subject_name": "doctoralseminar2",
+            "type": "nc",
+            "credit": 1,
+            "grade_earn": "s"
+          }
+        ]
+      },
+      {
+        "year": 2565,
+        "sem_num": 2,
+        "GPA": "3.50",
+        "GPS": "0.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "14138303",
+            "subject_name": "doctoralseminar3",
+            "type": "nc",
+            "credit": 1,
+            "grade_earn": "s"
+          },
+          {
+            "subject_id": "14138602",
+            "subject_name": "doctoralthesis",
+            "type": "cr",
+            "credit": 9,
+            "grade_earn": "s"
+          }
+        ]
+      },
+      {
+        "year": 2566,
+        "sem_num": 1,
+        "GPA": "3.50",
+        "GPS": "0.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "14138601",
+            "subject_name": "doctoralthesis",
+            "type": "cr",
+            "credit": 48,
+            "grade_earn": "s"
+          }
+        ]
+      },
+      {
+        "year": 2566,
+        "sem_num": 2,
+        "GPA": "3.50",
+        "GPS": "0.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "14138602",
+            "subject_name": "doctoralthesis",
+            "type": "cr",
+            "credit": 9,
+            "grade_earn": "s"
+          }
+        ]
+      },
+      {
+        "year": 2567,
+        "sem_num": 1,
+        "GPA": "3.50",
+        "GPS": "0.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "14138306",
+            "subject_name": "doctoralseminar6",
+            "type": "nc",
+            "credit": 1,
+            "grade_earn": "s"
+          },
+          {
+            "subject_id": "14138602",
+            "subject_name": "doctoralthesis",
+            "type": "cr",
+            "credit": 9,
+            "grade_earn": "i"
+          }
+        ]
+      },
+      {
+        "year": 2567,
+        "sem_num": 2,
+        "GPA": "3.50",
+        "GPS": "0.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "14138304",
+            "subject_name": "doctoralseminar4",
+            "type": "nc",
+            "credit": 1,
+            "grade_earn": null
+          },
+          {
+            "subject_id": "14138305",
+            "subject_name": "doctoralseminar5",
+            "type": "nc",
+            "credit": 1,
+            "grade_earn": null
+          }
+        ]
+      }
+    ],
+    "master_comprehensive": null,
+    "master_thesis": null,
+    "master_qualify": null,
+    "total_credits_earned": 78,
+    "cumulative_gpa": "3.50"
+  },
+  "footer_detail": {
+    "updated_at": "2025-01-15",
+    "by": {
+      "by_signature": "asst.prof.dr.testsurname",
+      "by_position": "director",
+      "by_reg": "kmitlregistrationandeducationserviceoffice"
+    }
+  }
+}

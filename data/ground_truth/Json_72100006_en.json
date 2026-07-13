@@ -1,0 +1,93 @@
+{
+  "header_detail": {
+    "uni_name": "kingmongkut'sinstituteoftechnologyladkrabang",
+    "uni_address": "chalongkrungroad,ladkrabang,bangkok10520,thailand",
+    "student_id": "72100006",
+    "faculty_name": "collegeofnanotechnology",
+    "prename": "mr.",
+    "name": "mit6materialsinnovationandtechnology6",
+    "date_of_birth": "2000-07-17",
+    "admis_date": "2019-08-05",
+    "grad_date": "0000-00-00",
+    "grad_reason": "n/a(resignedinsemester1/2019)",
+    "degree": "bachelorofengineering",
+    "major": null,
+    "program": "nanomaterialengineering",
+    "honor": 0
+  },
+  "transcript_detail": {
+    "semesters": [
+      {
+        "year": 2562,
+        "sem_num": 1,
+        "GPA": "0.00",
+        "GPS": "0.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "90201001",
+            "subject_name": "foundationenglish1",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "-"
+          },
+          {
+            "subject_id": "90304001",
+            "subject_name": "libraryusageandinformation",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "-"
+          },
+          {
+            "subject_id": "92596100",
+            "subject_name": "engineeringworkshopanddrawing",
+            "type": null,
+            "credit": 1,
+            "grade_earn": "-"
+          },
+          {
+            "subject_id": "92596101",
+            "subject_name": "engineeringmathematics",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "-"
+          },
+          {
+            "subject_id": "92596103",
+            "subject_name": "physics1",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "-"
+          },
+          {
+            "subject_id": "92596111",
+            "subject_name": "physicslaboratory1",
+            "type": null,
+            "credit": 1,
+            "grade_earn": "-"
+          },
+          {
+            "subject_id": "92596113",
+            "subject_name": "chemistrylaboratory",
+            "type": null,
+            "credit": 1,
+            "grade_earn": "-"
+          }
+        ]
+      }
+    ],
+    "master_comprehensive": null,
+    "master_thesis": null,
+    "master_qualify": null,
+    "total_credits_earned": 0,
+    "cumulative_gpa": "0.00"
+  },
+  "footer_detail": {
+    "updated_at": "2025-01-15",
+    "by": {
+      "by_signature": "asst.prof.dr.testsurname",
+      "by_position": "director",
+      "by_reg": "kmitlregistrationandeducationserviceoffice"
+    }
+  }
+}

@@ -1,0 +1,513 @@
+{
+  "72100009.pdf": {
+    "header_detail": {
+      "uni_name": "kingmongkut'sinstituteoftechnologyladkrabang",
+      "uni_address": "chalongkrungroad,ladkrabang,bangkok10520,thailand",
+      "student_id": "72100009",
+      "faculty_name": "collegeofmaterialsinnovationandtechnology",
+      "prename": "miss",
+      "name": "mit9materialsinnovationandtechnology9",
+      "date_of_birth": "2001-12-17",
+      "admis_date": "2019-08-05",
+      "grad_date": "0000-00-00",
+      "grad_reason": null,
+      "degree": "bachelorofengineering",
+      "major": null,
+      "program": "nanomaterialengineering",
+      "honor": 0
+    },
+    "transcript_detail": {
+      "semesters": [
+        {
+          "year": 2562,
+          "sem_num": 1,
+          "GPA": "2.31",
+          "GPS": "2.31",
+          "pass_reason": null,
+          "subject": [
+            {
+              "subject_id": "90201001",
+              "subject_name": "foundationenglish1",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "c"
+            },
+            {
+              "subject_id": "90304001",
+              "subject_name": "libraryusageandinformation",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "b+"
+            },
+            {
+              "subject_id": "90402009",
+              "subject_name": "introductiontoprinciplesoflawsindailylife",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "c+"
+            },
+            {
+              "subject_id": "92596100",
+              "subject_name": "engineeringworkshopanddrawing",
+              "type": null,
+              "credit": 1,
+              "grade_earn": "b"
+            },
+            {
+              "subject_id": "92596101",
+              "subject_name": "engineeringmathematics",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "d+"
+            },
+            {
+              "subject_id": "92596102",
+              "subject_name": "fundamentalchemistry",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "d+"
+            },
+            {
+              "subject_id": "92596103",
+              "subject_name": "physics1",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "c+"
+            },
+            {
+              "subject_id": "92596111",
+              "subject_name": "physicslaboratory1",
+              "type": null,
+              "credit": 1,
+              "grade_earn": "b"
+            },
+            {
+              "subject_id": "92596113",
+              "subject_name": "chemistrylaboratory",
+              "type": null,
+              "credit": 1,
+              "grade_earn": "c"
+            }
+          ]
+        },
+        {
+          "year": 2562,
+          "sem_num": 2,
+          "GPA": "2.13",
+          "GPS": "1.92",
+          "pass_reason": null,
+          "subject": [
+            {
+              "subject_id": "90201002",
+              "subject_name": "foundationenglish2",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "d+"
+            },
+            {
+              "subject_id": "92596104",
+              "subject_name": "physics2",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "c"
+            },
+            {
+              "subject_id": "92596105",
+              "subject_name": "biology",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "c"
+            },
+            {
+              "subject_id": "92596106",
+              "subject_name": "organicchemistry",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "c"
+            },
+            {
+              "subject_id": "92596108",
+              "subject_name": "materialsscienceandengineering",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "c"
+            },
+            {
+              "subject_id": "92596112",
+              "subject_name": "physicslaboratory2",
+              "type": null,
+              "credit": 1,
+              "grade_earn": "c"
+            },
+            {
+              "subject_id": "92596114",
+              "subject_name": "advancedengineeringmathematics",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "c"
+            }
+          ]
+        },
+        {
+          "year": 2563,
+          "sem_num": 1,
+          "GPA": "2.08",
+          "GPS": "2.00",
+          "pass_reason": null,
+          "subject": [
+            {
+              "subject_id": "90201003",
+              "subject_name": "englishforacademicpurposes",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "b+"
+            },
+            {
+              "subject_id": "90307001",
+              "subject_name": "thaiusageforcommunication",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "b+"
+            },
+            {
+              "subject_id": "92596107",
+              "subject_name": "inorganicchemistry",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "d"
+            },
+            {
+              "subject_id": "92596109",
+              "subject_name": "introductiontonanotechnology",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "d"
+            },
+            {
+              "subject_id": "92596115",
+              "subject_name": "probabilityandstatisticsforengineer",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "c"
+            },
+            {
+              "subject_id": "92596201",
+              "subject_name": "circuitsandelectronics",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "c"
+            },
+            {
+              "subject_id": "92596211",
+              "subject_name": "instrumentationfornanostructurematerials",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "d"
+            }
+          ]
+        },
+        {
+          "year": 2563,
+          "sem_num": 2,
+          "GPA": "2.11",
+          "GPS": "2.18",
+          "pass_reason": null,
+          "subject": [
+            {
+              "subject_id": "90201012",
+              "subject_name": "developmentofreadingandwritingskillsinenglish",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "a"
+            },
+            {
+              "subject_id": "90302001",
+              "subject_name": "generalpsychology",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "c"
+            },
+            {
+              "subject_id": "92596110",
+              "subject_name": "thermodynamics",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "c+"
+            },
+            {
+              "subject_id": "92596204",
+              "subject_name": "solidstateandsemiconductormaterials",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "d+"
+            },
+            {
+              "subject_id": "92596206",
+              "subject_name": "mechanicsofnanomaterials",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "c"
+            },
+            {
+              "subject_id": "92596209",
+              "subject_name": "nanomateriallaboratory",
+              "type": null,
+              "credit": 1,
+              "grade_earn": "b"
+            },
+            {
+              "subject_id": "92596213",
+              "subject_name": "computerprogramming",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "d+"
+            },
+            {
+              "subject_id": "92596216",
+              "subject_name": "electromagneticandoptics",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "d+"
+            }
+          ]
+        },
+        {
+          "year": 2564,
+          "sem_num": 1,
+          "GPA": "2.17",
+          "GPS": "2.41",
+          "pass_reason": null,
+          "subject": [
+            {
+              "subject_id": "90101002",
+              "subject_name": "mathematicsindailylife",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "d+"
+            },
+            {
+              "subject_id": "92596200",
+              "subject_name": "surfacephysicsandchemistry",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "c+"
+            },
+            {
+              "subject_id": "92596203",
+              "subject_name": "quantummechanics",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "c+"
+            },
+            {
+              "subject_id": "92596205",
+              "subject_name": "polymericmaterials",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "c+"
+            },
+            {
+              "subject_id": "92596207",
+              "subject_name": "microandnanomaterialsfabricationtechnology",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "c"
+            },
+            {
+              "subject_id": "92596212",
+              "subject_name": "advancednanomaterialinstrumentationlaboratory",
+              "type": null,
+              "credit": 1,
+              "grade_earn": "c"
+            },
+            {
+              "subject_id": "92596214",
+              "subject_name": "microcontrollersystemapplicationsanddesign",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "b"
+            },
+            {
+              "subject_id": "92596217",
+              "subject_name": "processengineeringandqualitycontrol",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "b"
+            }
+          ]
+        },
+        {
+          "year": 2564,
+          "sem_num": 2,
+          "GPA": "2.29",
+          "GPS": "2.97",
+          "pass_reason": null,
+          "subject": [
+            {
+              "subject_id": "90104010",
+              "subject_name": "homegardenmanagement",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "b"
+            },
+            {
+              "subject_id": "90401013",
+              "subject_name": "generalbusiness",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "b+"
+            },
+            {
+              "subject_id": "92596202",
+              "subject_name": "materialsdesignandsimulation",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "c+"
+            },
+            {
+              "subject_id": "92596210",
+              "subject_name": "advancednanomateriallaboratory",
+              "type": null,
+              "credit": 1,
+              "grade_earn": "a"
+            },
+            {
+              "subject_id": "92596215",
+              "subject_name": "magneticmaterialsandnanoscaleapplications",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "b+"
+            },
+            {
+              "subject_id": "92596218",
+              "subject_name": "advancednanomaterialssynthesisandapplication",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "c"
+            },
+            {
+              "subject_id": "92596219",
+              "subject_name": "researchskilldevelopment",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "b"
+            }
+          ]
+        },
+        {
+          "year": 2565,
+          "sem_num": 1,
+          "GPA": "2.29",
+          "GPS": "2.25",
+          "pass_reason": null,
+          "subject": [
+            {
+              "subject_id": "90591004",
+              "subject_name": "artsofemotiondevelopment",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "c"
+            },
+            {
+              "subject_id": "92596221",
+              "subject_name": "specialproject1",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "c+"
+            }
+          ]
+        },
+        {
+          "year": 2565,
+          "sem_num": 2,
+          "GPA": "2.26",
+          "GPS": "1.85",
+          "pass_reason": null,
+          "subject": [
+            {
+              "subject_id": "92596208",
+              "subject_name": "specialtopics",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "b"
+            },
+            {
+              "subject_id": "92596220",
+              "subject_name": "seminar",
+              "type": null,
+              "credit": 1,
+              "grade_earn": "b+"
+            },
+            {
+              "subject_id": "92596222",
+              "subject_name": "specialproject2",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "f"
+            },
+            {
+              "subject_id": "92596301",
+              "subject_name": "biosensors",
+              "type": null,
+              "credit": 3,
+              "grade_earn": "c"
+            }
+          ]
+        },
+        {
+          "year": 2566,
+          "sem_num": 1,
+          "GPA": null,
+          "GPS": null,
+          "pass_reason": "maintain",
+          "subject": []
+        },
+        {
+          "year": 2566,
+          "sem_num": 2,
+          "GPA": null,
+          "GPS": null,
+          "pass_reason": "maintain",
+          "subject": []
+        },
+        {
+          "year": 2567,
+          "sem_num": 1,
+          "GPA": null,
+          "GPS": null,
+          "pass_reason": "leaveofabsence",
+          "subject": []
+        },
+        {
+          "year": 2567,
+          "sem_num": 2,
+          "GPA": "2.26",
+          "GPS": "0.00",
+          "pass_reason": null,
+          "subject": [
+            {
+              "subject_id": "09026401",
+              "subject_name": "specialproject2",
+              "type": null,
+              "credit": 3,
+              "grade_earn": null
+            }
+          ]
+        }
+      ],
+      "master_comprehensive": null,
+      "master_thesis": null,
+      "master_qualify": null,
+      "total_credits_earned": 140,
+      "cumulative_gpa": "2.26"
+    },
+    "footer_detail": {
+      "updated_at": "2025-01-15",
+      "by": {
+        "by_signature": "asst.prof.dr.testsurname",
+        "by_position": "director",
+        "by_reg": "kmitlregistrationandeducationserviceoffice"
+      }
+    }
+  }
+}

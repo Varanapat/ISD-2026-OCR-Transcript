@@ -1,0 +1,178 @@
+{
+  "header_detail": {
+    "uni_name": "kingmongkut'sinstituteoftechnologyladkrabang",
+    "uni_address": "chalongkrungroad,ladkrabang,bangkok10520,thailand",
+    "student_id": "74156007",
+    "faculty_name": "schoolofliberalarts",
+    "prename": "mr.",
+    "name": "graduatela7liberalarts7",
+    "date_of_birth": "1996-02-06",
+    "admis_date": "2021-08-02",
+    "grad_date": "2024-06-25",
+    "grad_reason": null,
+    "degree": "masterofarts",
+    "major": null,
+    "program": "appliedlinguistics-englishforprofessionalpurposes",
+    "honor": 0
+  },
+  "transcript_detail": {
+    "semesters": [
+      {
+        "year": 2564,
+        "sem_num": 1,
+        "GPA": "3.63",
+        "GPS": "3.63",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "16127021",
+            "subject_name": "appliedlinguistics",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "a"
+          },
+          {
+            "subject_id": "16127024",
+            "subject_name": "advancedintegratedenglishlanguageskillsforprofessionalpurposes",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "a"
+          },
+          {
+            "subject_id": "16127025",
+            "subject_name": "englishforprofessionalpurposes",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "b"
+          },
+          {
+            "subject_id": "16127064",
+            "subject_name": "englishphoneticsandworkplacecommunication",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "b+"
+          }
+        ]
+      },
+      {
+        "year": 2564,
+        "sem_num": 2,
+        "GPA": "3.63",
+        "GPS": "3.63",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "16127022",
+            "subject_name": "researchmethodology",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "b+"
+          },
+          {
+            "subject_id": "16127023",
+            "subject_name": "researchwriting",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "b+"
+          },
+          {
+            "subject_id": "16127053",
+            "subject_name": "businesswritingforworkplacecommunication",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "a"
+          },
+          {
+            "subject_id": "16127054",
+            "subject_name": "translationforprofessionalcommunication",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "b+"
+          }
+        ]
+      },
+      {
+        "year": 2565,
+        "sem_num": 1,
+        "GPA": "3.59",
+        "GPS": "3.50",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "16127057",
+            "subject_name": "englishlanguageteachingmethodologyandmaterialdesign",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "a"
+          },
+          {
+            "subject_id": "16127058",
+            "subject_name": "languagetestingandassessment",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "b"
+          },
+          {
+            "subject_id": "16127063",
+            "subject_name": "currenttrendsinenglishforprofessionalpurposes",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "b+"
+          },
+          {
+            "subject_id": "16127101",
+            "subject_name": "seminarinenglishforprofessionalpurposes",
+            "type": "nc",
+            "credit": 1,
+            "grade_earn": "s"
+          }
+        ]
+      },
+      {
+        "year": 2565,
+        "sem_num": 2,
+        "GPA": "3.59",
+        "GPS": "0.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "16127012",
+            "subject_name": "independentstudy",
+            "type": "cr",
+            "credit": 6,
+            "grade_earn": "g"
+          }
+        ]
+      },
+      {
+        "year": 2566,
+        "sem_num": 1,
+        "GPA": null,
+        "GPS": null,
+        "pass_reason": "maintain",
+        "subject": []
+      },
+      {
+        "year": 2566,
+        "sem_num": 2,
+        "GPA": null,
+        "GPS": null,
+        "pass_reason": "maintain",
+        "subject": []
+      }
+    ],
+    "master_comprehensive": "pass",
+    "master_thesis": null,
+    "master_qualify": null,
+    "total_credits_earned": 39,
+    "cumulative_gpa": "3.59"
+  },
+  "footer_detail": {
+    "updated_at": "2025-01-15",
+    "by": {
+      "by_signature": "asst.prof.dr.testsurname",
+      "by_position": "director",
+      "by_reg": "kmitlregistrationandeducationserviceoffice"
+    }
+  }
+}

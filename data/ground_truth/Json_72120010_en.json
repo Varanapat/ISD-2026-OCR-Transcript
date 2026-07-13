@@ -1,0 +1,492 @@
+{
+  "header_detail": {
+    "uni_name": "kingmongkut'sinstituteoftechnologyladkrabang",
+    "uni_address": "chalongkrungroad,ladkrabang,bangkok10520,thailand",
+    "student_id": "72120010",
+    "faculty_name": "kmitlbusinessschool",
+    "prename": "miss",
+    "name": "kbs10kmitlbusinessschool10",
+    "date_of_birth": "2000-06-11",
+    "admis_date": "2019-08-05",
+    "grad_date": "0000-00-00",
+    "grad_reason": null,
+    "degree": "bachelorofscience",
+    "major": null,
+    "program": "businessandmanagerialeconomics",
+    "honor": 0
+  },
+  "transcript_detail": {
+    "semesters": [
+      {
+        "year": 2562,
+        "sem_num": 1,
+        "GPA": "2.58",
+        "GPS": "2.58",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "14026141",
+            "subject_name": "introductiontomicroeconomics",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c+"
+          },
+          {
+            "subject_id": "14026142",
+            "subject_name": "introductiontomacroeconomics",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c+"
+          },
+          {
+            "subject_id": "90101007",
+            "subject_name": "introductiontomathematicaleconomics",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c+"
+          },
+          {
+            "subject_id": "90201001",
+            "subject_name": "foundationenglish1",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b+"
+          },
+          {
+            "subject_id": "90307004",
+            "subject_name": "languageinthaisociety",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c"
+          },
+          {
+            "subject_id": "90402008",
+            "subject_name": "introductiontoworkingandsocialwelfare",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c+"
+          }
+        ]
+      },
+      {
+        "year": 2562,
+        "sem_num": 2,
+        "GPA": "2.58",
+        "GPS": "2.58",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "14026143",
+            "subject_name": "microeconomicsforbusiness",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "d"
+          },
+          {
+            "subject_id": "14026144",
+            "subject_name": "macroeconomicsforbusiness",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b"
+          },
+          {
+            "subject_id": "14026146",
+            "subject_name": "mathematicsforeconomists",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b+"
+          },
+          {
+            "subject_id": "90101002",
+            "subject_name": "mathematicsindailylife",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c+"
+          },
+          {
+            "subject_id": "90201002",
+            "subject_name": "foundationenglish2",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c"
+          },
+          {
+            "subject_id": "90402009",
+            "subject_name": "introductiontoprinciplesoflawsindailylife",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b+"
+          }
+        ]
+      },
+      {
+        "year": 2563,
+        "sem_num": 1,
+        "GPA": "2.53",
+        "GPS": "2.42",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "14026101",
+            "subject_name": "principlesofaccounting",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c"
+          },
+          {
+            "subject_id": "14026104",
+            "subject_name": "principlesofmarketing",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b"
+          },
+          {
+            "subject_id": "14026105",
+            "subject_name": "organizationandmanagement",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c"
+          },
+          {
+            "subject_id": "14026147",
+            "subject_name": "quantitativeanalysisforbusinesseconomics",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "d+"
+          },
+          {
+            "subject_id": "90201035",
+            "subject_name": "writingandspeakingintheprofessions",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b"
+          },
+          {
+            "subject_id": "90302011",
+            "subject_name": "psychologyofthinking",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b"
+          }
+        ]
+      },
+      {
+        "year": 2563,
+        "sem_num": 2,
+        "GPA": "2.46",
+        "GPS": "2.25",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "14026107",
+            "subject_name": "productionandoperationsmanagement",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "f"
+          },
+          {
+            "subject_id": "14026114",
+            "subject_name": "computerandinformationapplications",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c"
+          },
+          {
+            "subject_id": "14026145",
+            "subject_name": "businesstax",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c+"
+          },
+          {
+            "subject_id": "14026148",
+            "subject_name": "statisticsforeconomists",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b"
+          },
+          {
+            "subject_id": "14026150",
+            "subject_name": "introductiontoindustrialeconomics",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b+"
+          },
+          {
+            "subject_id": "90595002",
+            "subject_name": "englishforcommunication",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c+"
+          }
+        ]
+      },
+      {
+        "year": 2564,
+        "sem_num": 1,
+        "GPA": "2.45",
+        "GPS": "2.43",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "14026103",
+            "subject_name": "businessfinance",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "d+"
+          },
+          {
+            "subject_id": "14026108",
+            "subject_name": "humanresourcemanagement",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b"
+          },
+          {
+            "subject_id": "14026151",
+            "subject_name": "environmentalmanagementforbusiness",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c+"
+          },
+          {
+            "subject_id": "14026153",
+            "subject_name": "statisticpackagesfordataanalysis",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c+"
+          },
+          {
+            "subject_id": "14026154",
+            "subject_name": "businesseconomicsresearch",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c"
+          },
+          {
+            "subject_id": "14026241",
+            "subject_name": "agribusinesseconomicsandfood",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b"
+          },
+          {
+            "subject_id": "14026345",
+            "subject_name": "projectfeasibilitystudy",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c+"
+          }
+        ]
+      },
+      {
+        "year": 2564,
+        "sem_num": 2,
+        "GPA": "2.45",
+        "GPS": "2.43",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "14026107",
+            "subject_name": "productionandoperationsmanagement",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "d+"
+          },
+          {
+            "subject_id": "14026115",
+            "subject_name": "businessandcommerciallaws",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b+"
+          },
+          {
+            "subject_id": "14026149",
+            "subject_name": "introductiontoeconomietrics",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c+"
+          },
+          {
+            "subject_id": "14026152",
+            "subject_name": "moneyandbankingeconomics",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "d+"
+          },
+          {
+            "subject_id": "14026155",
+            "subject_name": "businessplanning",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b"
+          },
+          {
+            "subject_id": "14026156",
+            "subject_name": "seminarinbusinesseconomics",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b+"
+          },
+          {
+            "subject_id": "14026442",
+            "subject_name": "internationalmonetaryeconomics",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "d+"
+          }
+        ]
+      },
+      {
+        "year": 2565,
+        "sem_num": 1,
+        "GPA": "2.59",
+        "GPS": "3.50",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "14026349",
+            "subject_name": "economicsofserviceindustry",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b"
+          },
+          {
+            "subject_id": "14026351",
+            "subject_name": "selectedtopicsinindustrialandtechnologyeconomics2",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "a"
+          },
+          {
+            "subject_id": "14026449",
+            "subject_name": "selectedtopicsininternationaleconomics1",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b"
+          },
+          {
+            "subject_id": "14026501",
+            "subject_name": "marketingplanningandmanagement",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b"
+          },
+          {
+            "subject_id": "14026843",
+            "subject_name": "specialproject",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "a"
+          },
+          {
+            "subject_id": "90302013",
+            "subject_name": "personalityandmentalhealthdevelopment",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "a"
+          }
+        ]
+      },
+      {
+        "year": 2565,
+        "sem_num": 2,
+        "GPA": "2.60",
+        "GPS": "2.71",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "90591910",
+            "subject_name": "chess",
+            "type": null,
+            "credit": 2,
+            "grade_earn": "b"
+          },
+          {
+            "subject_id": "90591911",
+            "subject_name": "tabletennis",
+            "type": null,
+            "credit": 2,
+            "grade_earn": "b+"
+          },
+          {
+            "subject_id": "90592004",
+            "subject_name": "contemporaryculture",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c"
+          }
+        ]
+      },
+      {
+        "year": 2566,
+        "sem_num": 1,
+        "GPA": "2.61",
+        "GPS": "3.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "90201020",
+            "subject_name": "englishforindustry",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b"
+          }
+        ]
+      },
+      {
+        "year": 2566,
+        "sem_num": 2,
+        "GPA": "2.61",
+        "GPS": "3.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "14026346",
+            "subject_name": "informationandcommunicationtechnologyeconomics",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b"
+          }
+        ]
+      },
+      {
+        "year": 2567,
+        "sem_num": 1,
+        "GPA": null,
+        "GPS": null,
+        "pass_reason": "maintain",
+        "subject": []
+      },
+      {
+        "year": 2567,
+        "sem_num": 2,
+        "GPA": "2.61",
+        "GPS": "0.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "14026844",
+            "subject_name": "practicaltraininginbusinessandmanagerialeconomics",
+            "type": null,
+            "credit": 3,
+            "grade_earn": null
+          }
+        ]
+      }
+    ],
+    "master_comprehensive": null,
+    "master_thesis": null,
+    "master_qualify": null,
+    "total_credits_earned": 145,
+    "cumulative_gpa": "2.61"
+  },
+  "footer_detail": {
+    "updated_at": "2025-01-15",
+    "by": {
+      "by_signature": "asst.prof.dr.testsurname",
+      "by_position": "director",
+      "by_reg": "kmitlregistrationandeducationserviceoffice"
+    }
+  }
+}

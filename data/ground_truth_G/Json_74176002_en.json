@@ -1,0 +1,133 @@
+{
+  "header_detail": {
+    "uni_name": "kingmongkut'sinstituteoftechnologyladkrabang",
+    "uni_address": "chalongkrungroad,ladkrabang,bangkok10520,thailand",
+    "student_id": "74176002",
+    "faculty_name": "collegeofinnovationandindustrialmanagement",
+    "prename": "miss",
+    "name": "graduateciim2innovationandindustrialmanagement2",
+    "date_of_birth": "1998-01-26",
+    "admis_date": "2022-01-10",
+    "grad_date": "0000-00-00",
+    "grad_reason": null,
+    "degree": "doctorofphilosophy",
+    "major": null,
+    "program": "innovationandindustrialmanagement",
+    "honor": 0
+  },
+  "transcript_detail": {
+    "semesters": [
+      {
+        "year": 2564,
+        "sem_num": 2,
+        "GPA": "3.63",
+        "GPS": "3.63",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "18018000",
+            "subject_name": "advancedinnovationmanagement",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "b+"
+          },
+          {
+            "subject_id": "18018001",
+            "subject_name": "advancesresearchmethodology",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "b"
+          },
+          {
+            "subject_id": "18018008",
+            "subject_name": "leadershipandchangemanagement",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "a"
+          },
+          {
+            "subject_id": "18018011",
+            "subject_name": "logisticsandsupplychainmanagement",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "a"
+          },
+          {
+            "subject_id": "18018014",
+            "subject_name": "doctoralseminar1",
+            "type": "nc",
+            "credit": 1,
+            "grade_earn": "s"
+          }
+        ]
+      },
+      {
+        "year": 2565,
+        "sem_num": 1,
+        "GPA": "3.67",
+        "GPS": "3.75",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "18018002",
+            "subject_name": "industrialandintellectualproperty",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "a"
+          },
+          {
+            "subject_id": "18018007",
+            "subject_name": "principlesofinnovationforenvironment",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "b+"
+          },
+          {
+            "subject_id": "18018015",
+            "subject_name": "doctoralseminar2",
+            "type": "nc",
+            "credit": 1,
+            "grade_earn": "s"
+          }
+        ]
+      },
+      {
+        "year": 2565,
+        "sem_num": 2,
+        "GPA": "3.67",
+        "GPS": "0.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "18018012",
+            "subject_name": "thesis",
+            "type": "cr",
+            "credit": 6,
+            "grade_earn": null
+          }
+        ]
+      },
+      {
+        "year": 2566,
+        "sem_num": 1,
+        "GPA": null,
+        "GPS": null,
+        "pass_reason": "leaveofabsence",
+        "subject": []
+      }
+    ],
+    "master_comprehensive": null,
+    "master_thesis": null,
+    "master_qualify": null,
+    "total_credits_earned": 24,
+    "cumulative_gpa": "3.67"
+  },
+  "footer_detail": {
+    "updated_at": "2025-01-15",
+    "by": {
+      "by_signature": "asst.prof.dr.testsurname",
+      "by_position": "director",
+      "by_reg": "kmitlregistrationandeducationserviceoffice"
+    }
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "header_detail": {
+    "uni_name": "kingmongkut'sinstituteoftechnologyladkrabang",
+    "uni_address": "chalongkrungroad,ladkrabang,bangkok10520,thailand",
+    "student_id": "72120002",
+    "faculty_name": "kmitlbusinessschool",
+    "prename": "miss",
+    "name": "kbs2kmitlbusinessschool2",
+    "date_of_birth": "2000-07-06",
+    "admis_date": "2019-08-05",
+    "grad_date": "0000-00-00",
+    "grad_reason": "n/a(retiredinsemester2/2019)",
+    "degree": "bachelorofbusinessadministration",
+    "major": null,
+    "program": "businessadministration(internationalprogram)",
+    "honor": 0
+  },
+  "transcript_detail": {
+    "semesters": [
+      {
+        "year": 2562,
+        "sem_num": 1,
+        "GPA": "1.25",
+        "GPS": "1.25",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "14036110",
+            "subject_name": "principlesofeconomics",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "d"
+          },
+          {
+            "subject_id": "14036119",
+            "subject_name": "fundamentalsofmanagingtechnology",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "d+"
+          },
+          {
+            "subject_id": "14036906",
+            "subject_name": "computerindailylife",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "d+"
+          },
+          {
+            "subject_id": "14036923",
+            "subject_name": "generalbusiness",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "d"
+          },
+          {
+            "subject_id": "14036946",
+            "subject_name": "theworldtoday",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "d+"
+          },
+          {
+            "subject_id": "14036964",
+            "subject_name": "englishforbusiness",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "d"
+          }
+        ]
+      },
+      {
+        "year": 2562,
+        "sem_num": 2,
+        "GPA": "1.00",
+        "GPS": "0.75",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "14036104",
+            "subject_name": "internationalmarketingmanagement",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "f"
+          },
+          {
+            "subject_id": "14036111",
+            "subject_name": "managerialeconomics",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "f"
+          },
+          {
+            "subject_id": "14036112",
+            "subject_name": "principlesofmanagement",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "d+"
+          },
+          {
+            "subject_id": "14036905",
+            "subject_name": "mathemeticsinbusinessandindustry",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "f"
+          },
+          {
+            "subject_id": "14036921",
+            "subject_name": "economyofasiancountries",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b"
+          },
+          {
+            "subject_id": "14036968",
+            "subject_name": "englishforprofessionalpresentation",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "f"
+          }
+        ]
+      }
+    ],
+    "master_comprehensive": null,
+    "master_thesis": null,
+    "master_qualify": null,
+    "total_credits_earned": 36,
+    "cumulative_gpa": "1.00"
+  },
+  "footer_detail": {
+    "updated_at": "2025-01-15",
+    "by": {
+      "by_signature": "asst.prof.dr.testsurname",
+      "by_position": "director",
+      "by_reg": "kmitlregistrationandeducationserviceoffice"
+    }
+  }
+}

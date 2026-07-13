@@ -1,0 +1,86 @@
+{
+  "header_detail": {
+    "uni_name": "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
+    "uni_address": "เลขที่1ซอยฉลองกรุง1เขตลาดกระบังกรุงเทพฯ10520",
+    "student_id": "71010005",
+    "faculty_name": "คณะวิศวกรรมศาสตร์",
+    "prename": "นางสาว",
+    "name": "วศ5วิศวกรรมศาสตร์5",
+    "date_of_birth": "2000-04-08",
+    "admis_date": "2018-08-06",
+    "grad_date": "0000-00-00",
+    "grad_reason": "n/a(ลาออก1/2561)",
+    "degree": "วิทยาศาสตรบัณฑิต",
+    "major": null,
+    "program": "การจัดการวิศวกรรมและเทคโนโลยี(หลักสูตรนานาชาติ)",
+    "honor": 0
+  },
+  "transcript_detail": {
+    "semesters": [
+      {
+        "year": 2561,
+        "sem_num": 1,
+        "GPA": "2.75",
+        "GPS": "2.75",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13006006",
+            "subject_name": "พีชคณิตเชิงเส้น",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b+"
+          },
+          {
+            "subject_id": "13006007",
+            "subject_name": "แคลคูลัส1",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b"
+          },
+          {
+            "subject_id": "13006109",
+            "subject_name": "programmingformanagement",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "d"
+          },
+          {
+            "subject_id": "13006204",
+            "subject_name": "ภาษาอังกฤษพื้นฐาน1",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b+"
+          },
+          {
+            "subject_id": "13006301",
+            "subject_name": "ตรรกศาสตร์เบื้องต้น",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b+"
+          },
+          {
+            "subject_id": "13006402",
+            "subject_name": "เศรษฐศาสตร์เบื้องต้น",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c"
+          }
+        ]
+      }
+    ],
+    "master_comprehensive": null,
+    "master_thesis": null,
+    "master_qualify": null,
+    "total_credits_earned": 18,
+    "cumulative_gpa": "2.75"
+  },
+  "footer_detail": {
+    "updated_at": "2025-01-15",
+    "by": {
+      "by_signature": "ผู้ช่วยศาสตราจารย์ดร.ทดสอบนามสกุล",
+      "by_position": "ผู้อำนวยการ",
+      "by_reg": "สำนักทะเบียนและบริการการศึกษา"
+    }
+  }
+}

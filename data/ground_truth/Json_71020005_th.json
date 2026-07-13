@@ -1,0 +1,100 @@
+{
+  "header_detail": {
+    "uni_name": "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
+    "uni_address": "เลขที่1ซอยฉลองกรุง1เขตลาดกระบังกรุงเทพฯ10520",
+    "student_id": "71020005",
+    "faculty_name": "คณะสถาปัตยกรรมศาสตร์",
+    "prename": "นางสาว",
+    "name": "สถ5สถาปัตยกรรมศิลปะและการออกแบบ5",
+    "date_of_birth": "1997-12-23",
+    "admis_date": "2018-08-06",
+    "grad_date": "0000-00-00",
+    "grad_reason": "n/a(ลาออก1/2561)",
+    "degree": "ศิลปกรรมศาสตรบัณฑิต",
+    "major": null,
+    "program": "การออกแบบสนเทศสามมิติ",
+    "honor": 0
+  },
+  "transcript_detail": {
+    "semesters": [
+      {
+        "year": 2561,
+        "sem_num": 1,
+        "GPA": "0.00",
+        "GPS": "0.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "02366051",
+            "subject_name": "ประวัติศาสตร์ศิลปะและการออกแบบ",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "-"
+          },
+          {
+            "subject_id": "02366053",
+            "subject_name": "วิจิตรศิลป์1:จิตรกรรมและภาพพิมพ์",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "-"
+          },
+          {
+            "subject_id": "02366055",
+            "subject_name": "มิติสัมพันธ์และการเขียนแบบ",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "-"
+          },
+          {
+            "subject_id": "02366064",
+            "subject_name": "การออกแบบสนเทศสามมิติ1:การรับรู้ด้วยการมอง",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "-"
+          },
+          {
+            "subject_id": "02366070",
+            "subject_name": "ปฏิบัติการออกแบบสนเทศสามมิติ1:สื่อเชิงศิลป์",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "-"
+          },
+          {
+            "subject_id": "90591001",
+            "subject_name": "เรารักสจล.",
+            "type": null,
+            "credit": 2,
+            "grade_earn": "-"
+          },
+          {
+            "subject_id": "90591002",
+            "subject_name": "กีฬาและนันทนาการ",
+            "type": null,
+            "credit": 1,
+            "grade_earn": "-"
+          },
+          {
+            "subject_id": "90595001",
+            "subject_name": "ภาษาอังกฤษพื้นฐาน",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "-"
+          }
+        ]
+      }
+    ],
+    "master_comprehensive": null,
+    "master_thesis": null,
+    "master_qualify": null,
+    "total_credits_earned": 0,
+    "cumulative_gpa": "0.00"
+  },
+  "footer_detail": {
+    "updated_at": "2025-01-15",
+    "by": {
+      "by_signature": "ผู้ช่วยศาสตราจารย์ดร.ทดสอบนามสกุล",
+      "by_position": "ผู้อำนวยการ",
+      "by_reg": "สำนักทะเบียนและบริการการศึกษา"
+    }
+  }
+}

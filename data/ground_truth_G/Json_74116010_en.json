@@ -1,0 +1,113 @@
+{
+  "header_detail": {
+    "uni_name": "kingmongkut'sinstituteoftechnologyladkrabang",
+    "uni_address": "chalongkrungroad,ladkrabang,bangkok10520,thailand",
+    "student_id": "74116010",
+    "faculty_name": "collegeofadvancedmanufacturinginnovation",
+    "prename": "mr.",
+    "name": "graduateami10advancedmanufacturinginnovation10",
+    "date_of_birth": "1998-12-26",
+    "admis_date": "2022-01-10",
+    "grad_date": "2023-11-14",
+    "grad_reason": null,
+    "degree": "masterofengineering",
+    "major": null,
+    "program": "advancedmanufacturingsystemengineering(internationalprogram)",
+    "honor": 0
+  },
+  "transcript_detail": {
+    "semesters": [
+      {
+        "year": 2564,
+        "sem_num": 2,
+        "GPA": "0.00",
+        "GPS": "0.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "12017031",
+            "subject_name": "thesis",
+            "type": "cr",
+            "credit": 9,
+            "grade_earn": "s"
+          },
+          {
+            "subject_id": "12017231",
+            "subject_name": "researchmethodologyformanufacturingprocess",
+            "type": "nc",
+            "credit": 3,
+            "grade_earn": "s"
+          }
+        ]
+      },
+      {
+        "year": 2565,
+        "sem_num": 1,
+        "GPA": "0.00",
+        "GPS": "0.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "12017031",
+            "subject_name": "thesis",
+            "type": "cr",
+            "credit": 9,
+            "grade_earn": "s"
+          },
+          {
+            "subject_id": "12017131",
+            "subject_name": "seminar",
+            "type": "nc",
+            "credit": 1,
+            "grade_earn": "s"
+          }
+        ]
+      },
+      {
+        "year": 2565,
+        "sem_num": 2,
+        "GPA": "0.00",
+        "GPS": "0.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "12017031",
+            "subject_name": "thesis",
+            "type": "cr",
+            "credit": 9,
+            "grade_earn": "s"
+          }
+        ]
+      },
+      {
+        "year": 2566,
+        "sem_num": 1,
+        "GPA": "0.00",
+        "GPS": "0.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "12017031",
+            "subject_name": "thesis",
+            "type": "cr",
+            "credit": 9,
+            "grade_earn": "s"
+          }
+        ]
+      }
+    ],
+    "master_comprehensive": null,
+    "master_thesis": null,
+    "master_qualify": null,
+    "total_credits_earned": 36,
+    "cumulative_gpa": null
+  },
+  "footer_detail": {
+    "updated_at": "2025-01-15",
+    "by": {
+      "by_signature": "asst.prof.dr.testsurname",
+      "by_position": "director",
+      "by_reg": "kmitlregistrationandeducationserviceoffice"
+    }
+  }
+}

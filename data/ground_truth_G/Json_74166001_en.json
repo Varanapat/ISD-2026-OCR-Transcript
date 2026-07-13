@@ -1,0 +1,185 @@
+{
+  "header_detail": {
+    "uni_name": "kingmongkut'sinstituteoftechnologyladkrabang",
+    "uni_address": "chalongkrungroad,ladkrabang,bangkok10520,thailand",
+    "student_id": "74166001",
+    "faculty_name": "facultyofmedicine",
+    "prename": "mr.",
+    "name": "graduatemed1medicine1",
+    "date_of_birth": "1995-11-01",
+    "admis_date": "2022-01-10",
+    "grad_date": "0000-00-00",
+    "grad_reason": null,
+    "degree": "masterofscience",
+    "major": null,
+    "program": "healthtechnologydevelopment(internationalprogram)",
+    "honor": 0
+  },
+  "transcript_detail": {
+    "semesters": [
+      {
+        "year": 2564,
+        "sem_num": 2,
+        "GPA": "4.00",
+        "GPS": "4.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "17017002",
+            "subject_name": "basicprogramming",
+            "type": "cr",
+            "credit": 2,
+            "grade_earn": "s"
+          },
+          {
+            "subject_id": "17017003",
+            "subject_name": "theoryandmethodologyofscience",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "a"
+          },
+          {
+            "subject_id": "17017004",
+            "subject_name": "medicaltechnologiesindigitalhealthcaretransformation",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "a"
+          },
+          {
+            "subject_id": "17017009",
+            "subject_name": "artificialintelligenceforhealthcare",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "a"
+          }
+        ]
+      },
+      {
+        "year": 2565,
+        "sem_num": 1,
+        "GPA": "3.92",
+        "GPS": "3.83",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "17017005",
+            "subject_name": "cognitivescience",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "b+"
+          },
+          {
+            "subject_id": "17017110",
+            "subject_name": "datascience,machinelearningandartificialintelligence",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "a"
+          },
+          {
+            "subject_id": "17017117",
+            "subject_name": "medicalimaging",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "a"
+          }
+        ]
+      },
+      {
+        "year": 2565,
+        "sem_num": 2,
+        "GPA": "3.93",
+        "GPS": "4.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "17017114",
+            "subject_name": "innovativediagnosisandtherapeutics",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "a"
+          },
+          {
+            "subject_id": "17017801",
+            "subject_name": "seminar1",
+            "type": "cr",
+            "credit": 1,
+            "grade_earn": "s"
+          },
+          {
+            "subject_id": "17017802",
+            "subject_name": "seminar2",
+            "type": "cr",
+            "credit": 1,
+            "grade_earn": "s"
+          },
+          {
+            "subject_id": "17017901",
+            "subject_name": "thesis",
+            "type": "cr",
+            "credit": 6,
+            "grade_earn": "s"
+          }
+        ]
+      },
+      {
+        "year": 2566,
+        "sem_num": 1,
+        "GPA": "3.94",
+        "GPS": "4.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "17017101",
+            "subject_name": "advancedmolecularbiologytechniques",
+            "type": "cr",
+            "credit": 3,
+            "grade_earn": "a"
+          },
+          {
+            "subject_id": "17017803",
+            "subject_name": "seminar3",
+            "type": "cr",
+            "credit": 1,
+            "grade_earn": "s"
+          },
+          {
+            "subject_id": "17017901",
+            "subject_name": "thesis",
+            "type": "cr",
+            "credit": 6,
+            "grade_earn": "s"
+          }
+        ]
+      },
+      {
+        "year": 2566,
+        "sem_num": 2,
+        "GPA": null,
+        "GPS": null,
+        "pass_reason": "maintain",
+        "subject": []
+      },
+      {
+        "year": 2567,
+        "sem_num": 1,
+        "GPA": null,
+        "GPS": null,
+        "pass_reason": "maintain",
+        "subject": []
+      }
+    ],
+    "master_comprehensive": null,
+    "master_thesis": null,
+    "master_qualify": null,
+    "total_credits_earned": 41,
+    "cumulative_gpa": "3.94"
+  },
+  "footer_detail": {
+    "updated_at": "2025-01-15",
+    "by": {
+      "by_signature": "asst.prof.dr.testsurname",
+      "by_position": "director",
+      "by_reg": "kmitlregistrationandeducationserviceoffice"
+    }
+  }
+}
