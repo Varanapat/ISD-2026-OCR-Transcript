@@ -1,0 +1,65 @@
+{
+  "header_detail": {
+    "uni_name": "บ",
+    "uni_address": null,
+    "student_id": "13006301",
+    "faculty_name": null,
+    "prename": null,
+    "name": null,
+    "date_of_birth": null,
+    "admis_date": null,
+    "grad_date": "0000-00-00",
+    "grad_reason": null,
+    "degree": null,
+    "major": null,
+    "program": null,
+    "honor": 0
+  },
+  "transcript_detail": {
+    "semesters": [
+      {
+        "year": null,
+        "sem_num": null,
+        "GPA": null,
+        "GPS": null,
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13006301",
+            "subject_name": "ตรรกศาสตร์เบืองตน52ญ",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b"
+          },
+          {
+            "subject_id": "13006402",
+            "subject_name": "เศรษฐีศาสตรเบืองตนคะแนนเฉลีย:233ภาคการศึกษาที่2ปีการศึกษา2561ซีวิศวกรรมสมัยใหมเบื้องต้น",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c"
+          },
+          {
+            "subject_id": "13026001",
+            "subject_name": "วิศวกรรมสมัยใหมเบื้องต้น1คะแนนเฉลีย:1179e:nbuimnnazll:lauelumuieluum",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "f"
+          }
+        ]
+      }
+    ],
+    "master_comprehensive": null,
+    "master_thesis": null,
+    "master_qualify": null,
+    "total_credits_earned": null,
+    "cumulative_gpa": null
+  },
+  "footer_detail": {
+    "updated_at": null,
+    "by": {
+      "by_signature": null,
+      "by_position": null,
+      "by_reg": null
+    }
+  }
+}
