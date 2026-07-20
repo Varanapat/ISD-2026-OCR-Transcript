@@ -7,7 +7,7 @@ from .pipeline import run_ocr
 from .evaluation import evaluate_from_files
 from .field_extraction import extract_common_fields
 from .utils.io import save_json
-
+from .transcript_extraction import extract_transcript_from_file
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Thai-English OCR system")
@@ -30,6 +30,12 @@ def parse_args():
     ev.add_argument("ground_truth_json")
     ev.add_argument("prediction_json")
     ev.add_argument("--output", default="outputs/evaluation_result.json")
+
+    tr = sub.add_parser("transcript", help="Extract transcript structure from OCR JSON")
+    tr.add_argument("ocr_json")
+    tr.add_argument("--output", default=None)
+    tr.add_argument("--language", default=None)
+    tr.add_argument("--ground-truth", default=None)
 
     return parser.parse_args()
 
@@ -63,6 +69,14 @@ def main():
     elif args.command == "evaluate":
         result = evaluate_from_files(args.ground_truth_json, args.prediction_json)
         save_json(result, args.output)
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+    elif args.command == "transcript":
+        result = extract_transcript_from_file(args.ocr_json, language=args.language)
+        out_path = args.output or Path(args.ocr_json).with_name(
+            Path(args.ocr_json).stem + "_transcript.json"
+        )
+        save_json(result, out_path)
+        print(f"[green]Transcript extracted[/green]: {out_path}")
         print(json.dumps(result, ensure_ascii=False, indent=2))
 
 
