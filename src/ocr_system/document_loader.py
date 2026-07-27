@@ -17,7 +17,7 @@ def is_pdf(path: str | Path) -> bool:
 
 def pdf_to_images(pdf_path: str | Path, output_dir: str | Path, dpi: int = 300) -> list[Path]:
     output_dir = ensure_dir(output_dir)
-    pages = convert_from_path(str(pdf_path), dpi=dpi, poppler_path=r"C:\Program Files (x86)\Release-26.02.0-0\poppler-26.02.0\Library\bin")
+    pages = convert_from_path(str(pdf_path), dpi=dpi, poppler_path=r"C:\Program Files\poppler-26.02.0\Library\bin")
     image_paths: list[Path] = []
     for idx, page in enumerate(pages, start=1):
         out = output_dir / f"{Path(pdf_path).stem}_page_{idx:03d}.jpg"
