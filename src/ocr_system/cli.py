@@ -4,10 +4,11 @@ from pathlib import Path
 from rich import print
 from .config import OCRConfig
 from .pipeline import run_ocr
-from .evaluation import evaluate_from_files
-from .field_extraction import extract_common_fields
+from .evaluation import evaluate_from_files, evaluate_fields_from_files
+from .transcript_extraction import extract_transcript_fields
+from .augmentation import augment_document
 from .utils.io import save_json
-from .transcript_extraction import extract_transcript_from_file
+
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Thai-English OCR system")
@@ -31,11 +32,12 @@ def parse_args():
     ev.add_argument("prediction_json")
     ev.add_argument("--output", default="outputs/evaluation_result.json")
 
-    tr = sub.add_parser("transcript", help="Extract transcript structure from OCR JSON")
-    tr.add_argument("ocr_json")
-    tr.add_argument("--output", default=None)
-    tr.add_argument("--language", default=None)
-    tr.add_argument("--ground-truth", default=None)
+    aug = sub.add_parser("augment", help="Generate rotated/skewed/blurred/noisy image variants for OCR robustness testing")
+    aug.add_argument("input_path")
+    aug.add_argument("--output-dir", default="data/augmented")
+    aug.add_argument("--ground-truth-dir", default="data/ground_truth/ground_truth")
+    aug.add_argument("--dpi", type=int, default=300)
+    aug.add_argument("--seed", type=int, default=None)
 
     return parser.parse_args()
 
@@ -60,24 +62,33 @@ def main():
             device=args.device,
         )
         result = run_ocr(config)
-        fields = extract_common_fields(result.text)
+        fields = extract_transcript_fields(result.pages)
         field_path = output_dir / f"{Path(args.input_path).stem}_fields.json"
         save_json(fields, field_path)
         print(f"[green]OCR done[/green]: {output_dir}")
         print(f"Extracted fields: {json.dumps(fields, ensure_ascii=False, indent=2)}")
 
     elif args.command == "evaluate":
-        result = evaluate_from_files(args.ground_truth_json, args.prediction_json)
+        with open(args.ground_truth_json, encoding="utf-8") as f:
+            gt_preview = json.load(f)
+        if isinstance(gt_preview, dict) and "header_detail" in gt_preview:
+            result = evaluate_fields_from_files(args.ground_truth_json, args.prediction_json)
+        else:
+            result = evaluate_from_files(args.ground_truth_json, args.prediction_json)
         save_json(result, args.output)
         print(json.dumps(result, ensure_ascii=False, indent=2))
-    elif args.command == "transcript":
-        result = extract_transcript_from_file(args.ocr_json, language=args.language)
-        out_path = args.output or Path(args.ocr_json).with_name(
-            Path(args.ocr_json).stem + "_transcript.json"
+
+    elif args.command == "augment":
+        manifest = augment_document(
+            args.input_path,
+            args.output_dir,
+            ground_truth_dir=args.ground_truth_dir,
+            dpi=args.dpi,
+            seed=args.seed,
         )
-        save_json(result, out_path)
-        print(f"[green]Transcript extracted[/green]: {out_path}")
-        print(json.dumps(result, ensure_ascii=False, indent=2))
+        num_variants = sum(len(p["variants"]) for p in manifest["pages"])
+        print(f"[green]Augmentation done[/green]: {Path(args.output_dir) / Path(args.input_path).stem}")
+        print(f"Generated {num_variants} variants across {len(manifest['pages'])} page(s)")
 
 
 if __name__ == "__main__":

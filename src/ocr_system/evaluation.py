@@ -43,52 +43,12 @@ def evaluate_text(reference: str, prediction: str, file_name: str = "") -> Evalu
         prediction_chars=len(hyp),
     )
 
-def _flatten(obj, prefix: str = "") -> dict[str, str]:
-    """แบนโครงสร้าง nested เป็น {path: value} เช่น header_detail.student_id"""
-    flat = {}
-    if isinstance(obj, dict):
-        for k, v in obj.items():
-            flat.update(_flatten(v, f"{prefix}.{k}" if prefix else k))
-    elif isinstance(obj, list):
-        for i, v in enumerate(obj):
-            flat.update(_flatten(v, f"{prefix}[{i}]"))
-    else:
-        flat[prefix] = "" if obj is None else str(obj)
-    return flat
-
 
 def evaluate_from_files(ground_truth_json: str | Path, prediction_json: str | Path) -> dict:
     with Path(ground_truth_json).open("r", encoding="utf-8") as f:
         ground_truth = json.load(f)
     with Path(prediction_json).open("r", encoding="utf-8") as f:
         prediction = json.load(f)
-    
-    # โหมด transcript: เทียบโครงสร้างตรงๆ ไม่ต้องค้นด้วยชื่อไฟล์
-    if "header_detail" in prediction:
-        flat_gt = _flatten(ground_truth)
-        flat_pred = _flatten(prediction)
-        keys = sorted(set(flat_gt) | set(flat_pred))
-
-        mismatches = [
-            {"field": k, "ground_truth": flat_gt.get(k), "predicted": flat_pred.get(k)}
-            for k in keys
-            if flat_gt.get(k) != flat_pred.get(k)
-        ]
-        matched = len(keys) - len(mismatches)
-
-        # ใช้ลำดับ key เดียวกันทั้งสองฝั่ง ข้อความจึงเรียงตรงกัน
-        reference = " ".join(flat_gt.get(k, "") for k in keys)
-        hypothesis = " ".join(flat_pred.get(k, "") for k in keys)
-
-        result = evaluate_text(reference, hypothesis, file_name=Path(prediction_json).name)
-        return {
-            **asdict(result),
-            "mode": "transcript",
-            "total_fields": len(keys),
-            "matched_fields": matched,
-            "field_accuracy": round(matched / len(keys), 4) if keys else 0.0,
-            "mismatches": mismatches,
-        }
 
     source_name = Path(prediction["source_path"]).name
     reference = ground_truth.get(source_name) or ground_truth.get(Path(source_name).stem)
@@ -97,3 +57,44 @@ def evaluate_from_files(ground_truth_json: str | Path, prediction_json: str | Pa
 
     result = evaluate_text(reference, prediction["text"], file_name=source_name)
     return asdict(result)
+
+
+def _flatten(value, prefix: str = "") -> dict:
+    flat: dict = {}
+    if isinstance(value, dict):
+        for k, v in value.items():
+            flat.update(_flatten(v, f"{prefix}.{k}" if prefix else k))
+    elif isinstance(value, list):
+        for i, v in enumerate(value):
+            flat.update(_flatten(v, f"{prefix}[{i}]"))
+    else:
+        flat[prefix] = value
+    return flat
+
+
+def compare_fields(ground_truth: dict, prediction: dict) -> dict:
+    gt_flat = _flatten(ground_truth)
+    pred_flat = _flatten(prediction)
+    mismatches = []
+    matched = 0
+    for key, gt_val in gt_flat.items():
+        pred_val = pred_flat.get(key)
+        if gt_val == pred_val:
+            matched += 1
+        else:
+            mismatches.append({"field": key, "ground_truth": gt_val, "prediction": pred_val})
+    total = len(gt_flat)
+    return {
+        "total_fields": total,
+        "matched_fields": matched,
+        "accuracy": matched / total if total else 0.0,
+        "mismatches": mismatches,
+    }
+
+
+def evaluate_fields_from_files(ground_truth_json: str | Path, prediction_json: str | Path) -> dict:
+    with Path(ground_truth_json).open("r", encoding="utf-8") as f:
+        ground_truth = json.load(f)
+    with Path(prediction_json).open("r", encoding="utf-8") as f:
+        prediction = json.load(f)
+    return compare_fields(ground_truth, prediction)

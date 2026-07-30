@@ -1,3 +1,137 @@
 {
-  "numeric_id": "71010001"
+  "header_detail": {
+    "uni_name": "1๒ยง6าา6t61rาเนท0186ก0า๘๕",
+    "uni_address": "เลขที1ซอยฉลองกรุง1เขตลาดกระบังกรุงเทพฯ10520",
+    "student_id": "71010001",
+    "faculty_name": "คณะวิศวกรรมศาสตร",
+    "prename": "นางสาว",
+    "name": "วศ1วิศวกรรมศาสตร์1",
+    "date_of_birth": "1999-09-03",
+    "admis_date": "2018-08-06",
+    "grad_date": "0000-00-00",
+    "grad_reason": "n/a(พ้นสภาพ1/2562)",
+    "degree": "วิทยาศาสตรบัณฑิต",
+    "major": null,
+    "program": "การจัดการวิศวกรรมและเทคโนโลยี(หลักสูตรนานาชาติ)",
+    "honor": 0
+  },
+  "transcript_detail": {
+    "semesters": [
+      {
+        "year": 2561,
+        "sem_num": 1,
+        "GPA": "2.33",
+        "GPS": "2.33",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13006006",
+            "subject_name": "พิชคณิตเชิงเส้น",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c+"
+          },
+          {
+            "subject_id": "13006007",
+            "subject_name": "แคลคูลัส1",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "d+"
+          },
+          {
+            "subject_id": "13006109",
+            "subject_name": "programmingformanagement",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "d+"
+          },
+          {
+            "subject_id": "13006204",
+            "subject_name": "ภาษาอังกฤษพื้นฐาน1",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b+"
+          },
+          {
+            "subject_id": "13006301",
+            "subject_name": "ตรรกศาสตร์เบืองต้น",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b"
+          },
+          {
+            "subject_id": "13006402",
+            "subject_name": "เศรษฐศาสตร์เบืองต้น",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c"
+          }
+        ]
+      },
+      {
+        "year": 2561,
+        "sem_num": 2,
+        "GPA": "1.17",
+        "GPS": "0.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13006008",
+            "subject_name": "แคลคูลัส2",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "f"
+          },
+          {
+            "subject_id": "13006104",
+            "subject_name": "เทคโนโลยีอินเทอร์เน็ตเบื้องต้น",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "f"
+          },
+          {
+            "subject_id": "13006205",
+            "subject_name": "ภาษาอังกฤษพืนฐาน2",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "f"
+          },
+          {
+            "subject_id": "13026001",
+            "subject_name": "วิศวกรรมสมัยใหม่เบื้องต้น",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "f"
+          },
+          {
+            "subject_id": "13026003",
+            "subject_name": "หลักธุรกิจ",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "f"
+          },
+          {
+            "subject_id": "13026004",
+            "subject_name": "หลักการจัดการ",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "f"
+          }
+        ]
+      }
+    ],
+    "master_comprehensive": null,
+    "master_thesis": null,
+    "master_qualify": null,
+    "total_credits_earned": 36,
+    "cumulative_gpa": "1.17"
+  },
+  "footer_detail": {
+    "updated_at": "2025-01-16",
+    "by": {
+      "by_signature": null,
+      "by_position": null,
+      "by_reg": null
+    }
+  }
 }

@@ -72,7 +72,7 @@ Terminal > New Terminal
 เช็กเวอร์ชัน Python ก่อน:
 
 ```bash
-python --version
+python3 --version
 ```
 หรือบางเครื่องอาจต้องใช้:
 ```bash
@@ -90,7 +90,7 @@ cd ocr_system
 ```
 จากนั้นสร้าง environment:
 ```bash
-python -m venv .venv
+python3.11 -m venv .venv
 ```
 
 ถ้าใช้ Windows แล้วคำสั่ง `python` ไม่ได้ ให้ลองใช้:
@@ -256,8 +256,7 @@ outputs/pages/      ภาพแต่ละหน้าที่แปลงจ
 เหมาะกับเอกสารทั่วไป โดยเฉพาะภาษาไทยและอังกฤษปนกัน
 ```bash
 python -m ocr_system.cli ocr data/input/sample.jpg --engine paddle --paddle-lang th
-data/input/71010001.pdf
-python -m ocr_system.cli ocr data/input/71010001.pdf --engine paddle --paddle-lang th
+python3.11 -m ocr_system.cli ocr data/input/input/71010001.pdf --engine paddle --paddle-lang th
 ```
 ถ้าเอกสารเป็นอังกฤษล้วน อาจลองใช้:
 ```bash
@@ -314,15 +313,9 @@ data/ground_truth/example_ground_truth.json
 ```bash
 python -m ocr_system.cli ocr data/input/sample.pdf --engine ensemble
 ```
-แล้ว extract transcript
-```bash
-python -m ocr_system.cli transcript outputs/[name]].json
-```
-
 แล้ว evaluate:
 ```bash
-python -m ocr_system.cli evaluate data/ground_truth/example_ground_truth.json outputs/sample_ocr.json
-python -m ocr_system.cli evaluate data/ground_truth/Json_[name]_th.json outputs/[name]_ocr_transcript.json
+python3.11 -m ocr_system.cli evaluate data/ground_truth/ground_truth/Json_71010001_th.json outputs/71010001_fields.json
 ```
 
 Metric ที่ได้:
@@ -360,8 +353,6 @@ python -m ocr_system.cli ocr data/input/sample.jpg --engine tesseract --language
 Evaluate ผล OCR:
 ```bash
 python -m ocr_system.cli evaluate data/ground_truth/example_ground_truth.json outputs/sample_ocr.json
-# python -m ocr_system.cli evaluate data/ground_truth/Json_71010001_th.json outputs/71010001_ocr_transcript.json
-
 ```
 
 ---

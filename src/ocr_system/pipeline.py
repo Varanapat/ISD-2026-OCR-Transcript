@@ -17,7 +17,7 @@ def run_ocr(config: OCRConfig) -> OCRDocumentResult:
     page_results: list[OCRPageResult] = []
     for page_no, image_path in enumerate(pages, start=1):
         image = read_image(image_path)
-        if config.preprocess:
+        if config.preprocess and config.engine != "paddle":
             image_for_ocr = preprocess_image(image, deskew=config.deskew)
             if config.save_debug_images:
                 debug_path = output_dir / "debug" / f"page_{page_no:03d}_preprocessed.png"
