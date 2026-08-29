@@ -8,6 +8,7 @@ from .evaluation import evaluate_from_files
 from .field_extraction import extract_common_fields
 from .utils.io import save_json
 from .transcript_extraction import extract_transcript_from_file
+from .dataset_builder import build_dataset
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Thai-English OCR system")
@@ -36,6 +37,13 @@ def parse_args():
     tr.add_argument("--output", default=None)
     tr.add_argument("--language", default=None)
     tr.add_argument("--ground-truth", default=None)
+
+    ds = sub.add_parser("dataset", help="สร้าง augmented dataset จาก PDF + ground truth")
+    ds.add_argument("input_dir", help="โฟลเดอร์ PDF เช่น data/input")
+    ds.add_argument("output_dir", help="โฟลเดอร์ผลลัพธ์ เช่น dataset/augmented")
+    ds.add_argument("--ground-truth-dir", default="data/ground_truth")
+    ds.add_argument("--n", type=int, default=8, help="จำนวนเวอร์ชันต่อภาพ")
+    ds.add_argument("--dpi", type=int, default=300)
 
     return parser.parse_args()
 
@@ -78,6 +86,10 @@ def main():
         save_json(result, out_path)
         print(f"[green]Transcript extracted[/green]: {out_path}")
         print(json.dumps(result, ensure_ascii=False, indent=2))
+    elif args.command == "dataset":
+        build_dataset(args.input_dir, args.output_dir,
+                      ground_truth_dir=args.ground_truth_dir,
+                      n=args.n, dpi=args.dpi)
 
 
 if __name__ == "__main__":
