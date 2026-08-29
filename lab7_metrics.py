@@ -12,7 +12,14 @@ class FieldStat:
     def accuracy(self) -> float:
         return (self.correct / self.total) if self.total > 0 else 0.0
 
-    def add(self, reference: str | None, hypothesis: str | None, mode: str = "soft"):
+    def add(
+        self, 
+        reference: str | None, 
+        hypothesis: str | None, 
+        field_name: str = "", 
+        mode: str = "soft", 
+        track_wer: bool = False
+    ):
         ref_norm = normalize(reference, mode=mode)
         hyp_norm = normalize(hypothesis, mode=mode)
         self.total += 1

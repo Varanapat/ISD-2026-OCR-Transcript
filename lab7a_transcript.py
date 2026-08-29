@@ -968,7 +968,7 @@ def evaluate(pred: dict, gt: dict) -> tuple[dict, dict]:
     #    ถ้าอ่านรหัสนักศึกษาผิดตัวเดียว ผลการเรียนทั้งใบจะไปผูกกับคนผิด
     #    จึงเป็นส่วนที่สำคัญไม่แพ้ตารางเกรด และต้องวัดให้ครบทุกฟิลด์
     stats["student_id"].add(gh.get("student_id"), ph.get("student_id"),
-                            "student_id", track_wer=False)
+                            "student_id")
     for f in ("prename", "name"):
         stats["person"].add(gh.get(f), ph.get(f), f, track_wer=False)
 
