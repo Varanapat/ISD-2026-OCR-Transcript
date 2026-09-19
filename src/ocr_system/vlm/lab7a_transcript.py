@@ -26,21 +26,22 @@
  --------------------------------------------------------------------------
  วิธีใช้
  --------------------------------------------------------------------------
-   # ตรวจว่าเครื่องพร้อม (ต้องทำก่อนเสมอ)
-   python3 lab7a_transcript.py --check
+   (รันจากรากโปรเจกต์ ocr_system/ โดยมี PYTHONPATH=src หรือ pip install -e .)
 
-   # รันครบทุก pipeline แล้วเทียบกับ ground truth
-   python3 lab7a_transcript.py \
-       --input data/71010001.pdf \
-       --gt    gt/Json_71010001_th.json \
-       --pipeline all \
-       --out   output/
+   # ตรวจว่าเครื่องพร้อม (ต้องทำก่อนเสมอ)
+   python -m ocr_system.vlm.lab7a_transcript --check
+
+   # รันครบทุก pipeline แล้วเทียบกับ ground truth (ผลลง outputs/lab7a/)
+   python -m ocr_system.vlm.lab7a_transcript \
+       --input data/input/71010001.pdf \
+       --gt    data/ground_truth/Json_71010001_th.json \
+       --pipeline all
 
    # รันเฉพาะ pipeline เดียว (ตอน debug จะเร็วกว่า)
-   python3 lab7a_transcript.py -i data/x.pdf -g gt/x.json -p vlm
+   python -m ocr_system.vlm.lab7a_transcript -i data/input/x.pdf -g data/ground_truth/x.json -p vlm
 
    # ประเมินผลจากไฟล์ JSON ที่รันไว้แล้ว (ไม่ต้องเรียกโมเดลซ้ำ)
-   python3 lab7a_transcript.py --eval-only output/pred_vlm.json --gt gt/x.json
+   python -m ocr_system.vlm.lab7a_transcript --eval-only outputs/lab7a/pred_vlm.json --gt data/ground_truth/x.json
 
  --------------------------------------------------------------------------
  สามเส้นทาง (pipeline) ที่เราจะเปรียบเทียบกัน
@@ -73,9 +74,15 @@ import time
 from pathlib import Path
 from typing import Any
 
-# --- เพิ่ม path ของโฟลเดอร์แม่ เพื่อ import โมดูลกลาง lab7_metrics ---------
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-import lab7_metrics as M  # noqa: E402
+# --- โมดูลกลาง lab7_metrics อยู่ในแพ็กเกจเดียวกัน (src/ocr_system/vlm) -------
+#     รองรับทั้ง  python -m ocr_system.vlm.lab7a_transcript  และการรันไฟล์ตรง ๆ
+try:
+    from . import lab7_metrics as M
+except ImportError:
+    import lab7_metrics as M  # type: ignore[no-redef]  # noqa: E402
+
+# รากของโปรเจกต์ ocr_system/  (vlm -> ocr_system -> src -> ราก)
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
 
 
 # ==============================================================================
@@ -490,14 +497,18 @@ EXTRACT_PROMPT = """ต่อไปนี้คือข้อความที
 
 [4] รูปแบบข้อมูล
     - credit  : จำนวนเต็ม เช่น 3  (ไม่ใช่ "3(3-0-6)")
-    - year    : ปีการศึกษา พ.ศ. เช่น 2561 (field นี้เก็บเป็น พ.ศ. ตามที่พิมพ์ ห้ามแปลง)
+    - type    : ถ้าตารางวิชามีคอลัมน์ Type ให้ลอกค่าในคอลัมน์นั้นใส่ field type ตามที่พิมพ์
+      ถ้าตารางไม่มีคอลัมน์ Type ให้ใส่ null
+    - year    : ตัวเลขปีที่พิมพ์ในหัวของภาคนั้น ลอกตามที่พิมพ์ ห้ามบวกหรือลบ 543
+      (เอกสารไทยพิมพ์ พ.ศ. เอกสารอังกฤษพิมพ์ ค.ศ. ให้ลอกตามนั้น โปรแกรมจะแปลงให้เอง)
+      ถ้าหัวภาคไม่มีปี ให้ใส่ null ห้ามเดา
     - sem_num : 1, 2, หรือ 3 (3 = ภาคฤดูร้อน)
-    - วันที่ (date_of_birth, admis_date, grad_date, updated_at) : YYYY-MM-DD
-      ⚠️ ปีในเอกสารเป็น พ.ศ. (Buddhist Era) ต้องลบ 543 แปลงเป็น ค.ศ. ก่อนใส่ในฟิลด์วันที่เสมอ
-      เช่น "3 กันยายน 2542" -> "1999-09-03"  (2542 - 543 = 1999)
+      ภาษาอังกฤษ: "1st Semester" = 1, "2nd Semester" = 2, "Summer" = 3
+    - วันที่ (date_of_birth, admis_date, grad_date, updated_at) : รูปแบบ YYYY-MM-DD
+      YYYY = ปีตามที่พิมพ์ในเอกสาร ห้ามบวกหรือลบ 543 (โปรแกรมจะแปลงให้เอง)
+      แปลงชื่อเดือนเป็นเลข 2 หลัก เช่น มกราคม/January = 01, กันยายน/September = 09
       ถ้ายังไม่สำเร็จการศึกษาหรือเอกสารระบุ N/A ให้ grad_date = "0000-00-00"
-      และเอาข้อความในวงเล็บ/ส่วนอธิบายทั้งหมดใส่ grad_reason ตามที่พิมพ์ (ไม่ต้องแปลงวันที่ในนั้น)
-      เช่น "N/A (พ้นสภาพ 1 / 2562)" -> grad_date: "0000-00-00", grad_reason: "n/a(พ้นสภาพ1/2562)"
+      และเอาข้อความทั้งหมดของช่องนั้นใส่ grad_reason ตามที่พิมพ์ (ไม่ต้องแปลงปีในนั้น)
     - แปลงเลขไทย ๐๑๒๓๔๕๖๗๘๙ เป็นเลขอารบิก
     - honor   : 0 ถ้าไม่ได้เกียรตินิยม, 1 = อันดับหนึ่ง, 2 = อันดับสอง
 
@@ -767,6 +778,99 @@ def _extract_cells(row_html: str) -> list[str]:
     return [re.sub(r'<[^>]+>', '', c).strip() for c in cells]
 
 
+CODE_START = re.compile(r'^\d{6,}')
+SEM_SUMMARY_RE = r'คะแนนเฉลี่ยประจำภาคการศึกษา\s*:\s*([\d.]+).*?คะแนนเฉลี่ย\s*:\s*([\d.]+)'
+TITLE_RE = r'ภาคการศึกษาที่\s*(\d)\s*ปีการศึกษา\s*(\d{4})'
+
+# ท้ายชื่อวิชาที่มี [ประเภท] หน่วยกิต เกรด ติดมา เช่น "SEMINAR 1 Nc 1 S", "แคลคูลัส 1 3 D+"
+# (Typhoon บางครั้งรวมทุกคอลัมน์ไว้ใน cell ชื่อ แล้วปล่อย cell หน่วยกิต/เกรดว่าง)
+TRAILING_RE = re.compile(
+    r'^(?P<name>.*?\S)\s+(?:(?P<type>[A-Za-z]{1,3}(?:\s+[A-Za-z]{1,3})*)\s+)?'
+    r'(?P<credit>\d{1,2})\s+(?P<grade>[A-Za-z]\+?)$')
+
+
+def _is_grade(text: str) -> bool:
+    return text.strip().upper() in GRADE_SET
+
+
+def _is_type(text: str) -> bool:
+    """ประเภทวิชา เช่น Cr / Nc — ตัวอักษรล้วน 1-3 ตัว ที่ไม่ใช่เกรด"""
+    t = text.strip()
+    return bool(re.fullmatch(r'[A-Za-z]{1,3}', t)) and not _is_grade(t)
+
+
+def _split_trailing(name: str) -> tuple[str, str, str, str] | None:
+    """แยก (ชื่อ, ประเภท, หน่วยกิต, เกรด) ออกจากท้ายชื่อวิชา — None ถ้าท้ายชื่อไม่ใช่รูปนี้"""
+    m = TRAILING_RE.match(name.strip())
+    if not m or not _is_grade(m.group("grade")):
+        return None
+    return m.group("name"), m.group("type") or "", m.group("credit"), m.group("grade")
+
+
+def _extract_cells_span(row_html: str) -> list[tuple[str, int]]:
+    """เหมือน _extract_cells แต่คืน (ข้อความ, คอลัมน์เริ่มต้น) โดยนับ colspan ด้วย"""
+    out, col = [], 0
+    for attrs, body in re.findall(r'<t[dh]([^>]*)>(.*?)(?=<t[dh]|</tr>|$)', row_html, flags=re.S):
+        span_m = re.search(r'colspan\s*=\s*"?(\d+)', attrs)
+        out.append((re.sub(r'<[^>]+>', '', body).strip(), col))
+        col += int(span_m.group(1)) if span_m else 1
+    return out
+
+
+def _reading_order(rows: list[str]) -> list[list[str]]:
+    """
+    คืน cell ของทุกแถวตาม "ลำดับการอ่าน"
+
+    transcript หลายแบบจัดหน้าเป็นสองคอลัมน์ (ภาคหนึ่งอยู่ซ้าย อีกภาคอยู่ขวา)
+    Typhoon จึงพ่นวิชาสองภาคมาในแถว <tr> เดียวกัน ถ้าอ่านทีละแถว วิชาของสองภาค
+    จะปนกัน — ฟังก์ชันนี้แยกซ้าย/ขวา แล้วเรียง "คอลัมน์ซ้ายทั้งหมด แล้วค่อยคอลัมน์ขวา"
+
+    หาเส้นแบ่งจากแถวที่มีรหัสวิชาสองตัว (คอลัมน์ที่รหัสตัวที่สองเริ่ม นับ colspan)
+    แยกเฉพาะแถวที่ส่วนขวามีความหมายในตัวเอง (มีรหัสวิชา/ชื่อภาค/บรรทัดสรุปภาค)
+    ส่วนแถวอื่น เช่น "หน่วยกิตรวม : | 36" ที่ค่าอยู่ฝั่งขวาของ label จะไม่ถูกผ่า
+    ถ้าตารางไม่ใช่สองคอลัมน์ คืนลำดับเดิมทุกแถว
+    """
+    spans = [_extract_cells_span(r) for r in rows]
+    splits = []
+    for cells in spans:
+        starts = [col for text, col in cells if CODE_START.match(text)]
+        if len(starts) >= 2:
+            splits.append(starts[1])
+    if not splits:
+        return [[t for t, _ in cells] for cells in spans]
+    split = max(set(splits), key=splits.count)
+
+    left, right = [], []
+    for cells in spans:
+        lpart = [t for t, col in cells if col < split]
+        rpart = [t for t, col in cells if col >= split]
+        rtext = " ".join(rpart)
+        meaningful = (any(CODE_START.match(t) for t in rpart)
+                      or re.search(TITLE_RE, rtext) or re.search(SEM_SUMMARY_RE, rtext))
+        if meaningful:
+            if any(lpart):
+                left.append(lpart)
+            right.append(rpart)
+        else:
+            left.append([t for t, _ in cells])
+    return left + right
+
+
+RAW_ROW_TAG = "[ดิบ]"
+
+
+def _raw_row(cells: list[str]) -> str:
+    """แถวที่ parse ไม่ได้ — ส่งข้อความเดิมต่อให้ LLM ขั้น 2 อ่านเอง พร้อมป้ายกำกับ"""
+    return f"{RAW_ROW_TAG} " + " | ".join(c for c in cells if c)
+
+
+def _has_leftover(text: str, consumed: list[str]) -> bool:
+    """หลังตัดส่วนที่ regex ใช้ไปแล้ว ยังเหลือตัวอักษร/ตัวเลขอยู่ไหม (ถ้าเหลือ = มีข้อมูลที่จะหาย)"""
+    for c in consumed:
+        text = text.replace(c, " ", 1)
+    return bool(re.search(r'[0-9A-Za-z\u0E00-\u0E7F]', text))
+
+
 def normalize_typhoon_table(raw_markdown: str) -> str:
     """
     Typhoon-OCR มักพ่นตารางวิชาออกมาเป็น <table> ก้อนเดียวยาว ไม่มี newline,
@@ -780,6 +884,10 @@ def normalize_typhoon_table(raw_markdown: str) -> str:
 
     ข้อความนอก <table>...</table> (ส่วน header/footer ที่เป็นร้อยแก้ว) จะถูก
     คงไว้เหมือนเดิมทุกตัวอักษร ไม่แตะ — เพราะส่วนนั้น extract ได้แม่นอยู่แล้ว
+
+    Safety net: แถวในตารางที่ไม่เข้ารูปแบบที่รู้จัก (ภาษาอื่น, layout อื่น,
+    รหัสแยก cell ฯลฯ) จะไม่ถูกทิ้งเงียบ ๆ แต่ส่งต่อเป็น "[ดิบ] <ข้อความเดิม>"
+    ตามตำแหน่งเดิม ให้ LLM ขั้น 2 อ่านเอง — parse ได้ก็จัดให้ parse ไม่ได้ก็ไม่ทำหาย
     """
     table_match = re.search(r'<table>.*?</table>', raw_markdown, flags=re.S)
     if table_match is None:
@@ -787,82 +895,243 @@ def normalize_typhoon_table(raw_markdown: str) -> str:
 
     table_html = table_match.group(0)
     rows = re.findall(r'<tr>.*?</tr>', table_html, flags=re.S)
+    ordered = _reading_order(rows)   # ตารางสองคอลัมน์ -> ซ้ายทั้งหมดก่อน แล้วค่อยขวา
 
-    # ดึง (เลขภาค, ปีการศึกษา) ทุกคู่ที่ปรากฏในตาราง ตามลำดับที่เจอ
-    titles = re.findall(r'ภาคการศึกษาที่\s*(\d)\s*ปีการศึกษา\s*(\d{4})', table_html)
+    # ดึง (เลขภาค, ปีการศึกษา) ทุกคู่ ตามลำดับการอ่าน (ไม่ใช่ลำดับ HTML)
+    title_re = TITLE_RE
+    titles = re.findall(title_re, "\n".join(" ".join(c) for c in ordered))
+    # ขอบเขตของภาค: ถ้าตารางมีแถวชื่อภาค ให้ "แถวชื่อภาค" เป็นตัวเริ่มภาคใหม่
+    # (แม่นกว่าบรรทัดสรุปภาค เพราะ OCR ของหน้าสองคอลัมน์มักวางบรรทัดสรุปภาค
+    #  ก่อนวิชาสุดท้ายของภาคนั้น) ถ้าไม่มีชื่อภาคเลย ค่อยใช้บรรทัดสรุปภาคแบ่งแทน
+    split_on_titles = bool(titles)
 
-    semesters: list[list[str]] = [[]]   # บล็อกวิชาของแต่ละภาค ตามลำดับที่เจอในตาราง
+    # บล็อกของแต่ละภาค — เก็บ (ชนิด, ข้อความ) ตามลำดับที่เจอ
+    #   "course" = แถววิชาที่ parse ได้   "raw" = แถวที่ parse ไม่ได้ (ส่งต่อแบบดิบ)
+    #   "title"/"gps" = ชื่อภาค/บรรทัดสรุปภาค ณ ตำแหน่งเดิม (ใช้เมื่อบล็อกไม่มีแถววิชาที่ parse ได้)
+    semesters: list[list[tuple[str, str]]] = [[]]
     gps_gpa_lines: list[str] = []
     trailing_lines: list[str] = []
 
-    for row in rows:
-        cells = _extract_cells(row)
-        if not cells:
+    for cells in ordered:
+        if not any(cells):
             continue
         joined = " ".join(cells)
 
         # 1) บรรทัดสรุปท้ายภาค -> ตัวคั่นภาค + บรรทัด GPS/GPA ระบุชัด
-        m = re.search(
-            r'คะแนนเฉลี่ยประจำภาคการศึกษา\s*:\s*([\d.]+).*?คะแนนเฉลี่ย\s*:\s*([\d.]+)',
-            joined,
-        )
+        m = re.search(SEM_SUMMARY_RE, joined)
         if m:
             gps, gpa = m.group(1), m.group(2)
             gps_gpa_lines.append(f"GPS: {gps}\nGPA: {gpa}")
-            semesters.append([])  # เริ่มเก็บวิชาของภาคถัดไป
+            semesters[-1].append(("gps", gps_gpa_lines[-1]))
+            if _has_leftover(joined, [m.group(0)]):
+                semesters[-1].append(("raw", _raw_row(cells)))
+            if not split_on_titles:
+                semesters.append([])  # เริ่มเก็บวิชาของภาคถัดไป
             continue
 
         # 2) เกรดเฉลี่ยสะสม (ระดับทั้งเอกสาร ไม่ใช่ระดับภาค)
         m = re.search(r'คะแนนเฉลี่ยสะสม\s*:\s*([\d.]+)', joined)
         if m:
             trailing_lines.append(f"cumulative_gpa: {m.group(1)}")
+            if _has_leftover(joined, [m.group(0)]):
+                trailing_lines.append(_raw_row(cells))
             continue
 
         # 3) หน่วยกิตรวม
         m = re.search(r'จำนวนหน่วยกิตที่สอบได้ทั้งหมด\s*:\s*(\d+)', joined)
         if m:
             trailing_lines.append(f"total_credits_earned: {m.group(1)}")
+            if _has_leftover(joined, [m.group(0)]):
+                trailing_lines.append(_raw_row(cells))
             continue
 
         # 4) บรรทัดปิดท้าย — ข้าม
         if "สิ้นสุดการแสดงผลการศึกษา" in joined:
             continue
 
-        # 5) แถวหัวตาราง/ไม่มีรหัสวิชา — ข้าม (จับ title ไปแล้วจาก regex ด้านบน)
+        # 5) แถวที่ไม่ได้ขึ้นต้นด้วยรหัสวิชา (หัวตาราง/ชื่อภาค/ข้อความอื่น)
+        #    ชื่อภาคที่จับด้วย title_re ไปแล้วไม่ต้องส่งซ้ำ แต่ถ้ามีข้อความอื่นปน
+        #    หรือเป็นรูปแบบที่ไม่รู้จัก ให้ส่งต่อแบบดิบ แทนการทิ้งเงียบ ๆ
         if not re.match(r'^\d{6,}', cells[0]):
+            consumed = [t.group(0) for t in re.finditer(title_re, joined)]
+            if _has_leftover(joined, consumed):
+                semesters[-1].append(("raw", _raw_row(cells)))
+            elif consumed:
+                if split_on_titles and any(k == "course" for k, _ in semesters[-1]):
+                    semesters.append([])  # แถวชื่อภาค = เริ่มภาคใหม่
+                semesters[-1].append(("title", _raw_row(cells)))
             continue
 
-        # 6) แถววิชา — เชื่อถือแค่ 3 เซลล์แรก (รหัส+ชื่อ, หน่วยกิต, เกรด)
-        #    คอลัมน์ถัดจากนั้นเป็น noise ที่พิสูจน์แล้วว่าไม่น่าเชื่อถือ
+        # 6) แถววิชา — รองรับทั้ง "รหัส ชื่อ" ใน cell เดียว และ "รหัส" | "ชื่อ" แยก cell
         code_m = re.match(r'^(\d{6,})\s+(.*)$', cells[0])
-        if not code_m:
+        if code_m:
+            code, name, rest = code_m.group(1), code_m.group(2).strip(), cells[1:]
+        elif re.fullmatch(r'\d{6,}', cells[0]) and len(cells) > 1 and cells[1]:
+            code, name, rest = cells[0], cells[1], cells[2:]
+        else:
+            # รูปแถวที่ไม่คาดไว้ — ส่งต่อแบบดิบ
+            semesters[-1].append(("raw", _raw_row(cells)))
             continue
-        code, name = code_m.group(1), code_m.group(2).strip()
 
-        credit = next((c for c in cells[1:] if c.isdigit()), "")
-        grade = next((c for c in cells[1:] if c in GRADE_SET), "")
+        credit = next((c for c in rest if c.isdigit()), "")
+        grade = next((c for c in rest if _is_grade(c)), "")
+        ctype = next((c for c in rest if _is_type(c)), "")
 
-        semesters[-1].append(f"{code} | {name} | {credit} | {grade}")
+        # ท้ายชื่อมี [ประเภท] หน่วยกิต เกรด ติดมา: ใช้เติมช่องที่ว่าง
+        # หรือตัดทิ้งถ้าเป็นค่าซ้ำกับคอลัมน์ที่แยกมาแล้ว
+        tail = _split_trailing(name)
+        if tail:
+            t_name, t_type, t_credit, t_grade = tail
+            if not credit and not grade:
+                name, credit, grade, ctype = t_name, t_credit, t_grade, ctype or t_type
+            elif (t_credit, t_grade.upper()) == (credit, grade.upper()):
+                name, ctype = t_name, ctype or t_type
+
+        semesters[-1].append(("course", (code, name, ctype, credit, grade)))
+
+        # เซลล์ที่เหลือมีรหัสวิชาอีกตัว = มีวิชาอื่นอยู่ในแถวเดียวกัน (เช่น ตาราง
+        # สองคอลัมน์) — ส่งส่วนนั้นต่อแบบดิบ แทนการทิ้งไปพร้อมคอลัมน์ noise
+        extra = next((i for i, c in enumerate(cells[1:], 1) if re.match(r'^\d{6,}', c)), None)
+        if extra is not None:
+            semesters[-1].append(("raw", _raw_row(cells[extra:])))
 
     # ประกอบข้อความสะอาด จับคู่บล็อกวิชากับ GPS/GPA ที่ตามมาตามลำดับในเอกสาร
-    non_empty = [b for b in semesters if b]
+    # (นับเฉพาะบล็อกที่มีแถววิชาที่ parse ได้ ให้การจับคู่ title เหมือนเดิม
+    #  บล็อกที่มีแต่แถวดิบจะพิมพ์ทุกอย่างตามตำแหน่งเดิม รวมชื่อภาคและ GPS/GPA
+    #  เพื่อให้ LLM ยังเห็นขอบเขตของภาค และไม่กิน title ของบล็อกที่ parse ได้)
+    # คอลัมน์ Type ใส่เฉพาะเอกสารที่มีประเภทวิชา (เช่น ใบบัณฑิตศึกษา Cr/Nc)
+    has_type = any(kind == "course" and entry[2]
+                   for block in semesters for kind, entry in block)
+
+    def fmt(kind, entry):
+        if kind != "course":
+            return entry
+        code, name, ctype, credit, grade = entry
+        return (f"{code} | {name} | {ctype} | {credit} | {grade}" if has_type
+                else f"{code} | {name} | {credit} | {grade}")
+
+    # ชื่อภาคและ GPS/GPA ของแต่ละบล็อก: ใช้ตัวที่ "อยู่ในบล็อกนั้นจริง" ก่อน
+    # ถ้าบล็อกไม่มี ค่อยใช้ตัวถัดไปตามลำดับ (การจับคู่ตามลำดับอย่างเดียวจะเพี้ยน
+    # ทันทีที่ OCR เรียงแถวผิด เช่น วิชาสุดท้ายของภาคหลุดไปอยู่หลังบรรทัดสรุปภาค)
     out = []
-    for i, subj_block in enumerate(non_empty):
-        if i < len(titles):
-            sem_num, year = titles[i]
-            out.append(f"[ภาคการศึกษาที่ {sem_num} ปีการศึกษา {year}]")
+    i = 0          # นับบล็อกที่มีวิชา (ใช้ตั้งชื่อ "บล็อกที่ n" เมื่อหาชื่อภาคไม่ได้)
+    t_next = 0     # ตำแหน่งชื่อภาคถัดไปใน titles ที่ยังไม่ถูกใช้
+    g_next = 0     # ตำแหน่งบรรทัด GPS/GPA ถัดไปที่ยังไม่ถูกใช้
+    for block in semesters:
+        if not any(kind == "course" for kind, _ in block):
+            out.extend(text for _, text in block)
+            continue
+
+        own_titles = [m.groups() for kind, entry in block if kind == "title"
+                      for m in [re.search(title_re, entry)] if m]
+        if own_titles and own_titles[0] in titles[t_next:]:
+            title = own_titles[0]
+            t_next = titles.index(title, t_next) + 1
+        elif t_next < len(titles):
+            title = titles[t_next]
+            t_next += 1
+        else:
+            title = None
+        if title:
+            out.append(f"[ภาคการศึกษาที่ {title[0]} ปีการศึกษา {title[1]}]")
         else:
             out.append(f"[ภาคการศึกษา บล็อกที่ {i + 1}]")
-        out.append("Code | Name | Credit | Grade")
-        out.extend(subj_block)
-        if i < len(gps_gpa_lines):
-            out.append(gps_gpa_lines[i])
+
+        out.append("Code | Name | Type | Credit | Grade" if has_type
+                   else "Code | Name | Credit | Grade")
+        out.extend(fmt(kind, entry) for kind, entry in block if kind in ("course", "raw"))
+
+        own_gps = next((entry for kind, entry in block if kind == "gps"), None)
+        if own_gps is not None and own_gps in gps_gpa_lines[g_next:]:
+            out.append(own_gps)
+            g_next = gps_gpa_lines.index(own_gps, g_next) + 1
+        elif g_next < len(gps_gpa_lines):
+            out.append(gps_gpa_lines[g_next])
+            g_next += 1
         out.append("")
+        i += 1
 
     out.extend(trailing_lines)
 
     clean_table_text = "\n".join(out)
     return raw_markdown[:table_match.start()] + clean_table_text + raw_markdown[table_match.end():]
+
+# ==============================================================================
+#  แปลงปี พ.ศ./ค.ศ. ด้วยโค้ด (ไม่ให้ LLM คำนวณเอง)
+# ==============================================================================
+#
+#  เอกสารไทยพิมพ์ปีเป็น พ.ศ.  เอกสารอังกฤษพิมพ์ปีเป็น ค.ศ.
+#  แต่ ground truth เก็บ:  year ของภาค = พ.ศ.   วันที่ทุกช่อง = ค.ศ.
+#
+#  เคยให้ LLM (qwen3:4b) บวก/ลบ 543 เองผ่าน prompt แล้วพบว่า
+#    - อ่านตัวเลขปีได้ถูก แต่ไม่ยอมบวก 543
+#    - ลอกตัวเลขจากตัวอย่างใน prompt ไปใช้แทนค่าจริง (เช่น 1999, 2553)
+#  จึงแบ่งหน้าที่ใหม่: LLM "ลอกปีตามที่พิมพ์" ส่วนโค้ดนี้ "ทำเลขคณิต"
+# ==============================================================================
+
+THAI_RATIO_THRESHOLD = 0.3     # สัดส่วนตัวอักษรไทยขั้นต่ำที่ถือว่าเป็นเอกสารภาษาไทย
+BE_OFFSET = 543                # พ.ศ. = ค.ศ. + 543
+BE_MIN = 2400                  # ตัวกันแปลงซ้ำ: ปีตั้งแต่ 2400 ขึ้นไปถือว่าเป็น พ.ศ. แล้ว
+DATE_FIELDS = (("header_detail", "date_of_birth"), ("header_detail", "admis_date"),
+               ("header_detail", "grad_date"), ("footer_detail", "updated_at"))
+
+
+def detect_language(ocr_text: str) -> str:
+    """
+    เดาภาษาของเอกสารจากสัดส่วนตัวอักษรไทย คืนค่า "th" หรือ "en"
+
+    ⚠️ ต้องส่งข้อความที่ Typhoon อ่านได้จริงเท่านั้น ห้ามส่งข้อความหลัง
+       normalize_typhoon_table() หรือที่มี "=== หน้า n ===" เพราะโค้ดเราแทรกคำไทย
+       ("[ดิบ]", "[ภาคการศึกษา บล็อกที่ n]") ลงไปในเอกสารอังกฤษด้วย
+    เอกสารไทยมีชื่อวิชาภาษาอังกฤษปนได้ แต่ตัวอักษรส่วนใหญ่ยังเป็นไทย
+    """
+    thai = len(re.findall(r'[฀-๿]', ocr_text))
+    latin = len(re.findall(r'[A-Za-z]', ocr_text))
+    total = thai + latin
+    return "th" if total and thai / total >= THAI_RATIO_THRESHOLD else "en"
+
+
+def convert_years(data: dict, lang: str) -> dict:
+    """
+    แปลงปีให้ตรงกับรูปแบบของ ground truth ตามภาษาของเอกสาร
+
+        เอกสารอังกฤษ:  year ของภาค + 543      วันที่ใช้ตามเดิม (ค.ศ. อยู่แล้ว)
+        เอกสารไทย   :  year ของภาคใช้ตามเดิม   วันที่ - 543
+
+    ตัวกันแปลงซ้ำ: แปลงเฉพาะค่าที่ยังอยู่ในระบบเดิม
+      (year < 2400 = ยังเป็น ค.ศ.,  ปีของวันที่ >= 2400 = ยังเป็น พ.ศ.)
+      ถ้า LLM แปลงมาให้แล้ว จะไม่ถูกบวก/ลบซ้ำ
+    ไม่แตะ "0000-00-00" (ยังไม่สำเร็จการศึกษา) และไม่แตะ grad_reason
+    """
+    if not isinstance(data, dict):
+        return data
+
+    if lang == "en":
+        td = data.get("transcript_detail")
+        sems = td.get("semesters") if isinstance(td, dict) else None
+        for sem in sems if isinstance(sems, list) else []:
+            if not isinstance(sem, dict) or sem.get("year") is None:
+                continue
+            try:
+                y = int(str(sem["year"]).strip())
+            except ValueError:
+                continue                      # อ่านเป็นตัวเลขไม่ได้ — ปล่อยไว้ตามเดิม
+            sem["year"] = y + BE_OFFSET if y < BE_MIN else y
+
+    if lang == "th":
+        for section, key in DATE_FIELDS:
+            part = data.get(section)
+            if not isinstance(part, dict):
+                continue
+            m = re.fullmatch(r'(\d{4})-(\d{2})-(\d{2})', str(part.get(key) or "").strip())
+            if not m or m.group(1) == "0000":
+                continue
+            y = int(m.group(1))
+            if y >= BE_MIN:
+                part[key] = f"{y - BE_OFFSET:04d}-{m.group(2)}-{m.group(3)}"
+
+    return data
+
 
 def pipeline_vlm(pages: list[bytes], save_md: Path | None = None) -> dict:
     """
@@ -881,6 +1150,7 @@ def pipeline_vlm(pages: list[bytes], save_md: Path | None = None) -> dict:
       เรียกว่า error propagation — เป็นจุดอ่อนของ pipeline แบบต่อกันเป็นทอด
     """
     md_parts: list[str] = []
+    ocr_parts: list[str] = []     # ข้อความจาก Typhoon ล้วน ๆ ไว้ตรวจภาษา (ไม่มี marker ที่เราแทรก)
     for i, png in enumerate(pages):
         print(f"    [ขั้น 1/2] Typhoon-OCR อ่านหน้า {i + 1}/{len(pages)}...")
         md = ollama_chat(
@@ -890,6 +1160,7 @@ def pipeline_vlm(pages: list[bytes], save_md: Path | None = None) -> dict:
             temperature=0,   # เอกสารทางการแนะนำ 0-0.1 สำหรับโมเดล OCR
         )
         md_parts.append(f"\n=== หน้า {i + 1} ===\n{md}")
+        ocr_parts.append(md)
 
     document_text = "\n".join(md_parts)
 
@@ -913,7 +1184,15 @@ def pipeline_vlm(pages: list[bytes], save_md: Path | None = None) -> dict:
     print("=== RAW ===")
     print(raw)
     print("=== END RAW ===")
-    return parse_json(raw)
+    data = parse_json(raw)
+
+    # แปลงปี พ.ศ./ค.ศ. ด้วยโค้ด ตามภาษาของเอกสาร (LLM ลอกปีตามที่พิมพ์มา)
+    lang = detect_language("\n".join(ocr_parts))
+    print(f"    ภาษาเอกสาร: {lang} -> แปลงปีด้วยโค้ด")
+    data = convert_years(data, lang)
+    if isinstance(data, dict):
+        data["_meta"] = {**(data.get("_meta") or {}), "detected_lang": lang}
+    return data
 
 
 
@@ -1336,7 +1615,8 @@ def main() -> None:
     )
     ap.add_argument("-i", "--input", help="ไฟล์ transcript (.pdf/.png/.jpg)")
     ap.add_argument("-g", "--gt", help="ไฟล์ ground truth (.json)")
-    ap.add_argument("-o", "--out", default="output", help="โฟลเดอร์ผลลัพธ์")
+    ap.add_argument("-o", "--out", default=str(PROJECT_ROOT / "outputs" / "lab7a"),
+                    help="โฟลเดอร์ผลลัพธ์ (ค่าเริ่มต้น outputs/lab7a ที่รากโปรเจกต์)")
     ap.add_argument("-p", "--pipeline", default="all",
                     choices=["all", "baseline", "vlm"])
     ap.add_argument("--check", action="store_true", help="ตรวจความพร้อมของเครื่องแล้วออก")
