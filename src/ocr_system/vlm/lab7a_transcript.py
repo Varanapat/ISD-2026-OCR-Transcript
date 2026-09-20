@@ -107,7 +107,7 @@ MODEL_TEXT = os.getenv("LAB7_MODEL_TEXT", "qwen3:4b")
 # ความละเอียดตอนแปลง PDF เป็นภาพ
 # 150 DPI เพียงพอสำหรับตัวหนังสือขนาด 10-12pt
 # 300 DPI ชัดกว่าแต่ภาพใหญ่ขึ้น 4 เท่า -> VLM ช้าลงมากและอาจเกิน context
-DPI = int(os.getenv("LAB7_DPI", "150"))
+DPI = int(os.getenv("LAB7_DPI", "200"))
 
 REQUEST_TIMEOUT = 900       # วินาที — CPU-only อาจใช้เวลา 5-10 นาทีต่อหน้า
 
@@ -496,10 +496,8 @@ EXTRACT_PROMPT = """ต่อไปนี้คือข้อความที
     "cumulative_gpa: <ข้อความ>"  -> ใส่ใน field cumulative_gpa
 
 [4] รูปแบบข้อมูล
-    - major   : ชื่อสาขาวิชา/วิชาเอก ให้ดึงเฉพาะชื่อสาขา
-      • หากเอกสารไม่มีระบุ Major ไว้โดยตรง แต่พบชื่อคณะเป็น "Business School" หรือ "KMITL Business School" ให้สกัดค่า major เป็น "Business"
-      • ตัดคำว่า "สาขาวิชา", "วิชาเอก", "Major in", "Field of Study", "School" ออก ให้เหลือเฉพาะชื่อสาขา
-      • หากไม่พบระบุและไม่อยู่ในเงื่อนไขข้างต้น ให้ใส่ null
+    - total_credits_earned : ให้ดึงตัวเลขจำนวนหน่วยกิตจากบรรทัด "จำนวนหน่วยกิตที่สอบได้ทั้งหมด", "Total Credits Earned" หรือ "total_credits_earned: <ตัวเลข>" ท้ายเอกสาร (ตอบเป็นตัวเลขจำนวนเต็ม หรือ string ตัวเลขตาม schema)
+    - major    : ให้กำหนดค่าเป็น null เสมอ (ห้ามสกัดหรือเดาค่าใส่)
     - credit  : จำนวนเต็ม เช่น 3  (ไม่ใช่ "3(3-0-6)")
     - type    : ถ้าตารางวิชามีคอลัมน์ Type ให้ลอกค่าในคอลัมน์นั้นใส่ field type ตามที่พิมพ์
       ถ้าตารางไม่มีคอลัมน์ Type ให้ใส่ null
@@ -513,19 +511,24 @@ EXTRACT_PROMPT = """ต่อไปนี้คือข้อความที
       แปลงชื่อเดือนเป็นเลข 2 หลัก เช่น มกราคม/January = 01, กันยายน/September = 09
       ถ้ายังไม่สำเร็จการศึกษา หรือเอกสารระบุ N/A ให้กำหนดค่าดังนี้:
       • grad_date = "0000-00-00"
-      • grad_reason = null (หากเป็น N/A หรือไม่มีเหตุผลระบุ ให้ใส่ null)
+      • grad_reason = ให้ตรวจสอบข้อความในบรรทัดวันที่สำเร็จการศึกษา (Date of Graduation):
+        - หากพบข้อความเหตุผลหรือข้อความในวงเล็บต่อท้าย (เช่น "N/A (พ้นสภาพ 1 / 2562)" หรือ "N/A (Resigned in Semester 1 / 2019)") ให้สกัดข้อความทั้งหมดมาตอบตรงๆ โดยรวมคำว่า N/A ด้านหน้าด้วย
+        - หากมีเพียงคำว่า "N/A", "n/a", "-" หรือไม่มีข้อความเหตุผลใดๆ ต่อท้ายเลย ให้ตอบเป็น null เท่านั้น (ห้ามคืนค่าเป็นข้อความ "N/A")
+        [ตัวอย่างการคืนค่า grad_reason]
+        - กรณีมีเหตุผล: "grad_reason": "N/A (Resigned in Semester 1 / 2019)"
+        - กรณีไม่มีเหตุผล (มีแค่ N/A ในเอกสาร): "grad_reason": null
     - แปลงเลขไทย ๐๑๒๓๔๕๖๗๘๙ เป็นเลขอารบิก
     - honor   : 0 ถ้าไม่ได้เกียรตินิยม, 1 = อันดับหนึ่ง, 2 = อันดับสอง
-
+    - prename : คำนำหน้าชื่อทุกรูปแบบ ทั้งภาษาไทยและภาษาอังกฤษ (เช่น นาย, นาง, นางสาว, น.ส., ดร., Mr., Mrs., Miss, Ms., คำนำหน้าที่มีตัวเลข หรืออักขระพิเศษ) ให้สกัดมาตามที่ปรากฏในเอกสารทั้งหมด ห้ามตัดตัวเลข ตัวอักษรภาษาอังกฤษ หรืออักขระใดๆ ออก
+    - name : ชื่อ-นามสกุล ทั้งภาษาไทยและภาษาอังกฤษ (สามารถมีตัวเลข ตัวอักษรภาษาไทย/ภาษาอังกฤษ หรือเครื่องหมายใดๆ ปะปนอยู่ได้ตามที่ปรากฏจริงในเอกสาร)
+    - by_signature : ให้ลบเครื่องหมายวงเล็บเปิดและปิด เช่น "(" และ ")" ออกทั้งหมด ให้เหลือเฉพาะข้อความหรือชื่อที่อยู่ข้างในเท่านั้น (ตัวอย่าง: เปลี่ยนจาก "(นายสมชาย ใจดี)" เป็น "นายสมชาย ใจดี")
+    - pass_reason : ค่า Null เสมอ
+    
 [5] uni_name / uni_address
     บรรทัดแรกสุดของเอกสารไม่มี label กำกับ แต่แยกได้จากคำว่า "เลขที่" ที่ขึ้นต้นที่อยู่เสมอ:
     ข้อความก่อนคำว่า "เลขที่" ตัวแรก = uni_name
     ตั้งแต่คำว่า "เลขที่" เป็นต้นไปจนจบบรรทัด = uni_address
 
-[6] pass_reason
-    ใส่ค่าได้ก็ต่อเมื่อเอกสารมีข้อความระบุสถานะผ่าน/ไม่ผ่านของภาคนั้นตรง ๆ เท่านั้น
-    ห้ามอนุมานจากเกรดที่เห็น (เช่น เห็นเกรด F เยอะแล้วสรุปเองว่า "ไม่ผ่าน")
-    ถ้าเอกสารไม่มีข้อความแบบนี้ระบุไว้ ให้ใส่ null เสมอ
 
 [7] footer_detail.by — 3 บรรทัดสุดท้ายก่อนจบเอกสารมีความหมายต่างกัน แยกตามตำแหน่ง:
     บรรทัดที่อยู่ในวงเล็บ (ชื่อคน)     -> by_signature
@@ -556,17 +559,6 @@ EXTRACT_PROMPT = """ต่อไปนี้คือข้อความที
 [11] การอ่านตารางและป้ายกำกับ
     - อ่านตารางทีละแถว จากบนลงล่าง หากพบคำว่า "[ดิบ]" อยู่หน้าบรรทัด ให้ข้ามคำว่า "[ดิบ]" แล้วอ่านข้อความข้างในตามปกติ
     - รวมวิชาที่เทียบโอน วิชาที่ถอน (W) และวิชาที่ลงซ้ำ ทุกครั้งที่ปรากฏ
-
-[12] การสกัด field "major" (สาขาวิชา / วิชาเอก):
-    ให้ค้นหาข้อความชื่อสาขาวิชา/วิชาเอก จากส่วนหัวของเอกสาร ซึ่งอาจปรากฏในรูปแบบใดรูปแบบหนึ่งต่อไปนี้:
-    - รูปแบบ "College of ... / School of ... / Faculty of ...": ให้ดึงเฉพาะชื่อสาขา/ภาควิชา เช่น 
-      • หากพบ "College of Digital Innovation" หรือ "School of Information Technology" ให้ดึงชื่อเฉพาะ เช่น "Information Technology"
-    - รูปแบบ "คณะ <ชื่อคณะ> สาขาวิชา/วิชาเอก <ชื่อสาขา>": ให้ดึงเฉพาะชื่อสาขาวิชา เช่น 
-      • "สาขาวิชาเทคโนโลยีสารสนเทศ" -> ดึง "เทคโนโลยีสารสนเทศ"
-      • "วิชาเอกวิทยาการคอมพิวเตอร์" -> ดึง "วิทยาการคอมพิวเตอร์"
-    - รูปแบบชื่อมหาลัย/คณะ ขึ้นต้น และปิดท้ายด้วยคำว่า "School" เช่น:
-      • "<University Name> <Faculty/Department Name> School" -> ให้ดึงข้อความส่วนที่เป็นชื่อสาขาวิชาหรือ School นั้นๆ
-    - หากเอกสารไม่ได้ระบุชื่อสาขา/วิชาเอกไว้อย่างชัดเจน หรือมีเฉพาะชื่อคณะ (faculty_name) ให้ใส่ null ห้ามเดาขึ้นมาเอง
 
 
 === ข้อความจากเอกสาร ===
@@ -753,7 +745,7 @@ def _rule_based_parse(text: str) -> dict:
         out["header_detail"]["student_id"] = m.group(1)
 
     # --- คำนำหน้า + ชื่อ ---
-    m = re.search(r"(นางสาว|นาย|นาง)\s*([^\n]{2,60})", text)
+    m = re.search(r"(นางสาว|นาย|นาง|[A-Za-z0-9]+)\s*([^\n]{2,60})", text)
     if m:
         out["header_detail"]["prename"] = m.group(1)
         out["header_detail"]["name"] = m.group(2).strip()
@@ -939,14 +931,8 @@ def normalize_typhoon_table(raw_markdown: str) -> str:
     # ดึง (เลขภาค, ปีการศึกษา) ทุกคู่ ตามลำดับการอ่าน (ไม่ใช่ลำดับ HTML)
     title_re = TITLE_RE
     titles = re.findall(title_re, "\n".join(" ".join(c) for c in ordered))
-    # ขอบเขตของภาค: ถ้าตารางมีแถวชื่อภาค ให้ "แถวชื่อภาค" เป็นตัวเริ่มภาคใหม่
-    # (แม่นกว่าบรรทัดสรุปภาค เพราะ OCR ของหน้าสองคอลัมน์มักวางบรรทัดสรุปภาค
-    #  ก่อนวิชาสุดท้ายของภาคนั้น) ถ้าไม่มีชื่อภาคเลย ค่อยใช้บรรทัดสรุปภาคแบ่งแทน
     split_on_titles = bool(titles)
 
-    # บล็อกของแต่ละภาค — เก็บ (ชนิด, ข้อความ) ตามลำดับที่เจอ
-    #   "course" = แถววิชาที่ parse ได้   "raw" = แถวที่ parse ไม่ได้ (ส่งต่อแบบดิบ)
-    #   "title"/"gps" = ชื่อภาค/บรรทัดสรุปภาค ณ ตำแหน่งเดิม (ใช้เมื่อบล็อกไม่มีแถววิชาที่ parse ได้)
     semesters: list[list[tuple[str, str]]] = [[]]
     gps_gpa_lines: list[str] = []
     trailing_lines: list[str] = []
@@ -988,36 +974,49 @@ def normalize_typhoon_table(raw_markdown: str) -> str:
         if "สิ้นสุดการแสดงผลการศึกษา" in joined:
             continue
 
-        # 5) แถวที่ไม่ได้ขึ้นต้นด้วยรหัสวิชา (หัวตาราง/ชื่อภาค/ข้อความอื่น)
-        #    ชื่อภาคที่จับด้วย title_re ไปแล้วไม่ต้องส่งซ้ำ แต่ถ้ามีข้อความอื่นปน
-        #    หรือเป็นรูปแบบที่ไม่รู้จัก ให้ส่งต่อแบบดิบ แทนการทิ้งเงียบ ๆ
-        if not re.match(r'^\d{6,}', cells[0]):
-            consumed = [t.group(0) for t in re.finditer(title_re, joined)]
+        # 5) แถวชื่อภาคการศึกษา (เช่น "ภาคการศึกษาที่ 2 ปีการศึกษา 2561")
+        # เช็คว่ามีข้อความชื่อภาคอยู่หรือไม่
+        consumed = [t.group(0) for t in re.finditer(title_re, joined)]
+        if consumed:
+            # ถ้าแยกตามชื่อภาค และในภาคปัจจุบันมีวิชาอยู่แล้ว ให้ขึ้นภาคใหม่
+            if split_on_titles and any(k == "course" for k, _ in semesters[-1]):
+                semesters.append([])
+            semesters[-1].append(("title", _raw_row(cells)))
+            
             if _has_leftover(joined, consumed):
                 semesters[-1].append(("raw", _raw_row(cells)))
-            elif consumed:
-                if split_on_titles and any(k == "course" for k, _ in semesters[-1]):
-                    semesters.append([])  # แถวชื่อภาค = เริ่มภาคใหม่
-                semesters[-1].append(("title", _raw_row(cells)))
+            continue
+
+        # ถ้าไม่ใช่แถวที่ขึ้นต้นด้วยรหัสวิชา (เช่น หัวตาราง หรือข้อความขยะ)
+        if not re.match(r'^\d{6,}', cells[0].strip()):
+            semesters[-1].append(("raw", _raw_row(cells)))
             continue
 
         # 6) แถววิชา — รองรับทั้ง "รหัส ชื่อ" ใน cell เดียว และ "รหัส" | "ชื่อ" แยก cell
-        code_m = re.match(r'^(\d{6,})\s+(.*)$', cells[0])
+        code_m = re.match(r'^(\d{6,})\s+(.*)$', cells[0].strip())
         if code_m:
             code, name, rest = code_m.group(1), code_m.group(2).strip(), cells[1:]
-        elif re.fullmatch(r'\d{6,}', cells[0]) and len(cells) > 1 and cells[1]:
-            code, name, rest = cells[0], cells[1], cells[2:]
+        elif re.fullmatch(r'\d{6,}', cells[0].strip()) and len(cells) > 1 and cells[1]:
+            code, name, rest = cells[0].strip(), cells[1].strip(), cells[2:]
         else:
             # รูปแถวที่ไม่คาดไว้ — ส่งต่อแบบดิบ
             semesters[-1].append(("raw", _raw_row(cells)))
             continue
 
-        credit = next((c for c in rest if c.isdigit()), "")
-        grade = next((c for c in rest if _is_grade(c)), "")
-        ctype = next((c for c in rest if _is_type(c)), "")
+        # --- ปรับปรุงการสกัด CREDIT ให้มีความยืดหยุ่นขึ้น (ดึงตัวเลขจากเซลล์) ---
+        credit = ""
+        for c in rest:
+            c_clean = c.strip()
+            # ค้นหาตัวเลขเดี่ยวๆ หรือ ทศนิยม เช่น '3', '3.0', '1.5' แม้มีข้อความอื่นติดมา
+            cred_m = re.search(r'\b(\d+(?:\.\d+)?)\b', c_clean)
+            if cred_m and not _is_grade(c_clean) and not _is_type(c_clean):
+                credit = cred_m.group(1)
+                break
+
+        grade = next((c.strip() for c in rest if _is_grade(c.strip())), "")
+        ctype = next((c.strip() for c in rest if _is_type(c.strip())), "")
 
         # ท้ายชื่อมี [ประเภท] หน่วยกิต เกรด ติดมา: ใช้เติมช่องที่ว่าง
-        # หรือตัดทิ้งถ้าเป็นค่าซ้ำกับคอลัมน์ที่แยกมาแล้ว
         tail = _split_trailing(name)
         if tail:
             t_name, t_type, t_credit, t_grade = tail
@@ -1028,17 +1027,12 @@ def normalize_typhoon_table(raw_markdown: str) -> str:
 
         semesters[-1].append(("course", (code, name, ctype, credit, grade)))
 
-        # เซลล์ที่เหลือมีรหัสวิชาอีกตัว = มีวิชาอื่นอยู่ในแถวเดียวกัน (เช่น ตาราง
-        # สองคอลัมน์) — ส่งส่วนนั้นต่อแบบดิบ แทนการทิ้งไปพร้อมคอลัมน์ noise
-        extra = next((i for i, c in enumerate(cells[1:], 1) if re.match(r'^\d{6,}', c)), None)
+        # เซลล์ที่เหลือมีรหัสวิชาอีกตัว = มีวิชาอื่นอยู่ในแถวเดียวกัน
+        extra = next((i for i, c in enumerate(cells[1:], 1) if re.match(r'^\d{6,}', c.strip())), None)
         if extra is not None:
             semesters[-1].append(("raw", _raw_row(cells[extra:])))
 
-    # ประกอบข้อความสะอาด จับคู่บล็อกวิชากับ GPS/GPA ที่ตามมาตามลำดับในเอกสาร
-    # (นับเฉพาะบล็อกที่มีแถววิชาที่ parse ได้ ให้การจับคู่ title เหมือนเดิม
-    #  บล็อกที่มีแต่แถวดิบจะพิมพ์ทุกอย่างตามตำแหน่งเดิม รวมชื่อภาคและ GPS/GPA
-    #  เพื่อให้ LLM ยังเห็นขอบเขตของภาค และไม่กิน title ของบล็อกที่ parse ได้)
-    # คอลัมน์ Type ใส่เฉพาะเอกสารที่มีประเภทวิชา (เช่น ใบบัณฑิตศึกษา Cr/Nc)
+    # ประกอบข้อความสะอาด
     has_type = any(kind == "course" and entry[2]
                    for block in semesters for kind, entry in block)
 
@@ -1049,13 +1043,10 @@ def normalize_typhoon_table(raw_markdown: str) -> str:
         return (f"{code} | {name} | {ctype} | {credit} | {grade}" if has_type
                 else f"{code} | {name} | {credit} | {grade}")
 
-    # ชื่อภาคและ GPS/GPA ของแต่ละบล็อก: ใช้ตัวที่ "อยู่ในบล็อกนั้นจริง" ก่อน
-    # ถ้าบล็อกไม่มี ค่อยใช้ตัวถัดไปตามลำดับ (การจับคู่ตามลำดับอย่างเดียวจะเพี้ยน
-    # ทันทีที่ OCR เรียงแถวผิด เช่น วิชาสุดท้ายของภาคหลุดไปอยู่หลังบรรทัดสรุปภาค)
     out = []
-    i = 0          # นับบล็อกที่มีวิชา (ใช้ตั้งชื่อ "บล็อกที่ n" เมื่อหาชื่อภาคไม่ได้)
-    t_next = 0     # ตำแหน่งชื่อภาคถัดไปใน titles ที่ยังไม่ถูกใช้
-    g_next = 0     # ตำแหน่งบรรทัด GPS/GPA ถัดไปที่ยังไม่ถูกใช้
+    i = 0          # นับบล็อกที่มีวิชา
+    t_next = 0     # ตำแหน่งชื่อภาคถัดไปใน titles
+    g_next = 0     # ตำแหน่งบรรทัด GPS/GPA ถัดไป
     for block in semesters:
         if not any(kind == "course" for kind, _ in block):
             out.extend(text for _, text in block)
@@ -1071,6 +1062,7 @@ def normalize_typhoon_table(raw_markdown: str) -> str:
             t_next += 1
         else:
             title = None
+
         if title:
             out.append(f"[ภาคการศึกษาที่ {title[0]} ปีการศึกษา {title[1]}]")
         else:
@@ -1314,6 +1306,26 @@ def verify_internal(data: dict) -> dict:
         v = hd.get(f)
         if v and not DATE_RE.match(str(v)):
             issues.append(f"{f} ผิดรูปแบบ: {v!r} (ต้องเป็น YYYY-MM-DD)")
+
+    # 1.1 ตรวจสอบคำนำหน้าชื่อ (prename)
+    prename = hd.get("prename")
+    if prename is not None:
+        prename_str = str(prename).strip()
+        if not prename_str:
+            issues.append("prename เป็นค่าว่าง (ต้องมีคำนำหน้าชื่อ)")
+        elif len(prename_str) > 30:
+            issues.append(f"prename ยาวผิดปกติ ({len(prename_str)} ตัวอักษร): {prename!r} --> อาจดึงข้อมูลเกิน")
+
+    # 1.2 ตรวจสอบชื่อ-นามสกุล (name)
+    name = hd.get("name")
+    if name is not None:
+        name_str = str(name).strip()
+        if not name_str:
+            issues.append("name เป็นค่าว่าง (ต้องมีชื่อ-นามสกุล)")
+        elif len(name_str) < 2:
+            issues.append(f"name สั้นผิดปกติ: {name!r}")
+        elif len(name_str) > 100:
+            issues.append(f"name ยาวผิดปกติ ({len(name_str)} ตัวอักษร): {name!r} --> อาจรวมข้อความส่วนอื่นเข้ามา")
 
     # ── กฎ 2: ปี/ภาค ต้องอยู่ในช่วงที่เป็นไปได้ ───────────────────────
     seen_terms: set[tuple] = set()
