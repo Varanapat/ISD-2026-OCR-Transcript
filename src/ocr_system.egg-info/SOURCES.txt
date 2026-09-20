@@ -1,8 +1,10 @@
 README.md
 pyproject.toml
 src/ocr_system/__init__.py
+src/ocr_system/augmentation.py
 src/ocr_system/cli.py
 src/ocr_system/config.py
+src/ocr_system/dataset_builder.py
 src/ocr_system/document_loader.py
 src/ocr_system/engine_factory.py
 src/ocr_system/evaluation.py
@@ -23,3 +25,7 @@ src/ocr_system/engines/tesseract_engine.py
 src/ocr_system/engines/trocr_engine.py
 src/ocr_system/utils/__init__.py
 src/ocr_system/utils/io.py
+src/ocr_system/vlm/__init__.py
+src/ocr_system/vlm/lab7_metrics.py
+src/ocr_system/vlm/lab7a_transcript.py
+src/ocr_system/vlm/lab8a_denoise.py

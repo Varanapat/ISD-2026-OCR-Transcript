@@ -1,0 +1,5 @@
+doc_id,group,lang,input,clean,accuracy,cer,hallucinated,correct,fields,ollama_version
+71010001,undergrad,th,/Users/patcharapongvech/Desktop/Phet_folder/Year 3/ISD/Lab/ocr_system/work/71010001/noisy/L0_clean/page_01.png,none,0.8817204301075269,0.08744976648202456,0,82,93,0.33.3
+72100002,undergrad,en,/Users/patcharapongvech/Desktop/Phet_folder/Year 3/ISD/Lab/ocr_system/work/72100002/noisy/L0_clean/page_01.png,none,0.9178082191780822,0.032235856208458945,0,67,73,0.33.3
+73036003,grad,th,/Users/patcharapongvech/Desktop/Phet_folder/Year 3/ISD/Lab/ocr_system/work/73036003/noisy/L0_clean/page_01.png,none,0.9186991869918699,0.07479674796747966,0,113,123,0.33.3
+74106005,grad,en,/Users/patcharapongvech/Desktop/Phet_folder/Year 3/ISD/Lab/ocr_system/work/74106005/noisy/L0_clean/page_01.png,none,0.926829268292683,0.05323267518389469,1,114,123,0.33.3
