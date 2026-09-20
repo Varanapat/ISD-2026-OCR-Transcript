@@ -493,8 +493,6 @@ EXTRACT_PROMPT = """ต่อไปนี้คือข้อความที
 [3] คัดลอกค่าต่อไปนี้ตรงจากบรรทัดที่มี label กำกับในเอกสาร:
     "GPS: <ข้อความ>"            -> ใส่ใน field GPS ของภาคนั้น
     "GPA: <ข้อความ>"            -> ใส่ใน field GPA ของภาคนั้น
-    "pass_reason: <ข้อความ>"    -> ใส่ใน field pass_reason ของภาคนั้น
-                                   ภาคนั้นไม่มีรายวิชา (subject = []) และ GPS/GPA = null
     "cumulative_gpa: <ข้อความ>"  -> ใส่ใน field cumulative_gpa
 
 [4] รูปแบบข้อมูล
@@ -509,12 +507,8 @@ EXTRACT_PROMPT = """ต่อไปนี้คือข้อความที
     - วันที่ (date_of_birth, admis_date, grad_date, updated_at) : รูปแบบ YYYY-MM-DD
       YYYY = ปีตามที่พิมพ์ในเอกสาร ห้ามบวกหรือลบ 543 (โปรแกรมจะแปลงให้เอง)
       แปลงชื่อเดือนเป็นเลข 2 หลัก เช่น มกราคม/January = 01, กันยายน/September = 09
-      ถ้ายังไม่สำเร็จการศึกษา หรือเอกสารระบุ N/A ให้กำหนดค่าดังนี้:
-      • grad_date = "0000-00-00"
-      • grad_reason : ดูข้อความในช่องวันสำเร็จการศึกษา
-        - ถ้ามีแต่ "N/A" ไม่มีข้อความอื่น -> null
-        - ถ้ามีเหตุผลต่อท้าย -> ลอกข้อความทั้งช่องรวมคำว่า N/A ตามที่พิมพ์
-          (เช่น ช่องที่เขียนว่า N/A แล้วตามด้วยเหตุผลในวงเล็บ ให้เก็บทั้งสองส่วน)
+      ถ้ายังไม่สำเร็จการศึกษาหรือเอกสารระบุ N/A ให้ grad_date = "0000-00-00"
+      และเอาข้อความทั้งหมดของช่องนั้นใส่ grad_reason ตามที่พิมพ์ (ไม่ต้องแปลงปีในนั้น)
     - แปลงเลขไทย ๐๑๒๓๔๕๖๗๘๙ เป็นเลขอารบิก
     - honor   : 0 ถ้าไม่ได้เกียรตินิยม, 1 = อันดับหนึ่ง, 2 = อันดับสอง
 
@@ -535,29 +529,6 @@ EXTRACT_PROMPT = """ต่อไปนี้คือข้อความที
     ทั้งสามค่าไม่ใช่ field เดียวกัน ห้ามใส่ค่าเดียวกันซ้ำในหลาย field
 
 [8] ช่องที่ไม่ปรากฏในเอกสาร ให้ใส่ null — ห้ามแต่งขึ้นมา
-
-[9] ค้นหาค่าเกรดเฉลี่ยประจำภาคการศึกษา (GPS / GPA ในภาคนั้น) และเกรดเฉลี่ยสะสม (cumulative_gpa / GPAX):
-    - สำหรับ GPS / GPA ประจำภาค: ให้มองหาตัวเลขที่เป็นเกรดเฉลี่ยประจำภาคนั้นๆ ซึ่งอาจระบุด้วยคำว่า "GPS", "GPA", "Semester GPA", "คะแนนเฉลี่ยประจำภาคการศึกษา", "เฉลี่ยประจำภาค" หรือตัวเลขสรุปท้ายตารางของภาคนั้น
-    - สำหรับ cumulative_gpa: ให้มองหาเกรดเฉลี่ยสะสมรวมของทั้งเอกสาร ซึ่งอาจระบุด้วยคำว่า "cumulative_gpa", "Cumulative GPA", "GPAX", "คะแนนเฉลี่ยสะสม", "คะแนนเฉลี่ย" หรือเกรดสะสมที่อยู่ท้ายภาคการศึกษาสุดท้าย
-
-[10] การสกัดค่า GPS, GPA และ cumulative_gpa (ต้องสกัดให้ครบทุกภาคการศึกษา):
-    ก) field "GPS" (เกรดเฉลี่ยประจำภาค):
-       - รูปแบบปริญญาตรี: ลอกจากบรรทัด "GPS: <ตัวเลข>" หรือ "GPS:<ตัวเลข>" (เช่น "GPS: 3.83" ให้ดึง "3.83")
-       - รูปแบบบัณฑิตศึกษา / ข้อความยาว: ลอกจาก "คะแนนเฉลี่ยประจำภาคการศึกษา : <ตัวเลข>" หรือ "Semester GPA: <ตัวเลข>"
-    ข) field "GPA" (เกรดเฉลี่ยสะสมประจำภาค):
-       - รูปแบบปริญญาตรี: ลอกจากบรรทัด "GPA: <ตัวเลข>" หรือ "GPA:<ตัวเลข>" (เช่น "GPA: 3.83" ให้ดึง "3.83")
-       - รูปแบบบัณฑิตศึกษา / ข้อความยาว: ลอกจาก "คะแนนเฉลี่ย : <ตัวเลข>" หรือ "Cumulative GPA: <ตัวเลข>"
-    ค) field "cumulative_gpa" (เกรดเฉลี่ยสะสมรวมทั้งเอกสาร):
-       - ลอกจากบรรทัด "cumulative_gpa: <ตัวเลข>", "Cumulative GPA: <ตัวเลข>" หรือ "คะแนนเฉลี่ยสะสม" ท้ายเอกสาร
-    ง) กฎเพิ่มเติม:
-       - หากภาคใดระบุตัวเลขเป็น "0.00" หรือ "0,00" ให้ใส่ "0.00" ห้ามใส่ null
-       - หากพิมพ์เป็นเครื่องหมาย "-" ให้ใส่ "-"
-       - ห้ามคำนวณเองเด็ดขาด ให้ลอกตัวเลขตามที่ปรากฏในเอกสารเท่านั้น
-
-[11] การอ่านตารางและป้ายกำกับ
-    - อ่านตารางทีละแถว จากบนลงล่าง หากพบคำว่า "[ดิบ]" อยู่หน้าบรรทัด ให้ข้ามคำว่า "[ดิบ]" แล้วอ่านข้อความข้างในตามปกติ
-    - รวมวิชาที่เทียบโอน วิชาที่ถอน (W) และวิชาที่ลงซ้ำ ทุกครั้งที่ปรากฏ
-
 
 === ข้อความจากเอกสาร ===
 {document_text}
@@ -808,7 +779,7 @@ def _extract_cells(row_html: str) -> list[str]:
 
 
 CODE_START = re.compile(r'^\d{6,}')
-SEM_SUMMARY_RE = r'(?:คะแนนเฉลี่ยประจำภาคการศึกษา|GPS|Semester GPA)\s*:\s*([\d.,N/A-]+).*?(?:คะแนนเฉลี่ย|GPA|Cumulative GPA)\s*:\s*([\d.,N/A-]+)'
+SEM_SUMMARY_RE = r'คะแนนเฉลี่ยประจำภาคการศึกษา\s*:\s*([\d.]+).*?คะแนนเฉลี่ย\s*:\s*([\d.]+)'
 TITLE_RE = r'ภาคการศึกษาที่\s*(\d)\s*ปีการศึกษา\s*(\d{4})'
 
 # ท้ายชื่อวิชาที่มี [ประเภท] หน่วยกิต เกรด ติดมา เช่น "SEMINAR 1 Nc 1 S", "แคลคูลัส 1 3 D+"
@@ -820,25 +791,6 @@ TRAILING_RE = re.compile(
 
 def _is_grade(text: str) -> bool:
     return text.strip().upper() in GRADE_SET
-
-
-# ภาค "รักษาสภาพ" / "Maintain" — ภาคที่ไม่ได้ลงเรียน แค่รักษาสถานภาพนักศึกษาไว้
-# เฉลยเก็บภาคแบบนี้เป็น pass_reason = "maintain" โดยไม่มีรายวิชา และ GPS/GPA เป็น null
-MAINTAIN_RE = re.compile(r'^\s*(?:\*{0,2})\s*(?:รักษาสภาพ|maintain)\s*(?:\*{0,2})\s*$', re.I)
-MAINTAIN_LINE = "pass_reason: maintain"
-
-
-def _is_maintain(text: str) -> bool:
-    return bool(MAINTAIN_RE.match(text or ""))
-
-
-def _first_type(text: str) -> str:
-    """
-    ประเภทวิชาต้องมีค่าเดียว (เช่น Cr) — ถ้า OCR อ่านมาหลายตัว ("Cr Nc") เก็บตัวแรก
-
-    เอกสารมีคอลัมน์ประเภทช่องเดียวต่อวิชา ค่าที่เกินมาจึงเป็นของคอลัมน์อื่นที่หลุดมา
-    """
-    return text.split()[0] if text.strip() else ""
 
 
 def _is_type(text: str) -> bool:
@@ -966,9 +918,7 @@ def normalize_typhoon_table(raw_markdown: str) -> str:
         joined = " ".join(cells)
 
         # 1) บรรทัดสรุปท้ายภาค -> ตัวคั่นภาค + บรรทัด GPS/GPA ระบุชัด
-        #    ข้ามถ้าแถวนี้ขึ้นต้นด้วยรหัสวิชา เพราะเป็น "แถววิชาที่มีบรรทัดสรุปติดมา"
-        #    (บรรทัดสรุปจริงไม่เคยขึ้นต้นด้วยรหัสวิชา) ให้ข้อ 6 จัดการแยกวิชา/สรุปออกจากกัน
-        m = None if CODE_START.match(cells[0]) else re.search(SEM_SUMMARY_RE, joined)
+        m = re.search(SEM_SUMMARY_RE, joined)
         if m:
             gps, gpa = m.group(1), m.group(2)
             gps_gpa_lines.append(f"GPS: {gps}\nGPA: {gpa}")
@@ -1003,20 +953,8 @@ def normalize_typhoon_table(raw_markdown: str) -> str:
         #    ชื่อภาคที่จับด้วย title_re ไปแล้วไม่ต้องส่งซ้ำ แต่ถ้ามีข้อความอื่นปน
         #    หรือเป็นรูปแบบที่ไม่รู้จัก ให้ส่งต่อแบบดิบ แทนการทิ้งเงียบ ๆ
         if not re.match(r'^\d{6,}', cells[0]):
-            # แถว "รักษาสภาพ"/"Maintain" (เซลล์อื่นในแถวเป็นเศษคอลัมน์ที่ OCR พามา)
-            if any(_is_maintain(c) for c in cells):
-                # แต่ละแถวรักษาสภาพ = หนึ่งภาค จึงเริ่มบล็อกใหม่ทั้งเมื่อบล็อกเดิม
-                # มีวิชา และเมื่อบล็อกเดิมเป็นภาครักษาสภาพอยู่แล้ว
-                if any(k in ("course", "pass") for k, _ in semesters[-1]):
-                    semesters.append([])
-                semesters[-1].append(("pass", MAINTAIN_LINE))
-                continue
             consumed = [t.group(0) for t in re.finditer(title_re, joined)]
             if _has_leftover(joined, consumed):
-                # อะไรก็ตามที่มาหลังภาครักษาสภาพ = เนื้อหาของภาคถัดไป
-                # (เช่นหัวภาคภาษาอังกฤษที่เรายังไม่ได้ parse เป็น title)
-                if any(k == "pass" for k, _ in semesters[-1]):
-                    semesters.append([])
                 semesters[-1].append(("raw", _raw_row(cells)))
             elif consumed:
                 if split_on_titles and any(k == "course" for k, _ in semesters[-1]):
@@ -1035,54 +973,21 @@ def normalize_typhoon_table(raw_markdown: str) -> str:
             semesters[-1].append(("raw", _raw_row(cells)))
             continue
 
-        # บรรทัดสรุปภาคที่ OCR ยัดมาในเซลล์ชื่อวิชา (เช่น
-        # "CHEMISTRY LABORATORY GPS : 0.00 GPA : -") — ดึงออกมาเป็นบรรทัดของภาค
-        # ไม่งั้นทั้งวิชาและ GPS/GPA จะเพี้ยนไปด้วยกัน
-        inline_gps = re.search(SEM_SUMMARY_RE, name)
-        if inline_gps:
-            name = name[:inline_gps.start()].strip()
-
         credit = next((c for c in rest if c.isdigit()), "")
         grade = next((c for c in rest if _is_grade(c)), "")
-        ctype = _first_type(next((c for c in rest if _is_type(c)), ""))
+        ctype = next((c for c in rest if _is_type(c)), "")
 
         # ท้ายชื่อมี [ประเภท] หน่วยกิต เกรด ติดมา: ใช้เติมช่องที่ว่าง
         # หรือตัดทิ้งถ้าเป็นค่าซ้ำกับคอลัมน์ที่แยกมาแล้ว
         tail = _split_trailing(name)
         if tail:
             t_name, t_type, t_credit, t_grade = tail
-            # ข้อมูลท้ายชื่อคือคอลัมน์ที่ OCR ยุบเข้ามา — ใช้เติม "เฉพาะช่องที่ว่าง"
-            # ส่วนช่องที่แยกมาเป็นเซลล์จริงแล้วเชื่อถือมากกว่า จึงไม่ทับ
-            # (เช่น "THESIS Cr Nc 9 I" ที่มีเซลล์เกรด S อยู่แล้ว -> ได้ชื่อ THESIS,
-            #  ประเภท Cr, หน่วยกิต 9 และคงเกรด S ไว้)
-            name = t_name
-            credit = credit or t_credit
-            grade = grade or t_grade
-            ctype = ctype or _first_type(t_type)
+            if not credit and not grade:
+                name, credit, grade, ctype = t_name, t_credit, t_grade, ctype or t_type
+            elif (t_credit, t_grade.upper()) == (credit, grade.upper()):
+                name, ctype = t_name, ctype or t_type
 
-        # ภาครักษาสภาพถูกพิมพ์เป็นแถววิชา (มีรหัสด้วย) — เฉลยไม่นับเป็นรายวิชา
-        if _is_maintain(name):
-            if any(k == "course" for k, _ in semesters[-1]):
-                semesters.append([])       # ภาครักษาสภาพเป็นคนละภาคกับภาคที่มีวิชา
-            if not any(k == "pass" for k, _ in semesters[-1]):
-                semesters[-1].append(("pass", MAINTAIN_LINE))
-            continue
-
-        if any(k == "pass" for k, _ in semesters[-1]):
-            semesters.append([])   # มีวิชาต่อจากภาครักษาสภาพ = ขึ้นภาคใหม่
-
-        # (1) แถวซ้ำ: OCR พ่นวิชาเดิมซ้ำในภาคเดียวกัน — เก็บแถวแรกพอ
-        #     (วิชาเดียวกันที่ลงซ้ำคนละภาคยังเก็บครบ เพราะเทียบเฉพาะในบล็อกเดียวกัน)
-        entry = (code, name, ctype, credit, grade)
-        last_course = next((e for k, e in reversed(semesters[-1]) if k == "course"), None)
-        if entry != last_course:
-            semesters[-1].append(("course", entry))
-
-        if inline_gps:
-            gps_gpa_lines.append(f"GPS: {inline_gps.group(1)}\nGPA: {inline_gps.group(2)}")
-            semesters[-1].append(("gps", gps_gpa_lines[-1]))
-            if not split_on_titles:
-                semesters.append([])   # บรรทัดสรุปภาค = จบภาคนั้น
+        semesters[-1].append(("course", (code, name, ctype, credit, grade)))
 
         # เซลล์ที่เหลือมีรหัสวิชาอีกตัว = มีวิชาอื่นอยู่ในแถวเดียวกัน (เช่น ตาราง
         # สองคอลัมน์) — ส่งส่วนนั้นต่อแบบดิบ แทนการทิ้งไปพร้อมคอลัมน์ noise
@@ -1113,9 +1018,7 @@ def normalize_typhoon_table(raw_markdown: str) -> str:
     t_next = 0     # ตำแหน่งชื่อภาคถัดไปใน titles ที่ยังไม่ถูกใช้
     g_next = 0     # ตำแหน่งบรรทัด GPS/GPA ถัดไปที่ยังไม่ถูกใช้
     for block in semesters:
-        has_course = any(kind == "course" for kind, _ in block)
-        has_pass = any(kind == "pass" for kind, _ in block)
-        if not has_course and not has_pass:
+        if not any(kind == "course" for kind, _ in block):
             out.extend(text for _, text in block)
             continue
 
@@ -1134,26 +1037,17 @@ def normalize_typhoon_table(raw_markdown: str) -> str:
         else:
             out.append(f"[ภาคการศึกษา บล็อกที่ {i + 1}]")
 
-        if has_course:
-            out.append("Code | Name | Type | Credit | Grade" if has_type
-                       else "Code | Name | Credit | Grade")
-            out.extend(fmt(kind, entry) for kind, entry in block if kind in ("course", "raw"))
-        else:
-            out.extend(text for kind, text in block if kind == "raw")
-        if has_pass:
-            out.append(MAINTAIN_LINE)
+        out.append("Code | Name | Type | Credit | Grade" if has_type
+                   else "Code | Name | Credit | Grade")
+        out.extend(fmt(kind, entry) for kind, entry in block if kind in ("course", "raw"))
 
         own_gps = next((entry for kind, entry in block if kind == "gps"), None)
-        # ภาครักษาสภาพไม่มีเกรดเฉลี่ยของตัวเอง (เฉลยเป็น null) — ใช้คิวของ GPS ต่อไป
-        # ตามลำดับ แต่ไม่พิมพ์ออกมา เพื่อไม่ให้ภาคถัดไปหยิบบรรทัดผิด
         if own_gps is not None and own_gps in gps_gpa_lines[g_next:]:
-            if has_course:
-                out.append(own_gps)
+            out.append(own_gps)
             g_next = gps_gpa_lines.index(own_gps, g_next) + 1
         elif g_next < len(gps_gpa_lines):
-            if has_course:
-                out.append(gps_gpa_lines[g_next])
-                g_next += 1
+            out.append(gps_gpa_lines[g_next])
+            g_next += 1
         out.append("")
         i += 1
 
@@ -1180,6 +1074,7 @@ BE_OFFSET = 543                # พ.ศ. = ค.ศ. + 543
 BE_MIN = 2400                  # ตัวกันแปลงซ้ำ: ปีตั้งแต่ 2400 ขึ้นไปถือว่าเป็น พ.ศ. แล้ว
 DATE_FIELDS = (("header_detail", "date_of_birth"), ("header_detail", "admis_date"),
                ("header_detail", "grad_date"), ("footer_detail", "updated_at"))
+
 
 def detect_language(ocr_text: str) -> str:
     """
@@ -1235,108 +1130,6 @@ def convert_years(data: dict, lang: str) -> dict:
             if y >= BE_MIN:
                 part[key] = f"{y - BE_OFFSET:04d}-{m.group(2)}-{m.group(3)}"
 
-    return data
-
-
-def enforce_maintain(data: dict) -> dict:
-    """
-    ภาค "รักษาสภาพ" (maintain): เฉลยเก็บเป็น pass_reason = "maintain"
-    โดยไม่มีรายวิชา และ GPS/GPA เป็น null — บังคับด้วยโค้ด ไม่ต้องหวังให้ LLM ทำตาม
-
-    ครอบสองทาง: ภาคที่ normalizer ทำเครื่องหมายไว้แล้ว และภาคที่ LLM ยังใส่
-    "รักษาสภาพ"/"Maintain" มาเป็นรายวิชา
-    """
-    if not isinstance(data, dict):
-        return data
-    td = data.get("transcript_detail")
-    sems = td.get("semesters") if isinstance(td, dict) else None
-    for sem in sems if isinstance(sems, list) else []:
-        if not isinstance(sem, dict):
-            continue
-        subjects = [x for x in (sem.get("subject") or []) if isinstance(x, dict)]
-        maintain_rows = [x for x in subjects if _is_maintain(str(x.get("subject_name") or ""))]
-        flagged = _is_maintain(str(sem.get("pass_reason") or "")) or bool(maintain_rows)
-        if not flagged:
-            continue
-        real_rows = [x for x in subjects if x not in maintain_rows]
-        if real_rows:
-            # ภาคนี้มีวิชาจริง แปลว่า flag มาผิดภาค (OCR วางแถวคาบเกี่ยว)
-            # เก็บวิชาจริงกับเกรดเฉลี่ยไว้ ถอดเฉพาะร่องรอยของภาครักษาสภาพ
-            sem["subject"] = real_rows
-            if _is_maintain(str(sem.get("pass_reason") or "")):
-                sem["pass_reason"] = None
-            continue
-        sem["pass_reason"] = "maintain"
-        sem["subject"] = []
-        sem["GPS"] = None
-        sem["GPA"] = None
-    return data
-
-
-# คำนำหน้าชื่อที่ระบบทะเบียนใช้ — ชุดปิด ใช้ตัดชื่อที่ OCR พิมพ์ติดกับคำนำหน้า
-PRENAMES = ("นางสาว", "นาง", "นาย", "mrs.", "miss", "mr.", "ms.")
-NUMERIC_RE = re.compile(r'^[\d.,]+$')
-
-
-def _strip_spaces(value: Any) -> str:
-    """ลดรูปแบบเดียวกับตอนวัดผล (ตัดช่องว่าง + ตัวพิมพ์เล็ก) ไว้เทียบค่าในโค้ด"""
-    return M.normalize(value, "strict")
-
-
-def postprocess_record(data: dict) -> dict:
-    """
-    เก็บกวาดค่าที่ LLM มักพลาดแบบเดิมซ้ำ ๆ ด้วยกฎที่ตายตัว
-
-    ทำในโค้ดเพราะเป็นกฎที่ไม่ต้องตีความ และ prompt สั่งแล้วไม่นิ่ง
-    ทุกข้อเป็นการ "ถอดค่าที่ผิดออก" ไม่ใช่การเดาค่าใหม่
-    """
-    if not isinstance(data, dict):
-        return data
-    head = data.get("header_detail")
-    td = data.get("transcript_detail")
-
-    if isinstance(head, dict):
-        # 1) คำนำหน้าติดกับชื่อ เช่น prename="นายบัณฑิตคอ3" -> prename="นาย", name="บัณฑิตคอ3..."
-        raw_pre = str(head.get("prename") or "").strip()
-        flat = _strip_spaces(raw_pre)
-        for title in PRENAMES:
-            if flat.startswith(title) and flat != title:
-                extra = raw_pre[len(raw_pre) - (len(flat) - len(title)):].strip()
-                head["prename"] = raw_pre[:len(raw_pre) - len(extra)].strip()
-                name = str(head.get("name") or "").strip()
-                if extra and not _strip_spaces(name).startswith(_strip_spaces(extra)):
-                    head["name"] = f"{extra} {name}".strip()
-                break
-
-        # 2) grad_reason ที่เป็น "N/A" ล้วน เฉลยเก็บเป็น null
-        #    รวมถึงกรณีคำว่า "maintain"/"รักษาสภาพ" หลุดมาจากภาคเรียน
-        #    ไม่ใช่เหตุผลจบการศึกษา
-        if (_strip_spaces(head.get("grad_reason")) in ("n/a", "na", "-")
-                or _is_maintain(str(head.get("grad_reason") or ""))):
-            head["grad_reason"] = None
-
-        # 3) major ซ้ำกับ program = โมเดลลอกมาใส่ (เอกสารชุดนี้ไม่มีช่องสาขาวิชาแยก)
-        if head.get("major") is not None and _strip_spaces(head.get("major")) == _strip_spaces(head.get("program")):
-            head["major"] = None
-
-    # 4) master_* เก็บข้อความผลสอบ (ผ่าน/pass) — ค่าที่เป็นตัวเลขคือหยิบเกรด
-    #    เฉลี่ยมาใส่ผิดช่อง ค่าที่เป็น "maintain"/"รักษาสภาพ" คือหลุดมาจาก
-    #    ภาคเรียนรักษาสภาพ ไม่ใช่ผลสอบจริง
-    if isinstance(td, dict):
-        subject_names = {
-            _strip_spaces(x.get("subject_name"))
-            for sem in (td.get("semesters") or []) if isinstance(sem, dict)
-            for x in (sem.get("subject") or []) if isinstance(x, dict)
-        } - {""}
-        for key in ("master_comprehensive", "master_thesis", "master_qualify"):
-            value = td.get(key)
-            if value is None:
-                continue
-            text = str(value).strip()
-            # ค่าที่ตรงกับชื่อวิชาในตาราง = ลอกมาจากรายวิชา ไม่ใช่ผลสอบของหลักสูตร
-            if (NUMERIC_RE.match(text) or _is_maintain(text)
-                    or _strip_spaces(text) in subject_names):
-                td[key] = None
     return data
 
 
@@ -1397,8 +1190,6 @@ def pipeline_vlm(pages: list[bytes], save_md: Path | None = None) -> dict:
     lang = detect_language("\n".join(ocr_parts))
     print(f"    ภาษาเอกสาร: {lang} -> แปลงปีด้วยโค้ด")
     data = convert_years(data, lang)
-    data = enforce_maintain(data)
-    data = postprocess_record(data)
     if isinstance(data, dict):
         data["_meta"] = {**(data.get("_meta") or {}), "detected_lang": lang}
     return data
@@ -1449,7 +1240,7 @@ def pipeline_vlm(pages: list[bytes], save_md: Path | None = None) -> dict:
 # ==============================================================================
 
 # เกรดที่ปรากฏได้ในใบแสดงผลการศึกษาของสถาบันในประเทศไทย
-VALID_GRADES = {
+VALID_GRADES = { 
     "a", "b+", "b", "c+", "c", "d+", "d", "f",      # เกรดที่คิดคะแนน
     "w",        # ถอนรายวิชา (withdrawn)
     "s", "u",   # ผ่าน / ไม่ผ่าน (satisfactory / unsatisfactory)
