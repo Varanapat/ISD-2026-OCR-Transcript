@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Transcript OCR Application</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 1000px; margin: 35px auto; padding: 0 18px; line-height: 1.5; }
+    form, section { padding: 16px; margin-top: 18px; background: #f4f4f4; }
+    button { padding: 9px 18px; margin-top: 12px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    th, td { border: 1px solid #bbb; padding: 7px; text-align: left; }
+    pre { white-space: pre-wrap; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <h1>Transcript OCR Application</h1>
+  <p>อัปโหลด Transcript แล้วระบบจะทำ preprocessing, OCR, postprocessing และแสดงค่าที่อ่านได้แต่ละส่วน</p>
+
+  <form id="upload-form">
+    <input id="file" type="file" accept=".pdf,.png,.jpg,.jpeg,.tif,.tiff" required>
+    <select id="preprocessing">
+      <option value="none">none (แนะนำสำหรับไฟล์สะอาด)</option>
+      <option value="light">light</option>
+      <option value="heavy">heavy</option>
+    </select>
+    <label><input id="include-markdown" type="checkbox"> แสดง OCR Markdown</label><br>
+    <button type="submit">อัปโหลดและอ่านข้อมูล</button>
+  </form>
+
+  <section><h2>สถานะ</h2><div id="status">รอไฟล์...</div></section>
+  <section><h2>ข้อมูลส่วนหัว</h2><pre id="header">-</pre></section>
+  <section><h2>รายวิชา</h2><div id="courses">-</div></section>
+  <section><h2>ข้อมูลส่วนท้าย</h2><pre id="footer">-</pre></section>
+  <section><h2>คำเตือนและ Postprocessing</h2><pre id="warnings">-</pre></section>
+  <section id="markdown-section" hidden><h2>OCR Markdown</h2><pre id="markdown"></pre></section>
+
+  <script>
+    const pretty = (value) => JSON.stringify(value, null, 2);
+    document.getElementById("upload-form").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const status = document.getElementById("status");
+      status.textContent = "กำลังอ่านเอกสาร อาจใช้เวลาหลายนาที...";
+      const body = new FormData();
+      body.append("file", document.getElementById("file").files[0]);
+      body.append("preprocessing", document.getElementById("preprocessing").value);
+      body.append("include_markdown", document.getElementById("include-markdown").checked);
+      try {
+        const response = await fetch("/api/transcript/extract", {method: "POST", body});
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.detail || "เกิดข้อผิดพลาด");
+        status.textContent = `${data.filename}: ${data.pages} หน้า, ${data.processing_seconds} วินาที`;
+        document.getElementById("header").textContent = pretty(data.header_detail);
+        document.getElementById("footer").textContent = pretty(data.footer_detail);
+        document.getElementById("warnings").textContent = pretty({
+          warnings: data.warnings, postprocessing_changes: data.postprocessing_changes
+        });
+
+        const container = document.getElementById("courses");
+        container.innerHTML = "";
+        for (const semester of (data.transcript_detail.semesters || [])) {
+          const title = document.createElement("h3");
+          title.textContent = `ปี ${semester.year} ภาค ${semester.sem_num}`;
+          container.appendChild(title);
+          const table = document.createElement("table");
+          table.innerHTML = "<tr><th>รหัส</th><th>ชื่อวิชา</th><th>หน่วยกิต</th><th>เกรด</th></tr>";
+          for (const subject of (semester.subject || [])) {
+            const row = table.insertRow();
+            for (const key of ["subject_id", "subject_name", "credit", "grade_earn"]) {
+              row.insertCell().textContent = subject[key] ?? "";
+            }
+          }
+          container.appendChild(table);
+        }
+        if (data.markdown) {
+          document.getElementById("markdown-section").hidden = false;
+          document.getElementById("markdown").textContent = data.markdown;
+        }
+      } catch (error) {
+        status.textContent = `ผิดพลาด: ${error.message}`;
+      }
+    });
+  </script>
+</body>
+</html>
