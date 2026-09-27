@@ -26,3 +26,7 @@ dataset/
 # เก็บไว้เฉพาะ work/summary/ ซึ่งเป็นตัวเลขสรุปผลล้วน
 work/*
 !work/summary/
+
+# ─── config ส่วนตัว (Lab 10) — ห้าม commit ตาม README ข้อ 6 ────────────
+**/.env
+!**/.env.example
