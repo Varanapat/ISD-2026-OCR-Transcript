@@ -6,21 +6,36 @@ from ocr_system.schemas import OCRLine
 
 
 class EnsembleOCREngine(BaseOCREngine):
-    name = "ensemble"
+    """PaddleOCR as the primary reader, Tesseract filling the bands it left blank.
 
-    def __init__(self, paddle_lang: str = "th", tesseract_languages: str = "tha+eng"):
-        self.engines = [
-            PaddleOCREngine(lang=paddle_lang),
-            TesseractOCREngine(languages=tesseract_languages),
-        ]
+    The two engines fail in different places. PaddleOCR reads the grade table well but
+    must downscale a tall page before its detector will run, and at that size it misses
+    the largest heading and the signature block entirely. Tesseract reads those, needs
+    no downscale, and is an order of magnitude faster -- but it drops Thai vowels and
+    scatters spaces inside words, so it is the weaker reader wherever Paddle sees text.
+
+    Hence the rule: keep every Paddle line, and add a Tesseract line only where no
+    Paddle line occupies that horizontal band. Taking the better of two readings of the
+    SAME line would mix the engines' different row layouts inside the subject table and
+    leave the extractor parsing a shape neither engine produces.
+    """
+
+    name = "ensemble"
+    # A Tesseract line counts as already covered when this much of its height overlaps
+    # some Paddle line. Well under half, because a band Paddle read at all is a band
+    # where its reading should win.
+    COVERAGE = 0.35
+
+    def __init__(self, paddle_lang: str = "th", tesseract_languages: str = "tha+eng",
+                 tile: bool = False):
+        self.paddle = PaddleOCREngine(lang=paddle_lang, tile=tile)
+        self.tesseract = TesseractOCREngine(languages=tesseract_languages)
+        self.engines = [self.paddle, self.tesseract]
 
     def recognize(self, image: np.ndarray, page: int | None = None) -> list[OCRLine]:
-        paddle_result = self.engines[0].recognize(image, page=page)
-        tesseract_result = self.engines[1].recognize(image, page=page)
-
         return self.merge(
-            paddle_result,
-            tesseract_result=tesseract_result,
+            self.paddle.recognize(image, page=page),
+            self.tesseract.recognize(image, page=page),
         )
 
     def merge(
@@ -29,35 +44,40 @@ class EnsembleOCREngine(BaseOCREngine):
         tesseract_result: list[OCRLine] | None = None,
         trocr_result: list[OCRLine] | None = None,
     ) -> list[OCRLine]:
-        candidates: list[OCRLine] = []
-        candidates.extend(paddle_result or [])
-        candidates.extend(tesseract_result or [])
-        candidates.extend(trocr_result or [])
+        primary = [l for l in (paddle_result or []) if l.text.strip()]
+        spans = [_y_span(l.box) for l in primary]
+        spans = [s for s in spans if s]
 
-        # Simple production-safe default: keep all lines, sorted top-to-bottom if boxes exist.
-        # Dedup exact repeated text while preserving stronger confidence.
-        best: dict[str, OCRLine] = {}
-        for line in candidates:
-            key = line.text.strip()
-            if not key:
+        filled: list[OCRLine] = list(primary)
+        for line in (tesseract_result or []) + (trocr_result or []):
+            if not line.text.strip():
                 continue
-            if key not in best:
-                best[key] = line
-            else:
-                old_conf = best[key].confidence or 0.0
-                new_conf = line.confidence or 0.0
-                if new_conf > old_conf:
-                    best[key] = line
+            span = _y_span(line.box)
+            if span is None or _covered(span, spans, self.COVERAGE):
+                continue
+            filled.append(line)
 
-        lines = list(best.values())
-        lines.sort(key=lambda x: _box_top(x.box))
-        return lines
+        filled.sort(key=lambda l: (_y_span(l.box) or (10 ** 9, 10 ** 9))[0])
+        return filled
 
 
-def _box_top(box) -> float:
+def _y_span(box) -> tuple[float, float] | None:
     if not box:
-        return 10**9
+        return None
     try:
-        return min(float(p[1]) for p in box)
-    except Exception:
-        return 10**9
+        ys = [float(p[1]) for p in box]
+    except (TypeError, ValueError, IndexError):
+        return None
+    return (min(ys), max(ys))
+
+
+def _covered(span: tuple[float, float], spans: list[tuple[float, float]], threshold: float) -> bool:
+    top, bottom = span
+    height = bottom - top
+    if height <= 0:
+        return False
+    for other_top, other_bottom in spans:
+        overlap = min(bottom, other_bottom) - max(top, other_top)
+        if overlap > 0 and overlap / height >= threshold:
+            return True
+    return False

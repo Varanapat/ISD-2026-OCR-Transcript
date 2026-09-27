@@ -1,0 +1,484 @@
+{
+  "num_documents": 2,
+  "num_pages_evaluated": 12,
+  "page_level": [
+    {
+      "document": "71010001",
+      "language": "th",
+      "category": "original",
+      "image": "data/augmented/71010001/_source_pages/71010001_page_001.jpg",
+      "total_fields": 93,
+      "matched_fields": 82,
+      "accuracy": 0.8817204301075269,
+      "non_null_accuracy": 0.8533333333333334,
+      "precision": 0.8817204301075269,
+      "f1": 0.8817204301075269,
+      "num_extra_fields": 0
+    },
+    {
+      "document": "71010001",
+      "language": "th",
+      "category": "rotate",
+      "image": "data/augmented/71010001/page_001_rotate.jpg",
+      "total_fields": 93,
+      "matched_fields": 85,
+      "accuracy": 0.9139784946236559,
+      "non_null_accuracy": 0.8933333333333333,
+      "precision": 0.9139784946236559,
+      "f1": 0.9139784946236559,
+      "num_extra_fields": 0
+    },
+    {
+      "document": "71010001",
+      "language": "th",
+      "category": "skew",
+      "image": "data/augmented/71010001/page_001_skew.jpg",
+      "total_fields": 93,
+      "matched_fields": 83,
+      "accuracy": 0.8924731182795699,
+      "non_null_accuracy": 0.8666666666666667,
+      "precision": 0.8924731182795699,
+      "f1": 0.8924731182795699,
+      "num_extra_fields": 0
+    },
+    {
+      "document": "71010001",
+      "language": "th",
+      "category": "blur",
+      "image": "data/augmented/71010001/page_001_blur.jpg",
+      "total_fields": 93,
+      "matched_fields": 41,
+      "accuracy": 0.44086021505376344,
+      "non_null_accuracy": 0.4,
+      "precision": 0.5256410256410257,
+      "f1": 0.4795321637426901,
+      "num_extra_fields": 20
+    },
+    {
+      "document": "71010001",
+      "language": "th",
+      "category": "noise",
+      "image": "data/augmented/71010001/page_001_noise.jpg",
+      "total_fields": 93,
+      "matched_fields": 83,
+      "accuracy": 0.8924731182795699,
+      "non_null_accuracy": 0.8666666666666667,
+      "precision": 0.8924731182795699,
+      "f1": 0.8924731182795699,
+      "num_extra_fields": 0
+    },
+    {
+      "document": "71010001",
+      "language": "th",
+      "category": "combined",
+      "image": "data/augmented/71010001/page_001_combined.jpg",
+      "total_fields": 93,
+      "matched_fields": 10,
+      "accuracy": 0.10752688172043011,
+      "non_null_accuracy": 0.08,
+      "precision": 0.43478260869565216,
+      "f1": 0.1724137931034483,
+      "num_extra_fields": 0
+    },
+    {
+      "document": "71010005",
+      "language": "th",
+      "category": "original",
+      "image": "data/augmented/71010005/_source_pages/71010005_page_001.jpg",
+      "total_fields": 58,
+      "matched_fields": 50,
+      "accuracy": 0.8620689655172413,
+      "non_null_accuracy": 0.8297872340425532,
+      "precision": 0.8620689655172413,
+      "f1": 0.8620689655172413,
+      "num_extra_fields": 0
+    },
+    {
+      "document": "71010005",
+      "language": "th",
+      "category": "rotate",
+      "image": "data/augmented/71010005/page_001_rotate.jpg",
+      "total_fields": 58,
+      "matched_fields": 42,
+      "accuracy": 0.7241379310344828,
+      "non_null_accuracy": 0.6595744680851063,
+      "precision": 0.7241379310344828,
+      "f1": 0.7241379310344829,
+      "num_extra_fields": 0
+    },
+    {
+      "document": "71010005",
+      "language": "th",
+      "category": "skew",
+      "image": "data/augmented/71010005/page_001_skew.jpg",
+      "total_fields": 58,
+      "matched_fields": 49,
+      "accuracy": 0.8448275862068966,
+      "non_null_accuracy": 0.8085106382978723,
+      "precision": 0.8448275862068966,
+      "f1": 0.8448275862068967,
+      "num_extra_fields": 0
+    },
+    {
+      "document": "71010005",
+      "language": "th",
+      "category": "blur",
+      "image": "data/augmented/71010005/page_001_blur.jpg",
+      "total_fields": 58,
+      "matched_fields": 5,
+      "accuracy": 0.08620689655172414,
+      "non_null_accuracy": 0.02127659574468085,
+      "precision": 0.21739130434782608,
+      "f1": 0.12345679012345678,
+      "num_extra_fields": 0
+    },
+    {
+      "document": "71010005",
+      "language": "th",
+      "category": "noise",
+      "image": "data/augmented/71010005/page_001_noise.jpg",
+      "total_fields": 58,
+      "matched_fields": 48,
+      "accuracy": 0.8275862068965517,
+      "non_null_accuracy": 0.7872340425531915,
+      "precision": 0.8275862068965517,
+      "f1": 0.8275862068965517,
+      "num_extra_fields": 0
+    },
+    {
+      "document": "71010005",
+      "language": "th",
+      "category": "combined",
+      "image": "data/augmented/71010005/page_001_combined.jpg",
+      "total_fields": 58,
+      "matched_fields": 5,
+      "accuracy": 0.08620689655172414,
+      "non_null_accuracy": 0.02127659574468085,
+      "precision": 0.21739130434782608,
+      "f1": 0.12345679012345678,
+      "num_extra_fields": 0
+    }
+  ],
+  "category_level": [
+    {
+      "category": "blur",
+      "language": "all",
+      "num_pages": 2,
+      "avg_accuracy": 0.2635,
+      "avg_non_null_accuracy": 0.2106,
+      "avg_precision": 0.3715,
+      "avg_f1": 0.3015,
+      "avg_extra_fields": 10.0
+    },
+    {
+      "category": "combined",
+      "language": "all",
+      "num_pages": 2,
+      "avg_accuracy": 0.0969,
+      "avg_non_null_accuracy": 0.0506,
+      "avg_precision": 0.3261,
+      "avg_f1": 0.1479,
+      "avg_extra_fields": 0.0
+    },
+    {
+      "category": "noise",
+      "language": "all",
+      "num_pages": 2,
+      "avg_accuracy": 0.86,
+      "avg_non_null_accuracy": 0.827,
+      "avg_precision": 0.86,
+      "avg_f1": 0.86,
+      "avg_extra_fields": 0.0
+    },
+    {
+      "category": "original",
+      "language": "all",
+      "num_pages": 2,
+      "avg_accuracy": 0.8719,
+      "avg_non_null_accuracy": 0.8416,
+      "avg_precision": 0.8719,
+      "avg_f1": 0.8719,
+      "avg_extra_fields": 0.0
+    },
+    {
+      "category": "rotate",
+      "language": "all",
+      "num_pages": 2,
+      "avg_accuracy": 0.8191,
+      "avg_non_null_accuracy": 0.7765,
+      "avg_precision": 0.8191,
+      "avg_f1": 0.8191,
+      "avg_extra_fields": 0.0
+    },
+    {
+      "category": "skew",
+      "language": "all",
+      "num_pages": 2,
+      "avg_accuracy": 0.8687,
+      "avg_non_null_accuracy": 0.8376,
+      "avg_precision": 0.8687,
+      "avg_f1": 0.8687,
+      "avg_extra_fields": 0.0
+    },
+    {
+      "category": "blur",
+      "language": "th",
+      "num_pages": 2,
+      "avg_accuracy": 0.2635,
+      "avg_non_null_accuracy": 0.2106,
+      "avg_precision": 0.3715,
+      "avg_f1": 0.3015,
+      "avg_extra_fields": 10.0
+    },
+    {
+      "category": "combined",
+      "language": "th",
+      "num_pages": 2,
+      "avg_accuracy": 0.0969,
+      "avg_non_null_accuracy": 0.0506,
+      "avg_precision": 0.3261,
+      "avg_f1": 0.1479,
+      "avg_extra_fields": 0.0
+    },
+    {
+      "category": "noise",
+      "language": "th",
+      "num_pages": 2,
+      "avg_accuracy": 0.86,
+      "avg_non_null_accuracy": 0.827,
+      "avg_precision": 0.86,
+      "avg_f1": 0.86,
+      "avg_extra_fields": 0.0
+    },
+    {
+      "category": "original",
+      "language": "th",
+      "num_pages": 2,
+      "avg_accuracy": 0.8719,
+      "avg_non_null_accuracy": 0.8416,
+      "avg_precision": 0.8719,
+      "avg_f1": 0.8719,
+      "avg_extra_fields": 0.0
+    },
+    {
+      "category": "rotate",
+      "language": "th",
+      "num_pages": 2,
+      "avg_accuracy": 0.8191,
+      "avg_non_null_accuracy": 0.7765,
+      "avg_precision": 0.8191,
+      "avg_f1": 0.8191,
+      "avg_extra_fields": 0.0
+    },
+    {
+      "category": "skew",
+      "language": "th",
+      "num_pages": 2,
+      "avg_accuracy": 0.8687,
+      "avg_non_null_accuracy": 0.8376,
+      "avg_precision": 0.8687,
+      "avg_f1": 0.8687,
+      "avg_extra_fields": 0.0
+    }
+  ],
+  "field_level": [
+    {
+      "field": "transcript_detail.semesters[].subject[].subject_name",
+      "fail_count": 54,
+      "total_count": 108,
+      "fail_rate": 0.5
+    },
+    {
+      "field": "transcript_detail.semesters[].subject[].grade_earn",
+      "fail_count": 36,
+      "total_count": 108,
+      "fail_rate": 0.3333
+    },
+    {
+      "field": "transcript_detail.semesters[].subject[].credit",
+      "fail_count": 35,
+      "total_count": 108,
+      "fail_rate": 0.3241
+    },
+    {
+      "field": "transcript_detail.semesters[].subject[].subject_id",
+      "fail_count": 30,
+      "total_count": 108,
+      "fail_rate": 0.2778
+    },
+    {
+      "field": "transcript_detail.semesters[].subject[].type",
+      "fail_count": 30,
+      "total_count": 108,
+      "fail_rate": 0.2778
+    },
+    {
+      "field": "header_detail.uni_name",
+      "fail_count": 12,
+      "total_count": 12,
+      "fail_rate": 1.0
+    },
+    {
+      "field": "footer_detail.updated_at",
+      "fail_count": 12,
+      "total_count": 12,
+      "fail_rate": 1.0
+    },
+    {
+      "field": "footer_detail.by.by_signature",
+      "fail_count": 11,
+      "total_count": 12,
+      "fail_rate": 0.9167
+    },
+    {
+      "field": "footer_detail.by.by_position",
+      "fail_count": 11,
+      "total_count": 12,
+      "fail_rate": 0.9167
+    },
+    {
+      "field": "footer_detail.by.by_reg",
+      "fail_count": 11,
+      "total_count": 12,
+      "fail_rate": 0.9167
+    },
+    {
+      "field": "header_detail.uni_address",
+      "fail_count": 10,
+      "total_count": 12,
+      "fail_rate": 0.8333
+    },
+    {
+      "field": "header_detail.name",
+      "fail_count": 7,
+      "total_count": 12,
+      "fail_rate": 0.5833
+    },
+    {
+      "field": "header_detail.program",
+      "fail_count": 6,
+      "total_count": 12,
+      "fail_rate": 0.5
+    },
+    {
+      "field": "transcript_detail.semesters[].GPA",
+      "fail_count": 6,
+      "total_count": 18,
+      "fail_rate": 0.3333
+    },
+    {
+      "field": "header_detail.faculty_name",
+      "fail_count": 5,
+      "total_count": 12,
+      "fail_rate": 0.4167
+    },
+    {
+      "field": "transcript_detail.semesters[].year",
+      "fail_count": 5,
+      "total_count": 18,
+      "fail_rate": 0.2778
+    },
+    {
+      "field": "transcript_detail.semesters[].sem_num",
+      "fail_count": 5,
+      "total_count": 18,
+      "fail_rate": 0.2778
+    },
+    {
+      "field": "transcript_detail.semesters[].GPS",
+      "fail_count": 5,
+      "total_count": 18,
+      "fail_rate": 0.2778
+    },
+    {
+      "field": "transcript_detail.semesters[].pass_reason",
+      "fail_count": 5,
+      "total_count": 18,
+      "fail_rate": 0.2778
+    },
+    {
+      "field": "transcript_detail.cumulative_gpa",
+      "fail_count": 5,
+      "total_count": 12,
+      "fail_rate": 0.4167
+    },
+    {
+      "field": "header_detail.degree",
+      "fail_count": 4,
+      "total_count": 12,
+      "fail_rate": 0.3333
+    },
+    {
+      "field": "transcript_detail.total_credits_earned",
+      "fail_count": 4,
+      "total_count": 12,
+      "fail_rate": 0.3333
+    },
+    {
+      "field": "header_detail.admis_date",
+      "fail_count": 3,
+      "total_count": 12,
+      "fail_rate": 0.25
+    },
+    {
+      "field": "header_detail.grad_reason",
+      "fail_count": 3,
+      "total_count": 12,
+      "fail_rate": 0.25
+    },
+    {
+      "field": "header_detail.student_id",
+      "fail_count": 2,
+      "total_count": 12,
+      "fail_rate": 0.1667
+    },
+    {
+      "field": "header_detail.prename",
+      "fail_count": 2,
+      "total_count": 12,
+      "fail_rate": 0.1667
+    },
+    {
+      "field": "header_detail.date_of_birth",
+      "fail_count": 2,
+      "total_count": 12,
+      "fail_rate": 0.1667
+    },
+    {
+      "field": "header_detail.grad_date",
+      "fail_count": 2,
+      "total_count": 12,
+      "fail_rate": 0.1667
+    },
+    {
+      "field": "header_detail.major",
+      "fail_count": 0,
+      "total_count": 12,
+      "fail_rate": 0.0
+    },
+    {
+      "field": "header_detail.honor",
+      "fail_count": 0,
+      "total_count": 12,
+      "fail_rate": 0.0
+    },
+    {
+      "field": "transcript_detail.master_comprehensive",
+      "fail_count": 0,
+      "total_count": 12,
+      "fail_rate": 0.0
+    },
+    {
+      "field": "transcript_detail.master_thesis",
+      "fail_count": 0,
+      "total_count": 12,
+      "fail_rate": 0.0
+    },
+    {
+      "field": "transcript_detail.master_qualify",
+      "fail_count": 0,
+      "total_count": 12,
+      "fail_rate": 0.0
+    }
+  ]
+}

@@ -1,0 +1,194 @@
+{
+  "header_detail": {
+    "uni_name": "จม6าา6า6นกคาเนททtร60า๘",
+    "uni_address": "เลขที่1ซอยฉลองกรุง1เขตลาดกระบังกรุ่งเทพฯ10520",
+    "student_id": "71010013",
+    "faculty_name": "คณะวิศวกรรมศาสตร์",
+    "prename": "นาย",
+    "name": "วศ13วิศวกรรมศาสตร์13",
+    "date_of_birth": "2000-01-26",
+    "admis_date": "2018-08-06",
+    "grad_date": null,
+    "grad_reason": null,
+    "degree": "วิทยาศาสตรบัณฑิต",
+    "major": null,
+    "program": "การจัดการวิศวกรรมและเทคโนโลยี(หลักสูตรนานาชาติ)",
+    "honor": 0
+  },
+  "transcript_detail": {
+    "semesters": [
+      {
+        "year": 2561,
+        "sem_num": 1,
+        "GPA": "2.53",
+        "GPS": null,
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13006006",
+            "subject_name": "พีชคณิตเซิงเส้น",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c+"
+          }
+        ]
+      },
+      {
+        "year": 2564,
+        "sem_num": 1,
+        "GPA": "2.00",
+        "GPS": "2.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13006007",
+            "subject_name": "แคลคูลัส1",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "d"
+          },
+          {
+            "subject_id": "01356333",
+            "subject_name": "qualityengineering",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "c"
+          },
+          {
+            "subject_id": "13006109",
+            "subject_name": "programmingformanagement",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "d"
+          },
+          {
+            "subject_id": "13026020",
+            "subject_name": "การจัดการการผลิตและสินค้าคงคลัง",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "a"
+          },
+          {
+            "subject_id": "13006204",
+            "subject_name": "ภาษาอังกฤษพื้นฐาน1",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b"
+          },
+          {
+            "subject_id": "13026023",
+            "subject_name": "การวางแผนเลือกที่ตั้งโรงงานและจัดแผนผัง",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "a"
+          },
+          {
+            "subject_id": "13006301",
+            "subject_name": "ตรรกศาสตร์เบืองต้น",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b"
+          },
+          {
+            "subject_id": "13026031",
+            "subject_name": "การสื่อสารข้อมูลธุรกิจและการเครือข่าย",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "b+"
+          },
+          {
+            "subject_id": "13006402",
+            "subject_name": "เศรษฐศาสตร์เบื่องตน",
+            "type": null,
+            "credit": 3,
+            "grade_earn": "d+"
+          },
+          {
+            "subject_id": "13026038",
+            "subject_name": "สัมมนา",
+            "type": null,
+            "credit": 1,
+            "grade_earn": "a"
+          }
+        ]
+      },
+      {
+        "year": 2561,
+        "sem_num": 2,
+        "GPA": null,
+        "GPS": null,
+        "pass_reason": null,
+        "subject": []
+      },
+      {
+        "year": 2564,
+        "sem_num": 2,
+        "GPA": "2.68",
+        "GPS": "4.00",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13026041",
+            "subject_name": "สหกิจศึกษา",
+            "type": null,
+            "credit": 6,
+            "grade_earn": "a"
+          }
+        ]
+      },
+      {
+        "year": 2565,
+        "sem_num": 1,
+        "GPA": "2.17",
+        "GPS": "2.33",
+        "pass_reason": null,
+        "subject": []
+      },
+      {
+        "year": 2562,
+        "sem_num": 1,
+        "GPA": "2.25",
+        "GPS": "2.42",
+        "pass_reason": null,
+        "subject": []
+      },
+      {
+        "year": 2562,
+        "sem_num": 2,
+        "GPA": "2.26",
+        "GPS": "2.29",
+        "pass_reason": null,
+        "subject": []
+      },
+      {
+        "year": 2563,
+        "sem_num": 1,
+        "GPA": "2.42",
+        "GPS": "3.00",
+        "pass_reason": null,
+        "subject": []
+      },
+      {
+        "year": 2563,
+        "sem_num": 2,
+        "GPA": null,
+        "GPS": null,
+        "pass_reason": null,
+        "subject": []
+      }
+    ],
+    "master_comprehensive": null,
+    "master_thesis": null,
+    "master_qualify": null,
+    "total_credits_earned": 133,
+    "cumulative_gpa": "2.68"
+  },
+  "footer_detail": {
+    "updated_at": "2025-01-17",
+    "by": {
+      "by_signature": null,
+      "by_position": null,
+      "by_reg": null
+    }
+  }
+}

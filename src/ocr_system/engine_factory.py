@@ -8,11 +8,12 @@ from .engines.ensemble_engine import EnsembleOCREngine
 
 def build_engine(config: OCRConfig) -> BaseOCREngine:
     if config.engine == "paddle":
-        return PaddleOCREngine(lang=config.paddle_lang)
+        return PaddleOCREngine(lang=config.paddle_lang, tile=config.tile)
     if config.engine == "tesseract":
         return TesseractOCREngine(languages=config.languages)
     if config.engine == "trocr":
         return TrOCREngine(model_name=config.trocr_model_name, device=config.device)
     if config.engine == "ensemble":
-        return EnsembleOCREngine(paddle_lang=config.paddle_lang, tesseract_languages=config.languages)
+        return EnsembleOCREngine(paddle_lang=config.paddle_lang, tesseract_languages=config.languages,
+                                 tile=config.tile)
     raise ValueError(f"Unknown OCR engine: {config.engine}")

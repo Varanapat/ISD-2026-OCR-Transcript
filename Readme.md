@@ -227,6 +227,7 @@ Ensemble คือการใช้หลาย OCR engine ช่วยกั�
 
 ```bash
 python -m ocr_system.cli ocr data/input/sample.pdf --engine ensemble
+python -m ocr_system.cli ocr data/input/71010005.pdf --engine ensemble
 ```
 
 หลังรันเสร็จ ผลลัพธ์จะอยู่ในโฟลเดอร์:
@@ -256,7 +257,7 @@ outputs/pages/      ภาพแต่ละหน้าที่แปลงจ
 เหมาะกับเอกสารทั่วไป โดยเฉพาะภาษาไทยและอังกฤษปนกัน
 ```bash
 python -m ocr_system.cli ocr data/input/sample.jpg --engine paddle --paddle-lang th
-python3.11 -m ocr_system.cli ocr data/input/input/71010001.pdf --engine paddle --paddle-lang th
+python3.11 -m ocr_system.cli ocr data/input/71010013.pdf --engine paddle --paddle-lang th
 ```
 ถ้าเอกสารเป็นอังกฤษล้วน อาจลองใช้:
 ```bash
@@ -286,6 +287,7 @@ TrOCR เป็นโมเดล OCR จาก Transformer
 ในโปรเจกต์นี้ใช้เป็น fallback สำหรับข้อความสั้น ๆ หรือภาพที่ crop เป็นบรรทัดแล้ว
 ```bash
 python -m ocr_system.cli ocr data/input/sample.jpg --engine trocr --device cpu
+python -m ocr_system.cli ocr data/input/71020001.jpg --engine trocr --device cpu
 ```
 ถ้ามี GPU และติดตั้ง PyTorch แบบ CUDA แล้ว สามารถใช้:
 ```bash
@@ -299,6 +301,7 @@ Evaluation คือการวัดว่า OCR อ่านถูกแค�
 สร้างไฟล์ ground truth เช่น:
 ```text
 data/ground_truth/example_ground_truth.json
+data/ground_truth/Json_71010001_th.json
 ```
 
 ตัวอย่างเนื้อหา:
@@ -311,11 +314,12 @@ data/ground_truth/example_ground_truth.json
 
 จากนั้นรัน OCR ก่อน:
 ```bash
+python -m ocr_system.cli ocr data/input/72120002.pdf --engine ensemble
 python -m ocr_system.cli ocr data/input/sample.pdf --engine ensemble
 ```
 แล้ว evaluate:
 ```bash
-python3.11 -m ocr_system.cli evaluate data/ground_truth/ground_truth/Json_71010001_th.json outputs/71010001_fields.json
+python3.11 -m ocr_system.cli evaluate data/ground_truth/Json_72120002_en.json outputs/72120002_fields.json
 ```
 
 Metric ที่ได้:

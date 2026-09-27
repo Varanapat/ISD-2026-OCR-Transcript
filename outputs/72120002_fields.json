@@ -1,0 +1,34 @@
+{
+  "header_detail": {
+    "uni_name": "program:businessadministration(internationalprogram)",
+    "uni_address": "14036968",
+    "student_id": null,
+    "faculty_name": null,
+    "prename": null,
+    "name": null,
+    "date_of_birth": null,
+    "admis_date": null,
+    "grad_date": null,
+    "grad_reason": null,
+    "degree": null,
+    "major": null,
+    "program": null,
+    "honor": 0
+  },
+  "transcript_detail": {
+    "semesters": [],
+    "master_comprehensive": null,
+    "master_thesis": null,
+    "master_qualify": null,
+    "total_credits_earned": null,
+    "cumulative_gpa": null
+  },
+  "footer_detail": {
+    "updated_at": null,
+    "by": {
+      "by_signature": null,
+      "by_position": null,
+      "by_reg": null
+    }
+  }
+}

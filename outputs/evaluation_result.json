@@ -1,61 +1,750 @@
 {
   "total_fields": 93,
-  "matched_fields": 82,
-  "accuracy": 0.8817204301075269,
-  "mismatches": [
+  "matched_fields": 19,
+  "fields": [
     {
       "field": "header_detail.uni_name",
-      "ground_truth": "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
-      "prediction": "1๒ยง6าา6t61rาเนท0186ก0า๘๕"
+      "match": false
     },
     {
       "field": "header_detail.uni_address",
-      "ground_truth": "เลขที่1ซอยฉลองกรุง1เขตลาดกระบังกรุงเทพฯ10520",
-      "prediction": "เลขที1ซอยฉลองกรุง1เขตลาดกระบังกรุงเทพฯ10520"
+      "match": false
+    },
+    {
+      "field": "header_detail.student_id",
+      "match": false
     },
     {
       "field": "header_detail.faculty_name",
-      "ground_truth": "คณะวิศวกรรมศาสตร์",
-      "prediction": "คณะวิศวกรรมศาสตร"
+      "match": false
+    },
+    {
+      "field": "header_detail.prename",
+      "match": false
+    },
+    {
+      "field": "header_detail.name",
+      "match": false
+    },
+    {
+      "field": "header_detail.date_of_birth",
+      "match": false
+    },
+    {
+      "field": "header_detail.admis_date",
+      "match": false
+    },
+    {
+      "field": "header_detail.grad_date",
+      "match": false
+    },
+    {
+      "field": "header_detail.grad_reason",
+      "match": false
+    },
+    {
+      "field": "header_detail.degree",
+      "match": false
+    },
+    {
+      "field": "header_detail.major",
+      "match": true
+    },
+    {
+      "field": "header_detail.program",
+      "match": false
+    },
+    {
+      "field": "header_detail.honor",
+      "match": true
+    },
+    {
+      "field": "transcript_detail.semesters[0].year",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[0].sem_num",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[0].GPA",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[0].GPS",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[0].pass_reason",
+      "match": true
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[0].subject_id",
+      "match": false
     },
     {
       "field": "transcript_detail.semesters[0].subject[0].subject_name",
-      "ground_truth": "พีชคณิตเชิงเส้น",
-      "prediction": "พิชคณิตเชิงเส้น"
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[0].type",
+      "match": true
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[0].credit",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[0].grade_earn",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[1].subject_id",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[1].subject_name",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[1].type",
+      "match": true
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[1].credit",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[1].grade_earn",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[2].subject_id",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[2].subject_name",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[2].type",
+      "match": true
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[2].credit",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[2].grade_earn",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[3].subject_id",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[3].subject_name",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[3].type",
+      "match": true
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[3].credit",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[3].grade_earn",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[4].subject_id",
+      "match": false
     },
     {
       "field": "transcript_detail.semesters[0].subject[4].subject_name",
-      "ground_truth": "ตรรกศาสตร์เบื้องต้น",
-      "prediction": "ตรรกศาสตร์เบืองต้น"
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[4].type",
+      "match": true
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[4].credit",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[4].grade_earn",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[5].subject_id",
+      "match": false
     },
     {
       "field": "transcript_detail.semesters[0].subject[5].subject_name",
-      "ground_truth": "เศรษฐศาสตร์เบื้องต้น",
-      "prediction": "เศรษฐศาสตร์เบืองต้น"
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[5].type",
+      "match": true
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[5].credit",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[5].grade_earn",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[1].year",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[1].sem_num",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[1].GPA",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[1].GPS",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[1].pass_reason",
+      "match": true
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[0].subject_id",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[0].subject_name",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[0].type",
+      "match": true
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[0].credit",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[0].grade_earn",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[1].subject_id",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[1].subject_name",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[1].type",
+      "match": true
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[1].credit",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[1].grade_earn",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[2].subject_id",
+      "match": false
     },
     {
       "field": "transcript_detail.semesters[1].subject[2].subject_name",
-      "ground_truth": "ภาษาอังกฤษพื้นฐาน2",
-      "prediction": "ภาษาอังกฤษพืนฐาน2"
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[2].type",
+      "match": true
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[2].credit",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[2].grade_earn",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[3].subject_id",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[3].subject_name",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[3].type",
+      "match": true
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[3].credit",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[3].grade_earn",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[4].subject_id",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[4].subject_name",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[4].type",
+      "match": true
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[4].credit",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[4].grade_earn",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[5].subject_id",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[5].subject_name",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[5].type",
+      "match": true
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[5].credit",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[5].grade_earn",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.master_comprehensive",
+      "match": true
+    },
+    {
+      "field": "transcript_detail.master_thesis",
+      "match": true
+    },
+    {
+      "field": "transcript_detail.master_qualify",
+      "match": true
+    },
+    {
+      "field": "transcript_detail.total_credits_earned",
+      "match": false
+    },
+    {
+      "field": "transcript_detail.cumulative_gpa",
+      "match": false
+    },
+    {
+      "field": "footer_detail.updated_at",
+      "match": false
+    },
+    {
+      "field": "footer_detail.by.by_signature",
+      "match": false
+    },
+    {
+      "field": "footer_detail.by.by_position",
+      "match": false
+    },
+    {
+      "field": "footer_detail.by.by_reg",
+      "match": false
+    }
+  ],
+  "accuracy": 0.20430107526881722,
+  "mismatches": [
+    {
+      "field": "header_detail.uni_name",
+      "ground_truth": "kingmongkut'sinstituteoftechnologyladkrabang",
+      "prediction": "program:businessadministration(internationalprogram)"
+    },
+    {
+      "field": "header_detail.uni_address",
+      "ground_truth": "chalongkrungroad,ladkrabang,bangkok10520,thailand",
+      "prediction": "14036968"
+    },
+    {
+      "field": "header_detail.student_id",
+      "ground_truth": "72120002",
+      "prediction": null
+    },
+    {
+      "field": "header_detail.faculty_name",
+      "ground_truth": "kmitlbusinessschool",
+      "prediction": null
+    },
+    {
+      "field": "header_detail.prename",
+      "ground_truth": "miss",
+      "prediction": null
+    },
+    {
+      "field": "header_detail.name",
+      "ground_truth": "kbs2kmitlbusinessschool2",
+      "prediction": null
+    },
+    {
+      "field": "header_detail.date_of_birth",
+      "ground_truth": "2000-07-06",
+      "prediction": null
+    },
+    {
+      "field": "header_detail.admis_date",
+      "ground_truth": "2019-08-05",
+      "prediction": null
+    },
+    {
+      "field": "header_detail.grad_date",
+      "ground_truth": "0000-00-00",
+      "prediction": null
+    },
+    {
+      "field": "header_detail.grad_reason",
+      "ground_truth": "n/a(retiredinsemester2/2019)",
+      "prediction": null
+    },
+    {
+      "field": "header_detail.degree",
+      "ground_truth": "bachelorofbusinessadministration",
+      "prediction": null
+    },
+    {
+      "field": "header_detail.program",
+      "ground_truth": "businessadministration(internationalprogram)",
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[0].year",
+      "ground_truth": 2562,
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[0].sem_num",
+      "ground_truth": 1,
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[0].GPA",
+      "ground_truth": "1.25",
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[0].GPS",
+      "ground_truth": "1.25",
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[0].subject_id",
+      "ground_truth": "14036110",
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[0].subject_name",
+      "ground_truth": "principlesofeconomics",
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[0].credit",
+      "ground_truth": 3,
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[0].grade_earn",
+      "ground_truth": "d",
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[1].subject_id",
+      "ground_truth": "14036119",
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[1].subject_name",
+      "ground_truth": "fundamentalsofmanagingtechnology",
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[1].credit",
+      "ground_truth": 3,
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[1].grade_earn",
+      "ground_truth": "d+",
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[2].subject_id",
+      "ground_truth": "14036906",
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[2].subject_name",
+      "ground_truth": "computerindailylife",
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[2].credit",
+      "ground_truth": 3,
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[2].grade_earn",
+      "ground_truth": "d+",
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[3].subject_id",
+      "ground_truth": "14036923",
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[3].subject_name",
+      "ground_truth": "generalbusiness",
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[3].credit",
+      "ground_truth": 3,
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[3].grade_earn",
+      "ground_truth": "d",
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[4].subject_id",
+      "ground_truth": "14036946",
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[4].subject_name",
+      "ground_truth": "theworldtoday",
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[4].credit",
+      "ground_truth": 3,
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[4].grade_earn",
+      "ground_truth": "d+",
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[5].subject_id",
+      "ground_truth": "14036964",
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[5].subject_name",
+      "ground_truth": "englishforbusiness",
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[5].credit",
+      "ground_truth": 3,
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[0].subject[5].grade_earn",
+      "ground_truth": "d",
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[1].year",
+      "ground_truth": 2562,
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[1].sem_num",
+      "ground_truth": 2,
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[1].GPA",
+      "ground_truth": "1.00",
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[1].GPS",
+      "ground_truth": "0.75",
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[0].subject_id",
+      "ground_truth": "14036104",
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[0].subject_name",
+      "ground_truth": "internationalmarketingmanagement",
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[0].credit",
+      "ground_truth": 3,
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[0].grade_earn",
+      "ground_truth": "f",
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[1].subject_id",
+      "ground_truth": "14036111",
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[1].subject_name",
+      "ground_truth": "managerialeconomics",
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[1].credit",
+      "ground_truth": 3,
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[1].grade_earn",
+      "ground_truth": "f",
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[2].subject_id",
+      "ground_truth": "14036112",
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[2].subject_name",
+      "ground_truth": "principlesofmanagement",
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[2].credit",
+      "ground_truth": 3,
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[2].grade_earn",
+      "ground_truth": "d+",
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[3].subject_id",
+      "ground_truth": "14036905",
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[3].subject_name",
+      "ground_truth": "mathemeticsinbusinessandindustry",
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[3].credit",
+      "ground_truth": 3,
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[3].grade_earn",
+      "ground_truth": "f",
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[4].subject_id",
+      "ground_truth": "14036921",
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[4].subject_name",
+      "ground_truth": "economyofasiancountries",
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[4].credit",
+      "ground_truth": 3,
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[4].grade_earn",
+      "ground_truth": "b",
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[5].subject_id",
+      "ground_truth": "14036968",
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[5].subject_name",
+      "ground_truth": "englishforprofessionalpresentation",
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[5].credit",
+      "ground_truth": 3,
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.semesters[1].subject[5].grade_earn",
+      "ground_truth": "f",
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.total_credits_earned",
+      "ground_truth": 36,
+      "prediction": null
+    },
+    {
+      "field": "transcript_detail.cumulative_gpa",
+      "ground_truth": "1.00",
+      "prediction": null
     },
     {
       "field": "footer_detail.updated_at",
       "ground_truth": "2025-01-15",
-      "prediction": "2025-01-16"
+      "prediction": null
     },
     {
       "field": "footer_detail.by.by_signature",
-      "ground_truth": "ผู้ช่วยศาสตราจารย์ดร.ทดสอบนามสกุล",
+      "ground_truth": "asst.prof.dr.testsurname",
       "prediction": null
     },
     {
       "field": "footer_detail.by.by_position",
-      "ground_truth": "ผู้อำนวยการ",
+      "ground_truth": "director",
       "prediction": null
     },
     {
       "field": "footer_detail.by.by_reg",
-      "ground_truth": "สำนักทะเบียนและบริการการศึกษา",
+      "ground_truth": "kmitlregistrationandeducationserviceoffice",
       "prediction": null
     }
   ]
