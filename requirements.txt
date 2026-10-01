@@ -6,6 +6,9 @@ pdf2image
 pytesseract
 paddleocr
 paddlepaddle
+easyocr
+python-doctr[torch]
+surya-ocr
 transformers
 torch
 torchvision
