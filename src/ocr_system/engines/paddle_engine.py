@@ -1,22 +1,41 @@
+import cv2
 import numpy as np
 from .base import BaseOCREngine
 from ocr_system.schemas import OCRLine
 
 
 class PaddleOCREngine(BaseOCREngine):
+    """PaddleOCR 3.x engine.
+
+    det_model: "PP-OCRv5_mobile_det" (fast, ~10s/page on CPU) or
+    "PP-OCRv5_server_det" (more accurate, ~200s/page on CPU).
+    """
+
     name = "paddle"
 
-    def __init__(self, lang: str = "th"):
+    def __init__(self, lang: str = "th", det_model: str = "PP-OCRv5_mobile_det"):
         from paddleocr import PaddleOCR
-        self.model = PaddleOCR(use_angle_cls=True, lang=lang)
+        self.model = PaddleOCR(
+            lang=lang,
+            text_detection_model_name=det_model,
+            use_doc_orientation_classify=False,
+            use_doc_unwarping=False,
+            use_textline_orientation=False,
+        )
 
     def recognize(self, image: np.ndarray, page: int | None = None) -> list[OCRLine]:
-        result = self.model.ocr(image, cls=True)
+        # PaddleOCR 3.x requires a 3-channel image; preprocessing returns grayscale.
+        if len(image.shape) == 2:
+            image = cv2.cvtColor(image, cv2.COLOR_GRAY2BGR)
+
         lines: list[OCRLine] = []
-        for block in result or []:
-            for item in block or []:
-                box = item[0]
-                text = item[1][0]
-                conf = float(item[1][1])
-                lines.append(OCRLine(text=text, confidence=conf, box=box, engine=self.name, page=page))
+        for res in self.model.predict(image):
+            for text, score, poly in zip(res["rec_texts"], res["rec_scores"], res["rec_polys"]):
+                if not text.strip():
+                    continue
+                box = [[float(x), float(y)] for x, y in poly]
+                lines.append(OCRLine(text=text, confidence=float(score), box=box, engine=self.name, page=page))
+
+        # Paddle does not guarantee reading order; sort top-to-bottom, then left-to-right.
+        lines.sort(key=lambda x: (min(p[1] for p in x.box), min(p[0] for p in x.box)))
         return lines

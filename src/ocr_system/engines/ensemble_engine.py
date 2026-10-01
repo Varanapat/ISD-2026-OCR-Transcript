@@ -1,38 +1,20 @@
 import numpy as np
 from .base import BaseOCREngine
-from .paddle_engine import PaddleOCREngine
-from .tesseract_engine import TesseractOCREngine
 from ocr_system.schemas import OCRLine
 
 
 class EnsembleOCREngine(BaseOCREngine):
     name = "ensemble"
 
-    def __init__(self, paddle_lang: str = "th", tesseract_languages: str = "tha+eng"):
-        self.engines = [
-            PaddleOCREngine(lang=paddle_lang),
-            TesseractOCREngine(languages=tesseract_languages),
-        ]
+    def __init__(self, engines: list[BaseOCREngine]):
+        self.engines = engines
 
     def recognize(self, image: np.ndarray, page: int | None = None) -> list[OCRLine]:
-        paddle_result = self.engines[0].recognize(image, page=page)
-        tesseract_result = self.engines[1].recognize(image, page=page)
+        return self.merge(*(engine.recognize(image, page=page) for engine in self.engines))
 
-        return self.merge(
-            paddle_result,
-            tesseract_result=tesseract_result,
-        )
-
-    def merge(
-        self,
-        paddle_result: list[OCRLine],
-        tesseract_result: list[OCRLine] | None = None,
-        trocr_result: list[OCRLine] | None = None,
-    ) -> list[OCRLine]:
-        candidates: list[OCRLine] = []
-        candidates.extend(paddle_result or [])
-        candidates.extend(tesseract_result or [])
-        candidates.extend(trocr_result or [])
+    @staticmethod
+    def merge(*results: list[OCRLine]) -> list[OCRLine]:
+        candidates: list[OCRLine] = [line for result in results for line in (result or [])]
 
         # Simple production-safe default: keep all lines, sorted top-to-bottom if boxes exist.
         # Dedup exact repeated text while preserving stronger confidence.

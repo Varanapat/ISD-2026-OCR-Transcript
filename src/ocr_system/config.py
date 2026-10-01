@@ -3,7 +3,7 @@ from pathlib import Path
 from typing import Literal
 
 
-EngineName = Literal["paddle", "tesseract", "trocr", "ensemble"]
+EngineName = Literal["paddle", "tesseract", "easyocr", "doctr", "surya", "trocr", "ensemble"]
 
 
 @dataclass
@@ -13,6 +13,8 @@ class OCRConfig:
     engine: EngineName = "ensemble"
     languages: str = "tha+eng"
     paddle_lang: str = "th"
+    paddle_det_model: str = "PP-OCRv5_mobile_det"
+    easyocr_languages: str = "th,en"
     trocr_model_name: str = "microsoft/trocr-base-printed"
     dpi: int = 300
     preprocess: bool = True
