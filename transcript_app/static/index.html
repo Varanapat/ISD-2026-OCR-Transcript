@@ -37,33 +37,51 @@
 
   <script>
     const pretty = (value) => JSON.stringify(value, null, 2);
+    
     document.getElementById("upload-form").addEventListener("submit", async (event) => {
       event.preventDefault();
       const status = document.getElementById("status");
       status.textContent = "กำลังอ่านเอกสาร อาจใช้เวลาหลายนาที...";
+      
       const body = new FormData();
       body.append("file", document.getElementById("file").files[0]);
       body.append("preprocessing", document.getElementById("preprocessing").value);
-      body.append("include_markdown", document.getElementById("include-markdown").checked);
+      
+      // แปลงค่า boolean เป็น String 'true'/'false' ที่ FastAPI รองรับ
+      const isChecked = document.getElementById("include-markdown").checked;
+      body.append("include_markdown", isChecked ? "true" : "false");
+
       try {
-        const response = await fetch("/api/transcript/extract", {method: "POST", body});
+        const response = await fetch("/api/transcript/extract", { method: "POST", body });
+        
+        // เช็ค Content-Type ก่อน parse เพื่อป้องกัน crash เวลา server คืนค่าเป็น HTML Error
+        const contentType = response.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+          const rawText = await response.text();
+          throw new Error(`Server คืนค่าข้อผิดพลาด (Status ${response.status}): เช็ครายละเอียดใน Terminal ของ Uvicorn`);
+        }
+
         const data = await response.json();
-        if (!response.ok) throw new Error(data.detail || "เกิดข้อผิดพลาด");
+        if (!response.ok) throw new Error(data.detail || "เกิดข้อผิดพลาดในการประมวลผล");
+
         status.textContent = `${data.filename}: ${data.pages} หน้า, ${data.processing_seconds} วินาที`;
         document.getElementById("header").textContent = pretty(data.header_detail);
         document.getElementById("footer").textContent = pretty(data.footer_detail);
         document.getElementById("warnings").textContent = pretty({
-          warnings: data.warnings, postprocessing_changes: data.postprocessing_changes
+          warnings: data.warnings, 
+          postprocessing_changes: data.postprocessing_changes
         });
 
         const container = document.getElementById("courses");
         container.innerHTML = "";
-        for (const semester of (data.transcript_detail.semesters || [])) {
+        for (const semester of (data.transcript_detail?.semesters || [])) {
           const title = document.createElement("h3");
           title.textContent = `ปี ${semester.year} ภาค ${semester.sem_num}`;
           container.appendChild(title);
+          
           const table = document.createElement("table");
           table.innerHTML = "<tr><th>รหัส</th><th>ชื่อวิชา</th><th>หน่วยกิต</th><th>เกรด</th></tr>";
+          
           for (const subject of (semester.subject || [])) {
             const row = table.insertRow();
             for (const key of ["subject_id", "subject_name", "credit", "grade_earn"]) {
@@ -72,6 +90,7 @@
           }
           container.appendChild(table);
         }
+
         if (data.markdown) {
           document.getElementById("markdown-section").hidden = false;
           document.getElementById("markdown").textContent = data.markdown;

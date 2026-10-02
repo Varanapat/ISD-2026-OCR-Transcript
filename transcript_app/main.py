@@ -1,5 +1,6 @@
 """Application 2: upload a transcript and extract structured fields."""
 
+import json
 import logging
 import os
 import sys
@@ -59,12 +60,13 @@ def health() -> dict:
     }
 
 
-@app.post("/api/transcript/extract", response_model=TranscriptResponse)
+@app.post("/api/transcript/extract")
 async def extract_transcript(
     file: UploadFile = File(...),
     preprocessing: str = Form(default="none"),
     include_markdown: bool = Form(default=False),
 ) -> dict:
+    # 1. ตรวจสอบนามสกุลไฟล์
     suffix = Path(file.filename or "upload").suffix.lower()
     if suffix not in ALLOWED_SUFFIXES:
         raise HTTPException(
@@ -72,6 +74,7 @@ async def extract_transcript(
             detail=f"รองรับเฉพาะไฟล์ประเภท: {', '.join(ALLOWED_SUFFIXES)}",
         )
 
+    # 2. ตรวจสอบขนาดไฟล์
     limit = settings.max_upload_mb * 1024 * 1024
     content = await file.read(limit + 1)
     if len(content) > limit:
@@ -84,15 +87,33 @@ async def extract_transcript(
         with tempfile.TemporaryDirectory(prefix="lab10_transcript_") as temp_dir:
             path = Path(temp_dir) / f"upload{suffix}"
             path.write_bytes(content)
-            
+
             result = await run_in_threadpool(
                 pipeline.extract, path, preprocessing, include_markdown
             )
-            result["filename"] = file.filename or path.name
-            return result
+
+            # 3. จัดการโครงสร้าง Response ดึงก้อนข้อมูล record ให้ถูกต้อง
+            record = result.get("record", result)
+
+            markdown_val = result.get("markdown", "")
+            if isinstance(markdown_val, (dict, list)):
+                markdown_val = json.dumps(markdown_val, ensure_ascii=False, indent=2)
+
+            response_data = {
+                "filename": file.filename or path.name,
+                "pages": result.get("pages", 1),
+                "processing_seconds": result.get("processing_seconds", 0),
+                "header_detail": record.get("header_detail", {}),
+                "transcript_detail": record.get("transcript_detail", {"semesters": []}),
+                "footer_detail": record.get("footer_detail", {}),
+                "warnings": result.get("warnings", []),
+                "postprocessing_changes": result.get("postprocessing_changes", []),
+                "markdown": markdown_val,
+            }
+
+            return response_data
 
     except ValueError as exc:
-        # เกิดจากการส่ง Parameter ผิด หรือ Validation ใน Pipeline ไม่ผ่าน (Client Error)
         logger.warning(f"Validation error: {exc}")
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
@@ -100,7 +121,6 @@ async def extract_transcript(
         ) from exc
 
     except RuntimeError as exc:
-        # เกิดจากปัญหาภายในระบบ OCR, Ollama หรือ Model Crash (Server Error)
         logger.error(f"Pipeline runtime error: {exc}", exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -108,7 +128,6 @@ async def extract_transcript(
         ) from exc
 
     except Exception as exc:
-        # ดักจับ Unhandled Exceptions อื่นๆ
         logger.error(f"Unexpected error: {exc}", exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,

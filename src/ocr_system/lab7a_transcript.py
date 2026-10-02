@@ -73,6 +73,7 @@ import sys
 import time
 from pathlib import Path
 from typing import Any, Union
+from json_repair import repair_json
 
 # --- โมดูลกลาง lab7_metrics อยู่ในแพ็กเกจเดียวกัน (src/ocr_system/vlm) -------
 #     รองรับทั้ง  python -m ocr_system.vlm.lab7a_transcript  และการรันไฟล์ตรง ๆ
@@ -1185,48 +1186,65 @@ def structure_markdown(markdown_text: Union[str, dict[str, Any]]) -> dict[str, A
     print("=============================")
 
     prompt = f"""คุณเป็นระบบสกัดข้อมูลจากใบแสดงผลการเรียน (Transcript) 
-จงอ่านข้อความ Markdown ด้านล่างนี้ แล้วแปลงให้อยู่ในรูปแบบ JSON Object ให้ถูกต้องที่สุด 
+    จงแปลงข้อความ Markdown ด้านล่างให้อยู่ในรูปแบบ JSON Object ให้ถูกต้องตาม Schema โดยเคร่งครัด
 
-**ข้อกำหนด:**
-1. คืนค่าเฉพาะ JSON Object เท่านั้น ห้ามใส่คำอธิบายเพิ่มเติม
-2. โครงสร้าง JSON ต้องประกอบด้วย 3 Key หลัก: "header_detail", "transcript_detail", และ "footer_detail"
+    **กฎเหล็กการจัดภาคการศึกษา (Semester Boundary Rules):**
+    1. **จุดเริ่มต้นภาคเรียน:** เริ่มเมื่อพบข้อความระบุภาค เช่น "ภาคการศึกษาที่ X ปีการศึกษา YYYY"
+    2. **จุดสิ้นสุดภาคเรียน:** สิ้นสุดเมื่อพบข้อความสรุปภาค เช่น "คะแนนเฉลี่ยประจำภาคการศึกษา" หรือเมื่อขึ้นภาคเรียนใหม่
+    3. **ห้ามข้ามภาคเด็ดขาด:** รายวิชาทั้งหมดที่ปรากฏอยู่ระหว่าง "จุดเริ่มต้น" และ "จุดสิ้นสุด" จะต้องถูกใส่อยู่ใน `subject` ของภาคการศึกษานั้นเท่านั้น ห้ามนำวิชาไปใส่ในภาคเรียนอื่นโดยเด็ดขาด
 
-**ตัวอย่างรูปแบบ JSON:**
-{{
-  "header_detail": {{
-    "student_id": "65010001",
-    "name": "นายสมชาย ใจดี"
-  }},
-  "transcript_detail": {{
-    "semesters": [
-      {{
-        "year": 2565,
-        "sem_num": 1,
-        "subject": [
-          {{
-            "subject_id": "01001001",
-            "subject_name": "COMPUTER PROGRAMMING",
-            "credit": 3,
-            "grade_earn": "A"
-          }}
-        ]
-      }}
-    ]
-  }},
-  "footer_detail": {{
-    "gpa": 3.50
-  }}
-}}
+    **กฎการสกัดข้อมูลอื่นๆ:**
+    - **เกรด (grade_earn):** หากในเอกสารไม่มีเกรดปรากฏ (ช่องว่าง/ไม่มีข้อมูล) ให้ใส่ค่า `null` เท่านั้น ห้ามเดาหรือสมมติขึ้นมาเอง
+    - **คำนำหน้าชื่อ:** แยกคำนำหน้า (เช่น "นางสาว", "นาย") ออกจากชื่ออย่างถูกต้อง ห้ามแยก "นางสาว" เป็น "นาง"
+    - **การพ้นสภาพ:** หากพบข้อความพ้นสภาพ เช่น "(พ้นสภาพ 1/2562)" ในช่องวันสำเร็จการศึกษา ให้ดึงมาใส่ใน `grad_reason`
 
-**ข้อความ Markdown ที่ต้องสกัด:**
-{markdown_text}
-"""
+    **โครงสร้าง JSON Schema:**
+    {{
+    "header_detail": {{
+        "uni_name": string|null, "uni_address": string|null, "student_id": string|null,
+        "faculty_name": string|null, "prename": string|null, "name": string|null,
+        "date_of_birth": string|null, "admis_date": string|null, "grad_date": string|null,
+        "grad_reason": string|null, "degree": string|null, "program": string|null, "honor": integer
+    }},
+    "transcript_detail": {{
+        "semesters": [
+        {{
+            "year": integer,
+            "sem_num": integer,
+            "GPS": string|null,
+            "GPA": string|null,
+            "pass_reason": string|null,
+            "subject": [
+            {{
+                "subject_id": string|null,
+                "subject_name": string|null,
+                "credit": integer,
+                "grade_earn": string|null
+            }}
+            ]
+        }}
+        ],
+        "total_credits_earned": integer,
+        "cumulative_gpa": string|null,
+        "master_comprehensive": string|null, "master_thesis": string|null, "master_qualify": string|null
+    }},
+    "footer_detail": {{
+        "updated_at": string|null,
+        "by": {{ "by_signature": string|null, "by_position": string|null, "by_reg": string|null }}
+    }}
+    }}
+
+    **ข้อความ Markdown ที่ต้องสกัด:**
+    {markdown_text}
+    """
 
     try:
+        # ตัดพารามิเตอร์ options ออกเพื่อไม่ให้เกิด Error unexpected keyword argument
         response = ollama_chat(
             model=MODEL_TEXT,
             messages=[{"role": "user", "content": prompt}],
-            fmt={"type": "object"},  # หรือส่ง schema/dict ตามที่นิยามไว้
+            fmt={"type": "object"},
+            think=False,
         )
 
         if isinstance(response, dict):
@@ -1238,7 +1256,19 @@ def structure_markdown(markdown_text: Union[str, dict[str, Any]]) -> dict[str, A
         print(raw_json)
         print("=============================")
 
-        data = json.loads(raw_json)
+        # --- ส่วนจัดการและซ่อมแซม JSON ---
+        try:
+            # ใช้ repair_json เติมปีกกาปิดและซ่อมโครงสร้าง JSON ที่ถูกตัดจบอัตโนมัติ
+            repaired_str = repair_json(raw_json)
+            data = json.loads(repaired_str)
+        except Exception as json_err:
+            print(f"[Warning] Direct JSON load failed, attempting clean fallback: {json_err}")
+            match = re.search(r"\{.*\}", raw_json, re.DOTALL)
+            if match:
+                data = json.loads(repair_json(match.group(0)))
+            else:
+                raise json_err
+        # --------------------------------
 
         # หาก postprocess_record ทำงานผิดพลาด ให้ใช้ data ตรงๆ สำรองไว้
         processed_data = postprocess_record(data)
@@ -1254,7 +1284,6 @@ def structure_markdown(markdown_text: Union[str, dict[str, Any]]) -> dict[str, A
             "transcript_detail": {"semesters": []},
             "footer_detail": {},
         }
-
 # ==============================================================================
 #  แปลงปี พ.ศ./ค.ศ. ด้วยโค้ด (ไม่ให้ LLM คำนวณเอง)
 # ==============================================================================
@@ -1367,7 +1396,7 @@ def enforce_maintain(data: dict) -> dict:
 
 
 # คำนำหน้าชื่อที่ระบบทะเบียนใช้ — ชุดปิด ใช้ตัดชื่อที่ OCR พิมพ์ติดกับคำนำหน้า
-PRENAMES = ("นางสาว", "นาง", "นาย", "mrs.", "miss", "mr.", "ms.")
+PRENAMES = ("นางสาว", "นาง", "นาย", "mrs.", "miss", "mr.", "ms.", "นางสาว", "นาย", "นาง", "ดร.", "ผศ.", "รศ.", "ศ.")
 NUMERIC_RE = re.compile(r'^[\d.,]+$')
 
 
