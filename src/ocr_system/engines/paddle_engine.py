@@ -15,9 +15,15 @@ class PaddleOCREngine(BaseOCREngine):
 
     def __init__(self, lang: str = "th", det_model: str = "PP-OCRv5_mobile_det"):
         from paddleocr import PaddleOCR
+        # Passing a model name makes PaddleOCR ignore `lang` and fall back to a recognition
+        # model without Thai, so resolve the language's recognition model ourselves
+        # (e.g. th -> th_PP-OCRv5_mobile_rec, en -> en_PP-OCRv5_mobile_rec).
+        _, rec_model = PaddleOCR._get_ocr_model_names(None, lang, None)
+        if rec_model is None:
+            raise ValueError(f"PaddleOCR has no recognition model for lang={lang!r}")
         self.model = PaddleOCR(
-            lang=lang,
             text_detection_model_name=det_model,
+            text_recognition_model_name=rec_model,
             use_doc_orientation_classify=False,
             use_doc_unwarping=False,
             use_textline_orientation=False,

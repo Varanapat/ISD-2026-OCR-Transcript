@@ -9,6 +9,7 @@ class OCRLine:
     box: Any | None = None
     engine: str | None = None
     page: int | None = None
+    region: str | None = None  # layout region name when --layout is used
 
 
 @dataclass
@@ -17,6 +18,7 @@ class OCRPageResult:
     text: str
     lines: list[OCRLine]
     image_path: str
+    regions: list[dict] | None = None  # layout regions (name + box) when --layout is used
 
 
 @dataclass

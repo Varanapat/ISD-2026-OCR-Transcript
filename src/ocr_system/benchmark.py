@@ -11,11 +11,15 @@ from .config import OCRConfig
 from .document_loader import is_image, is_pdf
 from .engine_factory import ENSEMBLE_MEMBERS, build_engine
 from .engines.ensemble_engine import EnsembleOCREngine
-from .evaluation import evaluate_prediction
-from .pipeline import build_result, prepare_pages
-from .utils.io import ensure_dir
+from .evaluation import evaluate_fields, evaluate_prediction
+from .transcript_extraction import extract_transcript_from_ocr
+from .pipeline import build_result, prepare_pages, recognize_page
+from .utils.io import ensure_dir, save_json
 
-RESULT_COLUMNS = ["engine", "file", "lang", "field_recall", "cer", "field_found", "field_total", "seconds", "error"]
+RESULT_COLUMNS = [
+    "engine", "file", "lang", "variant", "field_recall", "cer", "field_found", "field_total",
+    "field_accuracy", "fields_correct", "fields_total", "seconds", "error",
+]
 
 
 def find_ground_truth(ground_truth_dir: Path, stem: str) -> Path | None:
@@ -28,6 +32,14 @@ def document_language(gt_path: Path) -> str:
     """Json_71010001_th.json -> "th"; anything without a _th/_en suffix -> "-"."""
     suffix = gt_path.stem.rsplit("_", 1)[-1]
     return suffix if suffix in ("th", "en") else "-"
+
+
+def document_variant(doc_path: Path) -> str:
+    """Augmentation of a file made by the augment command ("71010001_rotation.jpg" -> "rotation")."""
+    from .augmentation import AUGMENTATIONS
+
+    suffix = doc_path.stem.split("_", 1)[1] if "_" in doc_path.stem else ""
+    return suffix if suffix in AUGMENTATIONS or suffix == "original" else "-"
 
 
 def collect_documents(input_dir: Path, ground_truth_dir: Path, limit: int | None) -> list[tuple[Path, Path]]:
@@ -70,6 +82,7 @@ def run_benchmark(
     for doc_no, (doc_path, gt_path) in enumerate(docs, start=1):
         print(f"[bold]({doc_no}/{len(docs)})[/bold] {doc_path.name}")
         lang = document_language(gt_path)
+        variant = document_variant(doc_path)
         ground_truth = json.loads(gt_path.read_text(encoding="utf-8"))
         doc_config = replace(base_config, input_path=doc_path, save_debug_images=False)
         pages = prepare_pages(doc_config)
@@ -79,18 +92,18 @@ def run_benchmark(
         for name, engine in loaded.items():
             start = time.perf_counter()
             try:
-                engine_lines[name] = [(p, img_path, engine.recognize(img, page=p)) for p, img_path, img in pages]
+                engine_lines[name] = [(page, recognize_page(engine, page, doc_config)) for page in pages]
             except Exception as exc:  # keep benchmarking the other engines/documents
                 print(f"  [red]{name} failed[/red]: {exc}")
                 if name in engines:
-                    rows.append({"engine": name, "file": doc_path.name, "lang": lang, "error": str(exc)})
+                    rows.append({"engine": name, "file": doc_path.name, "lang": lang, "variant": variant, "error": str(exc)})
                 continue
             engine_seconds[name] = time.perf_counter() - start
 
         if "ensemble" in engines and all(m in engine_lines for m in ENSEMBLE_MEMBERS):
             engine_lines["ensemble"] = [
-                (p, img_path, EnsembleOCREngine.merge(*(engine_lines[m][i][2] for m in ENSEMBLE_MEMBERS)))
-                for i, (p, img_path, _) in enumerate(pages)
+                (page, EnsembleOCREngine.merge(*(engine_lines[m][i][1] for m in ENSEMBLE_MEMBERS)))
+                for i, page in enumerate(pages)
             ]
             engine_seconds["ensemble"] = sum(engine_seconds[m] for m in ENSEMBLE_MEMBERS)
 
@@ -99,10 +112,19 @@ def run_benchmark(
                 continue
             result = build_result(replace(doc_config, output_dir=output_dir / name), name, engine_lines[name])
             metrics = evaluate_prediction(ground_truth, result.text, doc_path.name)
-            row = {"engine": name, "file": doc_path.name, "lang": lang, "seconds": round(engine_seconds[name], 2)}
+            row = {"engine": name, "file": doc_path.name, "lang": lang, "variant": variant, "seconds": round(engine_seconds[name], 2)}
             row.update({k: metrics.get(k) for k in ("field_recall", "cer", "field_found", "field_total")})
+            if "header_detail" in ground_truth:
+                # Extract the structured transcript and compare it with the ground truth field by field.
+                transcript = extract_transcript_from_ocr(result.to_dict())
+                save_json(transcript, output_dir / name / f"{doc_path.stem}_transcript.json")
+                fields = evaluate_fields(transcript, ground_truth)
+                row.update({k: fields[k] for k in ("field_accuracy", "fields_correct", "fields_total")})
             rows.append(row)
-            print(f"  {name:<10} recall={_fmt(row['field_recall'])} cer={_fmt(row['cer'])} time={row['seconds']}s")
+            print(
+                f"  {name:<10} recall={_fmt(row['field_recall'])} cer={_fmt(row['cer'])} "
+                f"fields={_fmt(row.get('field_accuracy'))} time={row['seconds']}s"
+            )
 
         # Write after every document so partial results survive an interrupted run.
         write_csv(rows, results_path, RESULT_COLUMNS)
@@ -115,11 +137,14 @@ def run_benchmark(
 
 
 def summarize(rows: list[dict], engines: list[str]) -> list[dict]:
-    """One row per engine over all documents, plus one per engine and language (th/en)."""
+    """One row per engine over all documents, plus one per engine and language (th/en)
+    and, for an augmented dataset, one per augmentation."""
     langs = sorted({r["lang"] for r in rows if r["lang"] != "-"})
     groups = [("all", lambda r: True)]
     if len(langs) > 1:
         groups += [(lang, lambda r, lang=lang: r["lang"] == lang) for lang in langs]
+    variants = sorted({r.get("variant", "-") for r in rows} - {"-"}, key=lambda v: (v != "original", v))
+    groups += [(v, lambda r, v=v: r.get("variant") == v) for v in variants]
 
     summary = []
     for lang, match in groups:
@@ -136,23 +161,26 @@ def _summarize_engine(rows: list[dict], name: str, lang: str, match) -> dict | N
     ok = [r for r in mine if not r.get("error")]
     found = sum(r["field_found"] or 0 for r in ok)
     total = sum(r["field_total"] or 0 for r in ok)
+    fields_correct = sum(r.get("fields_correct") or 0 for r in ok)
+    fields_total = sum(r.get("fields_total") or 0 for r in ok)
     return {
-        "lang": lang,
+        "group": lang,
         "engine": name,
         "documents": len(ok),
         "errors": len(mine) - len(ok),
         "field_recall": round(found / total, 4) if total else None,
         "avg_cer": _avg([r["cer"] for r in ok]),
+        "field_accuracy": round(fields_correct / fields_total, 4) if fields_total else None,
         "avg_seconds_per_doc": _avg([r["seconds"] for r in ok], ndigits=2),
     }
 
 
 def print_summary(summary: list[dict]) -> None:
-    table = Table(title="OCR benchmark (per language, sorted by field_recall, higher is better)")
+    table = Table(title="OCR benchmark (per group, sorted by field_recall, higher is better)")
     for col in summary[0]:
         table.add_column(col)
     for i, s in enumerate(summary):
-        end_section = i + 1 < len(summary) and summary[i + 1]["lang"] != s["lang"]
+        end_section = i + 1 < len(summary) and summary[i + 1]["group"] != s["group"]
         table.add_row(*(_fmt(v) for v in s.values()), end_section=end_section)
     Console().print(table)
 

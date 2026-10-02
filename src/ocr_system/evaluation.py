@@ -59,6 +59,7 @@ def flatten_values(data: Any) -> list[str]:
 def _compact(text: str) -> str:
     # Structured ground truth stores values without spaces, so compare without whitespace.
     text = re.sub(r"--- Page \d+ ---", "", text)
+    text = re.sub(r"(?m)^\[[a-z0-9_]+\]$", "", text)  # region headings from --layout
     return re.sub(r"\s+", "", text).lower()
 
 
@@ -88,13 +89,78 @@ def evaluate_structured(ground_truth: dict, prediction_text: str, file_name: str
     }
 
 
+def _flatten(data: Any, prefix: str = "") -> dict[str, Any]:
+    """{"a": {"b": [1]}} -> {"a.b[0]": 1}"""
+    if isinstance(data, dict):
+        return {k: v for key, value in data.items() for k, v in _flatten(value, f"{prefix}.{key}" if prefix else key).items()}
+    if isinstance(data, list):
+        return {k: v for i, value in enumerate(data) for k, v in _flatten(value, f"{prefix}[{i}]").items()}
+    return {prefix: data}
+
+
+def _normalize_field(value: Any) -> str | None:
+    # Ground truth values are lowercase without spaces; 3 and "3" count as equal.
+    return None if value is None else re.sub(r"\s+", "", str(value)).lower()
+
+
+def _field_section(path: str) -> str:
+    if ".subject[" in path:
+        return "subject"
+    if ".semesters[" in path:
+        return "semester"
+    return path.split(".")[0]  # header_detail / transcript_detail / footer_detail
+
+
+def evaluate_fields(prediction: dict, ground_truth: dict, file_name: str = "") -> dict:
+    """Field-by-field comparison of an extracted transcript with the structured ground truth.
+
+    Every non-null leaf of the ground truth is one field (e.g. header_detail.name,
+    transcript_detail.semesters[0].subject[2].grade_earn). A field is correct when the
+    prediction at the same path is equal after removing whitespace and lowercasing.
+    Fields that are null in the ground truth are skipped.
+    """
+    expected = {k: v for k, v in _flatten(ground_truth).items() if v is not None}
+    predicted = _flatten(prediction)
+
+    by_section: dict[str, list[int]] = {}
+    mismatches = []
+    for path, value in expected.items():
+        ok = _normalize_field(predicted.get(path)) == _normalize_field(value)
+        counts = by_section.setdefault(_field_section(path), [0, 0])
+        counts[0] += ok
+        counts[1] += 1
+        if not ok:
+            mismatches.append({"field": path, "expected": value, "predicted": predicted.get(path)})
+
+    correct = sum(c for c, _ in by_section.values())
+    return {
+        "file": file_name,
+        "field_accuracy": correct / len(expected) if expected else 0.0,
+        "fields_correct": correct,
+        "fields_total": len(expected),
+        "by_section": {k: {"accuracy": c / t, "correct": c, "total": t} for k, (c, t) in by_section.items()},
+        "mismatches": mismatches,
+    }
+
+
 def evaluate_from_files(ground_truth_json: str | Path, prediction_json: str | Path) -> dict:
+    """prediction_json may be an OCR result (*_ocr.json) or an extracted transcript (*_transcript.json)."""
+    from .transcript_extraction import extract_transcript_from_ocr
+
     with Path(ground_truth_json).open("r", encoding="utf-8") as f:
         ground_truth = json.load(f)
     with Path(prediction_json).open("r", encoding="utf-8") as f:
         prediction = json.load(f)
 
-    return evaluate_prediction(ground_truth, prediction["text"], Path(prediction["source_path"]).name)
+    if "header_detail" in prediction:  # already an extracted transcript
+        return evaluate_fields(prediction, ground_truth, file_name=Path(prediction_json).name)
+
+    result = evaluate_prediction(ground_truth, prediction["text"], Path(prediction["source_path"]).name)
+    if "header_detail" in ground_truth:
+        # Also extract the transcript from the OCR result and compare field by field.
+        fields = evaluate_fields(extract_transcript_from_ocr(prediction), ground_truth)
+        result["fields"] = {k: v for k, v in fields.items() if k != "file"}
+    return result
 
 
 def evaluate_prediction(ground_truth: dict, prediction_text: str, source_name: str) -> dict:

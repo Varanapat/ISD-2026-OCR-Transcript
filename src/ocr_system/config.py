@@ -19,7 +19,10 @@ class OCRConfig:
     dpi: int = 300
     preprocess: bool = True
     deskew: bool = True
+    deskew_only: bool = False  # straighten the page but skip all other preprocessing
     save_debug_images: bool = False
     min_confidence: float = 0.0
     device: str = "cpu"
+    layout: bool = False
+    layout_mode: str = "auto"  # "auto" | "assign" (OCR page, then label boxes) | "crop" (OCR each region)
     page_image_dir: Path = field(default_factory=lambda: Path("outputs/pages"))

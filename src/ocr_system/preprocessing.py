@@ -52,6 +52,12 @@ def rotate_bound(image: np.ndarray, angle: float) -> np.ndarray:
     return cv2.warpAffine(image, matrix, (new_w, new_h), flags=cv2.INTER_CUBIC, borderMode=cv2.BORDER_REPLICATE)
 
 
+def deskew_image(image: np.ndarray) -> np.ndarray:
+    """Only straighten a tilted page; colors and pixels are otherwise unchanged (--deskew-only)."""
+    gray = image if len(image.shape) == 2 else cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    return rotate_bound(image, estimate_skew_angle(gray))
+
+
 def preprocess_image(image: np.ndarray, deskew: bool = True) -> np.ndarray:
     image = resize_if_small(image)
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
