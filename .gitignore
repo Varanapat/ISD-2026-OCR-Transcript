@@ -30,3 +30,9 @@ work/*
 # ─── config ส่วนตัว (Lab 10) — ห้าม commit ตาม README ข้อ 6 ────────────
 **/.env
 !**/.env.example
+
+docs/
+/lab10_fastapi/transcript_app/wireframe/
+
+# ไฟล์ส่วนตัว ไม่ได้ใช้ใน pipeline (ไม่มีโค้ดอ้างถึง)
+*_phet.py

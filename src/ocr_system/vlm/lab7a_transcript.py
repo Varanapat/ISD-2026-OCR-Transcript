@@ -1648,15 +1648,15 @@ def evaluate(pred: dict, gt: dict) -> tuple[dict, dict]:
     stats["student_id"].add(gh.get("student_id"), ph.get("student_id"),
                             "student_id", track_wer=False)
     for f in ("prename", "name"):
-        stats["person"].add(gh.get(f), ph.get(f), f, track_wer=False)
+        stats["person"].add(gh.get(f), ph.get(f), f, track_wer=True, wer_level="strict")
 
     # ชื่อและที่อยู่สถาบัน — ข้อความไทยยาวที่สุดในเอกสาร
     # เป็นตัววัดความสามารถอ่านภาษาไทยที่ดีมาก เพราะมีทั้งคำยาวและตัวเลขปน
     for f in ("uni_name", "uni_address"):
-        stats["institution"].add(gh.get(f), ph.get(f), f, track_wer=False)
+        stats["institution"].add(gh.get(f), ph.get(f), f, track_wer=True, wer_level="strict")
 
     for f in ("faculty_name", "degree", "program", "major"):
-        stats["faculty"].add(gh.get(f), ph.get(f), f, track_wer=False)
+        stats["faculty"].add(gh.get(f), ph.get(f), f, track_wer=True, wer_level="strict")
     for f in ("date_of_birth", "admis_date", "grad_date"):
         stats["dates"].add(gh.get(f), ph.get(f), f, track_wer=False)
 
@@ -1664,7 +1664,7 @@ def evaluate(pred: dict, gt: dict) -> tuple[dict, dict]:
     #   grad_reason เป็นข้อความอิสระ เช่น "n/a(พ้นสภาพ1/2562)"
     #   honor เป็นตัวเลข 0/1/2  --> โมเดลมักเดาเป็น 0 เสมอ ต้องจับให้ได้
     for f in ("grad_reason", "honor"):
-        stats["status"].add(gh.get(f), ph.get(f), f, track_wer=False)
+        stats["status"].add(gh.get(f), ph.get(f), f, track_wer=(f == "grad_reason"), wer_level="strict")
 
     # ---------- ภาคการศึกษา ----------
     gsems = (gt.get("transcript_detail") or {}).get("semesters") or []
@@ -1691,7 +1691,7 @@ def evaluate(pred: dict, gt: dict) -> tuple[dict, dict]:
                          f"GPS@{tag}", track_wer=False)
         # pass_reason มักเป็น null  ถ้าโมเดลเติมค่าขึ้นมา = hallucination
         stats["sem_misc"].add(g_sem.get("pass_reason"), p_sem.get("pass_reason"),
-                              f"pass_reason@{tag}", track_wer=False)
+                              f"pass_reason@{tag}", track_wer=True, wer_level="strict")
 
         # ---------- รายวิชาในภาคนั้น ----------
         sa = M.align_by_key(
@@ -1707,7 +1707,7 @@ def evaluate(pred: dict, gt: dict) -> tuple[dict, dict]:
             stats["subject_id"].add(g_sub.get("subject_id"),
                                     p_sub.get("subject_id"), key, track_wer=False)
             stats["subject_name"].add(g_sub.get("subject_name"),
-                                      p_sub.get("subject_name"), key, track_wer=False)
+                                      p_sub.get("subject_name"), key, track_wer=True, wer_level="strict")
             stats["subject_type"].add(g_sub.get("type"), p_sub.get("type"),
                                       key, track_wer=False)
             stats["credit"].add(g_sub.get("credit"), p_sub.get("credit"),
@@ -1721,7 +1721,7 @@ def evaluate(pred: dict, gt: dict) -> tuple[dict, dict]:
         for g_sub in sa.missed:
             k = f"{tag} {g_sub.get('subject_id')} [ตกแถว]"
             stats["subject_id"].add(g_sub.get("subject_id"), "", k, track_wer=False)
-            stats["subject_name"].add(g_sub.get("subject_name"), "", k, track_wer=False)
+            stats["subject_name"].add(g_sub.get("subject_name"), "", k, track_wer=True, wer_level="strict")
             stats["subject_type"].add(g_sub.get("type"), "", k, track_wer=False)
             stats["credit"].add(g_sub.get("credit"), "", k, track_wer=False)
             stats["grade"].add(g_sub.get("grade_earn"), "", k, track_wer=False)
@@ -1732,7 +1732,7 @@ def evaluate(pred: dict, gt: dict) -> tuple[dict, dict]:
         for g_sub in g_sem.get("subject") or []:
             k = f"{tag} {g_sub.get('subject_id')}"
             stats["subject_id"].add(g_sub.get("subject_id"), "", k, track_wer=False)
-            stats["subject_name"].add(g_sub.get("subject_name"), "", k, track_wer=False)
+            stats["subject_name"].add(g_sub.get("subject_name"), "", k, track_wer=True, wer_level="strict")
             stats["subject_type"].add(g_sub.get("type"), "", k, track_wer=False)
             stats["credit"].add(g_sub.get("credit"), "", k, track_wer=False)
             stats["grade"].add(g_sub.get("grade_earn"), "", k, track_wer=False)
@@ -1744,7 +1744,7 @@ def evaluate(pred: dict, gt: dict) -> tuple[dict, dict]:
     # master_* เป็น null ในใบปริญญาตรี  ถ้าโมเดลเติมค่า = hallucination
     for f in ("total_credits_earned", "cumulative_gpa",
               "master_comprehensive", "master_thesis", "master_qualify"):
-        stats["summary"].add(gtd.get(f), ptd.get(f), f, track_wer=False)
+        stats["summary"].add(gtd.get(f), ptd.get(f), f, track_wer=f.startswith("master_"), wer_level="strict")
 
     # ---------- ท้ายเอกสาร (4 ฟิลด์) ----------
     # ⚠️ ส่วนนี้อยู่ล่างสุดของหน้า ซึ่งเป็นตำแหน่งที่มักถูกอ่านตกมากที่สุด
@@ -1757,7 +1757,7 @@ def evaluate(pred: dict, gt: dict) -> tuple[dict, dict]:
     gby = gf.get("by") or {}
     pby = pf.get("by") or {}
     for f in ("by_signature", "by_position", "by_reg"):
-        stats["footer"].add(gby.get(f), pby.get(f), f, track_wer=False)
+        stats["footer"].add(gby.get(f), pby.get(f), f, track_wer=True, wer_level="strict")
 
     align_summary = {
         "semester": {
@@ -1783,6 +1783,57 @@ def evaluate(pred: dict, gt: dict) -> tuple[dict, dict]:
 # ==============================================================================
 #  ส่วนที่ 11 — MAIN
 # ==============================================================================
+
+
+def overall_metrics(stats: dict) -> dict:
+    """
+    สรุปผลรวมแบบ micro (ตัวเลขเดียวกับแถว "รวม (micro)" ที่ M.print_table พิมพ์)
+
+      accuracy = สัดส่วนช่องที่ตรงเฉลยเป๊ะ (หลัง normalize)
+      cer      = ข้อผิดระดับตัวอักษรรวม / จำนวนตัวอักษรในเฉลยรวม  (ทุกฟิลด์)
+      wer      = ข้อผิดระดับคำรวม / จำนวนคำในเฉลยรวม  (เฉพาะฟิลด์ที่เป็นข้อความ)
+
+    wer เป็น None ถ้าไม่มีฟิลด์ข้อความให้วัดเลย (ไม่ใช่ 0 ซึ่งจะหมายถึงอ่านถูกหมด)
+    ต้องดู wer_tokenizer ประกอบเสมอ: ถ้าเป็น "whitespace (fallback)" แปลว่ายังไม่ได้
+    ติดตั้ง pythainlp ภาษาไทยจะถูกนับเป็น "คำเดียวต่อฟิลด์" และ WER ไม่ละเอียดพอ
+    """
+    def total(attr: str) -> int:
+        return sum(getattr(st, attr) for st in stats.values())
+
+    n, exact = total("n_items"), total("n_exact")
+    c_err, c_ref = total("c_err"), total("c_ref")
+    w_err, w_ref = total("w_err"), total("w_ref")
+    return {
+        "accuracy": round(exact / n, 6) if n else 0.0,
+        "cer": round(c_err / c_ref, 6) if c_ref else 0.0,
+        "wer": round(w_err / w_ref, 6) if w_ref else None,
+        "wer_tokenizer": M.TOKENIZER_NAME,
+        "fields": n, "fields_exact": exact,
+        "ref_chars": c_ref, "ref_words": w_ref,
+    }
+
+
+def save_eval_summary(stats: dict, align: dict, pred_path: Path, gt_path: Path, outdir: Path) -> Path:
+    """
+    เขียนผลประเมินเป็น JSON (ไฟล์ที่ส่งตอน Challenge)
+
+    ไม่ใส่ error_samples ที่ M.stats_to_dict สร้างไว้ เพราะในนั้นมีค่าจริงของนักศึกษา
+    (ทั้งค่าในเฉลยและค่าที่อ่านได้) ไฟล์นี้จึงมีแต่ตัวเลขและชื่อคอลัมน์
+    """
+    detail = M.stats_to_dict(stats)
+    for attribute in detail["attributes"].values():
+        attribute.pop("error_samples", None)
+    result = {
+        "pred_file": pred_path.name,
+        "gt_file": gt_path.name,
+        "overall_micro": overall_metrics(stats),
+        "subject_alignment": align["subject"],
+        "semester_alignment": align["semester"],
+        "attributes": detail["attributes"],
+    }
+    out = outdir / f"{pred_path.stem}__metrics.json"
+    out.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
+    return out
 
 
 def run_pipeline(name: str, pages: list[bytes], outdir: Path) -> dict | None:
@@ -1854,6 +1905,8 @@ def main() -> None:
               f"spurious={align['subject']['spurious']}  "
               f"(F1={align['subject']['f1']:.3f})")
         M.print_errors(stats)
+        summary = save_eval_summary(stats, align, Path(args.eval_only), Path(args.gt), outdir)
+        print(f"\n  บันทึกสรุปผล (Accuracy / CER / WER): {summary}")
         return
 
     if not args.input:
