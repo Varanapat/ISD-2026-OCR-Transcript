@@ -36,10 +36,12 @@ ocr_system/
 │   │   ├── ground_truth/      #   Json_71010001_rotation_th.json, ... (label = copy ของเฉลยต้นฉบับ)
 │   │   └── manifest.csv       #   ภาพไหนมาจากไฟล์ไหน augment แบบไหน ค่าที่สุ่มได้
 │   └── Augmentation_input_G/  # ชุด G แบบ augment (โครงเดียวกัน)
-├── outputs/                   # ผลลัพธ์ OCR / evaluation / benchmark (สร้างอัตโนมัติ ลบได้)
+├── outputs/                   # ผลลัพธ์ OCR / evaluation / benchmark / report (สร้างอัตโนมัติ ลบได้)
+├── scripts/
+│   └── run_all.sh             # รัน benchmark ทุก dataset แล้วสร้าง report
 └── src/
     └── ocr_system/
-        ├── cli.py             # command line: ocr / extract / evaluate / benchmark / augment
+        ├── cli.py             # command line: ocr / extract / evaluate / benchmark / augment / report
         ├── config.py          # ค่าตั้งค่าหลัก (OCRConfig)
         ├── pipeline.py        # OCR pipeline หลัก: โหลด → preprocess → OCR → เซฟผล
         ├── document_loader.py # โหลดภาพ / แปลง PDF เป็นภาพทีละหน้า
@@ -49,6 +51,7 @@ ocr_system/
         ├── evaluation.py      # วัดผล: field_recall, CER, WER, field_accuracy (ทีละช่อง)
         ├── benchmark.py       # วัดผลหลาย engine × หลายไฟล์ แล้วสรุปเป็นตาราง
         ├── augmentation.py    # สร้าง dataset แบบ augment + label สำหรับทดสอบความทนทาน
+        ├── report.py          # ประเมินผลระดับ field / page / category รวมทุก dataset
         ├── field_extraction.py# ดึง field เช่น email, date, id, phone ด้วย regex
         ├── transcript_extraction.py # แปลงผล OCR เป็น JSON ใบเกรดแบบ ground truth
         ├── schemas.py         # dataclass ของผลลัพธ์ (OCRLine, OCRPageResult, ...)
@@ -209,6 +212,8 @@ Linux ที่มี NVIDIA GPU Surya จะใช้ vLLM แทนได้ �
 | เทียบชุด G | `python -m ocr_system.cli benchmark --input-dir data/input_G --ground-truth-dir data/ground_truth_G --output-dir outputs/benchmark_G` | `outputs/benchmark_G/summary.csv` |
 | สร้าง dataset augment + label | `python -m ocr_system.cli augment` | `data/Augmentation_input/` (images, ground_truth, manifest.csv) |
 | วัดความทนทานต่อการบิดภาพ | `python -m ocr_system.cli benchmark --input-dir data/Augmentation_input/images --ground-truth-dir data/Augmentation_input/ground_truth --output-dir outputs/benchmark_aug` | `summary.csv` แยกผลตาม augmentation |
+| รันทุก dataset + ประเมินทุกระดับ | `bash scripts/run_all.sh` | `outputs/report/*.csv` |
+| ประเมินใหม่หลังแก้ extraction (ไม่ต้อง OCR ใหม่) | `python -m ocr_system.cli report` | `outputs/report/*.csv` |
 | ดูวิธีใช้ทุก option | `python -m ocr_system.cli <คำสั่ง> --help` | |
 
 ### ขั้นตอนที่ใช้บ่อย
@@ -244,7 +249,7 @@ python -m ocr_system.cli benchmark --engines tesseract,paddle --deskew-only
 
 ## Usage
 
-มี 5 คำสั่งหลัก:
+มี 6 คำสั่งหลัก:
 
 | คำสั่ง | ใช้ทำอะไร |
 |---|---|
@@ -253,6 +258,7 @@ python -m ocr_system.cli benchmark --engines tesseract,paddle --deskew-only
 | `evaluate` | วัดผล OCR / transcript ไฟล์เดียวเทียบกับ ground truth (ข้อความ + ทีละช่อง) |
 | `benchmark` | วัดผลหลาย engine × ทุกไฟล์ในโฟลเดอร์ แล้วสรุปเป็นตาราง |
 | `augment` | สร้าง dataset ภาพบิด (rotation, crop, ...) พร้อม label สำหรับทดสอบความทนทาน |
+| `report` | ประเมินผลระดับ field / page / category รวมผล benchmark ทุก dataset |
 
 ดูวิธีใช้ทั้งหมดได้ด้วย:
 ```bash
@@ -573,6 +579,48 @@ python -m ocr_system.cli benchmark --input-dir data/Augmentation_input/images --
 
 ---
 
+## 6. คำสั่ง `report` — ประเมินผลระดับ Field / Page / Category
+
+### รันทุก dataset ในคำสั่งเดียว
+```bash
+bash scripts/run_all.sh
+```
+รัน benchmark 4 ชุด (`data/input`, `data/input_G`, `data/Augmentation_input`, `data/Augmentation_input_G`) ด้วย `--deskew-only` แล้วสร้าง report ให้อัตโนมัติ (ถ้ายังไม่มีชุด augment จะสร้างให้ก่อน)
+
+| ตัวแปร | ค่าเริ่มต้น | ตัวอย่าง |
+|---|---|---|
+| `ENGINES` | `tesseract,paddle` (~2.5 ชั่วโมง) | `ENGINES=tesseract bash scripts/run_all.sh` (~20 นาที) |
+| `OPTIONS` | `--deskew-only` | `OPTIONS="--deskew-only --layout" bash scripts/run_all.sh` |
+| `SKIP_DONE` | `0` | `SKIP_DONE=1 bash scripts/run_all.sh` ข้ามชุดที่รันเสร็จแล้ว (ใช้ตอนรันต่อหลังหยุดกลางทาง) |
+
+### ประเมินจากผล benchmark ที่มีอยู่แล้ว
+```bash
+python -m ocr_system.cli report
+```
+ค่าเริ่มต้นอ่าน `outputs/benchmark`, `outputs/benchmark_G`, `outputs/benchmark_aug`, `outputs/benchmark_aug_G` (ชุดไหนไม่มีจะข้าม) เลือกเองได้ด้วย `--run ชื่อ โฟลเดอร์benchmark โฟลเดอร์groundtruth` (ใส่ซ้ำได้หลายชุด):
+```bash
+python -m ocr_system.cli report --run set1 outputs/benchmark data/ground_truth --run setG outputs/benchmark_G data/ground_truth_G
+```
+
+`report` **ดึงข้อมูลใบเกรดใหม่จาก `_ocr.json` ทุกครั้ง** ด้วยโค้ด `transcript_extraction.py` ปัจจุบัน แก้ extraction แล้วรัน `report` ใหม่ได้เลย (ไม่กี่วินาที) ไม่ต้อง OCR ใหม่
+
+### ผลลัพธ์ (`outputs/report/`)
+
+| ไฟล์ | ระดับ | 1 แถว = | คอลัมน์สำคัญ |
+|---|---|---|---|
+| `field_level.csv` | **Field** | 1 ชนิดช่อง เช่น `header.name`, `subject.grade_earn`, `semester.GPA` | `correct`, `missing` (ดึงไม่ได้), `wrong` (ดึงได้แต่ผิด), `total`, `accuracy` |
+| `page_level.csv` | **Page** | 1 หน้าเอกสาร | `page_accuracy`, `all_fields_correct`, `fields_missing`, ความแม่นแต่ละ category ของหน้านั้น |
+| `page_summary.csv` | Page (สรุป) | 1 dataset × engine × กลุ่ม | `mean_page_accuracy`, `median`, `min`, `pages_>=90%`, `pages_100%` |
+| `category_level.csv` | **Category** | 1 กลุ่มช่อง: `header` / `semester` / `subject` / `summary` / `footer` / `overall` | `correct`, `missing`, `total`, `accuracy` |
+
+ทุกไฟล์แยกตาม `dataset`, `engine` และ `group`: `all`, `th`, `en` และสำหรับชุด augment `aug:original`, `aug:rotation`, ... เปิดใน Excel แล้วใช้ filter ได้
+
+หมายเหตุ:
+- นับเฉพาะช่องที่ ground truth ไม่ใช่ `null` และเทียบตามตำแหน่ง (วิชาเลื่อนแถว = ผิดทั้งแถว)
+- `pages_100%` มักเป็น 0 เพราะ ground truth บางช่องไม่ตรงกับเอกสาร (เช่น `updated_at`) จึงดู `pages_>=90%` ประกอบ
+
+---
+
 ## Transcript Extraction
 
 `transcript_extraction.py` แปลงผล OCR (`_ocr.json`) เป็น JSON โครงเดียวกับ ground truth:
@@ -591,6 +639,13 @@ footer_detail       updated_at, by → by_signature, by_position, by_reg
 - **header / footer / ยอดรวม (ไทย):** จัดกล่องข้อความเป็นแถว แล้วหา label ไทย (`ชื่อ-สกุล`, `รหัสประจำตัวนักศึกษา`, `วันเดือนปีเกิด`, `วันที่เข้าศึกษา`, `ชื่อปริญญา`, `วันที่สำเร็จการศึกษา`, `หลักสูตร`, `จำนวนหน่วยกิตที่สอบได้ทั้งหมด`, `คะแนนเฉลี่ยสะสม`, `วันที่ออกเอกสาร`) แบบทนต่อ OCR ผิด: เทียบเฉพาะพยัญชนะ/สระหลัก (ตัดวรรณยุกต์และสระบน/ล่าง ถือ ซ = ช) และใช้ fuzzy matching (`rapidfuzz`) ค่าของแต่ละ label = ข้อความจนถึง label ถัดไปในแถวเดียวกัน
 - **หัวภาคเรียนไทย:** `ภาคการศึกษาที่ 1 ปีการศึกษา 2561` (และ `ภาคฤดูร้อน` = sem_num 0), GPS/GPA จาก `คะแนนเฉลี่ยประจำภาคการศึกษา : 2.33  คะแนนเฉลี่ย : 2.33`
 - **เดือนไทย:** `3 กันยายน 2542` → `1999-09-03` แม้ชื่อเดือนสระหาย
+- **กฎแก้ header (rule-based):**
+  - **ข้อความที่พิมพ์เหมือนกันทุกใบ** (`KNOWN_HEADER_TEXTS`): ชื่อสถาบันและที่อยู่ ทั้งไทยและอังกฤษ ถ้าผล OCR เหมือนข้อความที่ถูก ≥ 85% (`KNOWN_TEXT_MIN_SIMILARITY`) จะแทนด้วยข้อความที่ถูกเลย เช่น `kingmongkuti'sinstitute...` → `kingmongkut'sinstitute...`, `สถาบนเทคโนโลยีพระจอมเกลา...` → `สถาบันเทคโนโลยีพระจอมเกล้า...` เพิ่มข้อความอื่นได้ใน `KNOWN_HEADER_TEXTS`
+  - **honor:** `Honor : Second Class Honors` → `2`, `First Class Honors` → `1`, `เกียรตินิยมอันดับ 1/2` → `1`/`2`, ไม่มี → `0`
+  - **ชื่อคณะ:** บรรทัดถัดจาก `TRANSCRIPT OF RECORDS` / `ใบแสดงผลการศึกษา` (เช่น `KMITL Business School`, `Faculty of Medicine`, `คณะวิศวกรรมศาสตร์`)
+  - **prename อังกฤษ:** `Mr` / `Mr.` → `mr.`, `Miss` → `miss` (`EN_PRENAMES`)
+  - **program อังกฤษ:** หยุดที่ `Honor`, หัวภาคเรียน (รวม `lst Semester`), `Transferred Credits` จะได้ไม่มีข้อความอื่นปน
+  - **ปริญญาไทยที่ขึ้นต้นด้วย "หลักสูตร"** (`ชื่อปริญญา หลักสูตรเทคโนโลยีบัณฑิต`) ไม่ถูกตัดเป็น label หลักสูตร
 - **หัวภาคเรียน:** จัดกล่องข้อความเป็นแถวตามตำแหน่ง แล้วหา `1st Semester, Academic Year 2019` (ชุดที่ 1) หรือ `1st Semester , 2021` (ชุด G) ในแต่ละแถว รองรับ OCR อ่าน `1st` เป็น `lst` / `Ist` (ใช้ได้ทั้ง engine ที่ให้ทีละคำและทีละบรรทัด)
 - **ตารางสองซีก:** ใบเกรดยาวจะต่อจากตารางซีกซ้ายไปซีกขวา ระบบ "คลี่" ตาราง โดยย้ายข้อความซีกขวาไปต่อท้ายซีกซ้าย (และเลื่อน footer ลงไปท้ายสุด) จะได้อ่านจากบนลงล่างได้เป็นคอลัมน์เดียว
   - เส้นแบ่งกลางตาราง: ถ้าใช้ `--layout` ใช้ region `table_col1..N` (ครึ่งหลัง = ซีกขวา) ถ้าไม่ใช้ ประมาณจากรหัสวิชาซีกขวาหรือกึ่งกลางหน้า
@@ -602,6 +657,10 @@ footer_detail       updated_at, by → by_signature, by_position, by_reg
   - ใช้แถวแบบ visual row (ไม่ใช่ช่วง y ตายตัว) จึงได้สระบน/ล่างของภาษาไทยครบ และไม่ดึงสระของแถวถัดไปมาปน
   - แก้เกรดที่ OCR อ่านผิดเมื่ออยู่ในตำแหน่งเกรด (มีหน่วยกิตอยู่ทางซ้าย): `0`/`6` → c, `8` → b, `5`/`ธ`/`ร` → s, `1A` → a, `Bt` → b+ และ type `Gr`/`0`/`๐` → cr, `Ne` → nc
 - **วิชาเทียบโอน:** `Transferred Credits` / `รายวิชาเทียบโอน` เป็นภาคเรียน `sem_num 0` ของปีที่เข้าศึกษา (ตาม ground truth)
+- **pass_reason:** ภาคเรียนที่ไม่มีวิชาแต่พิมพ์สถานะไว้ `Maintain` / `รักษาสภาพ` → `maintain`, `Leave of Absence` / `ลาพักเรียน` / `ลาพักการศึกษา` → `leaveofabsence` (เทียบแบบ fuzzy ≥ 80% ทั้งแถว) ภาคเรียนแบบนี้ GPA/GPS = `null` เพิ่มคำได้ใน `PASS_REASONS`
+- **GPA/GPS ของภาคเรียน:** ไม่นับแถว `Cumulative GPA` / `คะแนนเฉลี่ยสะสม` / `Total Credits` (เดิมภาคสุดท้ายได้ GPA สะสมไปแทน)
+- **หน่วยกิต 0:** ถ้าอ่านได้ 0 ให้เป็น `3` (`DEFAULT_CREDIT`) ยกเว้นวิชาที่หน่วยกิต 0 จริง: เกรด `s` / `t(s)` หรือชื่อวิชาเป็นการฝึกงาน (`ZERO_CREDIT_NAMES`: ฝึกงาน, ฝึกปฏิบัติ, training, internship, pre-pilot)
+- **เลขไทยในตาราง:** หน่วยกิตอ่านเฉพาะเลขอารบิก `0-9` เพราะ OCR อ่านเกรด C เป็นเลขไทย `๐` (แก้เป็น c)
 - วันที่แปลงเป็น `YYYY-MM-DD` (พ.ศ. → ค.ศ.), ข้อความแปลงเป็นตัวพิมพ์เล็กไม่มีช่องว่างตาม ground truth
 
 ข้อจำกัดตอนนี้:
