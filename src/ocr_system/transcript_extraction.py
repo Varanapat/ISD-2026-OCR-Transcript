@@ -39,6 +39,42 @@ TH_MONTHS = {
 # OCR often reads "1st" as "lst" / "Ist".
 SEMESTER_RE = re.compile(r"(?i)\b(1st|lst|ist|2nd|3rd|summer)\s+semester\s*,?\s*(?:academic\s+year\s*)?(\d{4})")
 SEMESTER_NUM = {"1st": 1, "lst": 1, "ist": 1, "2nd": 2, "3rd": 3, "summer": 0}
+# ---- Header rules ---------------------------------------------------------------------
+# Text printed identically on every KMITL transcript (copied from the documents). OCR output
+# that is >= 85% similar is replaced by this exact text, e.g. "kingmongkuti'sinstitute..."
+# -> "kingmongkut'sinstitute...", or Thai names that lost tone marks.
+KNOWN_HEADER_TEXTS = {
+    "uni_name": [
+        "KING MONGKUT'S INSTITUTE OF TECHNOLOGY LADKRABANG",
+        "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
+    ],
+    "uni_address": [
+        "Chalongkrung Road, Ladkrabang, Bangkok 10520, THAILAND",
+        "เลขที่ 1 ซอยฉลองกรุง 1 เขตลาดกระบัง กรุงเทพฯ 10520",
+    ],
+}
+KNOWN_TEXT_MIN_SIMILARITY = 85
+EN_PRENAMES = {"mr": "mr.", "mrs": "mrs.", "ms": "ms.", "miss": "miss"}
+# English header labels. A value runs from its label to the next label of ANY field, so the
+# result does not depend on reading order (row by row across the page, or left column then
+# right column with --layout).
+EN_HEADER_LABELS = {
+    "name": [["name"]],
+    "student_id": [["student", "id"]],
+    "date_of_birth": [["date", "of", "birth"]],
+    "admis_date": [["date", "of", "admission"]],
+    "degree": [["degree"]],
+    "grad": [["date", "of", "graduation"]],
+    "program": [["program"]],
+    "honor": [["honor"]],
+}
+# Words that end the "Program :" value (next header label or the start of the table).
+EN_PROGRAM_STOPS = [
+    ["honor"], ["honors"], ["1st", "semester"], ["lst", "semester"], ["ist", "semester"], ["2nd", "semester"],
+    ["3rd", "semester"], ["summer"], ["transferred"], ["course"], ["ภาค"],
+]
+
+
 # ---- Thai matching helpers -------------------------------------------------------------
 # OCR often drops or garbles Thai vowels above/below the line and tone marks, and reads
 # ช as ซ. Labels are therefore compared on a "skeleton" without those marks.
@@ -55,12 +91,23 @@ TH_HEADER_LABELS = {
     "grad": "วันที่สำเร็จการศึกษา",
     "program": "หลักสูตร",
     "major": "สาขาวิชา",
+    "honor": "เกียรตินิยม",
 }
 
 # Type column (set G): Cr / Nc / Ad. OCR reads "Cr" as "Gr", "0", "๐" and "Nc" as "Ne".
 TYPE_VALUES = {"cr": "cr", "gr": "cr", "0": "cr", "๐": "cr", "o": "cr", "nc": "nc", "ne": "nc", "ad": "ad"}
-# Digits/Thai letters OCR produces in the grade column: C -> 0/6, B -> 8, S -> 5/ธ/ร/$.
-GRADE_OCR_FIXES = {"0": "c", "6": "c", "8": "b", "5": "s", "ธ": "s", "ร": "s", "ธร": "s", "ss": "s", "$": "s"}
+# Digits/Thai letters OCR produces in the grade column: C -> 0/๐/6, B -> 8, S -> 5/ธ/ร/$.
+GRADE_OCR_FIXES = {"0": "c", "๐": "c", "6": "c", "8": "b", "5": "s", "ธ": "s", "ร": "s", "ธร": "s", "ss": "s", "$": "s"}
+
+# Semester status printed instead of subjects (ground truth values -> (English, Thai) text).
+PASS_REASONS = {
+    "maintain": (["maintain"], ["รักษาสภาพ"]),
+    "leaveofabsence": (["leaveofabsence"], ["ลาพักเรียน", "ลาพักการศึกษา"]),
+}
+# Credit read as 0 becomes DEFAULT_CREDIT, except for real 0-credit subjects (internships/training, graded S).
+DEFAULT_CREDIT = 3
+ZERO_CREDIT_GRADES = {"s", "t(s)"}
+ZERO_CREDIT_NAMES = ("ฝึกงาน", "ฝึกปฏิบัติ", "training", "internship", "pre-pilot")
 
 GRADE_RE = re.compile(r"^(?:[abcdf][+-]?|s|u|w|i|t\([abcdfs][+-]?\)|-)$", re.IGNORECASE)
 SUBJECT_ID_RE = re.compile(r"^\d{8}\.?$")
@@ -116,6 +163,9 @@ def extract_transcript(
         transcript.update(_extract_totals_th(rows))
         footer = _extract_footer_th(rows)
 
+    for field in KNOWN_HEADER_TEXTS:
+        header[field] = _snap_known_text(field, header.get(field))
+
     return {
         "header_detail": header,
         "transcript_detail": transcript,
@@ -148,9 +198,11 @@ def _clean_tokens(lines: list[str]) -> list[str]:
     tokens = []
     for line in lines:
         value = line.strip()
-        if not value or value.startswith("--- Page"):
-            continue
-        tokens.append(value)
+        if not value or value.startswith("--- Page") or re.fullmatch(r"\[[a-z0-9_]+\]", value):
+            continue  # page markers and region headings from --layout (e.g. "[info_left]")
+        # One token per word: tesseract already gives one word per line, line-based engines
+        # (paddle, easyocr, ...) give "Name : Mr. ..." which must be split to find the labels.
+        tokens.extend(value.split())
     return tokens
 
 
@@ -224,12 +276,23 @@ def _value_after_label(tokens: list[str], label: list[str]) -> str | None:
     return " ".join(values[:3])
 
 
+def _header_value(tokens: list[str], field: str) -> list[str]:
+    """Tokens after the field's label until the next header label (of any field) or the table."""
+    stops = [label for key, labels in EN_HEADER_LABELS.items() if key != field for label in labels]
+    stops += EN_PROGRAM_STOPS + [["transcript", "of", "records"], ["รหัส", "นักศึกษา"]]
+    for label in EN_HEADER_LABELS[field]:
+        values = _slice_after_until(tokens, label, stops)
+        if values:
+            return values
+    return []
+
+
 def _extract_header(tokens: list[str], is_thai: bool) -> dict[str, Any]:
     student_id = _first_match(tokens, r"^\d{8,12}$")
-    name_tokens = _slice_after_until(tokens, ["name"], [["student", "id"], ["รหัส", "นักศึกษา"]])
+    name_tokens = _header_value(tokens, "name")
     prename, name = _split_name(name_tokens, is_thai=is_thai)
 
-    grad_tokens = _slice_after_until(tokens, ["date", "of", "graduation"], [["program"], ["หลักสูตร"]])
+    grad_tokens = _header_value(tokens, "grad")
     grad_date = _parse_date(" ".join(grad_tokens))
     grad_reason = None if grad_date else _schema_text(" ".join(grad_tokens))
 
@@ -238,16 +301,16 @@ def _extract_header(tokens: list[str], is_thai: bool) -> dict[str, Any]:
         "uni_address": _extract_uni_address(tokens, is_thai=is_thai),
         "student_id": student_id,
         "faculty_name": _extract_faculty_name(tokens, is_thai=is_thai),
-        "prename": _schema_text(prename),
+        "prename": EN_PRENAMES.get(_token_key(prename)) if prename else None,
         "name": _schema_text(name),
-        "date_of_birth": _parse_date(" ".join(_slice_after_until(tokens, ["date", "of", "birth"], [["date", "of", "admission"]]))),
-        "admis_date": _parse_date(" ".join(_slice_after_until(tokens, ["date", "of", "admission"], [["degree"]]))),
+        "date_of_birth": _parse_date(" ".join(_header_value(tokens, "date_of_birth"))),
+        "admis_date": _parse_date(" ".join(_header_value(tokens, "admis_date"))),
         "grad_date": grad_date or "0000-00-00",
         "grad_reason": grad_reason,
-        "degree": _schema_text(" ".join(_slice_after_until(tokens, ["degree"], [["date", "of", "graduation"]]))),
+        "degree": _schema_text(" ".join(_header_value(tokens, "degree"))),
         "major": None,
-        "program": _schema_text(" ".join(_slice_after_until(tokens, ["program"], [["1st", "semester"], ["2nd", "semester"], ["ภาค"]]))),
-        "honor": 0,
+        "program": _schema_text(" ".join(_header_value(tokens, "program"))),
+        "honor": _parse_honor(" ".join(_header_value(tokens, "honor")[:4])),
     }
 
 
@@ -273,8 +336,41 @@ def _extract_faculty_name(tokens: list[str], is_thai: bool) -> str | None:
     if is_thai:
         value = _slice_after_until(tokens, ["คณะ"], [["ชื่อ"], ["รหัส"]])
         return _schema_text(" ".join(["คณะ", *value])) if value else None
-    value = _slice_after_until(tokens, ["college", "of"], [["name"]])
-    return _schema_text(" ".join(["college", "of", *value])) if value else None
+    # The faculty is printed on the line below the title "TRANSCRIPT OF RECORDS"
+    # (e.g. "KMITL Business School", "College of Nanotechnology", "Faculty of Medicine").
+    keys = [_token_key(token) for token in tokens]
+    title_end = next(
+        (i + 3 for i in range(len(keys) - 2) if keys[i : i + 3] == ["transcript", "of", "records"]),
+        next((i + 1 for i, key in enumerate(keys) if key == "transcriptofrecords"), None),
+    )
+    if title_end is None:
+        value = _slice_after_until(tokens, ["college", "of"], [["name"]])
+        return _schema_text(" ".join(["college", "of", *value])) if value else None
+    value = []
+    for token, key in zip(tokens[title_end : title_end + 12], keys[title_end : title_end + 12]):
+        if key.startswith("name"):  # next line: "Name : ..."
+            break
+        value.append(token)
+    return _schema_text(" ".join(value)) if value else None
+
+
+def _parse_honor(text: str | None) -> int:
+    """"Second Class Honors" -> 2, "First Class Honors" -> 1, "เกียรตินิยมอันดับ 1" -> 1; none -> 0."""
+    loose = _loose_th(text or "").lower()
+    if re.search(r"first|1st|หนง|อนดบ1", loose):
+        return 1
+    if re.search(r"second|2nd|สอง|อนดบ2", loose):
+        return 2
+    return 0
+
+
+def _snap_known_text(field: str, value: str | None) -> str | None:
+    """Replace OCR output with the known printed text when they are >= 85% similar."""
+    if not value:
+        return value
+    candidates = [_schema_text(text) for text in KNOWN_HEADER_TEXTS.get(field, [])]
+    best = max(candidates, key=lambda text: fuzz.ratio(text, value), default=None)
+    return best if best and fuzz.ratio(best, value) >= KNOWN_TEXT_MIN_SIMILARITY else value
 
 
 def _split_name(tokens: list[str], is_thai: bool) -> tuple[str | None, str | None]:
@@ -329,15 +425,18 @@ def _extract_subjects_from_boxes(ocr_lines: list[dict[str, Any]], admit_year: in
         end_y = semesters[index + 1].get("start_y") if index + 1 < len(semesters) else 10**9
         ids = [word for word in subject_words if start_y <= word["y"] < end_y]
         semester_subjects = [_subject_from_rows(subject_id, rows, row_of[id(subject_id)]) for subject_id in ids]
+        pass_reason = _pass_reason([row for row in rows if start_y - 30 <= row[0]["y"] < end_y])
 
         gps, gpa = _semester_scores(words, start_y, end_y)
+        if pass_reason and not semester_subjects:
+            gps = gpa = None  # "Maintain" / leave of absence: no grades this semester
         results.append(
             {
                 "year": semester.get("year"),
                 "sem_num": semester.get("sem_num"),
                 "GPA": gpa,
                 "GPS": gps,
-                "pass_reason": None,
+                "pass_reason": pass_reason,
                 "subject": semester_subjects,
             }
         )
@@ -571,27 +670,59 @@ def _subject_from_rows(subject_id: dict[str, Any], rows: list[list[dict[str, Any
         name_words += [word for word in next_row if word["key"]]
         previous = next_row
 
+    subject_name = _subject_text([word["text"] for word in name_words])
+    if credit == 0 and grade not in ZERO_CREDIT_GRADES and not any(k in subject_name for k in ZERO_CREDIT_NAMES):
+        # Almost every subject has credits; "0" is usually a misread digit. Real 0-credit
+        # subjects are internships/training, graded S.
+        credit = DEFAULT_CREDIT
     return {
         "subject_id": subject_id["key"].rstrip("."),
-        "subject_name": _subject_text([word["text"] for word in name_words]),
+        "subject_name": subject_name,
         "type": type_,
         "credit": credit,
         "grade_earn": grade,
     }
 
 
+def _pass_reason(rows: list[list[dict[str, Any]]]) -> str | None:
+    """"Maintain" / "รักษาสภาพ" -> "maintain", "Leave of Absence" / "ลาพักการศึกษา" -> "leaveofabsence".
+    Matched fuzzily so OCR errors (e.g. "Maintam", missing Thai vowels) still count."""
+    for row in rows:
+        text = "".join(word["text"] for word in row)
+        if any(SUBJECT_ID_RE.match(word["key"]) for word in row) or _thai_semester(text) or SEMESTER_RE.search(
+            " ".join(word["text"] for word in row)
+        ):
+            continue  # subject rows and semester headings ("ภาคการศึกษา..." looks like "ลาพักการศึกษา")
+        latin = re.sub(r"[^a-z]", "", text.lower())
+        skeleton = _skeleton(text)[0]
+        for reason, (english, thai) in PASS_REASONS.items():
+            if latin and any(fuzz.ratio(latin, word) >= 80 for word in english):
+                return reason
+            for word in thai:
+                # The row must be about as long as the word: "...บริการการศึกษา" is not "ลาพักการศึกษา".
+                if skeleton and fuzz.ratio(skeleton, _skeleton(word)[0]) >= 80:
+                    return reason
+    return None
+
+
 def _split_subject_row(words: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], str | None, int | None, str | None]:
     """Read the value columns from the right: grade, credit, type; the rest is the name."""
+    # Credits are printed with Arabic digits; [0-9] (not \d, which also matches the Thai
+    # digit "๐" that OCR produces for the grade "C" and would be read as credit 0).
+    is_credit = lambda index: index >= 0 and re.fullmatch(r"[0-9]{1,2}", words[index]["key"]) is not None
     i = len(words)
     grade = credit = type_ = None
+    if i >= 3 and len(words[i - 1]["key"]) == 1 and _grade_value(words[i - 1]["key"], is_credit(i - 2)) is None \
+            and _grade_value(words[i - 2]["key"], is_credit(i - 3)) is not None:
+        i -= 1  # 1-character noise after the grade (e.g. "3 ๐ ไ")
     if i:
-        credit_left = i >= 2 and re.fullmatch(r"\d{1,2}", words[i - 2]["key"]) is not None
+        credit_left = is_credit(i - 2)
         grade = _grade_value(words[i - 1]["key"], credit_left)
         if grade is not None:
             i -= 1
-        elif credit_left and not words[i - 1]["key"].isdigit() and len(words[i - 1]["key"]) <= 3:
+        elif credit_left and not re.fullmatch(r"[0-9]+", words[i - 1]["key"]) and len(words[i - 1]["key"]) <= 3:
             i -= 1  # unreadable grade (e.g. "N)"): skip it so the credit is still found
-    if i and re.fullmatch(r"\d{1,2}", words[i - 1]["key"]):
+    if is_credit(i - 1):
         credit = int(words[i - 1]["key"])
         i -= 1
     if i and words[i - 1]["key"] in TYPE_VALUES and credit is not None:
@@ -609,7 +740,7 @@ def _grade_value(key: str, credit_left: bool) -> str | None:
     if GRADE_RE.match(fixed):
         return fixed
     if credit_left:  # a credit number sits left of it, so this token is the grade column
-        match = re.fullmatch(r"([0568]|ธ|ร|ธร|ss|\$)(\+?)", fixed)
+        match = re.fullmatch(r"([0568๐]|ธ|ร|ธร|ss|\$)(\+?)", fixed)
         if match:
             return GRADE_OCR_FIXES[match.group(1)] + match.group(2)
     return None
@@ -641,6 +772,13 @@ def _is_transfer_heading(text: str) -> bool:
 
 def _semester_scores(words: list[dict[str, Any]], start_y: int, end_y: int) -> tuple[str | None, str | None]:
     scoped = [word for word in words if start_y <= word["y"] < end_y]
+    # Leave out "Cumulative GPA : 3.34" / "คะแนนเฉลี่ยสะสม" / "Total Credits": they are not this semester's scores.
+    scoped = [
+        word for row in _rows(scoped)
+        if not any(word["key"] in {"cumulative", "total"} for word in row)
+        and "คะแนนเฉลยสะสม" not in _loose_th("".join(word["text"] for word in row))
+        for word in row
+    ]
     gps = _score_after(scoped, "gps")
     gpa = _score_after(scoped, "gpa")
     if gps is None and gpa is None:
@@ -753,7 +891,9 @@ def _find_label(text: str, label: str, min_score: float = 80) -> tuple[int, int,
     pos = skel.find(target)
     if pos >= 0:
         return index[pos], index[pos + len(target) - 1] + 1, 100.0
-    if len(target) < 5:  # too short for fuzzy matching
+    if len(target) < 5 or len(skel) < 0.8 * len(target):
+        # Too short for fuzzy matching; partial_ratio would score a 1-letter noise row
+        # (e.g. "=ซึ") 100 against any label containing that letter.
         return None
     match = fuzz.partial_ratio_alignment(target, skel)
     if match.score < min_score or match.dest_end <= match.dest_start:
@@ -782,6 +922,14 @@ def _labeled_values(text: str, labels: dict[str, str]) -> dict[str, str]:
                 kept[-1] = item
             continue
         kept.append(item)
+    # A label right after another label (no value in between) is part of that value,
+    # e.g. "ชื่อปริญญา หลักสูตรเทคโนโลยีบัณฑิต": the degree name starts with "หลักสูตร".
+    merged = []
+    for item in kept:
+        if merged and item[0] - merged[-1][1] <= 2:
+            continue
+        merged.append(item)
+    kept = merged
     values = {}
     for i, (_, end, _, key) in enumerate(kept):
         stop = kept[i + 1][0] if i + 1 < len(kept) else len(text)
@@ -811,11 +959,15 @@ def _extract_header_th(rows: list[tuple[float, str]]) -> dict[str, Any]:
     # Rows above the title "ใบแสดงผลการศึกษา": university name and address.
     title_index = next((i for i, (_, text) in enumerate(above_table) if _find_label(text, "ใบแสดงผลการศึกษา")), None)
     top = [text for _, text in above_table[:title_index]] if title_index is not None else []
-    address = next((text for text in top if _find_label(text, "เลขที่") or re.search(r"\d{5}", text)), None)
+    # "เลขที่ ..." row, else the row with the 5-digit postcode ([0-9]: \d would also match Thai digits like "๑").
+    address = next((text for text in top if _find_label(text, "เลขที่")), None) or next(
+        (text for text in top if re.search(r"[0-9]{5}", text) and _thai_chars(text) >= 10), None
+    )
     names = [text for text in top if text is not address and _thai_chars(text) >= 10]
     uni_name = max(names, key=_thai_chars) if names else None
     after_title = above_table[title_index + 1:] if title_index is not None else above_table
-    faculty = next((text for _, text in after_title if _loose_th(text).startswith("คณะ")), None)
+    # The faculty is the line below the title "ใบแสดงผลการศึกษา" (skip short noise rows).
+    faculty = next((text for _, text in after_title if _thai_chars(text) >= 5 and not _labeled_values(text, TH_HEADER_LABELS)), None)
 
     prename, name = None, values.get("name")
     if name:
@@ -841,7 +993,7 @@ def _extract_header_th(rows: list[tuple[float, str]]) -> dict[str, Any]:
         "degree": _schema_text(values.get("degree")),
         "major": _schema_text(values.get("major")),
         "program": _schema_text(values.get("program")),
-        "honor": 0,
+        "honor": _parse_honor(values.get("honor")),
     }
 
 

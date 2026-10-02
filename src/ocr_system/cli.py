@@ -10,6 +10,7 @@ from .field_extraction import extract_common_fields
 from .transcript_extraction import extract_transcript_from_file, extract_transcript_from_ocr
 from .benchmark import run_benchmark
 from .augmentation import AUGMENTATIONS, augment_dataset
+from .report import DEFAULT_RUNS, build_report
 from .utils.io import save_json
 
 
@@ -80,6 +81,17 @@ def parse_args():
     aug.add_argument("--seed", type=int, default=42, help="Same seed = same random values = same images")
     aug.add_argument("--dpi", type=int, default=300)
     aug.add_argument("--no-original", action="store_true", help="Do not add the clean page as control image")
+
+    rep = sub.add_parser("report", help="Field / page / category level evaluation over benchmark results")
+    rep.add_argument(
+        "--run",
+        nargs=3,
+        action="append",
+        metavar=("NAME", "BENCHMARK_DIR", "GROUND_TRUTH_DIR"),
+        help="A benchmark result to include (repeatable). Default: "
+        + "; ".join(f"{n} {b} {g}" for n, b, g in DEFAULT_RUNS),
+    )
+    rep.add_argument("--output-dir", default="outputs/report")
 
     ext = sub.add_parser("extract", help="Extract a structured transcript JSON from an OCR result (*_ocr.json)")
     ext.add_argument("ocr_json", help="OCR result from the ocr command, e.g. outputs/71010001_ocr.json")
@@ -175,6 +187,10 @@ def main():
             dpi=args.dpi,
             include_original=not args.no_original,
         )
+
+    elif args.command == "report":
+        runs = args.run or DEFAULT_RUNS
+        build_report([(name, Path(bench), Path(gt)) for name, bench, gt in runs], Path(args.output_dir))
 
     elif args.command == "extract":
         ocr_json = Path(args.ocr_json)
