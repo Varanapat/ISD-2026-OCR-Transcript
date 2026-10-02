@@ -25,10 +25,13 @@ def estimate_skew_angle(gray: np.ndarray) -> float:
     if len(coords) < 100:
         return 0.0
     angle = cv2.minAreaRect(coords)[-1]
-    if angle < -45:
-        angle = -(90 + angle)
-    else:
-        angle = -angle
+    # OpenCV >= 4.5 returns angles in (0, 90], older versions in [-90, 0).
+    # Normalize to (-45, 45] so both tilt directions are detected on any version.
+    if angle > 45:
+        angle -= 90
+    elif angle < -45:
+        angle += 90
+    angle = -angle
     if abs(angle) > 15:
         return 0.0
     return float(angle)
