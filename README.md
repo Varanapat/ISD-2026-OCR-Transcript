@@ -90,6 +90,165 @@ python -m ocr_system.cli ocr <ไฟล์> --engine <engine>
    └─ transcript_extraction.py  จัดข้อมูลใบเกรด → เซฟ <ชื่อไฟล์>_transcript.json
 ```
 
+รายละเอียดทั้งระบบ ดูหัวข้อ [System Architecture & Data Flow](#system-architecture--data-flow) ด้านล่าง
+
+---
+
+## System Architecture & Data Flow
+
+แผนภาพในหัวข้อนี้เขียนด้วย Mermaid: GitHub แสดงเป็นภาพให้อัตโนมัติ ส่วน VS Code ต้องติดตั้งส่วนเสริม "Markdown Preview Mermaid Support"
+
+### ภาพรวมระบบ
+
+ระบบแบ่งเป็น 4 ชั้น: **ข้อมูล** → **OCR pipeline** (แปลงเอกสารเป็นข้อความ + JSON ใบเกรด) → **การประเมินผล** → **แล็บ VLM** ที่นำ OCR pipeline ไปเทียบกับ VLM
+
+```mermaid
+flowchart TB
+    subgraph DATA["ข้อมูล (data/)"]
+        IN["input/ , input_G/<br/>PDF ใบเกรด"]
+        GT["ground_truth/ , ground_truth_G/<br/>JSON เฉลย"]
+        AUG["Augmentation_input/ , Augmentation_input_G/<br/>ภาพบิด 7 แบบ + label + manifest.csv"]
+    end
+
+    subgraph CORE["OCR pipeline (src/ocr_system)"]
+        CLI["cli.py<br/>ocr · extract · evaluate · benchmark · augment · report"]
+        PIPE["pipeline.py<br/>โหลด → preprocess → layout → OCR → รวมผล"]
+        ENG["engines/<br/>tesseract · paddle · easyocr · doctr · surya · trocr · ensemble"]
+        TX["transcript_extraction.py<br/>ข้อความ + ตำแหน่ง → JSON ใบเกรด"]
+    end
+
+    subgraph EVAL["การประเมินผล"]
+        EV["evaluation.py<br/>field_recall · CER · field_accuracy"]
+        BM["benchmark.py<br/>engine × เอกสาร"]
+        RP["report.py<br/>field · page · category level"]
+        AG["augmentation.py<br/>สร้างภาพบิด + label"]
+    end
+
+    subgraph LABS["แล็บ VLM (src/ocr_system/vlm) — venv ของแล็บ"]
+        L7["lab7a_transcript.py<br/>ocr_system เทียบกับ VLM"]
+        L8["lab8a_denoise.py<br/>noise 5 ระดับ × ทำความสะอาด 3 วิธี"]
+        OL["Ollama (เครื่องตัวเอง)<br/>Typhoon-OCR · Qwen3"]
+    end
+
+    IN --> CLI
+    CLI --> PIPE --> ENG
+    PIPE --> TX
+    IN --> AG --> AUG --> BM
+    IN --> BM
+    BM --> PIPE
+    BM --> EV
+    GT --> EV
+    GT --> RP
+    BM --> RP
+    L7 -- "subprocess: python -m ocr_system.cli ocr" --> CLI
+    L7 --> OL
+    L8 --> L7
+    GT --> L7
+```
+
+### Data flow ของคำสั่ง `ocr` (เอกสาร 1 ไฟล์)
+
+```mermaid
+flowchart LR
+    A["PDF / รูป"] --> B["document_loader<br/>PDF → JPG 300 dpi"]
+    B --> C{"preprocess"}
+    C -- "ค่าเริ่มต้น" --> C1["ครบ 7 ขั้น<br/>denoise · CLAHE · deskew · threshold"]
+    C -- "--deskew-only" --> C2["หมุนให้ตรงอย่างเดียว"]
+    C -- "--no-preprocess" --> C3["ภาพเดิม"]
+    C1 & C2 & C3 --> D{"--layout ?"}
+    D -- "ใช่" --> D1["layout.py<br/>หาตาราง (morphology)<br/>แบ่ง block (projection)"]
+    D -- "ไม่" --> E
+    D1 --> E["engine.recognize()<br/>assign: OCR ทั้งหน้าแล้วจัดเข้า region<br/>crop: OCR ทีละ region"]
+    E --> F["OCRLine<br/>text · confidence · box · region"]
+    F --> G["build_result()"]
+    G --> H1["_ocr.json"]
+    G --> H2["_ocr.txt"]
+    F --> I["field_extraction"] --> H3["_fields.json"]
+    H1 --> J["transcript_extraction"] --> H4["_transcript.json"]
+```
+
+ขั้นตอนใน `transcript_extraction.py` (จาก `_ocr.json` → JSON โครงเดียวกับ ground truth):
+
+```mermaid
+flowchart LR
+    A["_ocr.json<br/>กล่องข้อความ + ตำแหน่ง"] --> B["แยกกล่องหลายคำเป็นคำ<br/>(paddle / easyocr / doctr)"]
+    B --> C["คลี่ตาราง 2 ซีก<br/>ย้ายซีกขวาไปต่อท้ายซีกซ้าย"]
+    C --> D["จัดเป็นแถว (visual rows)"]
+    D --> E1["header / footer<br/>ไทย: skeleton + fuzzy label<br/>อังกฤษ: label → label ถัดไป"]
+    D --> E2["หัวภาคเรียน · วิชาเทียบโอน · pass_reason"]
+    D --> E3["แถววิชา: อ่านจากขวา<br/>เกรด → หน่วยกิต → type → ชื่อ"]
+    E1 & E2 & E3 --> F["กฎแก้ค่า<br/>ข้อความที่รู้ ≥ 85% · honor · prename<br/>เกรดที่ OCR อ่านผิด · หน่วยกิต 0 → 3"]
+    F --> G["_transcript.json"]
+```
+
+### Data flow ของการประเมินผล
+
+```mermaid
+flowchart LR
+    subgraph RUN["รัน OCR"]
+        A1["data/input*"] --> B["benchmark<br/>ทุกไฟล์ × ทุก engine<br/>(ensemble ใช้ผลสมาชิกซ้ำ)"]
+        A2["data/Augmentation_input*/images"] --> B
+        AUGC["augment"] --> A2
+    end
+    B --> C["outputs/benchmark*/ชื่อ-engine/<br/>_ocr.json · _ocr.txt · _transcript.json"]
+    B --> D["results.csv · summary.csv<br/>field_recall · CER · field_accuracy · เวลา"]
+    C --> R["report<br/>ดึงใบเกรดใหม่จาก _ocr.json"]
+    GT["ground truth"] --> B
+    GT --> R
+    R --> O1["field_level.csv"]
+    R --> O2["page_level.csv · page_summary.csv"]
+    R --> O3["category_level.csv"]
+```
+
+`scripts/run_all.sh` รันทั้งหมดนี้ต่อกัน: `augment` (ถ้ายังไม่มี) → `benchmark` 4 dataset → `report`
+
+### Data flow ของแล็บ VLM (Lab 7A / 8A)
+
+```mermaid
+flowchart LR
+    PDF["PDF ใบเกรด"] --> P1 & P2
+    subgraph L7["lab7a_transcript.py"]
+        P1["pipeline ocr_system<br/>เรียก CLI ของเรา (subprocess)"] --> J1["pred_ocr_system.json"]
+        P2["pipeline vlm"] --> T["Typhoon-OCR (Ollama)<br/>ภาพ → Markdown"]
+        T --> RAW["intermediate_vlm_raw.md"]
+        T --> N["normalize_typhoon_table()"] --> MD["intermediate_vlm.md"]
+        N --> Q["Qwen3 + JSON Schema<br/>(Ollama)"] --> PP["แปลงปี · maintain · เก็บกวาดค่า"] --> J2["pred_vlm.json"]
+        J1 & J2 --> V["verify_internal()<br/>ตรวจกฎภายใน (ไม่ใช้เฉลย)"]
+        J1 & J2 --> EV["evaluate() + lab7_metrics<br/>จับคู่วิชาด้วยรหัสวิชา"]
+        EV --> OUT["comparison.csv · evaluation.json"]
+    end
+    subgraph L8["lab8a_denoise.py"]
+        NZ["noise<br/>L0–L4 (seed คงที่)"] --> CL["clean_image()<br/>none · light · heavy"]
+        CL --> P2
+        EV --> SW["sweep.json · sweep.csv · sweep_plot.png"]
+    end
+    SW --> AVG["scripts/average_sweeps.py<br/>เฉลี่ยหลายรอบ"]
+```
+
+### ไฟล์ข้อมูลระหว่างทาง (ใครสร้าง ใครใช้)
+
+| ไฟล์ | สร้างโดย | ใช้โดย |
+|---|---|---|
+| `outputs/pages/*.jpg` | `document_loader` | engine ทุกตัว |
+| `<ชื่อ>_ocr.json` | `pipeline.build_result` | `extract`, `evaluate`, `report` |
+| `<ชื่อ>_ocr.txt` | `pipeline.build_result` | คนอ่าน, `evaluate` (field_recall / CER) |
+| `<ชื่อ>_transcript.json` | `transcript_extraction` | `evaluate` (field_accuracy), Lab 7A (`pred_ocr_system.json`) |
+| `results.csv`, `summary.csv` | `benchmark` | คนอ่าน / Excel |
+| `field_level.csv`, `page_level.csv`, `category_level.csv` | `report` | คนอ่าน / Excel |
+| `data/Augmentation_input*/` | `augment` | `benchmark` |
+| `intermediate_vlm_raw.md`, `intermediate_vlm.md` | Lab 7A pipeline vlm | debug ว่าผิดที่ Typhoon หรือที่ Qwen |
+| `outputs/lab8a/*/sweep.json` | Lab 8A `sweep` | `report`, `average_sweeps.py` |
+
+### สภาพแวดล้อมที่ใช้รัน
+
+ทุกส่วนรัน **บนเครื่องตัวเอง** ไม่ส่งเอกสารออกนอกเครื่อง (ยกเว้นการดาวน์โหลดโมเดลครั้งแรก)
+
+| ส่วน | Python | โปรแกรม / โมเดลภายนอก |
+|---|---|---|
+| OCR pipeline, evaluate, benchmark, augment, report | `.venv` ของโปรเจกต์ | Tesseract, Poppler; โมเดล Paddle / EasyOCR / docTR; Surya ใช้ `llama-server` (llama.cpp) |
+| Lab 7A / 8A (`src/ocr_system/vlm/`) | venv ของแล็บ (มี pymupdf, augraphy, pythainlp) | Ollama ที่ `127.0.0.1:11434` + `scb10x/typhoon-ocr1.5-3b`, `qwen3:4b` |
+| pipeline `ocr_system` ใน Lab 7A | เรียก `.venv` ของโปรเจกต์ผ่าน subprocess | เหมือนแถวแรก |
+
 ---
 
 ## ใช้งานผ่าน VS Code
