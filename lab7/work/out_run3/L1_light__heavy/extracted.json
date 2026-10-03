@@ -1,0 +1,127 @@
+{
+  "header_detail": {
+    "uni_name": "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
+    "uni_address": "เลขที่ 1 ซอยฉลองกรุง 1 เขตลาดกระบัง กรุงเทพฯ 10520",
+    "student_id": "71010001",
+    "faculty_name": "คณะวิศวกรรมศาสตร์",
+    "prename": "นางสาว",
+    "name": "วรรคาวี วิศวกรรมศาสตร์",
+    "date_of_birth": "1999-09-03",
+    "admis_date": "2018-08-06",
+    "grad_date": "0000-00-00",
+    "grad_reason": "พ้นสภาพ 1 / 2562",
+    "degree": "วิทยาศาสตรบัณฑิต",
+    "program": "การจัดการวิศวกรรมและเทคโนโลยี (หลักสูตรนานาชาติ)",
+    "honor": 0,
+    "major": "วิศวกรรมศาสตร์"
+  },
+  "transcript_detail": {
+    "semesters": [
+      {
+        "year": 2561,
+        "sem_num": 1,
+        "GPS": "2.33",
+        "GPA": "2.33",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13006008",
+            "subject_name": "พัฒนาเว็บไซต์",
+            "credit": 3,
+            "grade_earn": "C+"
+          },
+          {
+            "subject_id": "13006007",
+            "subject_name": "เคลคุลัส 1",
+            "credit": 3,
+            "grade_earn": "D+"
+          },
+          {
+            "subject_id": "13006109",
+            "subject_name": "PROGRAMMING FOR MANAGEMENT",
+            "credit": 3,
+            "grade_earn": "B+"
+          },
+          {
+            "subject_id": "13006204",
+            "subject_name": "ภาษาอังกฤษพื้นฐาน 1",
+            "credit": 3,
+            "grade_earn": "B"
+          },
+          {
+            "subject_id": "13006301",
+            "subject_name": "ตรรกศาสตร์เบื้องต้น",
+            "credit": 3,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "13006402",
+            "subject_name": "เศรษฐศาสตร์เบื้องต้น",
+            "credit": null,
+            "grade_earn": null
+          },
+          {
+            "subject_id": "13006508",
+            "subject_name": "เคลคุลัส 2",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13006104",
+            "subject_name": "เทคโนโลยีอินเทอร์เน็ตเบื้องต้น",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13006205",
+            "subject_name": "ภาษาอังกฤษพื้นฐาน 2",
+            "credit": null,
+            "grade_earn": null
+          },
+          {
+            "subject_id": "13026001",
+            "subject_name": "วิศวกรรมสมัยใหม่เบื้องต้น",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13026003",
+            "subject_name": "หลักธุรกิจ",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13026004",
+            "subject_name": "หลักการจัดการ",
+            "credit": 3,
+            "grade_earn": "F"
+          }
+        ]
+      }
+    ],
+    "total_credits_earned": 36,
+    "cumulative_gpa": "1.17",
+    "master_comprehensive": null,
+    "master_thesis": null,
+    "master_qualify": null
+  },
+  "footer_detail": {
+    "updated_at": "2025-01-16",
+    "by": {
+      "by_signature": "(ผู้ช่วยศาสตราจารย์ ดร.ทดสอบ นามสกุล)",
+      "by_position": "ผู้อำนวยการ",
+      "by_reg": "สำนักทะเบียนและบริการการศึกษา"
+    }
+  },
+  "_meta": {
+    "level": "L1_light",
+    "method": "heavy",
+    "seconds": 103.2,
+    "clean_seconds": 0.3,
+    "error": null,
+    "models": {
+      "ocr": "scb10x/typhoon-ocr1.5-3b",
+      "text": "qwen3:4b"
+    }
+  }
+}

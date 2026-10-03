@@ -1,0 +1,551 @@
+{
+  "header_detail": {
+    "uni_name": "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
+    "uni_address": "เลขที่ 1 ซอยฉลองกรุง 1 เขตลาดกระบัง กรุงเทพฯ 10520",
+    "student_id": "71010001",
+    "faculty_name": "วิศวกรรมศาสตร์",
+    "prename": "นางสาว",
+    "name": "วรศรี วิศวกรรมศาสตร์",
+    "date_of_birth": "1999-09-03",
+    "admis_date": "2018-08-06",
+    "grad_date": "0000-00-00",
+    "grad_reason": null,
+    "degree": "วิทยาศาสตรบัณฑิต",
+    "program": "การจัดการวิศวกรรมและเทคโนโลยี (หลักสูตรนานาชาติ)",
+    "honor": 0,
+    "major": "วิศวกรรมศาสตร์"
+  },
+  "transcript_detail": {
+    "semesters": [
+      {
+        "year": 2561,
+        "sem_num": 1,
+        "GPS": "2.33",
+        "GPA": "2.33",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          }
+        ]
+      },
+      {
+        "year": 2561,
+        "sem_num": 2,
+        "GPS": "2.33",
+        "GPA": "2.33",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          }
+        ]
+      }
+    ],
+    "total_credits_earned": 0,
+    "cumulative_gpa": "2.33"
+  },
+  "_meta": {
+    "level": "L4_rescan",
+    "method": "none",
+    "seconds": 595.4,
+    "clean_seconds": 0.1,
+    "error": null,
+    "models": {
+      "ocr": "scb10x/typhoon-ocr1.5-3b",
+      "text": "qwen3:4b"
+    }
+  }
+}

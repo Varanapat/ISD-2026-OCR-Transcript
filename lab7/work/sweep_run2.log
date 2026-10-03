@@ -1,0 +1,2479 @@
+✓ ยืนยันโหมดออฟไลน์: http://127.0.0.1:11434 (loopback เท่านั้น)
+
+จะรัน 15 เงื่อนไข: 5 ระดับ x 3 วิธี
+
+──────────────────────────────────────────────────────────────────────
+  [1/15] L0_clean__none
+──────────────────────────────────────────────────────────────────────
+    [ขั้น 1/2] Typhoon-OCR อ่านหน้า 1/1...
+      (scb10x/typhoon-ocr1.5-3b ใช้เวลา 53.0 วิ, ได้ 1,839 ตัวอักษร)
+    บันทึก Markdown ดิบจาก Typhoon: work/out_run2/L0_clean__none/intermediate_raw.md
+    บันทึก Markdown กลางทาง: work/out_run2/L0_clean__none/intermediate.md
+    [ขั้น 2/2] qwen3:4b จัดรูปเป็น JSON...
+      (qwen3:4b ใช้เวลา 51.5 วิ, ได้ 2,553 ตัวอักษร)
+=== RAW ===
+{
+  "header_detail": {
+    "uni_name": "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
+    "uni_address": "เลขที่ 1 ซอยฉลองกรุง 1 เขตลาดกระบัง กรุงเทพฯ 10520",
+    "student_id": "71010001",
+    "faculty_name": "วิศวกรรมศาสตร์",
+    "prename": "นางสาววศีร",
+    "name": "วิศวกรรมศาสตร์",
+    "date_of_birth": "2542-09-03",
+    "admis_date": "2561-08-06",
+    "grad_date": "0000-00-00",
+    "grad_reason": null,
+    "degree": "วิทยาศาสตรบัณฑิต",
+    "program": "การจัดการวิศวกรรมและเทคโนโลยี (หลักสูตรนานาชาติ)",
+    "honor": 0
+  },
+  "transcript_detail": {
+    "semesters": [
+      {
+        "year": 2561,
+        "sem_num": 1,
+        "GPS": "2.33",
+        "GPA": "2.33",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13006006",
+            "subject_name": "พิชญณัฐรังสีน",
+            "credit": 3,
+            "grade_earn": "C+"
+          },
+          {
+            "subject_id": "13006007",
+            "subject_name": "เคลคุลัส 1",
+            "credit": 3,
+            "grade_earn": "D+"
+          },
+          {
+            "subject_id": "13006109",
+            "subject_name": "PROGRAMMING FOR MANAGEMENT",
+            "credit": 3,
+            "grade_earn": "D+"
+          },
+          {
+            "subject_id": "13006204",
+            "subject_name": "ภาษาอังกฤษพื้นฐาน 1",
+            "credit": 3,
+            "grade_earn": "B+"
+          },
+          {
+            "subject_id": "13006301",
+            "subject_name": "ตรรกศาสตร์เบื้องต้น",
+            "credit": 3,
+            "grade_earn": "B"
+          },
+          {
+            "subject_id": "13006402",
+            "subject_name": "เศรษฐศาสตร์เบื้องต้น",
+            "credit": 3,
+            "grade_earn": "C"
+          }
+        ]
+      },
+      {
+        "year": 2561,
+        "sem_num": 2,
+        "GPS": "2.00",
+        "GPA": "1.17",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13006008",
+            "subject_name": "เคลคุลัส 2",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13006104",
+            "subject_name": "เทคโนโลยีอินเทอร์เน็ตเบื้องต้น",
+            "credit": 3,
+            "grade_earn": "F"
+          }
+        ]
+      }
+    ],
+    "total_credits_earned": 36,
+    "cumulative_gpa": "1.17"
+  },
+  "footer_detail": {
+    "updated_at": "2568-01-16",
+    "by": {
+      "by_signature": "ผู้ช่วยศาสตราจารย์ ดร.ทดสอบ นามสกุล",
+      "by_position": "ผู้อำนวยการ",
+      "by_reg": "สำนักทะเบียนและบริการการศึกษา"
+    }
+  }
+}
+=== END RAW ===
+    ภาษาเอกสาร: th -> แปลงปีด้วยโค้ด
+  accuracy=0.753  CER=0.206  hall=0  seconds=104.6  (subject F1=0.800)
+
+──────────────────────────────────────────────────────────────────────
+  [2/15] L0_clean__light
+──────────────────────────────────────────────────────────────────────
+    [ขั้น 1/2] Typhoon-OCR อ่านหน้า 1/1...
+      (scb10x/typhoon-ocr1.5-3b ใช้เวลา 63.0 วิ, ได้ 2,441 ตัวอักษร)
+    บันทึก Markdown ดิบจาก Typhoon: work/out_run2/L0_clean__light/intermediate_raw.md
+    บันทึก Markdown กลางทาง: work/out_run2/L0_clean__light/intermediate.md
+    [ขั้น 2/2] qwen3:4b จัดรูปเป็น JSON...
+      (qwen3:4b ใช้เวลา 63.9 วิ, ได้ 2,965 ตัวอักษร)
+=== RAW ===
+{
+  "header_detail": {
+    "uni_name": "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
+    "uni_address": "เลขที่ 1 ซอยฉลองกรุง 1 เขตลาดกระบัง กรุงเทพฯ 10520",
+    "student_id": "71010001",
+    "faculty_name": "วิศวกรรมศาสตร์",
+    "prename": "นางสาววศีร",
+    "name": "วิศวกรรมศาสตร์",
+    "date_of_birth": "2542-09-03",
+    "admis_date": "2561-08-06",
+    "grad_date": "0000-00-00",
+    "grad_reason": null,
+    "degree": "วิทยาศาสตรบัณฑิต",
+    "program": "การจัดการวิศวกรรมและเทคโนโลยี (หลักสูตรนานาชาติ)",
+    "honor": 0
+  },
+  "transcript_detail": {
+    "semesters": [
+      {
+        "year": 2561,
+        "sem_num": 1,
+        "GPS": "2.33",
+        "GPA": "2.33",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13006006",
+            "subject_name": "พิชญนิตย์รังสีเริน",
+            "credit": 3,
+            "grade_earn": "C+"
+          },
+          {
+            "subject_id": "13006007",
+            "subject_name": "แคลคูลัส 1",
+            "credit": 3,
+            "grade_earn": "D+"
+          }
+        ]
+      },
+      {
+        "year": 2561,
+        "sem_num": 2,
+        "GPS": "0.00",
+        "GPA": "1.17",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13006109",
+            "subject_name": "PROGRAMMING FOR MANAGEMENT",
+            "credit": 3,
+            "grade_earn": "D+"
+          },
+          {
+            "subject_id": "13006204",
+            "subject_name": "ภาษาอังกฤษพื้นฐาน 1",
+            "credit": 3,
+            "grade_earn": "B+"
+          },
+          {
+            "subject_id": "13006301",
+            "subject_name": "ตรรกศาสตร์เบื้องต้น",
+            "credit": 3,
+            "grade_earn": "B"
+          },
+          {
+            "subject_id": "13006402",
+            "subject_name": "เศรษฐศาสตร์เบื้องต้น",
+            "credit": 3,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "13006008",
+            "subject_name": "แคลคูลัส 2",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13026001",
+            "subject_name": "วิศวกรรมสมัยใหม่เบื้องต้น",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13026003",
+            "subject_name": "หลักธุรกิจ",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13026004",
+            "subject_name": "หลักการจัดการ",
+            "credit": 3,
+            "grade_earn": "F"
+          }
+        ]
+      }
+    ],
+    "total_credits_earned": 36,
+    "cumulative_gpa": "1.17",
+    "master_comprehensive": null,
+    "master_thesis": null,
+    "master_qualify": null
+  },
+  "footer_detail": {
+    "updated_at": "2568-01-16",
+    "by": {
+      "by_signature": "ผู้ช่วยศาสตราจารย์ ดร.ทดสอบ นามสกุล",
+      "by_position": "ผู้อำนวยการ",
+      "by_reg": "สำนักทะเบียนและบริการการศึกษา"
+    }
+  }
+}
+=== END RAW ===
+    ภาษาเอกสาร: th -> แปลงปีด้วยโค้ด
+  accuracy=0.699  CER=0.323  hall=0  seconds=127.2  (subject F1=0.545)
+
+──────────────────────────────────────────────────────────────────────
+  [3/15] L0_clean__heavy
+──────────────────────────────────────────────────────────────────────
+    [ขั้น 1/2] Typhoon-OCR อ่านหน้า 1/1...
+      (scb10x/typhoon-ocr1.5-3b ใช้เวลา 61.5 วิ, ได้ 2,284 ตัวอักษร)
+    บันทึก Markdown ดิบจาก Typhoon: work/out_run2/L0_clean__heavy/intermediate_raw.md
+    บันทึก Markdown กลางทาง: work/out_run2/L0_clean__heavy/intermediate.md
+    [ขั้น 2/2] qwen3:4b จัดรูปเป็น JSON...
+      (qwen3:4b ใช้เวลา 73.4 วิ, ได้ 3,256 ตัวอักษร)
+=== RAW ===
+{
+  "header_detail": {
+    "uni_name": "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
+    "uni_address": "เลขที่ 1 ซอยฉลองกรุง 1 เขตลาดกระบัง กรุงเทพฯ 10520",
+    "student_id": "71010001",
+    "faculty_name": "วิศวกรรมศาสตร์",
+    "prename": "นางสาววศินี",
+    "name": "วศินี วิศวกรรมศาสตร์",
+    "date_of_birth": "2542-09-03",
+    "admis_date": "2561-08-06",
+    "grad_date": "0000-00-00",
+    "grad_reason": null,
+    "degree": "วิทยาศาสตรบัณฑิต",
+    "program": "การจัดการวิศวกรรมและเทคโนโลยี (หลักสูตรนานาชาติ)",
+    "honor": 0,
+    "major": "วิศวกรรมศาสตร์"
+  },
+  "transcript_detail": {
+    "semesters": [
+      {
+        "year": 2561,
+        "sem_num": 1,
+        "GPS": "2.33",
+        "GPA": null,
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13006 06",
+            "subject_name": "พีทีเคเอ็ด อินเทอร์เน็ต",
+            "credit": 3,
+            "grade_earn": "D",
+            "type": null
+          },
+          {
+            "subject_id": "13006 07",
+            "subject_name": "เคลคุลัส 1",
+            "credit": 3,
+            "grade_earn": "D",
+            "type": null
+          },
+          {
+            "subject_id": "13006109",
+            "subject_name": "PRO RAMM NG FOR MANAGEMEN",
+            "credit": 3,
+            "grade_earn": "B+",
+            "type": "E"
+          },
+          {
+            "subject_id": "13006204",
+            "subject_name": "ภาษาอังกฤษพื้นฐาน 1",
+            "credit": 3,
+            "grade_earn": "B",
+            "type": null
+          },
+          {
+            "subject_id": "13006301",
+            "subject_name": "ตรรกศาสตร์เบื้องต้น",
+            "credit": 3,
+            "grade_earn": "C",
+            "type": "E"
+          },
+          {
+            "subject_id": "13006402",
+            "subject_name": "เศรษฐศาสตร์เบื้องต้น",
+            "credit": 3,
+            "grade_earn": "F",
+            "type": null
+          },
+          {
+            "subject_id": "13006 08",
+            "subject_name": "เทคโนโลยีอินเทอร์เน็ตเบื้องต้น",
+            "credit": 3,
+            "grade_earn": "D",
+            "type": null
+          },
+          {
+            "subject_id": "13006205",
+            "subject_name": "ภาษาอังกฤษพื้นฐาน 2",
+            "credit": 3,
+            "grade_earn": "F",
+            "type": "E"
+          },
+          {
+            "subject_id": "130 6 01",
+            "subject_name": "วิศวกรรมสมัยใหม่เบื้องต้น",
+            "credit": 3,
+            "grade_earn": "E",
+            "type": null
+          },
+          {
+            "subject_id": "130 6 03",
+            "subject_name": "เหล็กอุทกิจ",
+            "credit": 3,
+            "grade_earn": "D",
+            "type": null
+          },
+          {
+            "subject_id": "130 6 04",
+            "subject_name": "หลักการจัดการ",
+            "credit": 3,
+            "grade_earn": "E",
+            "type": null
+          }
+        ]
+      }
+    ],
+    "total_credits_earned": 36,
+    "cumulative_gpa": "1.17",
+    "master_comprehensive": null
+  },
+  "footer_detail": {
+    "updated_at": "2568-01-16",
+    "by": {
+      "by_signature": "(ผู้ช่วยศาสตราจารย์ ดร.ทดสอบ นามสกุล)",
+      "by_position": "ผู้อำนวยการ",
+      "by_reg": "สำนักทะเบียนและบริการการศึกษา"
+    }
+  }
+}
+=== END RAW ===
+    ภาษาเอกสาร: th -> แปลงปีด้วยโค้ด
+  accuracy=0.473  CER=0.397  hall=3  seconds=135.2  (subject F1=0.348)
+
+──────────────────────────────────────────────────────────────────────
+  [4/15] L1_light__none
+──────────────────────────────────────────────────────────────────────
+    [ขั้น 1/2] Typhoon-OCR อ่านหน้า 1/1...
+      (scb10x/typhoon-ocr1.5-3b ใช้เวลา 53.1 วิ, ได้ 1,768 ตัวอักษร)
+    บันทึก Markdown ดิบจาก Typhoon: work/out_run2/L1_light__none/intermediate_raw.md
+    บันทึก Markdown กลางทาง: work/out_run2/L1_light__none/intermediate.md
+    [ขั้น 2/2] qwen3:4b จัดรูปเป็น JSON...
+      (qwen3:4b ใช้เวลา 47.7 วิ, ได้ 2,180 ตัวอักษร)
+=== RAW ===
+{
+  "header_detail": {
+    "uni_name": "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
+    "uni_address": "เลขที่ 1 ซอยฉลองกรุง 1 เขตลาดกระบัง กรุงเทพฯ 10520",
+    "student_id": "71010001",
+    "faculty_name": "คณะวิศวกรรมศาสตร์",
+    "prename": "นางสาววศี",
+    "name": "วิศวกรรมศาสตร์",
+    "date_of_birth": "2542-09-03",
+    "admis_date": "2561-08-06",
+    "grad_date": "0000-00-00",
+    "grad_reason": null,
+    "degree": "วิทยาศาสตรบัณฑิต",
+    "program": "การจัดการวิศวกรรมและเทคโนโลยี (หลักสูตรนานาชาติ)",
+    "honor": 0
+  },
+  "transcript_detail": {
+    "semesters": [
+      {
+        "year": 2561,
+        "sem_num": 1,
+        "GPS": "2.33",
+        "GPA": "2.33",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13006006",
+            "subject_name": "พีชคณิตเชิงเส้น",
+            "credit": 3,
+            "grade_earn": "C+"
+          },
+          {
+            "subject_id": "13006007",
+            "subject_name": "แคลคูลัส 1",
+            "credit": 3,
+            "grade_earn": "D+"
+          },
+          {
+            "subject_id": "13006109",
+            "subject_name": "PROGRAMMING FOR MANAGEMENT",
+            "credit": 3,
+            "grade_earn": "B+"
+          },
+          {
+            "subject_id": "13006204",
+            "subject_name": "ภาษากลุ่มทั้งฐาน 1",
+            "credit": 3,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "13006301",
+            "subject_name": "ตรรกศาสตรเบื้องต้น",
+            "credit": 3,
+            "grade_earn": "E"
+          },
+          {
+            "subject_id": "13006402",
+            "subject_name": "เศรษฐศาสตร์โภคตน",
+            "credit": 3,
+            "grade_earn": ""
+          }
+        ]
+      }
+    ],
+    "total_credits_earned": 36,
+    "cumulative_gpa": "1.17",
+    "master_comprehensive": null,
+    "master_thesis": null,
+    "master_qualify": null
+  },
+  "footer_detail": {
+    "updated_at": "2568-01-16",
+    "by": {
+      "by_signature": "(ผู้ช่วยศาสตราจารย์ ดร.ทดสอบ นามสกุล)",
+      "by_position": "ผู้อำนวยการสำนักทะเบียนและบริการการศึกษา",
+      "by_reg": "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง"
+    }
+  }
+}
+=== END RAW ===
+    ภาษาเอกสาร: th -> แปลงปีด้วยโค้ด
+  accuracy=0.570  CER=0.410  hall=0  seconds=100.8  (subject F1=0.667)
+
+──────────────────────────────────────────────────────────────────────
+  [5/15] L1_light__light
+──────────────────────────────────────────────────────────────────────
+    [ขั้น 1/2] Typhoon-OCR อ่านหน้า 1/1...
+      (scb10x/typhoon-ocr1.5-3b ใช้เวลา 58.8 วิ, ได้ 2,325 ตัวอักษร)
+    บันทึก Markdown ดิบจาก Typhoon: work/out_run2/L1_light__light/intermediate_raw.md
+    บันทึก Markdown กลางทาง: work/out_run2/L1_light__light/intermediate.md
+    [ขั้น 2/2] qwen3:4b จัดรูปเป็น JSON...
+      (qwen3:4b ใช้เวลา 63.3 วิ, ได้ 3,198 ตัวอักษร)
+=== RAW ===
+{
+  "header_detail": {
+    "uni_name": "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
+    "uni_address": "เลขที่ 1 ซอยฉลองกรุง 1 เขตลาดกระบัง กรุงเทพฯ 10520",
+    "student_id": "71010001",
+    "faculty_name": "คณะวิศวกรรมศาสตร์",
+    "prename": "นางสาววศินี",
+    "name": "วิศวกรรมศาสตร์",
+    "date_of_birth": "2542-09-03",
+    "admis_date": "2561-08-06",
+    "grad_date": "0000-00-00",
+    "grad_reason": "พ้นสภาพ 1 / 2562",
+    "degree": "วิทยาศาสตรบัณฑิต",
+    "program": "การจัดการวิศวกรรมและเทคโนโลยี (หลักสูตรนานาชาติ)",
+    "honor": 0,
+    "major": "วิศวกรรมศาสตร์"
+  },
+  "transcript_detail": {
+    "semesters": [
+      {
+        "year": 2561,
+        "sem_num": 1,
+        "GPS": "2.33",
+        "GPA": "2.33",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13006006",
+            "subject_name": "พิชิตเนตรเชิงเส้น",
+            "credit": 3,
+            "grade_earn": "C+"
+          },
+          {
+            "subject_id": "13006007",
+            "subject_name": "แคลคูลัส 1",
+            "credit": 3,
+            "grade_earn": "D+"
+          },
+          {
+            "subject_id": "13006109",
+            "subject_name": "PROGRAMMING FOR MANAGEMENT",
+            "credit": 3,
+            "grade_earn": "D+"
+          },
+          {
+            "subject_id": "13006204",
+            "subject_name": "ภาษาอังกฤษพื้นฐาน 1",
+            "credit": 3,
+            "grade_earn": "B+"
+          },
+          {
+            "subject_id": "13006301",
+            "subject_name": "ตรรกศาสตร์เบื้องต้น",
+            "credit": 3,
+            "grade_earn": "B"
+          },
+          {
+            "subject_id": "13006402",
+            "subject_name": "เศรษฐศาสตร์เบื้องต้น",
+            "credit": 3,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "13006008",
+            "subject_name": "แคลคูลัส 2",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13006104",
+            "subject_name": "เทคโนโลยีอินเทอร์เน็ตเบื้องต้น",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13006205",
+            "subject_name": "ภาษาอังกฤษพื้นฐาน 2",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13026001",
+            "subject_name": "วิศวกรรมสมัยใหม่เบื้องต้น",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13026003",
+            "subject_name": "หลักธุรกิจ",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13026004",
+            "subject_name": "หลักการจัดการ",
+            "credit": 3,
+            "grade_earn": "F"
+          }
+        ]
+      }
+    ],
+    "total_credits_earned": 36,
+    "cumulative_gpa": "1.17",
+    "master_comprehensive": null,
+    "master_thesis": null,
+    "master_qualify": null
+  },
+  "footer_detail": {
+    "updated_at": "2568-01-16",
+    "by": {
+      "by_signature": "(ผู้ช่วยศาสตราจารย์ ดร.ทดสอบ นามสกุล)",
+      "by_position": "ผู้อำนวยการ",
+      "by_reg": "สำนักทะเบียนและบริการการศึกษา"
+    }
+  }
+}
+=== END RAW ===
+    ภาษาเอกสาร: th -> แปลงปีด้วยโค้ด
+  accuracy=0.645  CER=0.299  hall=1  seconds=122.6  (subject F1=0.500)
+
+──────────────────────────────────────────────────────────────────────
+  [6/15] L1_light__heavy
+──────────────────────────────────────────────────────────────────────
+    [ขั้น 1/2] Typhoon-OCR อ่านหน้า 1/1...
+      (scb10x/typhoon-ocr1.5-3b ใช้เวลา 64.1 วิ, ได้ 2,544 ตัวอักษร)
+    บันทึก Markdown ดิบจาก Typhoon: work/out_run2/L1_light__heavy/intermediate_raw.md
+    บันทึก Markdown กลางทาง: work/out_run2/L1_light__heavy/intermediate.md
+    [ขั้น 2/2] qwen3:4b จัดรูปเป็น JSON...
+      (qwen3:4b ใช้เวลา 63.1 วิ, ได้ 3,203 ตัวอักษร)
+=== RAW ===
+{
+  "header_detail": {
+    "uni_name": "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
+    "uni_address": "เลขที่ 1 ซอยฉลองกรุง 1 เขตลาดกระบัง กรุงเทพฯ 10520",
+    "student_id": "71010001",
+    "faculty_name": "คณะวิศวกรรมศาสตร์",
+    "prename": "นางสาววรรคาวี",
+    "name": "วิศวกรรมศาสตร์",
+    "date_of_birth": "2542-09-03",
+    "admis_date": "2561-08-06",
+    "grad_date": "0000-00-00",
+    "grad_reason": "พ้นสภาพ 1 / 2562",
+    "degree": "วิทยาศาสตรบัณฑิต",
+    "program": "การจัดการวิศวกรรมและเทคโนโลยี (หลักสูตรนานาชาติ)",
+    "honor": 0,
+    "major": "วิศวกรรมศาสตร์"
+  },
+  "transcript_detail": {
+    "semesters": [
+      {
+        "year": 2561,
+        "sem_num": 1,
+        "GPS": "2.33",
+        "GPA": "2.33",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13006008",
+            "subject_name": "พัฒนาเว็บไซต์",
+            "credit": 3,
+            "grade_earn": "C+"
+          },
+          {
+            "subject_id": "13006007",
+            "subject_name": "เคลคุลัส 1",
+            "credit": 3,
+            "grade_earn": "D+"
+          },
+          {
+            "subject_id": "13006109",
+            "subject_name": "PROGRAMMING FOR MANAGEMENT",
+            "credit": 3,
+            "grade_earn": "B+"
+          },
+          {
+            "subject_id": "13006204",
+            "subject_name": "ภาษาอังกฤษพื้นฐาน 1",
+            "credit": 3,
+            "grade_earn": "B"
+          },
+          {
+            "subject_id": "13006301",
+            "subject_name": "ตรรกศาสตร์เบื้องต้น",
+            "credit": 3,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "13006402",
+            "subject_name": "เศรษฐศาสตร์เบื้องต้น",
+            "credit": null,
+            "grade_earn": null
+          },
+          {
+            "subject_id": "13006508",
+            "subject_name": "เคลคุลัส 2",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13006104",
+            "subject_name": "เทคโนโลยีอินเทอร์เน็ตเบื้องต้น",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13006205",
+            "subject_name": "ภาษาอังกฤษพื้นฐาน 2",
+            "credit": null,
+            "grade_earn": null
+          },
+          {
+            "subject_id": "13026001",
+            "subject_name": "วิศวกรรมสมัยใหม่เบื้องต้น",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13026003",
+            "subject_name": "หลักธุรกิจ",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13026004",
+            "subject_name": "หลักการจัดการ",
+            "credit": 3,
+            "grade_earn": "F"
+          }
+        ]
+      }
+    ],
+    "total_credits_earned": 36,
+    "cumulative_gpa": "1.17",
+    "master_comprehensive": null,
+    "master_thesis": null,
+    "master_qualify": null
+  },
+  "footer_detail": {
+    "updated_at": "2568-01-16",
+    "by": {
+      "by_signature": "(ผู้ช่วยศาสตราจารย์ ดร.ทดสอบ นามสกุล)",
+      "by_position": "ผู้อำนวยการ",
+      "by_reg": "สำนักทะเบียนและบริการการศึกษา"
+    }
+  }
+}
+=== END RAW ===
+    ภาษาเอกสาร: th -> แปลงปีด้วยโค้ด
+  accuracy=0.548  CER=0.341  hall=1  seconds=127.7  (subject F1=0.417)
+
+──────────────────────────────────────────────────────────────────────
+  [7/15] L2_watermark__none
+──────────────────────────────────────────────────────────────────────
+    [ขั้น 1/2] Typhoon-OCR อ่านหน้า 1/1...
+      (scb10x/typhoon-ocr1.5-3b ใช้เวลา 51.9 วิ, ได้ 2,069 ตัวอักษร)
+    บันทึก Markdown ดิบจาก Typhoon: work/out_run2/L2_watermark__none/intermediate_raw.md
+    บันทึก Markdown กลางทาง: work/out_run2/L2_watermark__none/intermediate.md
+    [ขั้น 2/2] qwen3:4b จัดรูปเป็น JSON...
+      (qwen3:4b ใช้เวลา 57.1 วิ, ได้ 3,307 ตัวอักษร)
+=== RAW ===
+{
+  "header_detail": {
+    "uni_name": "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
+    "uni_address": "เลขที่ 1 ซอยฉลองกรุง 1 เขตลาดกระบัง กรุงเทพฯ 10520",
+    "student_id": "71010001",
+    "faculty_name": "คณะวิศวกรรมศาสตร์",
+    "prename": "นางสาววศี",
+    "name": "วิศวกรรมศาสตร์",
+    "date_of_birth": "2542-09-03",
+    "admis_date": "2561-08-06",
+    "grad_date": "0000-00-00",
+    "grad_reason": null,
+    "degree": "วิทยาศาสตรบัณฑิต",
+    "program": "การจัดการวิศวกรรมและเทคโนโลยี (หลักสูตรนานาชาติ)",
+    "honor": 0
+  },
+  "transcript_detail": {
+    "semesters": [
+      {
+        "year": 2561,
+        "sem_num": 1,
+        "GPS": "2.33",
+        "GPA": null,
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13006006",
+            "subject_name": "พิชคณิตเชิงเส้น",
+            "credit": 3,
+            "grade_earn": "C+"
+          },
+          {
+            "subject_id": "13006007",
+            "subject_name": "แคลคูลัส 1",
+            "credit": 3,
+            "grade_earn": "D+"
+          },
+          {
+            "subject_id": "13006109",
+            "subject_name": "PROGRAMMING FOR MANAGEMENT",
+            "credit": 3,
+            "grade_earn": "D+"
+          },
+          {
+            "subject_id": "13006204",
+            "subject_name": "ภาษาอังกฤษพื้นฐาน 1",
+            "credit": 3,
+            "grade_earn": "B+"
+          },
+          {
+            "subject_id": "13006301",
+            "subject_name": "ตรรกศาสตร์เบื้องต้น",
+            "credit": 3,
+            "grade_earn": "B"
+          },
+          {
+            "subject_id": "13006402",
+            "subject_name": "เศรษฐศาสตร์เบื้องต้น",
+            "credit": 3,
+            "grade_earn": "C"
+          }
+        ]
+      },
+      {
+        "year": 2561,
+        "sem_num": 2,
+        "GPS": null,
+        "GPA": null,
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13006008",
+            "subject_name": "แคลคูลัส 2",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13006104",
+            "subject_name": "เทคโนโลยีอินเทอร์เน็ตเบื้องต้น",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13006205",
+            "subject_name": "ภาษาอังกฤษพื้นฐาน 2",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13026001",
+            "subject_name": "วิศวกรรมสมัยใหม่เบื้องต้น",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13026003",
+            "subject_name": "หลักธุรกิจ",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13026004",
+            "subject_name": "หลักการจัดการ",
+            "credit": 3,
+            "grade_earn": "F"
+          }
+        ]
+      }
+    ],
+    "total_credits_earned": 36,
+    "cumulative_gpa": "1.17",
+    "master_comprehensive": null,
+    "master_thesis": null,
+    "master_qualify": null
+  },
+  "footer_detail": {
+    "updated_at": "2568-01-16",
+    "by": {
+      "by_signature": "ผู้ช่วยศาสตราจารย์ ดร.ทดสอบ นามสกุล",
+      "by_position": "ผู้อำนวยการ",
+      "by_reg": "สำนักทะเบียนและบริการการศึกษา"
+    }
+  }
+}
+=== END RAW ===
+    ภาษาเอกสาร: th -> แปลงปีด้วยโค้ด
+  accuracy=0.935  CER=0.047  hall=0  seconds=109.2  (subject F1=1.000)
+
+──────────────────────────────────────────────────────────────────────
+  [8/15] L2_watermark__light
+──────────────────────────────────────────────────────────────────────
+    [ขั้น 1/2] Typhoon-OCR อ่านหน้า 1/1...
+      (scb10x/typhoon-ocr1.5-3b ใช้เวลา 52.9 วิ, ได้ 2,365 ตัวอักษร)
+    บันทึก Markdown ดิบจาก Typhoon: work/out_run2/L2_watermark__light/intermediate_raw.md
+    บันทึก Markdown กลางทาง: work/out_run2/L2_watermark__light/intermediate.md
+    [ขั้น 2/2] qwen3:4b จัดรูปเป็น JSON...
+      (qwen3:4b ใช้เวลา 62.9 วิ, ได้ 3,599 ตัวอักษร)
+=== RAW ===
+{
+  "header_detail": {
+    "uni_name": "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
+    "uni_address": "เลขที่ 1 ซอยฉลองกรุง 1 เขตลาดกระบัง กรุงเทพฯ 10520",
+    "student_id": "71010001",
+    "faculty_name": "วิศวกรรมศาสตร์",
+    "prename": "นางสาววงศ์1",
+    "name": "วิศวกรรมศาสตร์1",
+    "date_of_birth": "2542-09-03",
+    "admis_date": "2561-08-06",
+    "grad_date": "0000-00-00",
+    "grad_reason": "พ้นสภาพ 1 / 2562",
+    "degree": "วิทยาศาสตรบัณฑิต",
+    "program": "การจัดการวิศวกรรมและเทคโนโลยี (หลักสูตรนานาชาติ)",
+    "honor": 0,
+    "major": "วิศวกรรมศาสตร์"
+  },
+  "transcript_detail": {
+    "semesters": [
+      {
+        "year": 2561,
+        "sem_num": 1,
+        "GPS": "2.33",
+        "GPA": null,
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13006006",
+            "subject_name": "พิชิตนิรเชิงเสน",
+            "credit": 0,
+            "grade_earn": "C+",
+            "type": null
+          },
+          {
+            "subject_id": "13006007",
+            "subject_name": "แคลคูลัส 1",
+            "credit": 0,
+            "grade_earn": "D+",
+            "type": "E"
+          },
+          {
+            "subject_id": "13006109",
+            "subject_name": "PROGRAMMING FOR MANAGEMENT",
+            "credit": 0,
+            "grade_earn": "D+",
+            "type": "E"
+          },
+          {
+            "subject_id": "13006204",
+            "subject_name": "ภาษาอังกฤษพื้นฐาน 1",
+            "credit": 0,
+            "grade_earn": "B+",
+            "type": null
+          },
+          {
+            "subject_id": "13006301",
+            "subject_name": "ตรรกศาสตร์เบื้องต้น",
+            "credit": 0,
+            "grade_earn": "C",
+            "type": "E"
+          },
+          {
+            "subject_id": "13006402",
+            "subject_name": "เศรษฐศาสตร์เบื้องต้น",
+            "credit": 0,
+            "grade_earn": "F",
+            "type": "E"
+          }
+        ]
+      },
+      {
+        "year": 2561,
+        "sem_num": 2,
+        "GPS": "0.00",
+        "GPA": null,
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13006008",
+            "subject_name": "แคลคูลัส 2",
+            "credit": 0,
+            "grade_earn": "F",
+            "type": "E"
+          },
+          {
+            "subject_id": "13006104",
+            "subject_name": "เทคโนโลยีอินเทอร์เน็ตเบื้องต้น",
+            "credit": 0,
+            "grade_earn": "F",
+            "type": "E"
+          },
+          {
+            "subject_id": "13006205",
+            "subject_name": "ภาษาอังกฤษพื้นฐาน 2",
+            "credit": 0,
+            "grade_earn": "F",
+            "type": "E"
+          },
+          {
+            "subject_id": "13026001",
+            "subject_name": "วิศวกรรมสมัยใหม่เบื้องต้น",
+            "credit": 0,
+            "grade_earn": "F",
+            "type": "E"
+          },
+          {
+            "subject_id": "13026003",
+            "subject_name": "หลักธุรกิจ",
+            "credit": 0,
+            "grade_earn": "F",
+            "type": "E"
+          },
+          {
+            "subject_id": "13026004",
+            "subject_name": "หลักการจัดการ",
+            "credit": 0,
+            "grade_earn": "F",
+            "type": "E"
+          }
+        ]
+      }
+    ],
+    "total_credits_earned": 36,
+    "cumulative_gpa": null,
+    "master_comprehensive": null
+  },
+  "footer_detail": {
+    "updated_at": "2568-01-16",
+    "by": {
+      "by_signature": "ผู้ช่วยศาสตราจารย์ ดร.ทดสอบ นามสกุล",
+      "by_position": "ผู้อำนวยการ",
+      "by_reg": "สำนักทะเบียนและบริการการศึกษา"
+    }
+  }
+}
+=== END RAW ===
+    ภาษาเอกสาร: th -> แปลงปีด้วยโค้ด
+  accuracy=0.656  CER=0.094  hall=11  seconds=116.1  (subject F1=1.000)
+
+──────────────────────────────────────────────────────────────────────
+  [9/15] L2_watermark__heavy
+──────────────────────────────────────────────────────────────────────
+    [ขั้น 1/2] Typhoon-OCR อ่านหน้า 1/1...
+      (scb10x/typhoon-ocr1.5-3b ใช้เวลา 54.1 วิ, ได้ 2,386 ตัวอักษร)
+    บันทึก Markdown ดิบจาก Typhoon: work/out_run2/L2_watermark__heavy/intermediate_raw.md
+    บันทึก Markdown กลางทาง: work/out_run2/L2_watermark__heavy/intermediate.md
+    [ขั้น 2/2] qwen3:4b จัดรูปเป็น JSON...
+      (qwen3:4b ใช้เวลา 60.8 วิ, ได้ 3,381 ตัวอักษร)
+=== RAW ===
+{
+  "header_detail": {
+    "uni_name": "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
+    "uni_address": "เลขที่ 1 ซอยฉลองกรุง 1 เขตลาดกระบัง กรุงเทพฯ 10520",
+    "student_id": "71010001",
+    "faculty_name": "คณะวิศวกรรมศาสตร์",
+    "prename": "นางสาววดี",
+    "name": "วิศวกรรมศาสตร์",
+    "date_of_birth": "2542-09-03",
+    "admis_date": "2561-08-06",
+    "grad_date": "0000-00-00",
+    "grad_reason": "พ้นสภาพ 1 / 2562",
+    "degree": "วิทยาศาสตรบัณฑิต",
+    "program": "การจัดการวิศวกรรมและเทคโนโลยี (หลักสูตรนานาชาติ)",
+    "honor": 0,
+    "major": "วิศวกรรมศาสตร์"
+  },
+  "transcript_detail": {
+    "semesters": [
+      {
+        "year": 2561,
+        "sem_num": 1,
+        "GPS": "2.33",
+        "GPA": "2.33",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13006008",
+            "subject_name": "พัฒนาเชิงเส้น 3",
+            "credit": 3,
+            "grade_earn": "D+"
+          },
+          {
+            "subject_id": "13006007",
+            "subject_name": "เคลคุณิต 1 3",
+            "credit": 3,
+            "grade_earn": "D+"
+          },
+          {
+            "subject_id": "13006109",
+            "subject_name": "PROGRAMMING FOR MANAGEMENT 3",
+            "credit": 3,
+            "grade_earn": "B+"
+          },
+          {
+            "subject_id": "13006204",
+            "subject_name": "ภาษาอังกฤษพื้นฐาน 1 3",
+            "credit": 3,
+            "grade_earn": "D+"
+          },
+          {
+            "subject_id": "13006301",
+            "subject_name": "ตรรกศาสตร์เบื้องต้น 3",
+            "credit": 3,
+            "grade_earn": "E"
+          },
+          {
+            "subject_id": "13006402",
+            "subject_name": "เศรษฐศาสตร์เบื้องต้น 3",
+            "credit": 3,
+            "grade_earn": "F"
+          }
+        ]
+      },
+      {
+        "year": 2561,
+        "sem_num": 2,
+        "GPS": "0.00",
+        "GPA": "1.17",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13006008",
+            "subject_name": "เคลคุณิต 2 3",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13006104",
+            "subject_name": "เทคโนโลยีแอพพลิเคชันเบื้องต้น 3",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13006205",
+            "subject_name": "ภาษาอังกฤษพื้นฐาน 2 3",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13026001",
+            "subject_name": "วิศวกรรมสมัยใหม่เบื้องต้น 3",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13026003",
+            "subject_name": "หลักธุรกิจ 3",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13026004",
+            "subject_name": "พลิกการจัดการ 3",
+            "credit": 3,
+            "grade_earn": "F"
+          }
+        ]
+      }
+    ],
+    "total_credits_earned": 36,
+    "cumulative_gpa": "1.17",
+    "master_comprehensive": null,
+    "master_thesis": null,
+    "master_qualify": null
+  },
+  "footer_detail": {
+    "updated_at": "2568-01-16",
+    "by": {
+      "by_signature": "(ผู้ช่วยศาสตราจารย์ ดร.ทดสอบ นามสกุล)",
+      "by_position": "ผู้อำนวยการ",
+      "by_reg": "สำนักทะเบียนและบริการการศึกษา"
+    }
+  }
+}
+=== END RAW ===
+    ภาษาเอกสาร: th -> แปลงปีด้วยโค้ด
+  accuracy=0.753  CER=0.126  hall=1  seconds=115.2  (subject F1=0.917)
+
+──────────────────────────────────────────────────────────────────────
+  [10/15] L3_tilted_copy__none
+──────────────────────────────────────────────────────────────────────
+    [ขั้น 1/2] Typhoon-OCR อ่านหน้า 1/1...
+      (scb10x/typhoon-ocr1.5-3b ใช้เวลา 44.9 วิ, ได้ 1,817 ตัวอักษร)
+    บันทึก Markdown ดิบจาก Typhoon: work/out_run2/L3_tilted_copy__none/intermediate_raw.md
+    บันทึก Markdown กลางทาง: work/out_run2/L3_tilted_copy__none/intermediate.md
+    [ขั้น 2/2] qwen3:4b จัดรูปเป็น JSON...
+      (qwen3:4b ใช้เวลา 57.2 วิ, ได้ 3,233 ตัวอักษร)
+=== RAW ===
+{
+  "header_detail": {
+    "uni_name": "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
+    "uni_address": "เลขที่ 1 ซอยฉลองกรุง 1 เขตลาดกระบัง กรุงเทพฯ 10520",
+    "student_id": "71010001",
+    "faculty_name": "คณะวิศวกรรมศาสตร์",
+    "prename": "วรศี",
+    "name": "วิศวกรรมศาสตร์",
+    "date_of_birth": "2542-09-03",
+    "admis_date": "2561-08-06",
+    "grad_date": "0000-00-00",
+    "grad_reason": "พ้นสภาพ 1 / 2562",
+    "degree": "วิทยาศาสตรบัณฑิต",
+    "program": "การจัดการวิศวกรรมและเทคโนโลยี (หลักสูตรนานาชาติ)",
+    "honor": 0
+  },
+  "transcript_detail": {
+    "semesters": [
+      {
+        "year": 2561,
+        "sem_num": 1,
+        "GPS": "2.33",
+        "GPA": "2.33",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13006006",
+            "subject_name": "พืชคณิตเชิงเส้น",
+            "credit": 3,
+            "grade_earn": "C+"
+          },
+          {
+            "subject_id": "13006007",
+            "subject_name": "เทคลูดส์ 1",
+            "credit": 3,
+            "grade_earn": "D+"
+          },
+          {
+            "subject_id": "13006109",
+            "subject_name": "PROGRAMMING FOR MANAGEMENT",
+            "credit": 3,
+            "grade_earn": "D+"
+          },
+          {
+            "subject_id": "13006204",
+            "subject_name": "ภาษาอังกฤษพื้นฐาน 1",
+            "credit": 3,
+            "grade_earn": "B+"
+          },
+          {
+            "subject_id": "13006301",
+            "subject_name": "ตรรกศาสตร์เบื้องต้น",
+            "credit": 3,
+            "grade_earn": "B"
+          },
+          {
+            "subject_id": "13006402",
+            "subject_name": "เศรษฐศาสตร์เบื้องต้น",
+            "credit": 3,
+            "grade_earn": "C"
+          }
+        ]
+      },
+      {
+        "year": 2561,
+        "sem_num": 2,
+        "GPS": "0.00",
+        "GPA": "1.17",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13006008",
+            "subject_name": "เคลคูดส์ 2",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13006104",
+            "subject_name": "เทคโนโลยีอินเทอร์เน็ตเบื้องต้น",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13006205",
+            "subject_name": "ภาษาอังกฤษพื้นฐาน 2",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13026001",
+            "subject_name": "วิศวกรรมสมัยใหม่เบื้องต้น",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13026003",
+            "subject_name": "หลักธุรกิจ",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13026004",
+            "subject_name": "หลักการจัดการ",
+            "credit": 3,
+            "grade_earn": "F"
+          }
+        ]
+      }
+    ],
+    "total_credits_earned": 36,
+    "cumulative_gpa": "1.17"
+  },
+  "footer_detail": {
+    "updated_at": "2568-01-16",
+    "by": {
+      "by_signature": "ผู้ช่วยศาสตราจารย์ ดร.ทดสอบ นามสกุล",
+      "by_position": "ผู้อำนวยการ",
+      "by_reg": "สำนักทะเบียนและบริการการศึกษา"
+    }
+  }
+}
+=== END RAW ===
+    ภาษาเอกสาร: th -> แปลงปีด้วยโค้ด
+  accuracy=0.935  CER=0.037  hall=0  seconds=102.1  (subject F1=1.000)
+
+──────────────────────────────────────────────────────────────────────
+  [11/15] L3_tilted_copy__light
+──────────────────────────────────────────────────────────────────────
+    [ขั้น 1/2] Typhoon-OCR อ่านหน้า 1/1...
+      (scb10x/typhoon-ocr1.5-3b ใช้เวลา 52.0 วิ, ได้ 2,387 ตัวอักษร)
+    บันทึก Markdown ดิบจาก Typhoon: work/out_run2/L3_tilted_copy__light/intermediate_raw.md
+    บันทึก Markdown กลางทาง: work/out_run2/L3_tilted_copy__light/intermediate.md
+    [ขั้น 2/2] qwen3:4b จัดรูปเป็น JSON...
+      (qwen3:4b ใช้เวลา 58.7 วิ, ได้ 3,356 ตัวอักษร)
+=== RAW ===
+{
+  "header_detail": {
+    "uni_name": "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
+    "uni_address": "เลขที่ 1 ซอยฉลองกรุง 1 เขตลาดกระบัง กรุงเทพฯ 10520",
+    "student_id": "71010001",
+    "faculty_name": "คณะวิศวกรรมศาสตร์",
+    "prename": "นางสาววรศัพท์",
+    "name": "วิศวกรรมศาสตร์",
+    "date_of_birth": "2542-09-03",
+    "admis_date": "2561-08-06",
+    "grad_date": "0000-00-00",
+    "grad_reason": "พ้นสภาพ 1 / 2562",
+    "degree": "วิทยาศาสตรบัณฑิต",
+    "program": "การจัดการวิศวกรรมและเทคโนโลยี (หลักสูตรนานาชาติ)",
+    "honor": 0,
+    "major": "วิศวกรรมศาสตร์"
+  },
+  "transcript_detail": {
+    "semesters": [
+      {
+        "year": 2561,
+        "sem_num": 1,
+        "GPS": "2.33",
+        "GPA": "2.33",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13006008",
+            "subject_name": "พิจารณาเชิงเส้น",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13006007",
+            "subject_name": "เคลคุณ 1",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13006109",
+            "subject_name": "PROGRAMMING FOR MANAGEMENT",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13006204",
+            "subject_name": "ภาษาอังกฤษพื้นฐาน 1",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13006301",
+            "subject_name": "ตรรกศาสตร์เบื้องต้น",
+            "credit": 3,
+            "grade_earn": "B"
+          },
+          {
+            "subject_id": "13006402",
+            "subject_name": "เศรษฐศาสตร์เบื้องต้น",
+            "credit": 3,
+            "grade_earn": "C"
+          }
+        ]
+      },
+      {
+        "year": 2561,
+        "sem_num": 2,
+        "GPS": "1.17",
+        "GPA": "1.17",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13006008",
+            "subject_name": "เคลคุณ 2",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13006104",
+            "subject_name": "เทคโนโลยีอินเทอร์เน็ตเบื้องต้น",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13006205",
+            "subject_name": "ภาษาอังกฤษพื้นฐาน 2",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13026001",
+            "subject_name": "วิศวกรรมสมัยใหม่เบื้องต้น",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13026003",
+            "subject_name": "หลักธุรกิจ",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13026004",
+            "subject_name": "หลักการจัดการ",
+            "credit": 3,
+            "grade_earn": "F"
+          }
+        ]
+      }
+    ],
+    "total_credits_earned": 36,
+    "cumulative_gpa": "1.17",
+    "master_comprehensive": null,
+    "master_thesis": null,
+    "master_qualify": null
+  },
+  "footer_detail": {
+    "updated_at": "2568-01-16",
+    "by": {
+      "by_signature": "(ผู้ช่วยศาสตราจารย์ ดร.ทดสอบ นามสกุล)",
+      "by_position": "ผู้อำนวยการ",
+      "by_reg": "สำนักทะเบียนและบริการการศึกษา"
+    }
+  }
+}
+=== END RAW ===
+    ภาษาเอกสาร: th -> แปลงปีด้วยโค้ด
+  accuracy=0.850  CER=0.103  hall=1  seconds=111.0  (subject F1=0.917)
+
+──────────────────────────────────────────────────────────────────────
+  [12/15] L3_tilted_copy__heavy
+──────────────────────────────────────────────────────────────────────
+    [ขั้น 1/2] Typhoon-OCR อ่านหน้า 1/1...
+      (scb10x/typhoon-ocr1.5-3b ใช้เวลา 47.2 วิ, ได้ 2,083 ตัวอักษร)
+    บันทึก Markdown ดิบจาก Typhoon: work/out_run2/L3_tilted_copy__heavy/intermediate_raw.md
+    บันทึก Markdown กลางทาง: work/out_run2/L3_tilted_copy__heavy/intermediate.md
+    [ขั้น 2/2] qwen3:4b จัดรูปเป็น JSON...
+      (qwen3:4b ใช้เวลา 54.3 วิ, ได้ 3,285 ตัวอักษร)
+=== RAW ===
+{
+  "header_detail": {
+    "uni_name": "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
+    "uni_address": "เลขที่ 1 ซอยฉลองกรุง 1 เขตลาดกระบัง กรุงเทพฯ 10520",
+    "student_id": "71010001",
+    "faculty_name": "วิศวกรรมศาสตร์",
+    "prename": "นางสาววรดา",
+    "name": "วรดา วิศวกรรมศาสตร์",
+    "date_of_birth": "2542-09-03",
+    "admis_date": "2561-08-08",
+    "grad_date": "0000-00-00",
+    "grad_reason": "พ้นสภาพ 1/2562",
+    "degree": "วิทยาศาสตรบัณฑิต",
+    "program": "การจัดการวิศวกรรมและเทคโนโลยี (หลักสูตรนานาชาติ)",
+    "honor": 0
+  },
+  "transcript_detail": {
+    "semesters": [
+      {
+        "year": 2561,
+        "sem_num": 1,
+        "GPS": "2.33",
+        "GPA": null,
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13008008",
+            "subject_name": "พัฒนาเชิงเด่น",
+            "credit": 3,
+            "grade_earn": "C+"
+          },
+          {
+            "subject_id": "13006007",
+            "subject_name": "เทคโนโลยี 2 D-",
+            "credit": null,
+            "grade_earn": null
+          },
+          {
+            "subject_id": "13008109",
+            "subject_name": "PROGRAMMING FOR MANAGEMENT",
+            "credit": 3,
+            "grade_earn": "D+"
+          },
+          {
+            "subject_id": "13006204",
+            "subject_name": "ภาษาอังกฤษพื้นฐาน 3 B-",
+            "credit": null,
+            "grade_earn": null
+          },
+          {
+            "subject_id": "13006301",
+            "subject_name": "ตรรกศาสตร์เบื้องต้น",
+            "credit": 3,
+            "grade_earn": "B+"
+          },
+          {
+            "subject_id": "13008402",
+            "subject_name": "เศรษฐศาสตร์เบื้องต้น 3 C-",
+            "credit": null,
+            "grade_earn": null
+          }
+        ]
+      },
+      {
+        "year": 2561,
+        "sem_num": 2,
+        "GPS": "0.00",
+        "GPA": null,
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13008008",
+            "subject_name": "เทคโนโลยี",
+            "credit": 2,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13006104",
+            "subject_name": "เทคโนโลยีสินทรัพย์เบื้องต้น",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13006205",
+            "subject_name": "ภาษาอังกฤษพื้นฐาน",
+            "credit": 2,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13028001",
+            "subject_name": "วิศวกรรมสมัยใหม่เบื้องต้น",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13026003",
+            "subject_name": "หลักสูตรกิต",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13028004",
+            "subject_name": "หลักการจัดการ",
+            "credit": 3,
+            "grade_earn": "F"
+          }
+        ]
+      }
+    ],
+    "total_credits_earned": 38,
+    "cumulative_gpa": "1.17",
+    "master_comprehensive": null
+  },
+  "footer_detail": {
+    "updated_at": "2568-01-16",
+    "by": {
+      "by_signature": "ผู้ช่วยศาสตราจารย์ ดร.ทดสอบ นามสกุล",
+      "by_position": "ผู้อำนวยการ",
+      "by_reg": "สำนักทะเบียนและบริการการศึกษา"
+    }
+  }
+}
+=== END RAW ===
+    ภาษาเอกสาร: th -> แปลงปีด้วยโค้ด
+  accuracy=0.548  CER=0.320  hall=0  seconds=101.8  (subject F1=0.500)
+
+──────────────────────────────────────────────────────────────────────
+  [13/15] L4_rescan__none
+──────────────────────────────────────────────────────────────────────
+    [ขั้น 1/2] Typhoon-OCR อ่านหน้า 1/1...
+      (scb10x/typhoon-ocr1.5-3b ใช้เวลา 288.6 วิ, ได้ 15,731 ตัวอักษร)
+    บันทึก Markdown ดิบจาก Typhoon: work/out_run2/L4_rescan__none/intermediate_raw.md
+    บันทึก Markdown กลางทาง: work/out_run2/L4_rescan__none/intermediate.md
+    [ขั้น 2/2] qwen3:4b จัดรูปเป็น JSON...
+      (qwen3:4b ใช้เวลา 306.7 วิ, ได้ 14,624 ตัวอักษร)
+=== RAW ===
+{
+  "header_detail": {
+    "uni_name": "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
+    "uni_address": "เลขที่ 1 ซอยฉลองกรุง 1 เขตลาดกระบัง กรุงเทพฯ 10520",
+    "student_id": "71010001",
+    "faculty_name": "วิศวกรรมศาสตร์",
+    "prename": "นางสาววรศรี",
+    "name": "วิศวกรรมศาสตร์",
+    "date_of_birth": "2542-09-03",
+    "admis_date": "2561-08-06",
+    "grad_date": "0000-00-00",
+    "grad_reason": null,
+    "degree": "วิทยาศาสตรบัณฑิต",
+    "program": "การจัดการวิศวกรรมและเทคโนโลยี (หลักสูตรนานาชาติ)",
+    "honor": 0,
+    "major": "วิศวกรรมศาสตร์"
+  },
+  "transcript_detail": {
+    "semesters": [
+      {
+        "year": 2561,
+        "sem_num": 1,
+        "GPS": "2.33",
+        "GPA": "2.33",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          }
+        ]
+      },
+      {
+        "year": 2561,
+        "sem_num": 2,
+        "GPS": "2.33",
+        "GPA": "2.33",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "[Course Code]",
+            "subject_name": "ชื่อ-สกุล",
+            "credit": 0,
+            "grade_earn": "C"
+          }
+        ]
+      }
+    ],
+    "total_credits_earned": 0,
+    "cumulative_gpa": "2.33"
+  }
+}
+=== END RAW ===
+    ภาษาเอกสาร: th -> แปลงปีด้วยโค้ด
+  accuracy=0.355  CER=0.667  hall=1  seconds=595.4  (subject F1=0.000)
+
+──────────────────────────────────────────────────────────────────────
+  [14/15] L4_rescan__light
+──────────────────────────────────────────────────────────────────────
+    [ขั้น 1/2] Typhoon-OCR อ่านหน้า 1/1...
+      (scb10x/typhoon-ocr1.5-3b ใช้เวลา 68.8 วิ, ได้ 2,339 ตัวอักษร)
+    บันทึก Markdown ดิบจาก Typhoon: work/out_run2/L4_rescan__light/intermediate_raw.md
+    บันทึก Markdown กลางทาง: work/out_run2/L4_rescan__light/intermediate.md
+    [ขั้น 2/2] qwen3:4b จัดรูปเป็น JSON...
+      (qwen3:4b ใช้เวลา 83.5 วิ, ได้ 4,250 ตัวอักษร)
+=== RAW ===
+{
+  "header_detail": {
+    "uni_name": "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
+    "uni_address": "เลขที่ 1 ซอยฉลองกรุง 1 เขตลาดกระบัง กรุงเทพฯ 10520",
+    "student_id": "71010001",
+    "faculty_name": "คณะวิศวกรรมศาสตร์",
+    "prename": "นางสาววรดา",
+    "name": "วิศวกรรมศาสตร์",
+    "date_of_birth": "2542-09-03",
+    "admis_date": "2561-08-06",
+    "grad_date": "0000-00-00",
+    "grad_reason": "พ้นสภาพ 1 / 2562",
+    "degree": "วิทยาศาสตรบัณฑิต",
+    "program": "การจัดการวิศวกรรมและเทคโนโลยี (หลักสูตรนานาชาติ)",
+    "honor": 0,
+    "major": "วิศวกรรมศาสตร์"
+  },
+  "transcript_detail": {
+    "semesters": [
+      {
+        "year": 2561,
+        "sem_num": 1,
+        "GPS": null,
+        "GPA": null,
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13006008",
+            "subject_name": "พัฒนาสื่อสาร (คอมพิวเตอร์)",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13006007",
+            "subject_name": "เคล็ดลับ 1",
+            "credit": 3,
+            "grade_earn": "D+"
+          }
+        ]
+      },
+      {
+        "year": 2561,
+        "sem_num": 2,
+        "GPS": null,
+        "GPA": null,
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13006109",
+            "subject_name": "PROGRAMMING FOR MANAGEMENT",
+            "credit": 3,
+            "grade_earn": "C+"
+          },
+          {
+            "subject_id": "13006204",
+            "subject_name": "การจัดการธุรกิจพื้นฐาน 1",
+            "credit": 3,
+            "grade_earn": "B+"
+          },
+          {
+            "subject_id": "13006301",
+            "subject_name": "ครรภศาสตร์เบื้องต้น",
+            "credit": 3,
+            "grade_earn": "C+"
+          }
+        ]
+      },
+      {
+        "year": 2562,
+        "sem_num": 2,
+        "GPS": null,
+        "GPA": null,
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13006402",
+            "subject_name": "เศรษฐศาสตร์เบื้องต้น",
+            "credit": 3,
+            "grade_earn": "F"
+          },
+          {
+            "subject_id": "13006008",
+            "subject_name": "เคล็ดลับ 2",
+            "credit": 3,
+            "grade_earn": "C+"
+          }
+        ]
+      },
+      {
+        "year": 2563,
+        "sem_num": 3,
+        "GPS": null,
+        "GPA": null,
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13006104",
+            "subject_name": "เทคโนโลยีอินเทอร์เน็ตเบื้องต้น",
+            "credit": 3,
+            "grade_earn": "C+"
+          }
+        ]
+      },
+      {
+        "year": 2563,
+        "sem_num": 4,
+        "GPS": null,
+        "GPA": null,
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13006205",
+            "subject_name": "การจัดการธุรกิจพื้นฐาน 2",
+            "credit": 3,
+            "grade_earn": "C+"
+          }
+        ]
+      },
+      {
+        "year": 2563,
+        "sem_num": 5,
+        "GPS": null,
+        "GPA": null,
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13028001",
+            "subject_name": "วิศวกรรมสมัยใหม่เบื้องต้น",
+            "credit": 3,
+            "grade_earn": "C+"
+          }
+        ]
+      },
+      {
+        "year": 2563,
+        "sem_num": 6,
+        "GPS": null,
+        "GPA": null,
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13028003",
+            "subject_name": "เหล็กสูงอุตสาหกรรม",
+            "credit": 3,
+            "grade_earn": "C+"
+          }
+        ]
+      },
+      {
+        "year": 2563,
+        "sem_num": 7,
+        "GPS": null,
+        "GPA": null,
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13028004",
+            "subject_name": "เหล็กกิจกรรมทางวิชาการ",
+            "credit": 3,
+            "grade_earn": "C+"
+          }
+        ]
+      }
+    ],
+    "total_credits_earned": 36,
+    "cumulative_gpa": "1.17",
+    "master_comprehensive": "C+"
+  },
+  "footer_detail": {
+    "updated_at": "2568-01-16",
+    "by": {
+      "by_signature": "CERTIFIED",
+      "by_position": null,
+      "by_reg": null
+    }
+  }
+}
+=== END RAW ===
+    ภาษาเอกสาร: th -> แปลงปีด้วยโค้ด
+  accuracy=0.398  CER=0.617  hall=2  seconds=153.0  (subject F1=0.118)
+
+──────────────────────────────────────────────────────────────────────
+  [15/15] L4_rescan__heavy
+──────────────────────────────────────────────────────────────────────
+    [ขั้น 1/2] Typhoon-OCR อ่านหน้า 1/1...
+      (scb10x/typhoon-ocr1.5-3b ใช้เวลา 67.6 วิ, ได้ 2,763 ตัวอักษร)
+    บันทึก Markdown ดิบจาก Typhoon: work/out_run2/L4_rescan__heavy/intermediate_raw.md
+    บันทึก Markdown กลางทาง: work/out_run2/L4_rescan__heavy/intermediate.md
+    [ขั้น 2/2] qwen3:4b จัดรูปเป็น JSON...
+      (qwen3:4b ใช้เวลา 62.0 วิ, ได้ 3,326 ตัวอักษร)
+=== RAW ===
+{
+  "header_detail": {
+    "uni_name": "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
+    "uni_address": "เลขที่ 1 ซอยฉลองกรุง 1 เขตลาดกระบัง กรุงเทพฯ 10520",
+    "student_id": "T1010001",
+    "faculty_name": "คณะวิศวกรรมศาสตร์",
+    "prename": "นางสาววดี",
+    "name": "วิภาวรรณศาสตร์",
+    "date_of_birth": "2542-09-03",
+    "admis_date": "2561-08-06",
+    "grad_date": "0000-00-00",
+    "grad_reason": "พ้นสภาพ 1/2562",
+    "degree": "วิทยาศาสตรบัณฑิต",
+    "program": "การจัดการวิศวกรรมและเทคโนโลยี (นักสูตรนานาชาติ)",
+    "honor": 0,
+    "major": "วิศวกรรมศาสตร์"
+  },
+  "transcript_detail": {
+    "semesters": [
+      {
+        "year": 2561,
+        "sem_num": 1,
+        "GPS": "2.59",
+        "GPA": "1.73",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13008009",
+            "subject_name": "คอมพิวเตอร์อินเทอร์เน็ต",
+            "credit": 3,
+            "grade_earn": null
+          },
+          {
+            "subject_id": "13008007",
+            "subject_name": "เครื่องมือ 1",
+            "credit": 3,
+            "grade_earn": null
+          },
+          {
+            "subject_id": "13008109",
+            "subject_name": "PROGRAMMING FOR MANAGEMENT",
+            "credit": 3,
+            "grade_earn": "D+"
+          },
+          {
+            "subject_id": "13006504",
+            "subject_name": "ภาษาอังกฤษพื้นฐาน I",
+            "credit": 3,
+            "grade_earn": "D+"
+          },
+          {
+            "subject_id": "13006501",
+            "subject_name": "ตรรกศาสตร์เบื้องต้น",
+            "credit": 3,
+            "grade_earn": "D+"
+          },
+          {
+            "subject_id": "13006402",
+            "subject_name": "เศรษฐศาสตร์เบื้องต้น",
+            "credit": 3,
+            "grade_earn": "D+"
+          }
+        ]
+      },
+      {
+        "year": 2561,
+        "sem_num": 2,
+        "GPS": "0.96",
+        "GPA": "1.73",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13008009",
+            "subject_name": "เครื่องมืออิเล็กทรอนิกส์และคอมพิวเตอร์",
+            "credit": 3,
+            "grade_earn": "D+"
+          },
+          {
+            "subject_id": "13008104",
+            "subject_name": "เทคโนโลยีอิเล็กทรอนิกส์เบื้องต้น",
+            "credit": 3,
+            "grade_earn": "D+"
+          },
+          {
+            "subject_id": "13008206",
+            "subject_name": "ภาษาอังกฤษพื้นฐาน II",
+            "credit": 3,
+            "grade_earn": "D+"
+          },
+          {
+            "subject_id": "13028001",
+            "subject_name": "วิศวกรรมสมัยใหม่และปัญญาประดิษฐ์",
+            "credit": 3,
+            "grade_earn": "D+"
+          },
+          {
+            "subject_id": "13028003",
+            "subject_name": "หลักสูตรทั่วไป",
+            "credit": 3,
+            "grade_earn": "D+"
+          },
+          {
+            "subject_id": "13028004",
+            "subject_name": "พลังงานจัดการ",
+            "credit": 3,
+            "grade_earn": "D+"
+          }
+        ]
+      }
+    ],
+    "total_credits_earned": 24,
+    "cumulative_gpa": null
+  },
+  "footer_detail": {
+    "updated_at": "2568-01-16",
+    "by": {
+      "by_signature": "(ผู้ช่วยศาสตราจารย์ ดร.พดสอบ นามสกุล)",
+      "by_position": "ผู้อำนวยการ",
+      "by_reg": "สำนักทะเบียนและบริการการศึกษา"
+    }
+  }
+}
+=== END RAW ===
+    ภาษาเอกสาร: th -> แปลงปีด้วยโค้ด
+  accuracy=0.387  CER=0.503  hall=1  seconds=130.0  (subject F1=0.083)
+
+  ความถูกต้องระดับฟิลด์ (ยิ่งสูงยิ่งดี)
+  ระดับ noise             none     light     heavy
+  L0_clean             0.753 *   0.699     0.473  
+  L1_light             0.570     0.645 *   0.548  
+  L2_watermark         0.935 *   0.656     0.753  
+  L3_tilted_copy       0.935 *   0.850     0.548  
+  L4_rescan            0.355     0.398 *   0.387  
+
+  CER (ยิ่งต่ำยิ่งดี)
+  ระดับ noise             none     light     heavy
+  L0_clean             0.206 *   0.323     0.397  
+  L1_light             0.410     0.299 *   0.341  
+  L2_watermark         0.047 *   0.094     0.126  
+  L3_tilted_copy       0.037 *   0.103     0.320  
+  L4_rescan            0.667     0.617     0.503 *
+
+  hall — ช่องที่แต่งขึ้นมา (ยิ่งต่ำยิ่งดี)
+  ระดับ noise             none     light     heavy
+  L0_clean                 0 *       0 *       3  
+  L1_light                 0 *       1         1  
+  L2_watermark             0 *      11         1  
+  L3_tilted_copy           0 *       1         0 *
+  L4_rescan                1 *       2         1 *
+
+  เวลา วินาที (ยิ่งต่ำยิ่งเร็ว)
+  ระดับ noise             none     light     heavy
+  L0_clean             104.6 *   127.2     135.2  
+  L1_light             100.8 *   122.6     127.7  
+  L2_watermark         109.2 *   116.1     115.2  
+  L3_tilted_copy       102.1     111.0     101.8 *
+  L4_rescan            595.4     153.0     130.0 *
+  * = ดีที่สุดของแถวนั้น
+
+  ตาราง CSV: work/out_run2/sweep.csv
+  กราฟ: work/out_run2/sweep_plot.png

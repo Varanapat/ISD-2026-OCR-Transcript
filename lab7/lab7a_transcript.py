@@ -1316,6 +1316,11 @@ def pipeline_vlm(pages: list[bytes], save_md: Path | None = None) -> dict:
     # ถ้า JSON ออกมาผิด เราต้องรู้ว่าผิดที่ขั้นไหน
     normalized_document_text = normalize_typhoon_table(document_text)
     if save_md:
+        # ผลดิบจาก Typhoon (ก่อนจัดตาราง) — ไว้เทียบว่าข้อมูลหายตอน Typhoon อ่าน
+        # หรือหายตอน normalize_typhoon_table() จัดตาราง
+        raw_md = save_md.with_name(save_md.stem + "_raw" + save_md.suffix)
+        raw_md.write_text(document_text, encoding="utf-8")
+        print(f"    บันทึก Markdown ดิบจาก Typhoon: {raw_md}")
         save_md.write_text(normalized_document_text, encoding="utf-8")
         print(f"    บันทึก Markdown กลางทาง: {save_md}")
 
@@ -1433,8 +1438,9 @@ def verify_internal(data: dict) -> dict:
         y, n = s.get("year"), s.get("sem_num")
         if not isinstance(y, int) or not (2500 <= y <= 2600):
             issues.append(f"ปีการศึกษาผิดปกติ: {y!r} (คาดว่าเป็น พ.ศ. เช่น 2561)")
-        if n not in (1, 2, 3):
-            issues.append(f"ภาคการศึกษาผิดปกติ: {n!r} (ต้องเป็น 1, 2 หรือ 3)")
+        # 0 = ภาควิชาเทียบโอน / ภาคฤดูร้อน (ground truth ใช้ sem_num 0 กับกรณีนี้)
+        if n not in (0, 1, 2, 3):
+            issues.append(f"ภาคการศึกษาผิดปกติ: {n!r} (ต้องเป็น 0, 1, 2 หรือ 3)")
 
         # ── กฎ 3: ห้ามมีภาคการศึกษาซ้ำ ──────────────────────────────
         # ถ้าซ้ำ มักแปลว่าโมเดลอ่านหน้าเดิมสองรอบ หรือแบ่งภาคผิด
@@ -1493,9 +1499,10 @@ def verify_internal(data: dict) -> dict:
             if not isinstance(c, int):
                 issues.append(f"[{tag}] หน่วยกิตไม่ใช่จำนวนเต็ม: {c!r} "
                               f"ที่วิชา {sub.get('subject_id')}")
-            elif not (1 <= c <= 9):
+            # ข้อมูลจริงมี 0 (ฝึกงาน), 12 และ 48 (วิทยานิพนธ์/ดุษฎีนิพนธ์)
+            elif not (0 <= c <= 48):
                 issues.append(f"[{tag}] หน่วยกิตผิดปกติ: {c} "
-                              f"ที่วิชา {sub.get('subject_id')} (คาดว่า 1-9)")
+                              f"ที่วิชา {sub.get('subject_id')} (คาดว่า 0-48)")
             else:
                 term_credits += c
 

@@ -1,0 +1,133 @@
+{
+  "header_detail": {
+    "uni_name": "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
+    "uni_address": "เลขที่ 1 ซอยฉลองกรุง 1 เขตลาดกระบัง กรุงเทพฯ 10520",
+    "student_id": "T1010001",
+    "faculty_name": "คณะวิศวกรรมศาสตร์",
+    "prename": "นางสาว",
+    "name": "วดี วิภาวรรณศาสตร์",
+    "date_of_birth": "1999-09-03",
+    "admis_date": "2018-08-06",
+    "grad_date": "0000-00-00",
+    "grad_reason": "พ้นสภาพ 1/2562",
+    "degree": "วิทยาศาสตรบัณฑิต",
+    "program": "การจัดการวิศวกรรมและเทคโนโลยี (นักสูตรนานาชาติ)",
+    "honor": 0,
+    "major": "วิศวกรรมศาสตร์"
+  },
+  "transcript_detail": {
+    "semesters": [
+      {
+        "year": 2561,
+        "sem_num": 1,
+        "GPS": "2.59",
+        "GPA": "1.73",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13008009",
+            "subject_name": "คอมพิวเตอร์อินเทอร์เน็ต",
+            "credit": 3,
+            "grade_earn": null
+          },
+          {
+            "subject_id": "13008007",
+            "subject_name": "เครื่องมือ 1",
+            "credit": 3,
+            "grade_earn": null
+          },
+          {
+            "subject_id": "13008109",
+            "subject_name": "PROGRAMMING FOR MANAGEMENT",
+            "credit": 3,
+            "grade_earn": "D+"
+          },
+          {
+            "subject_id": "13006504",
+            "subject_name": "ภาษาอังกฤษพื้นฐาน I",
+            "credit": 3,
+            "grade_earn": "D+"
+          },
+          {
+            "subject_id": "13006501",
+            "subject_name": "ตรรกศาสตร์เบื้องต้น",
+            "credit": 3,
+            "grade_earn": "D+"
+          },
+          {
+            "subject_id": "13006402",
+            "subject_name": "เศรษฐศาสตร์เบื้องต้น",
+            "credit": 3,
+            "grade_earn": "D+"
+          }
+        ]
+      },
+      {
+        "year": 2561,
+        "sem_num": 2,
+        "GPS": "0.96",
+        "GPA": "1.73",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13008009",
+            "subject_name": "เครื่องมืออิเล็กทรอนิกส์และคอมพิวเตอร์",
+            "credit": 3,
+            "grade_earn": "D+"
+          },
+          {
+            "subject_id": "13008104",
+            "subject_name": "เทคโนโลยีอิเล็กทรอนิกส์เบื้องต้น",
+            "credit": 3,
+            "grade_earn": "D+"
+          },
+          {
+            "subject_id": "13008206",
+            "subject_name": "ภาษาอังกฤษพื้นฐาน II",
+            "credit": 3,
+            "grade_earn": "D+"
+          },
+          {
+            "subject_id": "13028001",
+            "subject_name": "วิศวกรรมสมัยใหม่และปัญญาประดิษฐ์",
+            "credit": 3,
+            "grade_earn": "D+"
+          },
+          {
+            "subject_id": "13028003",
+            "subject_name": "หลักสูตรทั่วไป",
+            "credit": 3,
+            "grade_earn": "D+"
+          },
+          {
+            "subject_id": "13028004",
+            "subject_name": "พลังงานจัดการ",
+            "credit": 3,
+            "grade_earn": "D+"
+          }
+        ]
+      }
+    ],
+    "total_credits_earned": 24,
+    "cumulative_gpa": null
+  },
+  "footer_detail": {
+    "updated_at": "2025-01-16",
+    "by": {
+      "by_signature": "(ผู้ช่วยศาสตราจารย์ ดร.พดสอบ นามสกุล)",
+      "by_position": "ผู้อำนวยการ",
+      "by_reg": "สำนักทะเบียนและบริการการศึกษา"
+    }
+  },
+  "_meta": {
+    "level": "L4_rescan",
+    "method": "heavy",
+    "seconds": 132.0,
+    "clean_seconds": 0.6,
+    "error": null,
+    "models": {
+      "ocr": "scb10x/typhoon-ocr1.5-3b",
+      "text": "qwen3:4b"
+    }
+  }
+}

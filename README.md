@@ -39,6 +39,9 @@ ocr_system/
 ├── outputs/                   # ผลลัพธ์ OCR / evaluation / benchmark / report (สร้างอัตโนมัติ ลบได้)
 ├── scripts/
 │   └── run_all.sh             # รัน benchmark ทุก dataset แล้วสร้าง report
+├── lab7/
+│   ├── lab7a_transcript.py    # Lab 7A: เทียบระบบของเรา (ocr_system) กับ VLM (Typhoon-OCR + Qwen3)
+│   └── lab7_metrics.py        # โมดูลวัดผล CER/WER ของแล็บ (ไม่ต้องแก้)
 └── src/
     └── ocr_system/
         ├── cli.py             # command line: ocr / extract / evaluate / benchmark / augment / report
@@ -618,6 +621,43 @@ python -m ocr_system.cli report --run set1 outputs/benchmark data/ground_truth -
 หมายเหตุ:
 - นับเฉพาะช่องที่ ground truth ไม่ใช่ `null` และเทียบตามตำแหน่ง (วิชาเลื่อนแถว = ผิดทั้งแถว)
 - `pages_100%` มักเป็น 0 เพราะ ground truth บางช่องไม่ตรงกับเอกสาร (เช่น `updated_at`) จึงดู `pages_>=90%` ประกอบ
+
+---
+
+## 7. Lab 7A — เทียบระบบของเรากับ VLM
+
+`lab7/lab7a_transcript.py` คือสคริปต์ Lab 7A ที่เชื่อมกับโปรเจกต์นี้แล้ว: pipeline **baseline เดิม (Tesseract + regex ในไฟล์) ถูกแทนด้วย pipeline `ocr_system`** ที่เรียกคำสั่ง `python -m ocr_system.cli ocr ...` ของเรา ส่วน pipeline **`vlm`** (Typhoon-OCR → Qwen3) และการประเมินผลของแล็บคงไว้ตามเดิม
+
+| pipeline | ทำอะไร | เวลา/หน้า (Mac) |
+|---|---|---|
+| `ocr_system` (เดิมชื่อ `baseline` ยังใช้ชื่อนี้ได้) | คำสั่ง `ocr` ของเรา → `_transcript.json` | ~2 วินาที (tesseract) |
+| `vlm` (ฉบับของเพื่อนในกลุ่ม) | Typhoon-OCR อ่านภาพ → Markdown → จัดตารางใหม่ (`normalize_typhoon_table`) → Qwen3 จัดเป็น JSON → แปลงปี พ.ศ./ค.ศ. และเก็บกวาดค่าด้วยโค้ด (ผ่าน Ollama บนเครื่อง) | ~140 วินาที |
+
+### เตรียมเครื่อง (ครั้งเดียว)
+สคริปต์ต้องใช้ `pymupdf` และ `pythainlp` (สำหรับ pipeline vlm และการวัด WER) ซึ่งไม่ได้อยู่ใน `.venv` ของ ocr_system ใช้ได้ 2 แบบ:
+- **ใช้ venv ของแล็บเดิม** (มีครบแล้ว) รันสคริปต์ด้วย Python ของแล็บ ส่วน OCR จะเรียก `.venv` ของ ocr_system ให้เอง
+- หรือติดตั้งเพิ่มใน `.venv` ของ ocr_system: `pip install pymupdf pythainlp`
+
+pipeline `vlm` ต้องมี Ollama + โมเดล `scb10x/typhoon-ocr1.5-3b` และ `qwen3:4b` (ดูเอกสารแล็บ)
+
+### วิธีรัน (จากโฟลเดอร์ `ocr_system/`)
+```bash
+python lab7/lab7a_transcript.py --check
+python lab7/lab7a_transcript.py -i data/input/71010001.pdf -g data/ground_truth/Json_71010001_th.json -p all -o outputs/lab7/
+python lab7/lab7a_transcript.py -i data/input/71010001.pdf -g data/ground_truth/Json_71010001_th.json -p ocr_system -o outputs/lab7/
+python lab7/lab7a_transcript.py --eval-only outputs/lab7/pred_ocr_system.json --gt data/ground_truth/Json_71010001_th.json
+```
+
+| ตั้งค่า | ค่าเริ่มต้น | ความหมาย |
+|---|---|---|
+| `--ocr-engine` / `LAB7_OCR_ENGINE` | `tesseract` | engine ของ ocr_system (`paddle`, `easyocr`, `surya`, ...) |
+| `--ocr-options` / `LAB7_OCR_OPTIONS` | `--deskew-only` | option ที่ส่งให้คำสั่ง `ocr` เช่น `"--deskew-only --layout"` |
+| `OCR_SYSTEM_DIR` | โฟลเดอร์แม่ของ `lab7/` | ที่อยู่โปรเจกต์ ocr_system |
+| `OCR_SYSTEM_PYTHON` | `<OCR_SYSTEM_DIR>/.venv/bin/python` | Python ที่ติดตั้ง ocr_system |
+| `LAB7_SKIP_BASELINE=1` | | ข้าม pipeline ocr_system |
+| `LAB7_MODEL_OCR`, `LAB7_MODEL_TEXT`, `LAB7_DPI` | | ตั้งค่าของ pipeline vlm (ตามเอกสารแล็บ) |
+
+ผลลัพธ์ใน `--out`: `pred_ocr_system.json`, `pred_vlm.json`, `intermediate_ocr_system.txt` (ข้อความ OCR กลางทาง), `intermediate_vlm.md`, `comparison.csv`, `evaluation.json`, โฟลเดอร์ `ocr_system/` (ผลเต็มของคำสั่ง ocr)
 
 ---
 

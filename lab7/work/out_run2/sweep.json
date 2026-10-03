@@ -1,0 +1,1450 @@
+{
+  "results": {
+    "L0_clean__none": {
+      "accuracy": 0.7527,
+      "cer": 0.2057,
+      "hall": 0,
+      "n_fields": 93,
+      "n_exact": 70,
+      "subject_f1": 0.8,
+      "per_attribute": {
+        "student_id": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "person": {
+          "acc": 0.5,
+          "cer": 0.125,
+          "hall": 0
+        },
+        "institution": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "faculty": {
+          "acc": 0.75,
+          "cer": 0.0375,
+          "hall": 0
+        },
+        "dates": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "status": {
+          "acc": 0.5,
+          "cer": 0.9474,
+          "hall": 0
+        },
+        "sem_meta": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "gpa": {
+          "acc": 0.75,
+          "cer": 0.0625,
+          "hall": 0
+        },
+        "sem_misc": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "subject_id": {
+          "acc": 0.6667,
+          "cer": 0.3333,
+          "hall": 0
+        },
+        "subject_name": {
+          "acc": 0.4167,
+          "cer": 0.3762,
+          "hall": 0
+        },
+        "subject_type": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "credit": {
+          "acc": 0.6667,
+          "cer": 0.3333,
+          "hall": 0
+        },
+        "grade": {
+          "acc": 0.6667,
+          "cer": 0.25,
+          "hall": 0
+        },
+        "summary": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "footer": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        }
+      },
+      "level": "L0_clean",
+      "method": "none",
+      "seconds": 104.6,
+      "error": null,
+      "updated_at": "2026-10-03T19:26:07"
+    },
+    "L0_clean__light": {
+      "accuracy": 0.6989,
+      "cer": 0.3229,
+      "hall": 0,
+      "n_fields": 93,
+      "n_exact": 65,
+      "subject_f1": 0.5455,
+      "per_attribute": {
+        "student_id": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "person": {
+          "acc": 0.5,
+          "cer": 0.125,
+          "hall": 0
+        },
+        "institution": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "faculty": {
+          "acc": 0.75,
+          "cer": 0.0375,
+          "hall": 0
+        },
+        "dates": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "status": {
+          "acc": 0.5,
+          "cer": 0.9474,
+          "hall": 0
+        },
+        "sem_meta": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "gpa": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "sem_misc": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "subject_id": {
+          "acc": 0.5,
+          "cer": 0.5,
+          "hall": 0
+        },
+        "subject_name": {
+          "acc": 0.4167,
+          "cer": 0.6667,
+          "hall": 0
+        },
+        "subject_type": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "credit": {
+          "acc": 0.5,
+          "cer": 0.5,
+          "hall": 0
+        },
+        "grade": {
+          "acc": 0.5,
+          "cer": 0.5,
+          "hall": 0
+        },
+        "summary": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "footer": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        }
+      },
+      "level": "L0_clean",
+      "method": "light",
+      "seconds": 127.2,
+      "error": null,
+      "updated_at": "2026-10-03T19:28:14"
+    },
+    "L0_clean__heavy": {
+      "accuracy": 0.4731,
+      "cer": 0.3971,
+      "hall": 3,
+      "n_fields": 93,
+      "n_exact": 44,
+      "subject_f1": 0.3478,
+      "per_attribute": {
+        "student_id": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "person": {
+          "acc": 0.5,
+          "cer": 0.1667,
+          "hall": 0
+        },
+        "institution": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "faculty": {
+          "acc": 0.5,
+          "cer": 0.2125,
+          "hall": 1
+        },
+        "dates": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "status": {
+          "acc": 0.5,
+          "cer": 0.9474,
+          "hall": 0
+        },
+        "sem_meta": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "gpa": {
+          "acc": 0.5,
+          "cer": 0.5,
+          "hall": 0
+        },
+        "sem_misc": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "subject_id": {
+          "acc": 0.3333,
+          "cer": 0.6667,
+          "hall": 0
+        },
+        "subject_name": {
+          "acc": 0.25,
+          "cer": 0.6286,
+          "hall": 0
+        },
+        "subject_type": {
+          "acc": 0.8333,
+          "cer": 0.0,
+          "hall": 2
+        },
+        "credit": {
+          "acc": 0.3333,
+          "cer": 0.6667,
+          "hall": 0
+        },
+        "grade": {
+          "acc": 0.0,
+          "cer": 0.875,
+          "hall": 0
+        },
+        "summary": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "footer": {
+          "acc": 0.75,
+          "cer": 0.0241,
+          "hall": 0
+        },
+        "sem_missed": {
+          "acc": 0.2,
+          "cer": 1.0,
+          "hall": 0
+        }
+      },
+      "level": "L0_clean",
+      "method": "heavy",
+      "seconds": 135.2,
+      "error": null,
+      "updated_at": "2026-10-03T19:30:29"
+    },
+    "L1_light__none": {
+      "accuracy": 0.5699,
+      "cer": 0.41,
+      "hall": 0,
+      "n_fields": 93,
+      "n_exact": 53,
+      "subject_f1": 0.6667,
+      "per_attribute": {
+        "student_id": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "person": {
+          "acc": 0.5,
+          "cer": 0.0833,
+          "hall": 0
+        },
+        "institution": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "faculty": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "dates": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "status": {
+          "acc": 0.5,
+          "cer": 0.9474,
+          "hall": 0
+        },
+        "sem_meta": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "gpa": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "sem_misc": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "subject_id": {
+          "acc": 0.5,
+          "cer": 0.5,
+          "hall": 0
+        },
+        "subject_name": {
+          "acc": 0.25,
+          "cer": 0.581,
+          "hall": 0
+        },
+        "subject_type": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "credit": {
+          "acc": 0.5,
+          "cer": 0.5,
+          "hall": 0
+        },
+        "grade": {
+          "acc": 0.1667,
+          "cer": 0.6875,
+          "hall": 0
+        },
+        "summary": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "footer": {
+          "acc": 0.25,
+          "cer": 0.8072,
+          "hall": 0
+        },
+        "sem_missed": {
+          "acc": 0.2,
+          "cer": 1.0,
+          "hall": 0
+        }
+      },
+      "level": "L1_light",
+      "method": "none",
+      "seconds": 100.8,
+      "error": null,
+      "updated_at": "2026-10-03T19:32:10"
+    },
+    "L1_light__light": {
+      "accuracy": 0.6452,
+      "cer": 0.2986,
+      "hall": 1,
+      "n_fields": 93,
+      "n_exact": 60,
+      "subject_f1": 0.5,
+      "per_attribute": {
+        "student_id": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "person": {
+          "acc": 0.5,
+          "cer": 0.1667,
+          "hall": 0
+        },
+        "institution": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "faculty": {
+          "acc": 0.75,
+          "cer": 0.175,
+          "hall": 1
+        },
+        "dates": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "status": {
+          "acc": 0.5,
+          "cer": 0.2632,
+          "hall": 0
+        },
+        "sem_meta": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "gpa": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "sem_misc": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "subject_id": {
+          "acc": 0.5,
+          "cer": 0.5,
+          "hall": 0
+        },
+        "subject_name": {
+          "acc": 0.4167,
+          "cer": 0.5286,
+          "hall": 0
+        },
+        "subject_type": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "credit": {
+          "acc": 0.5,
+          "cer": 0.5,
+          "hall": 0
+        },
+        "grade": {
+          "acc": 0.5,
+          "cer": 0.375,
+          "hall": 0
+        },
+        "summary": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "footer": {
+          "acc": 0.75,
+          "cer": 0.0241,
+          "hall": 0
+        },
+        "sem_missed": {
+          "acc": 0.2,
+          "cer": 1.0,
+          "hall": 0
+        }
+      },
+      "level": "L1_light",
+      "method": "light",
+      "seconds": 122.6,
+      "error": null,
+      "updated_at": "2026-10-03T19:34:13"
+    },
+    "L1_light__heavy": {
+      "accuracy": 0.5484,
+      "cer": 0.3414,
+      "hall": 1,
+      "n_fields": 93,
+      "n_exact": 51,
+      "subject_f1": 0.4167,
+      "per_attribute": {
+        "student_id": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "person": {
+          "acc": 0.5,
+          "cer": 0.2917,
+          "hall": 0
+        },
+        "institution": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "faculty": {
+          "acc": 0.75,
+          "cer": 0.175,
+          "hall": 1
+        },
+        "dates": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "status": {
+          "acc": 0.5,
+          "cer": 0.2632,
+          "hall": 0
+        },
+        "sem_meta": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "gpa": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "sem_misc": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "subject_id": {
+          "acc": 0.4167,
+          "cer": 0.5833,
+          "hall": 0
+        },
+        "subject_name": {
+          "acc": 0.3333,
+          "cer": 0.581,
+          "hall": 0
+        },
+        "subject_type": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "credit": {
+          "acc": 0.3333,
+          "cer": 0.6667,
+          "hall": 0
+        },
+        "grade": {
+          "acc": 0.0833,
+          "cer": 0.75,
+          "hall": 0
+        },
+        "summary": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "footer": {
+          "acc": 0.75,
+          "cer": 0.0241,
+          "hall": 0
+        },
+        "sem_missed": {
+          "acc": 0.2,
+          "cer": 1.0,
+          "hall": 0
+        }
+      },
+      "level": "L1_light",
+      "method": "heavy",
+      "seconds": 127.7,
+      "error": null,
+      "updated_at": "2026-10-03T19:36:20"
+    },
+    "L2_watermark__none": {
+      "accuracy": 0.9355,
+      "cer": 0.0471,
+      "hall": 0,
+      "n_fields": 93,
+      "n_exact": 87,
+      "subject_f1": 1.0,
+      "per_attribute": {
+        "student_id": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "person": {
+          "acc": 0.5,
+          "cer": 0.0833,
+          "hall": 0
+        },
+        "institution": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "faculty": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "dates": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "status": {
+          "acc": 0.5,
+          "cer": 0.9474,
+          "hall": 0
+        },
+        "sem_meta": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "gpa": {
+          "acc": 0.25,
+          "cer": 0.75,
+          "hall": 0
+        },
+        "sem_misc": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "subject_id": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "subject_name": {
+          "acc": 0.9167,
+          "cer": 0.0048,
+          "hall": 0
+        },
+        "subject_type": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "credit": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "grade": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "summary": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "footer": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        }
+      },
+      "level": "L2_watermark",
+      "method": "none",
+      "seconds": 109.2,
+      "error": null,
+      "updated_at": "2026-10-03T19:38:09"
+    },
+    "L2_watermark__light": {
+      "accuracy": 0.6559,
+      "cer": 0.0943,
+      "hall": 11,
+      "n_fields": 93,
+      "n_exact": 61,
+      "subject_f1": 1.0,
+      "per_attribute": {
+        "student_id": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "person": {
+          "acc": 0.5,
+          "cer": 0.0833,
+          "hall": 0
+        },
+        "institution": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "faculty": {
+          "acc": 0.5,
+          "cer": 0.2125,
+          "hall": 1
+        },
+        "dates": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "status": {
+          "acc": 0.5,
+          "cer": 0.2632,
+          "hall": 0
+        },
+        "sem_meta": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "gpa": {
+          "acc": 0.5,
+          "cer": 0.5,
+          "hall": 0
+        },
+        "sem_misc": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "subject_id": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "subject_name": {
+          "acc": 0.9167,
+          "cer": 0.0286,
+          "hall": 0
+        },
+        "subject_type": {
+          "acc": 0.1667,
+          "cer": 0.0,
+          "hall": 10
+        },
+        "credit": {
+          "acc": 0.0,
+          "cer": 1.0,
+          "hall": 0
+        },
+        "grade": {
+          "acc": 0.8333,
+          "cer": 0.125,
+          "hall": 0
+        },
+        "summary": {
+          "acc": 0.8,
+          "cer": 0.6667,
+          "hall": 0
+        },
+        "footer": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        }
+      },
+      "level": "L2_watermark",
+      "method": "light",
+      "seconds": 116.1,
+      "error": null,
+      "updated_at": "2026-10-03T19:40:06"
+    },
+    "L2_watermark__heavy": {
+      "accuracy": 0.7527,
+      "cer": 0.1257,
+      "hall": 1,
+      "n_fields": 93,
+      "n_exact": 70,
+      "subject_f1": 0.9167,
+      "per_attribute": {
+        "student_id": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "person": {
+          "acc": 0.5,
+          "cer": 0.125,
+          "hall": 0
+        },
+        "institution": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "faculty": {
+          "acc": 0.75,
+          "cer": 0.175,
+          "hall": 1
+        },
+        "dates": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "status": {
+          "acc": 0.5,
+          "cer": 0.2632,
+          "hall": 0
+        },
+        "sem_meta": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "gpa": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "sem_misc": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "subject_id": {
+          "acc": 0.9167,
+          "cer": 0.0833,
+          "hall": 0
+        },
+        "subject_name": {
+          "acc": 0.0,
+          "cer": 0.2333,
+          "hall": 0
+        },
+        "subject_type": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "credit": {
+          "acc": 0.9167,
+          "cer": 0.0833,
+          "hall": 0
+        },
+        "grade": {
+          "acc": 0.5833,
+          "cer": 0.375,
+          "hall": 0
+        },
+        "summary": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "footer": {
+          "acc": 0.75,
+          "cer": 0.0241,
+          "hall": 0
+        }
+      },
+      "level": "L2_watermark",
+      "method": "heavy",
+      "seconds": 115.2,
+      "error": null,
+      "updated_at": "2026-10-03T19:42:01"
+    },
+    "L3_tilted_copy__none": {
+      "accuracy": 0.9355,
+      "cer": 0.0371,
+      "hall": 0,
+      "n_fields": 93,
+      "n_exact": 87,
+      "subject_f1": 1.0,
+      "per_attribute": {
+        "student_id": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "person": {
+          "acc": 0.0,
+          "cer": 0.4167,
+          "hall": 0
+        },
+        "institution": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "faculty": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "dates": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "status": {
+          "acc": 0.5,
+          "cer": 0.2632,
+          "hall": 0
+        },
+        "sem_meta": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "gpa": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "sem_misc": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "subject_id": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "subject_name": {
+          "acc": 0.75,
+          "cer": 0.0524,
+          "hall": 0
+        },
+        "subject_type": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "credit": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "grade": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "summary": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "footer": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        }
+      },
+      "level": "L3_tilted_copy",
+      "method": "none",
+      "seconds": 102.1,
+      "error": null,
+      "updated_at": "2026-10-03T19:43:43"
+    },
+    "L3_tilted_copy__light": {
+      "accuracy": 0.8495,
+      "cer": 0.1029,
+      "hall": 1,
+      "n_fields": 93,
+      "n_exact": 79,
+      "subject_f1": 0.9167,
+      "per_attribute": {
+        "student_id": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "person": {
+          "acc": 0.5,
+          "cer": 0.25,
+          "hall": 0
+        },
+        "institution": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "faculty": {
+          "acc": 0.75,
+          "cer": 0.175,
+          "hall": 1
+        },
+        "dates": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "status": {
+          "acc": 0.5,
+          "cer": 0.2632,
+          "hall": 0
+        },
+        "sem_meta": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "gpa": {
+          "acc": 0.75,
+          "cer": 0.1875,
+          "hall": 0
+        },
+        "sem_misc": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "subject_id": {
+          "acc": 0.9167,
+          "cer": 0.0833,
+          "hall": 0
+        },
+        "subject_name": {
+          "acc": 0.75,
+          "cer": 0.119,
+          "hall": 0
+        },
+        "subject_type": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "credit": {
+          "acc": 0.9167,
+          "cer": 0.0833,
+          "hall": 0
+        },
+        "grade": {
+          "acc": 0.6667,
+          "cer": 0.5,
+          "hall": 0
+        },
+        "summary": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "footer": {
+          "acc": 0.75,
+          "cer": 0.0241,
+          "hall": 0
+        }
+      },
+      "level": "L3_tilted_copy",
+      "method": "light",
+      "seconds": 111.0,
+      "error": null,
+      "updated_at": "2026-10-03T19:45:34"
+    },
+    "L3_tilted_copy__heavy": {
+      "accuracy": 0.5484,
+      "cer": 0.32,
+      "hall": 0,
+      "n_fields": 93,
+      "n_exact": 51,
+      "subject_f1": 0.5,
+      "per_attribute": {
+        "student_id": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "person": {
+          "acc": 0.5,
+          "cer": 0.1667,
+          "hall": 0
+        },
+        "institution": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "faculty": {
+          "acc": 0.75,
+          "cer": 0.0375,
+          "hall": 0
+        },
+        "dates": {
+          "acc": 0.6667,
+          "cer": 0.0333,
+          "hall": 0
+        },
+        "status": {
+          "acc": 0.5,
+          "cer": 0.2632,
+          "hall": 0
+        },
+        "sem_meta": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "gpa": {
+          "acc": 0.5,
+          "cer": 0.5,
+          "hall": 0
+        },
+        "sem_misc": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "subject_id": {
+          "acc": 0.5,
+          "cer": 0.5,
+          "hall": 0
+        },
+        "subject_name": {
+          "acc": 0.0833,
+          "cer": 0.6286,
+          "hall": 0
+        },
+        "subject_type": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "credit": {
+          "acc": 0.25,
+          "cer": 0.75,
+          "hall": 0
+        },
+        "grade": {
+          "acc": 0.25,
+          "cer": 0.8125,
+          "hall": 0
+        },
+        "summary": {
+          "acc": 0.8,
+          "cer": 0.1667,
+          "hall": 0
+        },
+        "footer": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        }
+      },
+      "level": "L3_tilted_copy",
+      "method": "heavy",
+      "seconds": 101.8,
+      "error": null,
+      "updated_at": "2026-10-03T19:47:16"
+    },
+    "L4_rescan__none": {
+      "accuracy": 0.3548,
+      "cer": 0.6671,
+      "hall": 1,
+      "n_fields": 93,
+      "n_exact": 33,
+      "subject_f1": 0.0,
+      "per_attribute": {
+        "student_id": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "person": {
+          "acc": 0.5,
+          "cer": 0.1667,
+          "hall": 0
+        },
+        "institution": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "faculty": {
+          "acc": 0.5,
+          "cer": 0.2125,
+          "hall": 1
+        },
+        "dates": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "status": {
+          "acc": 0.5,
+          "cer": 0.9474,
+          "hall": 0
+        },
+        "sem_meta": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "gpa": {
+          "acc": 0.5,
+          "cer": 0.375,
+          "hall": 0
+        },
+        "sem_misc": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "subject_id": {
+          "acc": 0.0,
+          "cer": 1.0,
+          "hall": 0
+        },
+        "subject_name": {
+          "acc": 0.0,
+          "cer": 1.0,
+          "hall": 0
+        },
+        "subject_type": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "credit": {
+          "acc": 0.0,
+          "cer": 1.0,
+          "hall": 0
+        },
+        "grade": {
+          "acc": 0.0,
+          "cer": 1.0,
+          "hall": 0
+        },
+        "summary": {
+          "acc": 0.6,
+          "cer": 0.8333,
+          "hall": 0
+        },
+        "footer": {
+          "acc": 0.0,
+          "cer": 1.0,
+          "hall": 0
+        }
+      },
+      "level": "L4_rescan",
+      "method": "none",
+      "seconds": 595.4,
+      "error": null,
+      "updated_at": "2026-10-03T19:57:11"
+    },
+    "L4_rescan__light": {
+      "accuracy": 0.3978,
+      "cer": 0.6171,
+      "hall": 2,
+      "n_fields": 93,
+      "n_exact": 37,
+      "subject_f1": 0.1176,
+      "per_attribute": {
+        "student_id": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "person": {
+          "acc": 0.5,
+          "cer": 0.1667,
+          "hall": 0
+        },
+        "institution": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "faculty": {
+          "acc": 0.75,
+          "cer": 0.175,
+          "hall": 1
+        },
+        "dates": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "status": {
+          "acc": 0.5,
+          "cer": 0.2632,
+          "hall": 0
+        },
+        "sem_meta": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "gpa": {
+          "acc": 0.0,
+          "cer": 1.0,
+          "hall": 0
+        },
+        "sem_misc": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "subject_id": {
+          "acc": 0.0833,
+          "cer": 0.9167,
+          "hall": 0
+        },
+        "subject_name": {
+          "acc": 0.0,
+          "cer": 0.9762,
+          "hall": 0
+        },
+        "subject_type": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "credit": {
+          "acc": 0.0833,
+          "cer": 0.9167,
+          "hall": 0
+        },
+        "grade": {
+          "acc": 0.0833,
+          "cer": 0.875,
+          "hall": 0
+        },
+        "summary": {
+          "acc": 0.8,
+          "cer": 0.3333,
+          "hall": 1
+        },
+        "footer": {
+          "acc": 0.25,
+          "cer": 0.8795,
+          "hall": 0
+        }
+      },
+      "level": "L4_rescan",
+      "method": "light",
+      "seconds": 153.0,
+      "error": null,
+      "updated_at": "2026-10-03T19:59:44"
+    },
+    "L4_rescan__heavy": {
+      "accuracy": 0.3871,
+      "cer": 0.5029,
+      "hall": 1,
+      "n_fields": 93,
+      "n_exact": 36,
+      "subject_f1": 0.0833,
+      "per_attribute": {
+        "student_id": {
+          "acc": 0.0,
+          "cer": 0.125,
+          "hall": 0
+        },
+        "person": {
+          "acc": 0.5,
+          "cer": 0.2917,
+          "hall": 0
+        },
+        "institution": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "faculty": {
+          "acc": 0.5,
+          "cer": 0.2,
+          "hall": 1
+        },
+        "dates": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "status": {
+          "acc": 0.5,
+          "cer": 0.2632,
+          "hall": 0
+        },
+        "sem_meta": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "gpa": {
+          "acc": 0.0,
+          "cer": 0.5,
+          "hall": 0
+        },
+        "sem_misc": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "subject_id": {
+          "acc": 0.0833,
+          "cer": 0.9167,
+          "hall": 0
+        },
+        "subject_name": {
+          "acc": 0.0833,
+          "cer": 0.9048,
+          "hall": 0
+        },
+        "subject_type": {
+          "acc": 1.0,
+          "cer": 0.0,
+          "hall": 0
+        },
+        "credit": {
+          "acc": 0.0833,
+          "cer": 0.9167,
+          "hall": 0
+        },
+        "grade": {
+          "acc": 0.0,
+          "cer": 1.0625,
+          "hall": 0
+        },
+        "summary": {
+          "acc": 0.6,
+          "cer": 1.0,
+          "hall": 0
+        },
+        "footer": {
+          "acc": 0.75,
+          "cer": 0.0361,
+          "hall": 0
+        }
+      },
+      "level": "L4_rescan",
+      "method": "heavy",
+      "seconds": 130.0,
+      "error": null,
+      "updated_at": "2026-10-03T20:01:54"
+    }
+  },
+  "gt": "../data/ground_truth/Json_71010001_th.json"
+}

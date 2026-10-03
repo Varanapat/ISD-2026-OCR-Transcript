@@ -1,0 +1,90 @@
+{
+  "header_detail": {
+    "uni_name": "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง",
+    "uni_address": "เลขที่ 1 ซอยฉลองกรุง 1 เขตลาดกระบัง กรุงเทพฯ 10520",
+    "student_id": "71010001",
+    "faculty_name": "คณะวิศวกรรมศาสตร์",
+    "prename": "นางสาว",
+    "name": "วศี วิศวกรรมศาสตร์",
+    "date_of_birth": "1999-09-03",
+    "admis_date": "2018-08-06",
+    "grad_date": "0000-00-00",
+    "grad_reason": null,
+    "degree": "วิทยาศาสตรบัณฑิต",
+    "program": "การจัดการวิศวกรรมและเทคโนโลยี (หลักสูตรนานาชาติ)",
+    "honor": 0
+  },
+  "transcript_detail": {
+    "semesters": [
+      {
+        "year": 2561,
+        "sem_num": 1,
+        "GPS": "2.33",
+        "GPA": "2.33",
+        "pass_reason": null,
+        "subject": [
+          {
+            "subject_id": "13006006",
+            "subject_name": "พีชคณิตเชิงเส้น",
+            "credit": 3,
+            "grade_earn": "C+"
+          },
+          {
+            "subject_id": "13006007",
+            "subject_name": "แคลคูลัส 1",
+            "credit": 3,
+            "grade_earn": "D+"
+          },
+          {
+            "subject_id": "13006109",
+            "subject_name": "PROGRAMMING FOR MANAGEMENT",
+            "credit": 3,
+            "grade_earn": "B+"
+          },
+          {
+            "subject_id": "13006204",
+            "subject_name": "ภาษากลุ่มทั้งฐาน 1",
+            "credit": 3,
+            "grade_earn": "C"
+          },
+          {
+            "subject_id": "13006301",
+            "subject_name": "ตรรกศาสตรเบื้องต้น",
+            "credit": 3,
+            "grade_earn": "E"
+          },
+          {
+            "subject_id": "13006402",
+            "subject_name": "เศรษฐศาสตร์โภคตน",
+            "credit": 3,
+            "grade_earn": ""
+          }
+        ]
+      }
+    ],
+    "total_credits_earned": 36,
+    "cumulative_gpa": "1.17",
+    "master_comprehensive": null,
+    "master_thesis": null,
+    "master_qualify": null
+  },
+  "footer_detail": {
+    "updated_at": "2025-01-16",
+    "by": {
+      "by_signature": "(ผู้ช่วยศาสตราจารย์ ดร.ทดสอบ นามสกุล)",
+      "by_position": "ผู้อำนวยการสำนักทะเบียนและบริการการศึกษา",
+      "by_reg": "สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง"
+    }
+  },
+  "_meta": {
+    "level": "L1_light",
+    "method": "none",
+    "seconds": 127.6,
+    "clean_seconds": 0.1,
+    "error": null,
+    "models": {
+      "ocr": "scb10x/typhoon-ocr1.5-3b",
+      "text": "qwen3:4b"
+    }
+  }
+}
