@@ -1,0 +1,143 @@
+/* ธีมมืด: พื้น #242424 · การ์ดขาว · ตัวเน้นเทา #acacac
+   เทา #acacac ใช้ได้เฉพาะบนพื้นดำ (ความต่างสี 6.8:1)
+   ห้ามใช้เป็นตัวหนังสือในการ์ดขาว (เหลือ 2.3:1 อ่านยาก) ในการ์ดใช้ดำ #242424 (15.5:1) */
+
+/* ฟอนต์ Poppins เก็บไฟล์ไว้ในโปรเจกต์ (static/fonts/) ไม่โหลดจากภายนอก ตามแนวทางออฟไลน์/PDPA
+   ใบอนุญาต SIL OFL อยู่ที่ static/fonts/OFL.txt (ต้องเก็บไว้คู่กับไฟล์ฟอนต์)
+   ถ้าไฟล์หาย เบราว์เซอร์จะใช้ฟอนต์สำรองใน --font เอง
+   หมายเหตุ: Poppins ไม่มีตัวอักษรไทย ตัวไทยจึงใช้ฟอนต์ไทยลำดับถัดไปใน --font */
+@font-face {
+    font-family: "Poppins";
+    src: url("/static/fonts/Poppins-Regular.ttf") format("truetype");
+    font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+    font-family: "Poppins";
+    src: url("/static/fonts/Poppins-SemiBold.ttf") format("truetype");
+    font-weight: 600; font-style: normal; font-display: swap;
+}
+@font-face {
+    font-family: "Poppins";
+    src: url("/static/fonts/Poppins-Bold.ttf") format("truetype");
+    font-weight: 700; font-style: normal; font-display: swap;
+}
+
+:root {
+    --bg: #242424;
+    --card: #ffffff;
+    --ink: #242424;
+    --muted: #acacac;
+    --line: #acacac;          /* เส้นขอบ (ไม่ใช่ตัวหนังสือ จึงใช้เทาได้) */
+    --soft: #f2f2f2;          /* พื้นของกล่องข้อมูลดิบในการ์ด */
+    --font: "Poppins", "Noto Sans Thai", "Thonburi", "Sukhumvit Set", "Leelawadee UI", Tahoma, system-ui, sans-serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+html { background: var(--bg); }
+body {
+    margin: 0;
+    background: var(--bg);
+    color: #fff;
+    font-family: var(--font);
+    line-height: 1.6;
+}
+
+/* ---------- หัวหน้า ---------- */
+.page-header, main { width: min(960px, 100% - 48px); margin-inline: auto; }
+.page-header { padding: 56px 0 8px; }
+h1 {
+    margin: 0 0 12px;
+    font-size: clamp(1.7rem, 5.5vw, 3rem);
+    font-weight: 700;
+    line-height: 1.1;
+    text-transform: uppercase;
+    text-wrap: balance;
+}
+h1 span { color: var(--muted); }
+.page-header p { margin: 0; max-width: 64ch; font-size: 0.95rem; }
+
+/* ---------- การ์ด ---------- */
+main { display: grid; gap: 40px; padding: 40px 0 72px; }
+.card { background: var(--card); color: var(--ink); padding: 32px; min-width: 0; }
+.card h2 { margin: 0 0 20px; font-size: 1.25rem; font-weight: 700; }
+.card h3 { margin: 28px 0 10px; font-size: 0.95rem; font-weight: 600; }
+.card h2 + h3, .card form + h3 { margin-top: 28px; }
+.card-head {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; flex-wrap: wrap; margin-bottom: 4px;
+}
+.card-head h2 { margin: 0; }
+
+/* ---------- ฟอร์ม ---------- */
+form { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 16px; }
+input[type="file"] {
+    flex: 1 1 100%;
+    min-width: 0;             /* ไม่งั้น flex จะไม่ยอมให้หดเล็กกว่าความกว้างของปุ่ม+ชื่อไฟล์ แล้วล้นการ์ดบนมือถือ */
+    max-width: 100%;
+    padding: 10px;
+    border: 2px dashed var(--line);
+    background: var(--card);
+    color: var(--ink);
+    font: inherit;
+    cursor: pointer;
+}
+input[type="file"]::file-selector-button {
+    margin-right: 14px; padding: 8px 16px;
+    border: 2px solid var(--ink); background: var(--ink); color: #fff;
+    font: inherit; font-weight: 600; cursor: pointer;
+}
+select {
+    padding: 10px 12px;
+    border: 2px solid var(--ink); background: var(--card); color: var(--ink);
+    font: inherit; cursor: pointer;
+}
+form label { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; }
+input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--ink); }
+
+button {
+    padding: 11px 24px;
+    border: 2px solid var(--ink); background: var(--ink); color: #fff;
+    font: inherit; font-weight: 600; cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+button:hover:not(:disabled) { background: #fff; color: var(--ink); }
+button:disabled { background: var(--muted); border-color: var(--muted); color: var(--ink); cursor: not-allowed; }
+#download-btn { background: #fff; color: var(--ink); }
+#download-btn:hover { background: var(--ink); color: #fff; }
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+
+/* ---------- สถานะ (data-state ถูกตั้งโดย setState() ใน app.js) ---------- */
+.hint { margin: 10px 0 0; font-size: 0.85rem; line-height: 1.5; }
+#status { padding: 12px 16px; background: var(--soft); border-left: 6px solid var(--muted); font-weight: 500; }
+body[data-state="idle"]    #status { border-left-color: var(--muted); }
+body[data-state="loading"] #status { border-left-color: #e0a800; background: #fff8e1; }
+body[data-state="success"] #status { border-left-color: #2e7d32; background: #e8f5e9; }
+body[data-state="error"]   #status { border-left-color: #c62828; background: #ffebee; color: #8e1b1b; }
+
+/* ---------- ข้อมูลดิบและตาราง ---------- */
+pre {
+    margin: 0; padding: 14px 16px;
+    background: var(--soft); border: 1px solid #d9d9d9;
+    font-family: var(--mono); font-size: 0.82rem; line-height: 1.5;
+    white-space: pre-wrap; overflow-wrap: anywhere;
+    max-height: 420px; overflow: auto;
+}
+#courses { overflow-x: auto; }
+#courses h3 { margin: 22px 0 8px; }
+#courses h3:first-child { margin-top: 0; }
+table { width: 100%; min-width: 480px; margin-bottom: 6px; border-collapse: collapse; font-size: 0.9rem; }
+th, td { padding: 8px 10px; border: 1px solid var(--line); text-align: left; }
+th { background: var(--ink); color: #fff; font-weight: 600; }
+tbody tr:nth-child(even) td { background: #fafafa; }
+
+/* ---------- จอแคบ (มือถือ) ---------- */
+@media (max-width: 640px) {
+    .page-header, main { width: calc(100% - 32px); }
+    .page-header { padding-top: 36px; }
+    main { gap: 24px; padding-top: 28px; }
+    .card { padding: 20px; }
+    select, form button, #download-btn { width: 100%; }
+}
