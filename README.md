@@ -38,10 +38,8 @@ ocr_system/
 │   └── Augmentation_input_G/  # ชุด G แบบ augment (โครงเดียวกัน)
 ├── outputs/                   # ผลลัพธ์ OCR / evaluation / benchmark / report (สร้างอัตโนมัติ ลบได้)
 ├── scripts/
-│   └── run_all.sh             # รัน benchmark ทุก dataset แล้วสร้าง report
-├── lab7/
-│   ├── lab7a_transcript.py    # Lab 7A: เทียบระบบของเรา (ocr_system) กับ VLM (Typhoon-OCR + Qwen3)
-│   └── lab7_metrics.py        # โมดูลวัดผล CER/WER ของแล็บ (ไม่ต้องแก้)
+│   ├── run_all.sh             # รัน benchmark ทุก dataset แล้วสร้าง report
+│   └── average_sweeps.py      # Lab 8A: เฉลี่ยผล sweep หลายรอบ
 └── src/
     └── ocr_system/
         ├── cli.py             # command line: ocr / extract / evaluate / benchmark / augment / report
@@ -67,8 +65,12 @@ ocr_system/
         │   ├── surya_engine.py
         │   ├── trocr_engine.py
         │   └── ensemble_engine.py
-        └── utils/
-            └── io.py          # เซฟ JSON/TXT, สร้างโฟลเดอร์
+        ├── utils/
+        │   └── io.py          # เซฟ JSON/TXT, สร้างโฟลเดอร์
+        └── vlm/               # แล็บ (รันด้วย venv ของแล็บ ดูหัวข้อ 7)
+            ├── lab7a_transcript.py  # Lab 7A: เทียบระบบของเรา (ocr_system) กับ VLM (Typhoon-OCR + Qwen3)
+            ├── lab7_metrics.py      # โมดูลวัดผล CER/WER ของแล็บ (ไม่ต้องแก้)
+            └── lab8a_denoise.py     # Lab 8A: สร้าง noise 5 ระดับ + ทำความสะอาด + วัดผล
 ```
 
 ### Pipeline ทำงานอย่างไร
@@ -626,7 +628,7 @@ python -m ocr_system.cli report --run set1 outputs/benchmark data/ground_truth -
 
 ## 7. Lab 7A — เทียบระบบของเรากับ VLM
 
-`lab7/lab7a_transcript.py` คือสคริปต์ Lab 7A ที่เชื่อมกับโปรเจกต์นี้แล้ว: pipeline **baseline เดิม (Tesseract + regex ในไฟล์) ถูกแทนด้วย pipeline `ocr_system`** ที่เรียกคำสั่ง `python -m ocr_system.cli ocr ...` ของเรา ส่วน pipeline **`vlm`** (Typhoon-OCR → Qwen3) และการประเมินผลของแล็บคงไว้ตามเดิม
+`src/ocr_system/vlm/lab7a_transcript.py` คือสคริปต์ Lab 7A ที่เชื่อมกับโปรเจกต์นี้แล้ว: pipeline **baseline เดิม (Tesseract + regex ในไฟล์) ถูกแทนด้วย pipeline `ocr_system`** ที่เรียกคำสั่ง `python -m ocr_system.cli ocr ...` ของเรา ส่วน pipeline **`vlm`** (Typhoon-OCR → Qwen3) และการประเมินผลของแล็บคงไว้ตามเดิม
 
 | pipeline | ทำอะไร | เวลา/หน้า (Mac) |
 |---|---|---|
@@ -642,17 +644,29 @@ pipeline `vlm` ต้องมี Ollama + โมเดล `scb10x/typhoon-ocr1.
 
 ### วิธีรัน (จากโฟลเดอร์ `ocr_system/`)
 ```bash
-python lab7/lab7a_transcript.py --check
-python lab7/lab7a_transcript.py -i data/input/71010001.pdf -g data/ground_truth/Json_71010001_th.json -p all -o outputs/lab7/
-python lab7/lab7a_transcript.py -i data/input/71010001.pdf -g data/ground_truth/Json_71010001_th.json -p ocr_system -o outputs/lab7/
-python lab7/lab7a_transcript.py --eval-only outputs/lab7/pred_ocr_system.json --gt data/ground_truth/Json_71010001_th.json
+python src/ocr_system/vlm/lab7a_transcript.py --check
+python src/ocr_system/vlm/lab7a_transcript.py -i data/input/71010001.pdf -g data/ground_truth/Json_71010001_th.json -p all -o outputs/lab7/
+python src/ocr_system/vlm/lab7a_transcript.py -i data/input/71010001.pdf -g data/ground_truth/Json_71010001_th.json -p ocr_system -o outputs/lab7/
+python src/ocr_system/vlm/lab7a_transcript.py --eval-only outputs/lab7/pred_ocr_system.json --gt data/ground_truth/Json_71010001_th.json
 ```
+(`python` ในที่นี้คือ Python ของ venv แล็บ เช่น `../lab7/groupA_transcript/.venv/bin/python`)
+
+### Lab 8A — เอกสารไม่สะอาด (`lab8a_denoise.py`)
+```bash
+python src/ocr_system/vlm/lab8a_denoise.py check
+python src/ocr_system/vlm/lab8a_denoise.py selftest
+python src/ocr_system/vlm/lab8a_denoise.py noise -i data/input/71010001.pdf -o outputs/lab8a/noisy
+python src/ocr_system/vlm/lab8a_denoise.py sweep -i outputs/lab8a/noisy -g data/ground_truth/Json_71010001_th.json -o outputs/lab8a/out
+python src/ocr_system/vlm/lab8a_denoise.py report -o outputs/lab8a/out
+python scripts/average_sweeps.py outputs/lab8a/out outputs/lab8a/out_run2 outputs/lab8a/out_run3 -o outputs/lab8a/out_avg
+```
+ผลที่รันไว้แล้ว (3 รอบ) อยู่ใน `outputs/lab8a/`: `out/`, `out_run2/`, `out_run3/`, `out_avg/` (`sweep_avg.csv`, `sweep_avg_plot.png`)
 
 | ตั้งค่า | ค่าเริ่มต้น | ความหมาย |
 |---|---|---|
 | `--ocr-engine` / `LAB7_OCR_ENGINE` | `tesseract` | engine ของ ocr_system (`paddle`, `easyocr`, `surya`, ...) |
 | `--ocr-options` / `LAB7_OCR_OPTIONS` | `--deskew-only` | option ที่ส่งให้คำสั่ง `ocr` เช่น `"--deskew-only --layout"` |
-| `OCR_SYSTEM_DIR` | โฟลเดอร์แม่ของ `lab7/` | ที่อยู่โปรเจกต์ ocr_system |
+| `OCR_SYSTEM_DIR` | รากโปรเจกต์ (ขึ้นไป 3 ชั้นจาก `src/ocr_system/vlm/`) | ที่อยู่โปรเจกต์ ocr_system |
 | `OCR_SYSTEM_PYTHON` | `<OCR_SYSTEM_DIR>/.venv/bin/python` | Python ที่ติดตั้ง ocr_system |
 | `LAB7_SKIP_BASELINE=1` | | ข้าม pipeline ocr_system |
 | `LAB7_MODEL_OCR`, `LAB7_MODEL_TEXT`, `LAB7_DPI` | | ตั้งค่าของ pipeline vlm (ตามเอกสารแล็บ) |
