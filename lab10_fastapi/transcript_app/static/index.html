@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Transcript OCR Application</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="page-header">
+    <h1>Transcript <span>OCR</span> Application</h1>
+    <p>อัปโหลด Transcript แล้วระบบจะทำ preprocessing, OCR, postprocessing และแสดงค่าที่อ่านได้แต่ละส่วน</p>
+  </header>
+
+  <main>
+    <!-- การ์ด 1: อัปโหลด + สถานะ -->
+    <section class="card" aria-labelledby="upload-title">
+      <h2 id="upload-title">อัปโหลดเอกสาร</h2>
+      <form id="upload-form">
+        <input id="file" type="file" accept=".pdf,.png,.jpg,.jpeg,.tif,.tiff" required>
+        <button type="button" id="clear-file-btn" aria-label="ล้างไฟล์ที่เลือก" hidden>x</button>
+        <select id="method" aria-label="วิธีอ่านเอกสาร">
+          <option value="vlm">VLM (ช้า · ทนเค้าโครงหลากหลาย)</option>
+          <option value="ocr">OCR ปกติ (เร็ว)</option>
+        </select>
+        <select id="preprocessing" aria-label="วิธีทำความสะอาดภาพ">
+          <option value="none">none (แนะนำสำหรับไฟล์สะอาด)</option>
+          <option value="light">light</option>
+          <option value="heavy">heavy</option>
+        </select>
+        <label><input id="include-markdown" type="checkbox"> แสดง OCR Markdown</label>
+        <button type="submit">อัปโหลดและอ่านข้อมูล</button>
+      </form>
+      <p id="method-hint" class="hint"></p>
+
+      <h3>สถานะ</h3>
+      <div id="status" role="status">รอไฟล์...</div>
+    </section>
+
+    <!-- การ์ด 2: ผลลัพธ์ + ปุ่มดาวน์โหลด -->
+    <section class="card" aria-labelledby="result-title">
+      <div class="card-head">
+        <h2 id="result-title">ผลลัพธ์</h2>
+        <button type="button" id="download-btn" hidden>ดาวน์โหลด JSON</button>
+      </div>
+
+      <h3>ข้อมูลส่วนหัว</h3>
+      <pre id="header">-</pre>
+
+      <h3>รายวิชา</h3>
+      <div id="courses">-</div>
+
+      <h3>ข้อมูลส่วนท้าย</h3>
+      <pre id="footer">-</pre>
+    </section>
+
+    <!-- การ์ด 3: คำเตือน + OCR Markdown -->
+    <section class="card" aria-labelledby="warning-title">
+      <h2 id="warning-title">คำเตือนและ Postprocessing</h2>
+      <pre id="warnings">-</pre>
+
+      <div id="markdown-section" hidden>
+        <h3>OCR Markdown</h3>
+        <pre id="markdown"></pre>
+      </div>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
